@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.monkey_runner_sample"
+        applicationId "com.example.ui_testing_samples"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

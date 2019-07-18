@@ -15,8 +15,8 @@ def press_with_screenshot(code, path):
 device = MonkeyRunner.waitForConnection()
 
 directory = '.'
-package = 'com.example.monkey_runner_sample'
-activity = 'com.example.monkey_runner_sample.MainActivity'
+package = 'com.example.ui_testing_samples'
+activity = 'com.example.ui_testing_samples.MainActivity'
 
 # Installs the Android package. Notice that this method returns a boolean, so you can test
 # to see if the installation worked.
