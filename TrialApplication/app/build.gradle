@@ -23,6 +23,12 @@ android {
     }
 }
 
+
+task printStats(type: Exec) {
+    def adb = android.adbExe
+    commandLine "$adb", 'shell', 'dumpsys', 'batterystats'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
