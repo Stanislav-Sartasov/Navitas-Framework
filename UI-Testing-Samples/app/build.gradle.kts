@@ -99,15 +99,15 @@ tasks.register<Exec>("installApk") {
 
     workingDir("./..")
 
-    if (apkPath != null) {
-        commandLine("adb", "install", "-r", apkPath)
-    } else {
-        commandLine("echo", "Error: apk path must be passed!")
-    }
-
     if (testApkPath != null) {
         commandLine("adb", "install", "-r", testApkPath)
     } else {
         commandLine("echo", "Error: test apk path must be passed!")
+    }
+
+    if (apkPath != null) {
+        commandLine("adb", "install", "-r", apkPath)
+    } else {
+        commandLine("echo", "Error: apk path must be passed!")
     }
 }
