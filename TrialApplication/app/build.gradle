@@ -23,10 +23,10 @@ android {
     }
 }
 
-
 task printStats(type: Exec) {
     def adb = android.adbExe
     commandLine "$adb", 'shell', 'dumpsys', 'batterystats'
+    standardOutput new FileOutputStream("${buildDir}/batterystats.txt")
 }
 
 dependencies {
