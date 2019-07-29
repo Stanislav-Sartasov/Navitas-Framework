@@ -1,3 +1,6 @@
+import java.io.ByteArrayOutputStream
+import java.util.regex.Pattern
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -64,10 +67,8 @@ tasks.register<Exec>("monkeyRunner") {
     }
 }
 
+//TODO: how to run several tests???
 tasks.register<Exec>("espressoRunner") {
-    val appPackage: String? =
-        if (project.hasProperty("app_package")) project.property("app_package") as String else null
-
     val apkPath: String? =
         if (project.hasProperty("apk_path")) project.property("apk_path") as String else null
 
@@ -79,17 +80,16 @@ tasks.register<Exec>("espressoRunner") {
 
     workingDir("./..")
 
-    if (appPackage != null && apkPath != null && testApkPath != null && testPath != null) {
+    if (apkPath != null && testApkPath != null && testPath != null) {
         dependsOn("installApk")
         tasks["installApk"].inputs.properties["apk_path"] = apkPath
         tasks["installApk"].inputs.properties["test_apk_path"] = testApkPath
 
-        //TODO: how to extract app package from apk???
-        //TODO: how to run several tests???
-
-        commandLine("adb", "shell", "am", "instrument", "-w", "-e", "class", "$appPackage.$testPath", "$appPackage.test/androidx.test.runner.AndroidJUnitRunner")
+        val apkInfo = getApkInfo(apkPath)
+        val testApkInfo = getApkInfo(testApkPath)
+        commandLine("adb", "shell", "am", "instrument", "-w", "-e", "class", "${apkInfo.appPackage}.$testPath", "${testApkInfo.appPackage}/androidx.test.runner.AndroidJUnitRunner")
     } else {
-        commandLine("echo", "Error: app_package, apk_path, test_apk_path, test_path must be passed!")
+        commandLine("echo", "Error: apk_path, test_apk_path and test_path must be passed!")
     }
 }
 
@@ -110,4 +110,27 @@ tasks.register<Exec>("installApk") {
     } else {
         commandLine("echo", "Error: apk path must be passed!")
     }
+}
+
+//TODO: how to put it in a separate script???
+class ApkInfo(_aaptOutput: String) {
+    val appPackage: String
+
+    init {
+        val matcher = appPackagePattern.matcher(_aaptOutput)
+        matcher.find()
+        appPackage = matcher.group(1)
+    }
+}
+
+val appPackagePattern = Pattern.compile("name='([a-zA-Z0-9_.]+)'", Pattern.MULTILINE)
+
+val getApkInfo = { apkPath: String ->
+    val out = ByteArrayOutputStream()
+    exec {
+        workingDir("./..")
+        commandLine("aapt", "dump", "badging", apkPath)
+        standardOutput = out
+    }
+    ApkInfo(out.toString())
 }
