@@ -8,8 +8,6 @@ import com.android.build.api.transform.TransformInvocation
 import com.android.build.gradle.BaseExtension
 import javassist.ClassPool
 import javassist.CtClass
-import javassist.NotFoundException
-import org.gradle.api.GradleException
 import java.io.File
 
 class Transformer(
@@ -65,15 +63,6 @@ class Transformer(
                 externalDirs.forEach { pool.insertClassPath(it.absolutePath) }
 
                 if (applyTransform) {
-                    try {
-                        pool.get("net.grandcentrix.gradle.logalot.runtime.LogALot")
-                    } catch (nfe: NotFoundException) {
-                        throw GradleException(
-                            "You have to add the runtime dependency at least for the variants you enabled LogALot for.",
-                            nfe
-                        )
-                    }
-
                     transformInput(inputDirectory, outputDir, pool)
                 } else {
                     inputDirectory.file.copyRecursively(outputDir, true)
@@ -92,6 +81,7 @@ private fun transformInput(
         if (originalClassFile.isClassfile()) {
             val classname = originalClassFile.relativeTo(input.file).toClassname()
             val clazz = pool.get(classname)
+            pool.importPackage("android.util.Log")
             transformClass(clazz)
             clazz.writeFile(output.absolutePath)
         }
@@ -101,7 +91,7 @@ private fun transformInput(
 private fun transformClass(clazz: CtClass) {
     clazz.declaredMethods.forEach { method ->
         if (!method.isEmpty) {
-            method.insertBefore("System.out.println(\"-->This is instrumented code\");")
+            method.insertBefore(String.format("Log.d(\"TEST\", \"--> this is instrumented\");"))
         }
     }
 }

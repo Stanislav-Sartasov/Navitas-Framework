@@ -6,7 +6,7 @@ import org.gradle.api.Project
 
 open class InstrPlugin : Plugin<Project>{
     override fun apply(target: Project){
-        val extension = target.extensions.create("Instrum   entor", InstrExtension::class.java)
+        val extension = target.extensions.create("instrumentor", InstrExtension::class.java)
 
         val android = target.extensions.findByName("android") as BaseExtension
         android.registerTransform(Transformer(android, extension))
