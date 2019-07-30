@@ -51,64 +51,45 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
 }
 
-tasks.register<Exec>("monkeyRunner") {
+tasks.register("monkeyRunner") {
     val apkPath: String? =
         if (project.hasProperty("apk_path")) project.property("apk_path") as String else null
 
     val scriptPath: String? =
         if (project.hasProperty("script_path")) project.property("script_path") as String else null
 
-    workingDir("./..")
-
     if (apkPath != null && scriptPath != null) {
-        commandLine("monkeyrunner", scriptPath)
+        runCommand("monkeyrunner", scriptPath)
     } else {
-        commandLine("echo", "Error: apk_path and script_path must be passed!")
+        runCommand("echo", "Error: apk_path and script_path must be passed!")
     }
 }
 
-//TODO: how to run several tests???
-tasks.register<Exec>("espressoRunner") {
+tasks.register("espressoRunner") {
     val apkPath: String? =
         if (project.hasProperty("apk_path")) project.property("apk_path") as String else null
 
     val testApkPath: String? =
         if (project.hasProperty("test_apk_path")) project.property("test_apk_path") as String else null
 
-    val testPath: String? =
-        if (project.hasProperty("test_path")) project.property("test_path") as String else null
+    val testPaths: List<String>? =
+        if (project.hasProperty("test_paths")) {
+            val paths = project.property("test_paths") as String
+            paths.split(",")
+        } else null
 
-    workingDir("./..")
-
-    if (apkPath != null && testApkPath != null && testPath != null) {
-        dependsOn("installApk")
-        tasks["installApk"].inputs.properties["apk_path"] = apkPath
-        tasks["installApk"].inputs.properties["test_apk_path"] = testApkPath
+    if (apkPath != null && testApkPath != null && testPaths != null) {
+        installApk(apkPath)
+        installApk(testApkPath)
 
         val apkInfo = getApkInfo(apkPath)
         val testApkInfo = getApkInfo(testApkPath)
-        commandLine("adb", "shell", "am", "instrument", "-w", "-e", "class", "${apkInfo.appPackage}.$testPath", "${testApkInfo.appPackage}/androidx.test.runner.AndroidJUnitRunner")
+
+        for (path in testPaths) {
+            runTest(path, apkInfo, testApkInfo)
+        }
     } else {
-        commandLine("echo", "Error: apk_path, test_apk_path and test_path must be passed!")
-    }
-}
-
-tasks.register<Exec>("installApk") {
-    val apkPath: String? = if (project.hasProperty("apk_path")) project.property("apk_path") as String else null
-    val testApkPath: String? = if (project.hasProperty("test_apk_path")) project.property("test_apk_path") as String else null
-
-    workingDir("./..")
-
-    if (testApkPath != null) {
-        commandLine("adb", "install", "-r", testApkPath)
-    } else {
-        commandLine("echo", "Error: test apk path must be passed!")
-    }
-
-    if (apkPath != null) {
-        commandLine("adb", "install", "-r", apkPath)
-    } else {
-        commandLine("echo", "Error: apk path must be passed!")
+        runCommand("echo", "Error: apk_path, test_apk_path and test_paths must be passed!")
     }
 }
 
@@ -128,9 +109,25 @@ val appPackagePattern = Pattern.compile("name='([a-zA-Z0-9_.]+)'", Pattern.MULTI
 val getApkInfo = { apkPath: String ->
     val out = ByteArrayOutputStream()
     exec {
+        standardOutput = out
         workingDir("./..")
         commandLine("aapt", "dump", "badging", apkPath)
-        standardOutput = out
     }
     ApkInfo(out.toString())
+}
+
+val runTest = { testPath: String, apkInfo: ApkInfo, testApkInfo: ApkInfo ->
+    runCommand("adb", "shell", "am", "instrument", "-w", "-e", "class", "${apkInfo.appPackage}.$testPath", "${testApkInfo.appPackage}/androidx.test.runner.AndroidJUnitRunner")
+}
+
+val installApk = { apkPath: String ->
+    runCommand("echo", "APK Install: ", apkPath)
+    runCommand("adb", "install", "-r", apkPath)
+}
+
+fun runCommand(vararg args: String) {
+    exec {
+        workingDir("./..")
+        commandLine(*args)
+    }
 }
