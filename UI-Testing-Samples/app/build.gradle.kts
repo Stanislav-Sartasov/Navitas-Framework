@@ -82,11 +82,10 @@ tasks.register("espressoRunner") {
         installApk(apkPath)
         installApk(testApkPath)
 
-        val apkInfo = getApkInfo(apkPath)
-        val testApkInfo = getApkInfo(testApkPath)
+        val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
         for (path in testPaths) {
-            runTest(path, apkInfo, testApkInfo)
+            runTest(path, testRunnerInfo)
         }
     } else {
         runCommand("echo", "Error: apk_path, test_apk_path and test_paths must be passed!")
@@ -94,34 +93,46 @@ tasks.register("espressoRunner") {
 }
 
 //TODO: how to put it in a separate script???
-class ApkInfo(_aaptOutput: String) {
-    val appPackage: String
+val nameRegex = "([a-zA-Z0-9_\\.]+)"
+val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
+val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
+val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
+
+class TestRunnerInfo(aaptOutput: String) {
+    val targetPackage: String
+    val testPackage: String
+    val runnerName: String
 
     init {
-        val matcher = appPackagePattern.matcher(_aaptOutput)
-        matcher.find()
-        appPackage = matcher.group(1)
+        var matcher = testPackagePattern.matcher(aaptOutput).apply { find() }
+        testPackage = matcher.group(1)
+
+        val tail = aaptOutput.substringAfter("instrumentation")
+
+        matcher = targetPackagePattern.matcher(tail).apply { find() }
+        targetPackage = matcher.group(1)
+
+        matcher = runnerNamePattern.matcher(tail).apply { find() }
+        runnerName = matcher.group(1)
     }
 }
 
-val appPackagePattern = Pattern.compile("name='([a-zA-Z0-9_.]+)'", Pattern.MULTILINE)
-
-val getApkInfo = { apkPath: String ->
+val getTestRunnerInfo = { apkPath: String ->
     val out = ByteArrayOutputStream()
     exec {
         standardOutput = out
         workingDir("./..")
-        commandLine("aapt", "dump", "badging", apkPath)
+        commandLine("aapt", "dump", "xmltree", apkPath, "AndroidManifest.xml")
     }
-    ApkInfo(out.toString())
+    TestRunnerInfo(out.toString())
 }
 
-val runTest = { testPath: String, apkInfo: ApkInfo, testApkInfo: ApkInfo ->
-    runCommand("adb", "shell", "am", "instrument", "-w", "-e", "class", "${apkInfo.appPackage}.$testPath", "${testApkInfo.appPackage}/androidx.test.runner.AndroidJUnitRunner")
+val runTest = { testPath: String, info: TestRunnerInfo ->
+    runCommand("adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
 }
 
 val installApk = { apkPath: String ->
-    runCommand("echo", "APK Install: ", apkPath)
+    runCommand("echo", "APK Installing: ", apkPath)
     runCommand("adb", "install", "-r", apkPath)
 }
 
