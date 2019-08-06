@@ -4,6 +4,7 @@ import java.util.regex.Pattern
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("instrumentor")
 }
 
 android {
@@ -49,6 +50,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
     androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:3.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
+}
+
+instrumentor {
+    applyFor = arrayOf("Debug")
 }
 
 tasks.register("monkeyRunner") {
