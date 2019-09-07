@@ -1,6 +1,7 @@
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.util.regex.Pattern
+import java.io.FileWriter
 
 plugins {
     id("com.android.application")
@@ -95,6 +96,9 @@ tasks.register("profile") {
             printLogs()
             printStats()
             cleanBuild()
+
+            val logsFile = File("$projectDir/profileOutput/logs.txt")
+            parseToCsv(logsFile)
         } else {
             runCommand("echo", "Error: apk_path, test_apk_path and test_paths must be passed!")
         }
@@ -178,4 +182,26 @@ fun runCommand(vararg args: String) {
         workingDir("./..")
         commandLine("cmd", "/c", *args)
     }
+}
+
+fun parseToCsv(input: File) {
+    val csvHeader = "time,thread_id,enter/exit,method_name"
+    val fileWriter = FileWriter("$projectDir/profileOutput/parsedLogs.csv")
+    fileWriter.append(csvHeader)
+    fileWriter.append('\n')
+
+    val data = input.readLines()
+    for (line in data) {
+        if (!line.startsWith('-')) {
+            val dataList = line.split("\\s+".toRegex())
+            val time = dataList[1]
+            val processId = dataList[3]
+            val entryOrExit = dataList[7]
+            val methodName = dataList[8]
+
+            fileWriter.append("$time,$processId,$entryOrExit,$methodName")
+            fileWriter.append('\n')
+        }
+    }
+    fileWriter.close()
 }
