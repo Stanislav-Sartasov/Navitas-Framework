@@ -195,11 +195,11 @@ fun parseToCsv(input: File) {
         if (!line.startsWith('-')) {
             val dataList = line.split("\\s+".toRegex())
             val time = dataList[1]
-            val processId = dataList[3]
+            val threadId = dataList[3]
             val entryOrExit = dataList[7]
             val methodName = dataList[8]
 
-            fileWriter.append("$time,$processId,$entryOrExit,$methodName")
+            fileWriter.append("$time,$threadId,$entryOrExit,$methodName")
             fileWriter.append('\n')
         }
     }
