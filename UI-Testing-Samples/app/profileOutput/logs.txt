@@ -1,0 +1,18 @@
+--------- beginning of main
+--------- beginning of system
+09-11 19:28:05.001 27541 27541 D TEST    : Entry onCreate
+09-11 19:28:05.286 27541 27541 D TEST    : Exit onCreate
+09-11 19:28:06.051 27541 27541 D TEST    : Entry onClick
+09-11 19:28:06.076 27541 27541 D TEST    : Exit onClick
+09-11 19:28:06.129 27541 27541 D TEST    : Entry onCreate
+09-11 19:28:06.182 27541 27541 D TEST    : Exit onCreate
+09-11 19:28:07.973 27541 27541 D TEST    : Entry onCreate
+09-11 19:28:08.059 27541 27541 D TEST    : Exit onCreate
+09-11 19:28:08.896 27541 27541 D TEST    : Entry onClick
+09-11 19:28:08.954 27541 27541 D TEST    : Exit onClick
+09-11 19:28:09.004 27541 27541 D TEST    : Entry onCreate
+09-11 19:28:09.138 27541 27541 D TEST    : Exit onCreate
+09-11 19:28:09.748 27541 27541 D TEST    : Entry onClick
+09-11 19:28:09.754 27541 27541 D TEST    : Exit onClick
+09-11 19:28:12.974 27613 27613 D TEST    : Entry onCreate
+09-11 19:28:13.303 27613 27613 D TEST    : Exit onCreate

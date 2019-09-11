@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.lanit</groupId>
+  <artifactId>profilingPlugin</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20190911192550</lastUpdated>
+  </versioning>
+</metadata>
