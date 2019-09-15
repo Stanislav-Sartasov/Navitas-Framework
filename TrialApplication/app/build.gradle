@@ -96,7 +96,7 @@ task printLog(type: Exec) {
             if (time == prevTime) {
                 if (line.contains("volt")) {
                     lineToWrite += " voltage =" + line.split("=")[1]
-                } else {
+                } else if (line.contains("currnt")) {
                     lineToWrite += " amperage =" + line.split("=")[1]
                 }
             } else {
