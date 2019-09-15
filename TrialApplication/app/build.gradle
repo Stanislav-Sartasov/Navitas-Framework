@@ -22,12 +22,99 @@ android {
         }
     }
 }
-
+/*
 task printStats(type: Exec) {
     def adb = android.adbExe
     commandLine "$adb", 'shell', 'dumpsys', 'batterystats'
     standardOutput new FileOutputStream("${buildDir}/batterystats.txt")
+}*/
+
+task callBugreport(type: Exec) {
+    def adb = android.adbExe
+    commandLine "$adb", 'bugreport'
+    standardOutput new FileOutputStream("${buildDir}/bugreport.txt")
 }
+
+
+task printDmesg(type: Exec) {
+    def adb = android.adbExe
+    commandLine "$adb", 'shell', 'dmesg'
+    standardOutput new FileOutputStream("${buildDir}/dmesg.txt")
+}
+
+printDmesg.dependsOn callBugreport
+
+task printLog(type: Exec) {
+    def adb = android.adbExe
+    commandLine "$adb", 'logcat', '-d'
+    standardOutput new FileOutputStream("${buildDir}/dumpstateTime.txt")
+    doLast {
+        new File("$buildDir/log.txt").text = files(/*"$buildDir/batterystats.txt", */"$buildDir/dmesg.txt", "$buildDir/dumpstateTime.txt").collect{it.getText()}.join("\n")
+        def resFile = new File("$buildDir/res.txt")
+        for (line in file(("$buildDir/log.txt")).readLines()) {
+            if (line.contains("currnt") | line.contains("volt") | line.contains("dumpstate")) {
+                resFile << line + System.lineSeparator()
+            }
+        }
+        def lines = resFile.readLines()
+        def dumpTime = lines.find {i -> i.contains("dumpstate: done")}.split(" ")[1]
+        def dumpSec = lines.find {i -> i.contains("Service 'dumpstate'")}.replace("[ ", "").replace("]", "").replace("[", "").split(" ")[0]
+        def prevTime = " "
+        def lineToWrite = ""
+        def logsWithTime = new File("$buildDir/logsWithTime.txt")
+        for (l in lines.findAll {i -> i.contains("get_")}) {
+            def line = l.replace("[ ", "").replace("]", "").replace("[", "").replace(" ]", "")
+            def timeDifference = (line.split(" ")[0]).toDouble() - dumpSec.toDouble()
+            println(timeDifference)
+            def hrs = ((timeDifference.toInteger() / (24 * 60)).toInteger() + dumpTime.split(":")[0].toInteger()).toInteger() % 24
+            def min = ((timeDifference.toInteger() / 60).toInteger() % 60 + dumpTime.split(":")[1].toInteger()).toInteger()
+            def sec = (timeDifference.toInteger() % 60 + (dumpTime.split(":")[2].substring(0, 2)).toInteger())
+            def mcsec = ((timeDifference * 1000).toInteger() % 1000 + dumpTime.split(":")[2].substring(3).toInteger()).toInteger()
+            if (mcsec < 0) {
+                sec -= 1
+                mcsec += 1000
+            } else if (mcsec > 999) {
+                sec += 1
+                mcsec %= 1000
+            }
+            if (sec < 0) {
+                min -= 1
+                sec += 60
+            } else if (sec > 59) {
+                min += 1
+                sec %= 60
+            }
+            if (min < 0) {
+                hrs = hrs - 1
+                min = min + 60
+            } else if (min > 59) {
+                hrs += 1
+                hrs %= 24
+                min %= 60
+            }
+            def time = hrs.toString() + ":" + min.toString() + ":" + sec.toString() + "." + mcsec.toString()
+            if (time == prevTime) {
+                if (line.contains("volt")) {
+                    lineToWrite += " voltage =" + line.split("=")[1]
+                } else {
+                    lineToWrite += " amperage =" + line.split("=")[1]
+                }
+            } else {
+                logsWithTime << lineToWrite + System.lineSeparator()
+                lineToWrite = time
+                if (line.contains("volt")) {
+                    lineToWrite += " voltage =" + line.split("=")[1]
+                } else if (line.contains("currnt")) {
+                    lineToWrite += " amperage =" + line.split("=")[1]
+                }
+            }
+            prevTime = time
+        }
+
+    }
+}
+
+printLog.dependsOn printDmesg
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
