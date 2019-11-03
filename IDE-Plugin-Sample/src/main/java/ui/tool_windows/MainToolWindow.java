@@ -1,10 +1,11 @@
-package ui;
+package ui.tool_windows;
 
 import com.intellij.openapi.wm.ToolWindow;
+import ui.dialogs.SimpleDialogWrapper;
 
 import javax.swing.*;
 
-public class CustomToolWindow {
+public class MainToolWindow {
     private JButton start;
     private JCheckBox variant3CheckBox;
     private JCheckBox variant2CheckBox;
@@ -13,7 +14,7 @@ public class CustomToolWindow {
     private JPanel content;
     private JPanel subPanel;
 
-    public CustomToolWindow(ToolWindow toolWindow) {
+    public MainToolWindow(ToolWindow toolWindow) {
         createUIComponents();
     }
 
@@ -22,6 +23,8 @@ public class CustomToolWindow {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        start.addActionListener(actionEvent -> {
+            new SimpleDialogWrapper().show();
+        });
     }
 }

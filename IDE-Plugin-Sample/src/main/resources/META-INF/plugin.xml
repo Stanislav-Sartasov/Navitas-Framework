@@ -15,7 +15,7 @@
     -->
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Tool Window" anchor="bottom" secondary="true" factoryClass="ui.ToolWindowFactory"/>
+        <toolWindow id="Tool Window" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>
     </extensions>
 
     <actions>

@@ -1,4 +1,4 @@
-package ui;
+package ui.tool_windows;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -10,9 +10,9 @@ public class ToolWindowFactory implements com.intellij.openapi.wm.ToolWindowFact
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        CustomToolWindow customToolWindow = new CustomToolWindow(toolWindow);
+        MainToolWindow mainToolWindow = new MainToolWindow(toolWindow);
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(customToolWindow.getContent(), "", false);
+        Content content = contentFactory.createContent(mainToolWindow.getContent(), "", false);
         toolWindow.getContentManager().addContent(content);
     }
 }
