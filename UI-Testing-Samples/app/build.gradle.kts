@@ -54,7 +54,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:3.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
 }
-/*
+
 val adb: File = android.adbExecutable
 
 val profileOutput = File("$projectDir/profileOutput")
@@ -101,7 +101,6 @@ tasks.register("profile") {
     }
 }
 
-//TODO: how to put it in a separate script???
 val nameRegex = "([a-zA-Z0-9_\\.]+)"
 val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
 val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
@@ -202,4 +201,100 @@ fun parseToCsv(input: File) {
     fileWriter.close()
 }
 
-*/
+tasks.register("Test") {
+
+    val profileOutput = File("${projectDir}/profileOutput")
+
+    doLast {
+        exec {
+            commandLine("$adb", "logcat", "-d")
+            standardOutput = FileOutputStream("${profileOutput.absolutePath}/dumpstateTime.txt")
+        }
+    }
+    doLast {
+        //File("${profileOutput.absolutePath}/log.txt").writeText(/*"${profileOutput.absolutePath}/batterystats.txt", */(("${profileOutput.absolutePath}/dmesg.txt", "${profileOutput.absolutePath}/dumpstateTime.txt").{it.readText}.join("\n"))
+        File("${profileOutput.absolutePath}/log.txt").writeBytes(File("${profileOutput.absolutePath}/dmesg.txt").readBytes())
+        File("${profileOutput.absolutePath}/log.txt").appendText("\n")
+        File("${profileOutput.absolutePath}/log.txt").appendBytes(File("${profileOutput.absolutePath}/dumpstateTime.txt").readBytes())
+
+        val resFile = File("${profileOutput.absolutePath}/res.txt")
+
+        for (line in File(("${profileOutput.absolutePath}/log.txt")).readLines()) {
+            if (line.contains("currnt") || line.contains("volt") || line.contains("dumpstate")) {
+                resFile.appendText(line + System.lineSeparator())
+            }
+        }
+
+        val lines = resFile.readLines()
+        val dumpTime = lines.findLast { i -> i.contains("dumpstate: done") }?.split(" ")?.get(1)
+        val dumpSec =
+            lines.findLast { i -> i.contains("Service 'dumpstate'") }?.replace("]", "")?.replace("[", " ")?.split("\\s+".toRegex())
+                ?.get(1)
+        var prevTime = " "
+        var lineToWrite = ""
+        val logsWithTime = File("${profileOutput.absolutePath}/logsWithTime.txt")
+
+        for (l in lines.filter { i -> i.contains("get_") }) {
+            val line = l.replace("[", " ").replace("]", "")
+
+            val timeDifference =
+                (line.split("\\s+".toRegex())[1]).toDouble() - (dumpSec!!.toDouble())
+
+            var hrs = ((timeDifference.toInt() / (24 * 60)) + (dumpTime?.split(":")?.get(0)?.toInt()
+                ?: 0)) % 24
+
+            var min = ((timeDifference.toInt() / 60) % 60 + (dumpTime?.split(":")?.get(1)?.toInt()
+                ?: 0))
+            var sec = (timeDifference.toInt() % 60 + ((dumpTime?.split(":")?.get(2)?.substring(
+                0,
+                2
+            ))?.toInt()
+                ?: 0))
+            var mcsec =
+                ((timeDifference * 1000).toInt() % 1000 + (dumpTime?.split(":")?.get(2)?.substring(3)?.toInt()
+                    ?: 0))
+
+            if (mcsec < 0) {
+                sec -= 1
+                mcsec += 1000
+            } else if (mcsec > 999) {
+                sec += 1
+                mcsec %= 1000
+            }
+            if (sec < 0) {
+                min -= 1
+                sec += 60
+            } else if (sec > 59) {
+                min += 1
+                sec %= 60
+            }
+            if (min < 0) {
+                hrs -= 1
+                min += 60
+            } else if (min > 59) {
+                hrs += 1
+                hrs %= 24
+                min %= 60
+            }
+
+            val time = "$hrs:$min:$sec.$mcsec"
+
+            if (time == prevTime) {
+                if (line.contains("volt")) {
+                    lineToWrite += " voltage =" + line.split("=")[1]
+                } else if (line.contains("currnt")) {
+                    lineToWrite += " amperage =" + line.split("=")[1]
+                }
+            } else {
+                logsWithTime.appendText(lineToWrite + System.lineSeparator())
+                lineToWrite = time
+                if (line.contains("volt")) {
+                    lineToWrite += " voltage =" + line.split("=")[1]
+                } else if (line.contains("currnt")) {
+                    lineToWrite += " amperage =" + line.split("=")[1]
+                }
+            }
+            prevTime = time
+        }
+    }
+}
