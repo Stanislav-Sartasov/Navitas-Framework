@@ -1,30 +1,27 @@
 package ui.tool_windows;
 
 import com.intellij.openapi.wm.ToolWindow;
-import ui.dialogs.SimpleDialogWrapper;
+import ui.dialogs.ApkChooserDialog;
+import ui.dialogs.ItemChooserDialog;
 
 import javax.swing.*;
 
 public class MainToolWindow {
-    private JButton start;
-    private JCheckBox variant3CheckBox;
-    private JCheckBox variant2CheckBox;
-    private JCheckBox variant1CheckBox;
-    private JList list;
-    private JPanel content;
-    private JPanel subPanel;
+
+    private JButton startButton;
+    private JPanel contentPane;
 
     public MainToolWindow(ToolWindow toolWindow) {
         createUIComponents();
     }
 
-    public JPanel getContent() {
-        return content;
+    public JPanel getContentPane() {
+        return contentPane;
     }
 
     private void createUIComponents() {
-        start.addActionListener(actionEvent -> {
-            new SimpleDialogWrapper().show();
+        startButton.addActionListener(actionEvent -> {
+            new ApkChooserDialog().show();
         });
     }
 }

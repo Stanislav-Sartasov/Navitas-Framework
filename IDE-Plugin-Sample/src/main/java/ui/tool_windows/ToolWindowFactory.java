@@ -12,7 +12,7 @@ public class ToolWindowFactory implements com.intellij.openapi.wm.ToolWindowFact
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         MainToolWindow mainToolWindow = new MainToolWindow(toolWindow);
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(mainToolWindow.getContent(), "", false);
+        Content content = contentFactory.createContent(mainToolWindow.getContentPane(), "", false);
         toolWindow.getContentManager().addContent(content);
     }
 }
