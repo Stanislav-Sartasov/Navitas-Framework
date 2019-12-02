@@ -91,8 +91,9 @@ private fun transformInput(
 private fun transformClass(clazz: CtClass) {
     clazz.declaredMethods.forEach { method ->
         if (!method.isEmpty) {
-            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${method.name}\");"))
-            method.insertAfter("Log.d(\"TEST\", \"Exit ${method.name}\");")
+            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${method.name}, " +
+                    "Freqs ${getCpuFreqs()}\");"))
+            method.insertAfter("Log.d(\"TEST\", \"Exit ${method.name}, Freqs ${getCpuFreqs()}\");")
         }
     }
 }
@@ -103,3 +104,18 @@ private fun File.toClassname(): String =
         .replace(".class", "")
 
 private fun File.isClassfile(): Boolean = isFile && path.endsWith(".class")
+
+private fun getCpuFreqs(): String {
+    var freq = ""
+    for (i in 0 until 8) {
+        val filePath = "/sys/devices/system/cpu/cpu$i/cpufreq/scaling_cur_freq"
+        val proc = Runtime.getRuntime().exec("adb shell cat \"$filePath\"")
+
+        Scanner(proc.inputStream).use {
+            while (it.hasNextLine())
+                freq += it.nextLine()
+        }
+        freq += " "
+    }
+    return freq
+}
