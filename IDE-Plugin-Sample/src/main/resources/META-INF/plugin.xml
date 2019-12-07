@@ -17,11 +17,4 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Tool Window" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>
     </extensions>
-
-    <actions>
-        <group id="MyPlugin.SampleMenu" text="Greeting" description="Greeting menu">
-            <add-to-group group-id="MainMenu" anchor="last"/>
-            <action id="Myplugin.Textboxes" class="actions.HelloWorldAction" text="Hello" description="Says hello"/>
-        </group>
-    </actions>
 </idea-plugin>
