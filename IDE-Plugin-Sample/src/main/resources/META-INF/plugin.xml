@@ -8,11 +8,19 @@
     <em>most HTML tags may be used</em>
     ]]></description>
 
+    <depends>org.jetbrains.android</depends>
+
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <!-- uncomment to enable plugin in all products
     <depends>com.intellij.modules.lang</depends>
     -->
+
+    <project-components>
+        <component>
+            <implementation-class>components.AndroidModuleRepository</implementation-class>
+        </component>
+    </project-components>
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Tool Window" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>

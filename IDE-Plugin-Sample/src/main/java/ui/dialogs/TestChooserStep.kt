@@ -6,32 +6,31 @@ import com.intellij.ui.wizard.WizardStep
 
 import javax.swing.*
 
-class TestChooserStep(private val model: ConfigurationModel) : WizardStep<ConfigurationModel>("Test chooser") {
+class TestChooserStep(private val model: ConfigurationModel) : WizardStep<ConfigurationModel>("Choose tests for profiling") {
 
     private val list: CheckBoxList<String> = CheckBoxList()
-    private val selectedArray: BooleanArray
+    private var selectedArray: BooleanArray? = null
 
     init {
-        val items = model.tests;
-        selectedArray = BooleanArray(items.size)
-        list.setItems(items, String::toString)
-        list.setCheckBoxListListener { i: Int, b: Boolean -> selectedArray[i] = b }
+        list.setCheckBoxListListener { i: Int, b: Boolean -> selectedArray?.let{ it[i] = b } }
     }
 
     override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
-        return list
+        return list.also {
+            val items = model.getTestNamesOfSelectedModule()
+            selectedArray = BooleanArray(items.size) {false}
+            it.setItems(items, String::toString)
+        }
     }
 
-    /*
-
-     @Override
-    protected void doOKAction() {
-        System.out.print("OK is pressed. Selected item status: ");
-        for (boolean isSelected : selectedArray) System.out.print(isSelected + " ");
-        System.out.println();
-        close(0);
-        //TODO: pass selectedArray to somebody (may be to Presenter?)
+    override fun onFinish(): Boolean {
+        val indices = selectedArray!!.toList()
+                .asSequence()
+                .withIndex()
+                .filter { (_, value) -> value }
+                .map { (index, _) -> index }
+                .toList()
+        model.selectTests(indices)
+        return super.onFinish()
     }
-
-     */
 }

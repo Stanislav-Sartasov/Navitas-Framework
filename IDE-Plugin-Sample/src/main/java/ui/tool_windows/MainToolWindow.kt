@@ -1,11 +1,11 @@
 package ui.tool_windows
 
-import com.intellij.openapi.wm.ToolWindow
+import com.intellij.openapi.project.Project
 import ui.dialogs.ConfigurationDialog
 import javax.swing.JButton
 import javax.swing.JPanel
 
-class MainToolWindow(toolWindow: ToolWindow) {
+class MainToolWindow(private val project: Project) {
 
     lateinit var contentPane: JPanel
     private var startButton: JButton? = null
@@ -16,7 +16,7 @@ class MainToolWindow(toolWindow: ToolWindow) {
 
     private fun createUIComponents() {
         startButton!!.addActionListener {
-            ConfigurationDialog { model -> model.onFinish() }.apply { show() }
+            ConfigurationDialog(project) { model -> model.onFinish() }.apply { show() }
         }
     }
 }

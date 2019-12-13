@@ -7,7 +7,7 @@ import com.intellij.ui.content.ContentFactory
 class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val mainToolWindow = MainToolWindow(toolWindow)
+        val mainToolWindow = MainToolWindow(project)
         val contentFactory = ContentFactory.SERVICE.getInstance()
         val content = contentFactory.createContent(mainToolWindow.contentPane, "", false)
         toolWindow.contentManager.addContent(content)

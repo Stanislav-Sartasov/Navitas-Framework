@@ -16,7 +16,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2019.2.1'
+    version '191.8026.42'
 }
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
@@ -28,4 +28,9 @@ patchPluginXml {
     changeNotes """
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
+}
+
+runIde {
+    // Absolute path to installed target v3.5 Android Studio to use as IDE Development Instance
+    ideaDirectory '/home/vladislav/Programs/android-studio'
 }
