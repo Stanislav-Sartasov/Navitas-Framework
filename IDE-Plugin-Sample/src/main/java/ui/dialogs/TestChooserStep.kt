@@ -6,31 +6,31 @@ import com.intellij.ui.wizard.WizardStep
 
 import javax.swing.*
 
-class TestChooserStep(private val model: ConfigurationModel) : WizardStep<ConfigurationModel>("Choose tests for profiling") {
+class TestChooserStep(private val configModel: ConfigurationModel) : WizardStep<ConfigurationModel>("Choose tests for profiling") {
 
-    private val list: CheckBoxList<String> = CheckBoxList()
-    private var selectedArray: BooleanArray? = null
-
-    init {
-        list.setCheckBoxListListener { i: Int, b: Boolean -> selectedArray?.let{ it[i] = b } }
-    }
+    private lateinit var testList: CheckBoxList<String>
+    private lateinit var selectedArray: BooleanArray
 
     override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
-        return list.also {
-            val items = model.getTestNamesOfSelectedModule()
-            selectedArray = BooleanArray(items.size) {false}
-            it.setItems(items, String::toString)
+        testList = CheckBoxList<String>().apply {
+            val items = configModel.getTestNamesOfSelectedModule()
+            selectedArray = BooleanArray(items.size)
+            setItems(items, String::toString)
+            setCheckBoxListListener { i: Int, b: Boolean ->
+                selectedArray.let { it[i] = b }
+            }
         }
+        return testList
     }
 
     override fun onFinish(): Boolean {
-        val indices = selectedArray!!.toList()
+        val indices = selectedArray.toList()
                 .asSequence()
                 .withIndex()
                 .filter { (_, value) -> value }
                 .map { (index, _) -> index }
                 .toList()
-        model.selectTests(indices)
+        configModel.selectTests(indices)
         return super.onFinish()
     }
 }

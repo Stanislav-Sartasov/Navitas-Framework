@@ -8,15 +8,28 @@ import javax.swing.JPanel
 class MainToolWindow(private val project: Project) {
 
     lateinit var contentPane: JPanel
-    private var startButton: JButton? = null
+    private var configureButton: JButton? = null
+    private var profileButton: JButton? = null
 
     init{
-        createUIComponents()
+        setUpUIComponents()
     }
 
-    private fun createUIComponents() {
-        startButton!!.addActionListener {
-            ConfigurationDialog(project) { model -> model.onFinish() }.apply { show() }
+    private fun setUpUIComponents() {
+        configureButton!!.apply {
+            text = "Configure"
+            addActionListener {
+                ConfigurationDialog(project) { model ->
+                    model.onFinish()
+                }.show()
+            }
+        }
+        profileButton!!.apply {
+            text = "Profile"
+            isEnabled = false
+            addActionListener {
+                // TBD: check configuration and show error message or profiling dialog
+            }
         }
     }
 }

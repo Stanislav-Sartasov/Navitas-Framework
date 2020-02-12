@@ -43,6 +43,6 @@ class ConfigurationModel(project: Project) : WizardModel("Navitas configuration"
 
     fun onFinish() {
         println(selectedTests?.map { it.name })
-        //TODO: send harvested data to somebody (may be Presenter)
+        // TBD: send harvested data to somebody (may be Presenter)
     }
 }

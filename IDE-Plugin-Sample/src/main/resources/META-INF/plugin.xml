@@ -1,12 +1,7 @@
 <idea-plugin>
     <id>ide-plugin-sample</id>
-    <name>Android Studio Plugin Sample</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
-
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-    ]]></description>
+    <name>Navitas Energy Profiler</name>
+    <vendor>...</vendor>
 
     <depends>org.jetbrains.android</depends>
 
@@ -23,6 +18,6 @@
     </project-components>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Tool Window" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>
+        <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>
     </extensions>
 </idea-plugin>
