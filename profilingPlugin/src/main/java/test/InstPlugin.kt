@@ -23,17 +23,39 @@ open class InstrPlugin : Plugin<Project>{
             }
         }
 
-        target.tasks.register("Profile") { it ->
-            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
-            it.finalizedBy("clean")
-
+        target.tasks.register("rawProfile") { it ->
+            it.onlyIf { !it.hasProperty("SkipProfile")}
             val profileOutput = File("${target.projectDir}/profileOutput")
             if (!profileOutput.exists()) profileOutput.mkdirs()
 
-            val installApk = { apkPath: String ->
-                runCommand("echo", "APK Installing: ", apkPath)
-                runCommand("$adb", "install", "-r", apkPath)
+            val printStats = {
+                target.exec {
+                    it.commandLine("$adb", "shell", "dumpsys", "batterystats")
+                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/batterystats.txt")
+                }
             }
+
+            val printLogs = {
+                target.exec{
+                    it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/logs.txt")
+                }
+            }
+
+            it.doLast {
+                printLogs()
+                printStats()
+                val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
+                parseToCsv(logsFile, target)
+            }
+        }
+
+        target.tasks.named("rawProfile").configure { it.dependsOn("profileBuild") }
+        target.tasks.named("rawProfile").configure { it.dependsOn("runTests") }
+        target.tasks.named("rawProfile").configure { it.finalizedBy("clean") }
+
+        target.tasks.register("runTests") { it ->
+            it.onlyIf { !it.hasProperty("SkipProfile")}
 
             val clearLogs = {
                 target.exec{
@@ -42,6 +64,7 @@ open class InstrPlugin : Plugin<Project>{
                     it.commandLine("$adb", "logcat", "-c")
                 }
             }
+
             val getTestRunnerInfo = { apkPath: String ->
                 val out = ByteArrayOutputStream()
                 target.exec {
@@ -56,18 +79,63 @@ open class InstrPlugin : Plugin<Project>{
                 runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
             }
 
-            val printStats = {
-                target.exec {
-                    it.commandLine("$adb", "shell", "dumpsys", "batterystats")
-                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/batterystats.txt")
+            it.doLast {
+                clearLogs()
+
+                val testApkPath: String? =
+                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+
+                val testPaths: List<String>? =
+                    if (it.project.hasProperty("test_paths")) {
+                        val paths = it.project.property("test_paths") as String
+                        paths.split(",")
+                    } else null
+
+                if (testPaths != null && testApkPath != null) {
+                    val testRunnerInfo = getTestRunnerInfo(testApkPath)
+
+                    for (path in testPaths) {
+                        runTest(path, testRunnerInfo)
+                    }
+                }
+                else {
+                    runCommand("echo", "Error at task [runTests]: test_apk_path and test_paths should be passed")
+                    it.setProperty("SkipProfile", true)
                 }
             }
+        }
 
-            val printLogs = {
-                target.exec{
-                    it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/logs.txt")
+        target.tasks.register("profileBuild") { it ->
+            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
+
+            val installApk = { apkPath: String ->
+                runCommand("echo", "APK Installing: ", apkPath)
+                runCommand("$adb", "install", "-r", apkPath)
+            }
+
+            it.doLast {
+                val apkPath: String? =
+                    if (it.project.hasProperty("apk_path")) it.project.property("apk_path") as String else null
+
+                val testApkPath: String? =
+                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+
+                if (apkPath != null && testApkPath != null) {
+                    installApk(apkPath)
+                    installApk(testApkPath)
                 }
+                else {
+                    runCommand("echo", "Error at task [profileBuild]: apk_path and test_apk_path should be passed")
+                    target.setProperty("SkipProfile", true)
+                }
+        }
+
+        /* target.tasks.register("Profile") { it ->
+            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
+            it.finalizedBy("clean")
+
+            val runTest = { testPath: String, info: TestRunnerInfo ->
+                runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
             }
 
             val cleanBuild = {
@@ -109,10 +177,8 @@ open class InstrPlugin : Plugin<Project>{
                 } else {
                     runCommand("echo", "Error: apk_path, test_apk_path and test_paths must be passed!")
                 }
-            }
-
+            }*/
         }
-
     }
 }
 
@@ -120,7 +186,7 @@ open class InstrExtension {
     var applyFor: Array<String>? = null
 }
 
-val nameRegex = "([a-zA-Z0-9_\\.]+)"
+const val nameRegex = "([a-zA-Z0-9_\\.]+)"
 val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
 val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
 val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
