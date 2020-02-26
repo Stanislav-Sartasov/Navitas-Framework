@@ -1,6 +1,7 @@
 package test
 
 import com.android.build.gradle.BaseExtension
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import java.io.ByteArrayOutputStream
@@ -19,20 +20,13 @@ open class InstrPlugin : Plugin<Project>{
         fun runCommand(vararg args: String) {
             target.exec {
                 it.workingDir("./..")
-                it.commandLine("cmd", "/c", *args)
+                it.commandLine(*args)
             }
         }
 
         target.tasks.register("rawProfile") { it ->
             val profileOutput = File("${target.projectDir}/profileOutput")
             if (!profileOutput.exists()) profileOutput.mkdirs()
-
-            val printStats = {
-                target.exec {
-                    it.commandLine("$adb", "shell", "dumpsys", "batterystats")
-                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/batterystats.txt")
-                }
-            }
 
             val printLogs = {
                 target.exec{
@@ -43,7 +37,6 @@ open class InstrPlugin : Plugin<Project>{
 
             it.doLast {
                 printLogs()
-                printStats()
                 val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
                 //parseToCsv(logsFile, target)
             }
@@ -96,8 +89,8 @@ open class InstrPlugin : Plugin<Project>{
                     }
                 }
                 else {
-                    runCommand("echo", "Error at task [runTests]: test_apk_path and test_paths should be passed")
-                    it.project.gradle.startParameter.excludedTaskNames.add("rawProfile")
+                    runCommand("echo", "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
+                    throw GradleException("Arguments are not passed")
                 }
             }
         }
@@ -126,8 +119,8 @@ open class InstrPlugin : Plugin<Project>{
                     installApk(testApkPath)
                 }
                 else {
-                    runCommand("echo", "Error at task [profileBuild]: apk_path and test_apk_path should be passed")
-                    it.project.gradle.startParameter.excludedTaskNames.addAll(listOf("runTests", "rawProfile"))
+                    runCommand("echo", "\n!Error at task [profileBuild]: apk_path and test_apk_path should be passed\n")
+                    throw GradleException("Arguments are not passed")
                 }
             }
         }

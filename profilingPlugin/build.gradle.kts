@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     groovy
     java
+    id("org.jetbrains.intellij") version "0.4.9"
     kotlin("jvm") version "1.3.41"
     `java-gradle-plugin`
     maven
@@ -22,6 +23,7 @@ dependencies {
     implementation("com.android.tools.build:gradle:3.2.1")
     implementation("com.android.tools.build:gradle-api:3.2.1")
     implementation("org.javassist:javassist:3.23.1-GA")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.50")
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
