@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     groovy
-    id("org.jetbrains.intellij") version "0.4.9"
     java
     kotlin("jvm") version "1.3.41"
     `java-gradle-plugin`

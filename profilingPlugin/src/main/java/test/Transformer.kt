@@ -92,9 +92,10 @@ private fun transformInput(
 private fun transformClass(clazz: CtClass) {
     clazz.declaredMethods.forEach { method ->
         if (!method.isEmpty) {
-            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${method.name}, " +
-                    "Freqs ${getCpuFreqs()}\");\n" +  "Time in states:\n${getTimeInState()}"))
-            method.insertAfter("Log.d(\"TEST\", \"Exit ${method.name}, Freqs ${getCpuFreqs()}\");")
+            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${method.name} " +
+                    "Freqs ${getCpuFreqs()}" + "TimeInStates ${getTimeInState()}\");"))
+            method.insertAfter(String.format("Log.d(\"TEST\", \"Exit ${method.name} " +
+                    "Freqs ${getCpuFreqs()}" + "TimeInStates ${getTimeInState()}\");"))
         }
     }
 }
@@ -113,11 +114,10 @@ private fun getCpuFreqs(): String {
         val proc = Runtime.getRuntime().exec("adb shell cat \"$filePath\"")
 
         Scanner(proc.inputStream).use {
-            var line = it.nextLine().toIntOrNull()
-            if (line == null)
-                freq += "-"
+            freq += if (it.hasNextLine())
+                it.nextLine()
             else
-                freq += "$line"
+                "-"
         }
         freq += " "
     }
@@ -127,15 +127,14 @@ private fun getCpuFreqs(): String {
 private fun getTimeInState(): String {
     var timeInState = ""
     for (i in 0 until 8) {
-        timeInState += "cpu$i:\n"
+        timeInState += "cpu$i: "
         val filePath = "/sys/devices/system/cpu/cpu$i/cpufreq/stats/time_in_state"
         val proc = Runtime.getRuntime().exec("adb shell cat \"$filePath\"")
 
         Scanner(proc.inputStream).use {
             while (it.hasNextLine())
-                timeInState += it.nextLine()
+                timeInState += it.nextLine() + "; "
         }
-        timeInState += "\n"
     }
     return timeInState
 }

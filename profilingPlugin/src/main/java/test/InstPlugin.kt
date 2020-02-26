@@ -24,7 +24,6 @@ open class InstrPlugin : Plugin<Project>{
         }
 
         target.tasks.register("rawProfile") { it ->
-            it.onlyIf { !it.hasProperty("SkipProfile")}
             val profileOutput = File("${target.projectDir}/profileOutput")
             if (!profileOutput.exists()) profileOutput.mkdirs()
 
@@ -46,7 +45,7 @@ open class InstrPlugin : Plugin<Project>{
                 printLogs()
                 printStats()
                 val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
-                parseToCsv(logsFile, target)
+                //parseToCsv(logsFile, target)
             }
         }
 
@@ -55,8 +54,6 @@ open class InstrPlugin : Plugin<Project>{
         target.tasks.named("rawProfile").configure { it.finalizedBy("clean") }
 
         target.tasks.register("runTests") { it ->
-            it.onlyIf { !it.hasProperty("SkipProfile")}
-
             val clearLogs = {
                 target.exec{
                     it.isIgnoreExitValue = true //needs to be fixed somehow
@@ -100,7 +97,7 @@ open class InstrPlugin : Plugin<Project>{
                 }
                 else {
                     runCommand("echo", "Error at task [runTests]: test_apk_path and test_paths should be passed")
-                    it.setProperty("SkipProfile", true)
+                    it.project.gradle.startParameter.excludedTaskNames.add("rawProfile")
                 }
             }
         }
@@ -115,10 +112,14 @@ open class InstrPlugin : Plugin<Project>{
 
             it.doLast {
                 val apkPath: String? =
-                    if (it.project.hasProperty("apk_path")) it.project.property("apk_path") as String else null
+                    if (it.project.hasProperty("apk_path"))
+                        it.project.property("apk_path") as String
+                    else null
 
                 val testApkPath: String? =
-                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+                    if (it.project.hasProperty("test_apk_path"))
+                        it.project.property("test_apk_path") as String
+                    else null
 
                 if (apkPath != null && testApkPath != null) {
                     installApk(apkPath)
@@ -126,58 +127,9 @@ open class InstrPlugin : Plugin<Project>{
                 }
                 else {
                     runCommand("echo", "Error at task [profileBuild]: apk_path and test_apk_path should be passed")
-                    target.setProperty("SkipProfile", true)
-                }
-        }
-
-        /* target.tasks.register("Profile") { it ->
-            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
-            it.finalizedBy("clean")
-
-            val runTest = { testPath: String, info: TestRunnerInfo ->
-                runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
-            }
-
-            val cleanBuild = {
-                target.delete{
-                    it.delete(target.buildDir)
+                    it.project.gradle.startParameter.excludedTaskNames.addAll(listOf("runTests", "rawProfile"))
                 }
             }
-
-            it.doLast {
-                val apkPath: String? =
-                    if (it.project.hasProperty("apk_path")) it.project.property("apk_path") as String else null
-
-                val testApkPath: String? =
-                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
-
-                val testPaths: List<String>? =
-                    if (it.project.hasProperty("test_paths")) {
-                        val paths = it.project.property("test_paths") as String
-                        paths.split(",")
-                    } else null
-
-                if (apkPath != null && testApkPath != null && testPaths != null) {
-                    installApk(apkPath)
-                    installApk(testApkPath)
-
-                    val testRunnerInfo = getTestRunnerInfo(testApkPath)
-
-                    clearLogs()
-
-                    for (path in testPaths) {
-                        runTest(path, testRunnerInfo)
-                    }
-
-                    printLogs()
-                    printStats()
-                    cleanBuild()
-                    val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
-                    parseToCsv(logsFile, target)
-                } else {
-                    runCommand("echo", "Error: apk_path, test_apk_path and test_paths must be passed!")
-                }
-            }*/
         }
     }
 }
