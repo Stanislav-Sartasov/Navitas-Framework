@@ -15,6 +15,7 @@ class AndroidModuleRepository(private val project: Project) : ProjectComponent {
 
     private val moduleTests: HashMap<String, List<PsiFile>> = HashMap()
 
+    // TODO: fetching all android modules on 'Configure' button click
     override fun projectOpened() {
         super.projectOpened()
         _androidModules.addAll(

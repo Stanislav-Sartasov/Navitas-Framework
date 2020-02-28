@@ -13,6 +13,7 @@ const val INSTRUMENTED_TEST_FOLDER_NAME = "androidTest"
 const val TEST_ANNOTATION = "@Test"
 val FILE_EXTENSIONS = listOf("kt", "java")
 
+// TODO: checking for the presence of AndroidManifest file because module may not have build.gradle file
 private fun Module.isAndroidModule(type: String): Boolean {
     return FilenameIndex.getFilesByName(
             project,

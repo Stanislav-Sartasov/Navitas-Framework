@@ -5,12 +5,13 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.ui.wizard.WizardModel
 import components.AndroidModuleRepository
+import data.ConfigurationRepository
 
-class ConfigurationModel(project: Project) : WizardModel("Navitas configuration") {
+class ConfigurationModel(private val project: Project) : WizardModel("Navitas configuration") {
 
     private val repository = project.getComponent(AndroidModuleRepository::class.java)
     private var selectedModule: Module? = null
-    private var selectedTests: List<PsiFile>? = null
+    private var selectedTests: List<PsiFile> = emptyList()
     private val modules: List<Module> = repository.androidModules
     private val currentTests: MutableList<PsiFile> = mutableListOf()
 
@@ -42,7 +43,11 @@ class ConfigurationModel(project: Project) : WizardModel("Navitas configuration"
     }
 
     fun onFinish() {
-        println(selectedTests?.map { it.name })
-        // TBD: send harvested data to somebody (may be Presenter)
+//        println(selectedTests.map { it.name })
+        project.getComponent(ConfigurationRepository::class.java).apply {
+            appModule = selectedModule
+            testClasses = selectedTests
+        }
+        // TODO: send harvested data to somebody (may be Presenter)
     }
 }

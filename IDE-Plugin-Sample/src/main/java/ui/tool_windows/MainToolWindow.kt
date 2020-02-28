@@ -1,7 +1,9 @@
 package ui.tool_windows
 
 import com.intellij.openapi.project.Project
+import executeTask
 import ui.dialogs.ConfigurationDialog
+import ui.profiling.ProfilingDialog
 import javax.swing.JButton
 import javax.swing.JPanel
 
@@ -26,9 +28,9 @@ class MainToolWindow(private val project: Project) {
         }
         profileButton!!.apply {
             text = "Profile"
-            isEnabled = false
             addActionListener {
-                // TBD: check configuration and show error message or profiling dialog
+                executeTask(project, "rawProfile", arrayOf("-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk", "-Papk_path=app/build/outputs/apk/debug/app-debug.apk", "-Ptest_paths=NavigationTest,AnotherTest"))
+                // TODO: check ui.configuration and show error message or profiling dialog
             }
         }
     }

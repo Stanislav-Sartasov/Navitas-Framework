@@ -2,8 +2,10 @@
     <id>ide-plugin-sample</id>
     <name>Navitas Energy Profiler</name>
     <vendor>...</vendor>
+    <version>1.0</version>
 
-    <depends>org.jetbrains.android</depends>
+    <depends>org.jetbrains.plugins.gradle</depends>
+    <depends>org.intellij.groovy</depends>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -11,9 +13,22 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
+
+    <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
+
+    </extensions>
+
     <project-components>
         <component>
             <implementation-class>components.AndroidModuleRepository</implementation-class>
+        </component>
+
+        <component>
+            <implementation-class>data.ConfigurationRepository</implementation-class>
+        </component>
+
+        <component>
+            <implementation-class>components.GradlePluginInjector</implementation-class>
         </component>
     </project-components>
 
