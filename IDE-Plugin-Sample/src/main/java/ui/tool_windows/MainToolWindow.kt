@@ -1,6 +1,7 @@
 package ui.tool_windows
 
 import com.intellij.openapi.project.Project
+import components.GradlePluginInjector
 import executeTask
 import ui.dialogs.ConfigurationDialog
 import ui.profiling.ProfilingDialog
@@ -29,7 +30,8 @@ class MainToolWindow(private val project: Project) {
         profileButton!!.apply {
             text = "Profile"
             addActionListener {
-                executeTask(project, "rawProfile", arrayOf("-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk", "-Papk_path=app/build/outputs/apk/debug/app-debug.apk", "-Ptest_paths=NavigationTest,AnotherTest"))
+                GradlePluginInjector(project).verifyAndInject()
+//                executeTask(project, "rawProfile", arrayOf("-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk", "-Papk_path=app/build/outputs/apk/debug/app-debug.apk", "-Ptest_paths=NavigationTest,AnotherTest"))
                 // TODO: check ui.configuration and show error message or profiling dialog
             }
         }

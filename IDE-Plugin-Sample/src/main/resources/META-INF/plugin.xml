@@ -26,10 +26,6 @@
         <component>
             <implementation-class>data.ConfigurationRepository</implementation-class>
         </component>
-
-        <component>
-            <implementation-class>components.GradlePluginInjector</implementation-class>
-        </component>
     </project-components>
 
     <extensions defaultExtensionNs="com.intellij">
