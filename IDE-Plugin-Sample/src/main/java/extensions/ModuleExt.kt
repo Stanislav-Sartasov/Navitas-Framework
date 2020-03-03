@@ -5,8 +5,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.search.FilenameIndex
 
 const val BUILD_GRADLE_FILE_NAME = "build.gradle"
-const val GRADLE_KEYWORD_APPLY = "apply"
-const val GRADLE_KEYWORD_PLUGIN = "plugin"
 const val PLUGIN_ANDROID_LIBRARY_NAME = "com.android.library"
 const val PLUGIN_ANDROID_APPLICATION_NAME = "com.android.application"
 const val INSTRUMENTED_TEST_FOLDER_NAME = "androidTest"
@@ -19,12 +17,7 @@ private fun Module.isAndroidModule(type: String): Boolean {
             project,
             BUILD_GRADLE_FILE_NAME,
             moduleContentScope
-    ).firstOrNull()?.let { buildGradlePsiFile ->
-        return buildGradlePsiFile.children.any { psiElement ->
-            val text = psiElement.text
-            text.contains(GRADLE_KEYWORD_APPLY) && text.contains(GRADLE_KEYWORD_PLUGIN) && (text.contains(type))
-        }
-    } ?: false
+    ).firstOrNull()?.hasChildWithText(type) ?: false
 }
 
 fun Module.isAndroidLibraryModule(): Boolean = isAndroidModule(PLUGIN_ANDROID_LIBRARY_NAME)
@@ -33,6 +26,7 @@ fun Module.isAndroidApplicationModule(): Boolean = isAndroidModule(PLUGIN_ANDROI
 
 fun Module.isAndroidModule(): Boolean = isAndroidLibraryModule() || isAndroidApplicationModule()
 
+// TODO: what if several classes in one file ???
 fun Module.findInstrumentedTests(): List<PsiFile> {
     val result = mutableListOf<PsiFile>()
     for (fileExt in FILE_EXTENSIONS) {
@@ -40,12 +34,12 @@ fun Module.findInstrumentedTests(): List<PsiFile> {
                 .asSequence()
                 .filter { file -> file.path.contains(INSTRUMENTED_TEST_FOLDER_NAME, ignoreCase = true) }
                 .map { file -> file.name }
-                .toSet()
+                .toList()
 
         for (fileName in fileNames) {
             result.addAll(
                     FilenameIndex.getFilesByName(project, fileName, moduleContentScope)
-                            .filter { file -> file.children.any { psiElement -> psiElement.text.contains(TEST_ANNOTATION) } }
+                            .filter { file -> file.hasChildWithText(TEST_ANNOTATION) }
             )
         }
     }

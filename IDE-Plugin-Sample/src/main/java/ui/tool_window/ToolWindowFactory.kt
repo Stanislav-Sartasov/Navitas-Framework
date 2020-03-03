@@ -1,4 +1,4 @@
-package ui.tool_windows
+package ui.tool_window
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow

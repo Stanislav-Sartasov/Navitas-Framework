@@ -13,22 +13,7 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
-
-    <extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
-
-    </extensions>
-
-    <project-components>
-        <component>
-            <implementation-class>components.AndroidModuleRepository</implementation-class>
-        </component>
-
-        <component>
-            <implementation-class>data.ConfigurationRepository</implementation-class>
-        </component>
-    </project-components>
-
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="ui.tool_windows.ToolWindowFactory"/>
+        <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="ui.tool_window.ToolWindowFactory"/>
     </extensions>
 </idea-plugin>

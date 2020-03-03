@@ -1,4 +1,4 @@
-package components
+package tooling
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.WriteCommandAction

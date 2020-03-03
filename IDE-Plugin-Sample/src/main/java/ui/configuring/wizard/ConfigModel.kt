@@ -1,29 +1,30 @@
-package ui.dialogs
+package ui.configuring.wizard
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.ui.wizard.WizardModel
-import components.AndroidModuleRepository
-import data.ConfigurationRepository
+import tooling.AndroidModuleProvider
+import ui.configuring.wizard.steps.AndroidAppModuleChoosingStep
+import ui.configuring.wizard.steps.InstrumentedTestChoosingStep
 
-class ConfigurationModel(private val project: Project) : WizardModel("Navitas configuration") {
+class ConfigModel(private val project: Project) : WizardModel("Navitas configuration") {
 
-    private val repository = project.getComponent(AndroidModuleRepository::class.java)
+    private val repository = AndroidModuleProvider(project)
     private var selectedModule: Module? = null
     private var selectedTests: List<PsiFile> = emptyList()
-    private val modules: List<Module> = repository.androidModules
     private val currentTests: MutableList<PsiFile> = mutableListOf()
 
-    val moduleNames: List<String> = modules.map { it.name }
+    private val androidAppModules: List<Module> = repository.fetchAndroidAppModuleList()
+    val androidAppModuleNames: List<String> = androidAppModules.map { module -> module.moduleFilePath }
 
     init {
-        add(ModuleChooserStep(this))
-        add(TestChooserStep(this))
+        add(AndroidAppModuleChoosingStep(this))
+        add(InstrumentedTestChoosingStep(this))
     }
 
     fun selectModule(index: Int) {
-        selectedModule = modules[index]
+        selectedModule = androidAppModules[index]
     }
 
     fun selectTests(indices: List<Int>) {
@@ -34,20 +35,16 @@ class ConfigurationModel(private val project: Project) : WizardModel("Navitas co
                 .toList()
     }
 
+    // TODO: how to get package name of PsiFile ???
     fun getTestNamesOfSelectedModule(): List<String> {
         currentTests.clear()
         return selectedModule?.let {
-            currentTests.addAll(repository.getTestsByModule(it))
+            currentTests.addAll(repository.fetchTestList(it))
             currentTests.map { test -> test.name }
         } ?: emptyList()
     }
 
     fun onFinish() {
-//        println(selectedTests.map { it.name })
-        project.getComponent(ConfigurationRepository::class.java).apply {
-            appModule = selectedModule
-            testClasses = selectedTests
-        }
         // TODO: send harvested data to somebody (may be Presenter)
     }
 }

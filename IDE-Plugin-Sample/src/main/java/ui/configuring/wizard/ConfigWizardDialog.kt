@@ -1,12 +1,12 @@
-package ui.dialogs
+package ui.configuring.wizard
 
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardDialog
 
-class ConfigurationDialog(
+class ConfigWizardDialog(
         project: Project,
-        private val callback: (ConfigurationModel) -> Unit
-) : WizardDialog<ConfigurationModel>(true, true, ConfigurationModel(project)) {
+        private val callback: (ConfigModel) -> Unit
+) : WizardDialog<ConfigModel>(true, true, ConfigModel(project)) {
 
     override fun onWizardGoalAchieved() {
         super.onWizardGoalAchieved()
