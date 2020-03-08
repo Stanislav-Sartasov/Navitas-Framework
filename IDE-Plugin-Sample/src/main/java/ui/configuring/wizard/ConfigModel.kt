@@ -4,11 +4,12 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.ui.wizard.WizardModel
+import data.ConfigRepository
 import tooling.AndroidModuleProvider
 import ui.configuring.wizard.steps.AndroidAppModuleChoosingStep
 import ui.configuring.wizard.steps.InstrumentedTestChoosingStep
 
-class ConfigModel(private val project: Project) : WizardModel("Navitas configuration") {
+class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
 
     private val repository = AndroidModuleProvider(project)
     private var selectedModule: Module? = null
@@ -45,6 +46,7 @@ class ConfigModel(private val project: Project) : WizardModel("Navitas configura
     }
 
     fun onFinish() {
-        // TODO: send harvested data to somebody (may be Presenter)
+        ConfigRepository.androidAppModule = selectedModule
+        ConfigRepository.instrumentedTests = selectedTests
     }
 }
