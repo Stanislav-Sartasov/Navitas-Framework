@@ -38,7 +38,7 @@ open class InstrPlugin : Plugin<Project>{
             it.doLast {
                 printLogs()
                 val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
-                //parseToCsv(logsFile, target)
+                parseToCsv(logsFile, target)
             }
         }
 
@@ -156,23 +156,63 @@ open class TestRunnerInfo(aaptOutput: String) {
 }
 
 fun parseToCsv(input: File, target: Project) {
-    val csvHeader = "time,thread_id,enter/exit,method_name"
-    val fileWriter = FileWriter("${target.projectDir}/profileOutput/parsedLogs.csv")
-    fileWriter.append(csvHeader)
+    val fileWriter = FileWriter("parsedLogs.csv")
+    val header = "MethodName,StartTime,EndTime,ThreadID,Energy"
+    fileWriter.append(header)
     fileWriter.append('\n')
 
     val data = input.readLines()
-    for (line in data) {
-        if (!line.startsWith('-')) {
-            val dataList = line.split("\\s+".toRegex())
-            val time = dataList[1]
-            val threadId = dataList[3]
-            val entryOrExit = dataList[7]
-            val methodName = dataList[8]
+    for (i in 0 until data.size) {
+        val line = data[i]
 
-            fileWriter.append("$time,$threadId,$entryOrExit,$methodName")
+        if (!line.startsWith('-')) {
+            val entryLineList = line.split("\\s+".toRegex())
+            var dataString = ""
+
+            if (entryLineList[7] != "Entry") {
+                continue
+            } else {
+                val methodName = entryLineList[8]
+                val threadId = entryLineList[3]
+
+                val exitLine = findExitLine(data, i, methodName)
+                val exitLineList = exitLine!!.split("\\s+".toRegex())
+
+                val startTime = entryLineList[1]
+                val endTime = exitLineList[1]
+
+                var energy = 0
+
+                var parseIndex = 10
+                while (entryLineList[parseIndex] != "EndOfData") {
+                    val freq = entryLineList[parseIndex].toInt()
+                    val timeAtEntry = entryLineList[parseIndex + 1].toInt()
+                    val timeAtExit = exitLineList[parseIndex + 1].toInt()
+
+                    energy += freq * (timeAtExit - timeAtEntry)
+
+                    parseIndex += 2
+                }
+
+                dataString += "$methodName,$startTime,$endTime,$threadId,$energy"
+            }
+
+            fileWriter.append(dataString)
             fileWriter.append('\n')
         }
     }
     fileWriter.close()
+}
+
+fun findExitLine(data: List<String>, startingIndex: Int, methodName: String): String? {
+    for (i in (startingIndex + 1) until data.size) {
+        val line = data[i]
+
+        if (!line.startsWith('-')) {
+            val dataList = line.split("\\s+".toRegex())
+            if (dataList[7] == "Exit" && dataList[8] == methodName)
+                return line
+        }
+    }
+    return null
 }
