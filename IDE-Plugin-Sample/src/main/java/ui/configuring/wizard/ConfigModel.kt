@@ -4,7 +4,8 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.ui.wizard.WizardModel
-import data.ConfigRepository
+import data.ConfigurationRepository
+import data.model.ProfilingConfiguration
 import tooling.AndroidModuleProvider
 import ui.configuring.wizard.steps.AndroidAppModuleChoosingStep
 import ui.configuring.wizard.steps.InstrumentedTestChoosingStep
@@ -45,8 +46,5 @@ class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
         } ?: emptyList()
     }
 
-    fun onFinish() {
-        ConfigRepository.androidAppModule = selectedModule
-        ConfigRepository.instrumentedTests = selectedTests
-    }
+    fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!, selectedTests)
 }

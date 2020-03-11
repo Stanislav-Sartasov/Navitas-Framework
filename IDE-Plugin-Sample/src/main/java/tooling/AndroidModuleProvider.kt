@@ -13,7 +13,6 @@ class AndroidModuleProvider(private val project: Project) {
         return ModuleManager.getInstance(project)
                 .modules
                 .toList()
-                .filter { println(it.name) ;true}
                 .filter { it.isAndroidModule() }
     }
 

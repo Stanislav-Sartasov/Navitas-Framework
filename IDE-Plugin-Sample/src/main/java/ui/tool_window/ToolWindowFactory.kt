@@ -12,7 +12,7 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
 
         val contentFactory = ContentFactory.SERVICE.getInstance()
         val configuringContent = contentFactory.createContent(ConfiguringContentView(project, router).contentPanel, "", false)
-        val profilingContent = contentFactory.createContent(ProfilingContentView(router).contentPanel, "", false)
+        val profilingContent = contentFactory.createContent(ProfilingResultContentView(router).contentPanel, "", false)
 
         router.setupContents(listOf(configuringContent, profilingContent))
         router.toNextContent()

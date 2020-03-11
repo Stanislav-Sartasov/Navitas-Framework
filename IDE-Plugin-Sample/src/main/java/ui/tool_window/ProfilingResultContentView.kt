@@ -4,7 +4,7 @@ import interfaces.ContentRouter
 import javax.swing.JButton
 import javax.swing.JPanel
 
-class ProfilingContentView(private val router: ContentRouter) {
+class ProfilingResultContentView(private val router: ContentRouter) {
 
     // UI components
     lateinit var contentPanel: JPanel

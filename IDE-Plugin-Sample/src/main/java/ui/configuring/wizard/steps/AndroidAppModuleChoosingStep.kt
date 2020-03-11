@@ -26,7 +26,6 @@ class AndroidAppModuleChoosingStep(private val configModel: ConfigModel) : Wizar
 
     // TODO: problem with returning back from TestChooserStep
     override fun onNext(model: ConfigModel?): WizardStep<*> {
-        println("ModuleChooserStep::onNext")
         model?.selectModule(moduleList.selectedIndex)
         return super.onNext(model)
     }
