@@ -9,6 +9,8 @@ import ui.configuring.wizard.ConfigWizardDialog
 import ui.view_models.ConfiguringViewModel
 import ui.view_models.ProfilingViewModel
 import javax.swing.JButton
+import javax.swing.JLabel
+import javax.swing.JList
 import javax.swing.JPanel
 
 class ConfiguringContentView(private val project: Project, private val router: ContentRouter) {
@@ -18,6 +20,8 @@ class ConfiguringContentView(private val project: Project, private val router: C
     private lateinit var configureButton: JButton
     private lateinit var profileButton: JButton
     private lateinit var stopButton: JButton
+    private lateinit var androidAppModuleField: JLabel
+    private lateinit var instrumentedTestList: JList<String>
     private val profilingVM = ProfilingViewModel(project)
     private val configuringVM = ConfiguringViewModel()
 
@@ -65,5 +69,14 @@ class ConfiguringContentView(private val project: Project, private val router: C
                         }
                     }
         }
+        configuringVM.profilingConfiguration
+                .subscribe { config ->
+                    AppUIExecutor.onUiThread().execute {
+                        androidAppModuleField.text = config.module.name
+                        instrumentedTestList.setListData(
+                                config.tests.map { test -> test.name }.toTypedArray()
+                        )
+                    }
+                }
     }
 }
