@@ -40,6 +40,7 @@ class ConfiguringContentView(private val project: Project, private val router: C
         }
         profileButton.apply {
             text = "Profile"
+            isEnabled = false
             addActionListener {
                 isEnabled = false
                 configureButton.isEnabled = false
@@ -72,10 +73,9 @@ class ConfiguringContentView(private val project: Project, private val router: C
         configuringVM.profilingConfiguration
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
+                        profileButton.isEnabled = true
                         androidAppModuleField.text = config.module.name
-                        instrumentedTestList.setListData(
-                                config.tests.map { test -> test.name }.toTypedArray()
-                        )
+                        instrumentedTestList.setListData(config.instrumentedTestNames.toTypedArray())
                     }
                 }
     }

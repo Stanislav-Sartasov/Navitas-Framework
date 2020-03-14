@@ -16,6 +16,8 @@ class ProfilingViewModel(private val project: Project) {
     private val _profilingResult = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
     val profilingResult: Observable<RequestVerdict<Unit, ProfilingError>> = _profilingResult
 
+    private var currentConfiguration: ProfilingConfiguration? = null
+
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
             _profilingResult.onNext(RequestVerdict.Success(Unit))
@@ -32,15 +34,26 @@ class ProfilingViewModel(private val project: Project) {
 
     init {
         gradleTaskExecutor.callback = onExecuteTaskCallback
+
+        ConfigurationRepository.profilingConfiguration
+                .subscribe { config ->
+                    currentConfiguration = config
+                }
     }
 
     fun startProfiling() {
-        if (ConfigurationRepository.isEmpty) {
-            _profilingResult.onNext(RequestVerdict.Failure(ProfilingError.EmptyConfigurationError()))
-        } else {
+        currentConfiguration?.let { config ->
             GradlePluginInjector(project).verifyAndInject()
-            gradleTaskExecutor.executeTask("rawProfile", arrayOf("-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk", "-Papk_path=app/build/outputs/apk/debug/app-debug.apk", "-Ptest_paths=NavigationTest,AnotherTest"))
-            // TODO: replace hardcoded args to selected app module and instrumented tests
+            gradleTaskExecutor.executeTask(
+                    "rawProfile",
+                    arrayOf(
+                            "-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+                            "-Papk_path=app/build/outputs/apk/debug/app-debug.apk",
+                            "-Ptest_paths=${config.instrumentedTestNames.joinToString(separator = ",")}"
+                    ),
+                    config.module
+            )
+            // TODO: replace hardcoded args to selected app module
             // TODO: ISSUE: task doesn't stop if device is unplugged
             // TODO: how to detect when task is failed ??? (onFailure doesn't invoke)
         }

@@ -2,9 +2,7 @@ package ui.configuring.wizard
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiFile
 import com.intellij.ui.wizard.WizardModel
-import data.ConfigurationRepository
 import data.model.ProfilingConfiguration
 import tooling.AndroidModuleProvider
 import ui.configuring.wizard.steps.AndroidAppModuleChoosingStep
@@ -12,13 +10,13 @@ import ui.configuring.wizard.steps.InstrumentedTestChoosingStep
 
 class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
 
-    private val repository = AndroidModuleProvider(project)
+    private val provider = AndroidModuleProvider(project)
     private var selectedModule: Module? = null
-    private var selectedTests: List<PsiFile> = emptyList()
-    private val currentTests: MutableList<PsiFile> = mutableListOf()
+    private var selectedTests: List<String> = emptyList()
+    private val instrumentedTestNames: MutableList<String> = mutableListOf()
 
-    private val androidAppModules: List<Module> = repository.fetchAndroidAppModuleList()
-    val androidAppModuleNames: List<String> = androidAppModules.map { module -> module.moduleFilePath }
+    private val androidAppModules: List<Module> = provider.fetchAndroidAppModuleList()
+    val androidAppModuleNames: List<String> = androidAppModules.map { module -> module.name }
 
     init {
         add(AndroidAppModuleChoosingStep(this))
@@ -30,20 +28,19 @@ class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
     }
 
     fun selectTests(indices: List<Int>) {
-        selectedTests = currentTests.asSequence()
+        selectedTests = instrumentedTestNames.asSequence()
                 .withIndex()
                 .filter { (index, _) -> indices.contains(index) }
                 .map { (_, value) -> value }
                 .toList()
     }
 
-    // TODO: how to get package name of PsiFile ???
     fun getTestNamesOfSelectedModule(): List<String> {
-        currentTests.clear()
-        return selectedModule?.let {
-            currentTests.addAll(repository.fetchTestList(it))
-            currentTests.map { test -> test.name }
-        } ?: emptyList()
+        instrumentedTestNames.clear()
+        selectedModule?.let { module ->
+            instrumentedTestNames.addAll(provider.fetchInstrumentedTestNames(module))
+        }
+        return instrumentedTestNames
     }
 
     fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!, selectedTests)

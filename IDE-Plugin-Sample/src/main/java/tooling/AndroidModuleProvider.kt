@@ -3,8 +3,7 @@ package tooling
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiFile
-import extensions.findInstrumentedTests
+import extensions.findInstrumentedTestNames
 import extensions.isAndroidModule
 
 class AndroidModuleProvider(private val project: Project) {
@@ -16,7 +15,7 @@ class AndroidModuleProvider(private val project: Project) {
                 .filter { it.isAndroidModule() }
     }
 
-    fun fetchTestList(module: Module): List<PsiFile> {
-        return module.findInstrumentedTests()
+    fun fetchInstrumentedTestNames(module: Module): List<String> {
+        return module.findInstrumentedTestNames()
     }
 }
