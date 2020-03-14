@@ -1,12 +1,8 @@
-import java.io.ByteArrayOutputStream
-import java.io.FileOutputStream
-import java.util.regex.Pattern
-import java.io.FileWriter
-
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("profilingPlugin")
+    `maven-publish`
+    maven
 }
 
 android {
@@ -35,8 +31,8 @@ dependencies {
 
     //Support
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
-    implementation("androidx.appcompat:appcompat:1.0.2")
-    implementation("androidx.core:core-ktx:1.0.2")
+    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("androidx.core:core-ktx:1.2.0")
 
     //Local unit tests
     testImplementation("junit:junit:4.12")
@@ -53,4 +49,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
     androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:3.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
+
+    //Profiling plugin
+    //implementation("com.Navitas.NaviProf:1.11")
 }

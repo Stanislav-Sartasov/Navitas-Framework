@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>com.Navitas.NaviProf</id>
+    <name>NaviProf</name>
+    <vendor email="support@yourcompany.com" url="https://github.com/Stanislav-Sartasov/Navitas-Framework">YourCompany</vendor>
+
+    <description><![CDATA[
+    A profiling tool for power estimation
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
