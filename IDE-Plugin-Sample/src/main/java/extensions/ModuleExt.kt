@@ -1,7 +1,11 @@
 package extensions
 
+import com.intellij.ide.highlighter.JavaFileType
 import com.intellij.openapi.module.Module
+import com.intellij.psi.PsiJavaFile
+import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.FilenameIndex
+import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.idea.refactoring.fqName.getKotlinFqName
 import org.jetbrains.kotlin.idea.refactoring.toPsiFile
 import org.jetbrains.kotlin.psi.KtClass
@@ -14,7 +18,6 @@ const val PLUGIN_ANDROID_APPLICATION_NAME = "com.android.application"
 const val INSTRUMENTED_TEST_FOLDER_NAME = "androidTest"
 const val ANDROID_MANIFEST_FILE_NAME = "AndroidManifest.xml"
 const val TEST_ANNOTATION = "@Test"
-const val KOTLIN_EXTENSION = "kt"
 
 // TODO: checking for the presence of AndroidManifest file because module may not have build.gradle file
 private fun Module.isAndroidModule(type: String): Boolean {
@@ -31,7 +34,6 @@ fun Module.isAndroidApplicationModule(): Boolean = isAndroidModule(PLUGIN_ANDROI
 
 fun Module.isAndroidModule(): Boolean = isAndroidLibraryModule() || isAndroidApplicationModule()
 
-// TODO: add .java files
 fun Module.findInstrumentedTestNames(): List<String> {
     val result = mutableListOf<String>()
 
@@ -40,19 +42,30 @@ fun Module.findInstrumentedTestNames(): List<String> {
     val matcher = packagePattern.matcher(manifest.text).apply { find() }
     val packageName = matcher.group(1)
 
-    val kotlinFiles = FilenameIndex.getAllFilesByExt(project, KOTLIN_EXTENSION, moduleContentScope)
+    val testFiles = listOf(FileTypeIndex.getFiles(JavaFileType.INSTANCE, moduleContentScope), FileTypeIndex.getFiles(KotlinFileType.INSTANCE, moduleContentScope))
+            .flatten()
             .asSequence()
             .filter { file -> file.path.contains(INSTRUMENTED_TEST_FOLDER_NAME, ignoreCase = true) }
             .toList()
 
-    for (file in kotlinFiles) {
-        val psiFile = file.toPsiFile(project)
-        if (psiFile is KtFile) {
-            for (declaration in psiFile.declarations) {
-                if (declaration is KtClass && declaration.hasChildWithText(TEST_ANNOTATION)) {
-                    val fullName = declaration.getKotlinFqName().toString()
-                    val shortName = fullName.substringAfter("$packageName.")
-                    result.add(shortName)
+    for (file in testFiles) {
+        when (val psiFile = file.toPsiFile(project)) {
+            is KtFile -> {
+                for (declaration in psiFile.declarations) {
+                    if (declaration is KtClass && declaration.hasChildWithText(TEST_ANNOTATION)) {
+                        val fullName = declaration.getKotlinFqName().toString()
+                        val shortName = fullName.substringAfter("$packageName.")
+                        result.add(shortName)
+                    }
+                }
+            }
+            is PsiJavaFile -> {
+                for (clazz in psiFile.classes) {
+                    if (clazz.hasChildWithText(TEST_ANNOTATION)) {
+                        val fullName = clazz.getKotlinFqName().toString()
+                        val shortName = fullName.substringAfter("$packageName.")
+                        result.add(shortName)
+                    }
                 }
             }
         }
