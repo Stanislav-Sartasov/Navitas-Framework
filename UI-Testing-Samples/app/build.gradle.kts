@@ -1,12 +1,8 @@
-import java.io.ByteArrayOutputStream
-import java.io.FileOutputStream
-import java.util.regex.Pattern
-import java.io.FileWriter
-
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("profilingPlugin")
+    `maven-publish`
+    id("NaviProf")
 }
 
 android {
@@ -15,6 +11,7 @@ android {
         applicationId = "com.example.ui_testing_samples"
         minSdkVersion(19)
         targetSdkVersion(29)
+        multiDexEnabled = true
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -24,6 +21,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
@@ -37,6 +38,7 @@ dependencies {
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
     implementation("androidx.appcompat:appcompat:1.0.2")
     implementation("androidx.core:core-ktx:1.0.2")
+    implementation("com.android.support:multidex:1.0.3")
 
     //Local unit tests
     testImplementation("junit:junit:4.12")
