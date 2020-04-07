@@ -1,2 +1,4 @@
-This is implementation of "instrumentor" gradle-plugin where all the tasks are built-in, so you only have to apply plugin in app's build.gradle, run "UploadArchive", move revceived 'repo' folder to app and run something like:
-gradle Profile -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk -Papk_path=app/build/outputs/apk/debug/app-debug.apk -Ptest_paths=NavigationTest,AnotherTest
+Implementation of power-profiling Gradle plugin
+Can be downloaded from Github packages: com.Navitas:NaviProf:1.11
+MavenCentral comming soon..
+To see plugin's API check UI-Testing-Samples
