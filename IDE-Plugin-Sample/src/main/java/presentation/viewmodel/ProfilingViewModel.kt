@@ -1,17 +1,20 @@
-package ui.view_models
+package presentation.viewmodel
 
 import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
-import data.ConfigurationRepository
-import data.model.ProfilingConfiguration
 import data.model.ProfilingError
 import data.model.RequestVerdict
+import domain.model.ProfilingConfiguration
+import domain.repository.ConfigurationRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
 
-class ProfilingViewModel(private val project: Project) {
+class ProfilingViewModel(
+        private val project: Project,
+        private val configurationRepository: ConfigurationRepository
+) {
 
     private val _profilingResult = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
     val profilingResult: Observable<RequestVerdict<Unit, ProfilingError>> = _profilingResult
@@ -35,7 +38,7 @@ class ProfilingViewModel(private val project: Project) {
     init {
         gradleTaskExecutor.callback = onExecuteTaskCallback
 
-        ConfigurationRepository.profilingConfiguration
+        configurationRepository.fetch()
                 .subscribe { config ->
                     currentConfiguration = config
                 }
@@ -44,11 +47,12 @@ class ProfilingViewModel(private val project: Project) {
     fun startProfiling() {
         currentConfiguration?.let { config ->
             GradlePluginInjector(project).verifyAndInject()
+            val moduleName = config.module.name
             gradleTaskExecutor.executeTask(
                     "rawProfile",
                     arrayOf(
-                            "-Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-                            "-Papk_path=app/build/outputs/apk/debug/app-debug.apk",
+                            "-Ptest_apk_path=$moduleName/build/outputs/apk/androidTest/debug/$moduleName-debug-androidTest.apk",
+                            "-Papk_path=$moduleName/build/outputs/apk/debug/$moduleName-debug.apk",
                             "-Ptest_paths=${config.instrumentedTestNames.joinToString(separator = ",")}"
                     ),
                     config.module

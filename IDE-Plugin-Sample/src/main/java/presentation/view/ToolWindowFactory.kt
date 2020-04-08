@@ -1,8 +1,10 @@
-package ui.tool_window
+package presentation.view
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.content.ContentFactory
+import presentation.view.configuring.ConfiguringContentView
+import presentation.view.profiling_details.ProfilingResultContentView
 import tooling.ContentRouterImpl
 
 class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {

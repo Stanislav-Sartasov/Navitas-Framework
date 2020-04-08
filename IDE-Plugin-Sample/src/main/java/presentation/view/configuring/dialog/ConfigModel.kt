@@ -1,12 +1,12 @@
-package ui.configuring.wizard
+package presentation.view.configuring.dialog
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardModel
-import data.model.ProfilingConfiguration
+import domain.model.ProfilingConfiguration
 import tooling.AndroidModuleProvider
-import ui.configuring.wizard.steps.AndroidAppModuleChoosingStep
-import ui.configuring.wizard.steps.InstrumentedTestChoosingStep
+import presentation.view.configuring.dialog.steps.AndroidAppModuleChoosingStep
+import presentation.view.configuring.dialog.steps.InstrumentedTestChoosingStep
 
 class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
 

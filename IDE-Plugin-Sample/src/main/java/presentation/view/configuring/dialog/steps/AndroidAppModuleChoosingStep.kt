@@ -1,9 +1,9 @@
-package ui.configuring.wizard.steps
+package presentation.view.configuring.dialog.steps
 
 import com.intellij.ui.components.JBList
 import com.intellij.ui.wizard.WizardNavigationState
 import com.intellij.ui.wizard.WizardStep
-import ui.configuring.wizard.ConfigModel
+import presentation.view.configuring.dialog.ConfigModel
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 

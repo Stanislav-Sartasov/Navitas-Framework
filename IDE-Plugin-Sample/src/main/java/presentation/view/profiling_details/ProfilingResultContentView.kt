@@ -1,6 +1,6 @@
-package ui.tool_window
+package presentation.view.profiling_details
 
-import interfaces.ContentRouter
+import tooling.ContentRouter
 import javax.swing.JButton
 import javax.swing.JPanel
 

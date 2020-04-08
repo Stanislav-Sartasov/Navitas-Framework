@@ -1,19 +1,23 @@
-package ui.tool_window
+package presentation.view.configuring
 
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.project.Project
 import data.model.ProfilingError
 import data.model.RequestVerdict
-import interfaces.ContentRouter
-import ui.configuring.wizard.ConfigWizardDialog
-import ui.view_models.ConfiguringViewModel
-import ui.view_models.ProfilingViewModel
+import data.repository_impl.ConfigurationRepositoryImpl
+import tooling.ContentRouter
+import presentation.view.configuring.dialog.ConfigWizardDialog
+import presentation.viewmodel.ConfiguringViewModel
+import presentation.viewmodel.ProfilingViewModel
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel
 
-class ConfiguringContentView(private val project: Project, private val router: ContentRouter) {
+class ConfiguringContentView(
+        private val project: Project,
+        private val router: ContentRouter
+) {
 
     // UI components
     lateinit var contentPanel: JPanel
@@ -22,8 +26,8 @@ class ConfiguringContentView(private val project: Project, private val router: C
     private lateinit var stopButton: JButton
     private lateinit var androidAppModuleField: JLabel
     private lateinit var instrumentedTestList: JList<String>
-    private val profilingVM = ProfilingViewModel(project)
-    private val configuringVM = ConfiguringViewModel()
+    private val profilingVM = ProfilingViewModel(project, ConfigurationRepositoryImpl)
+    private val configuringVM = ConfiguringViewModel(ConfigurationRepositoryImpl)
 
     init{
         setupUI()

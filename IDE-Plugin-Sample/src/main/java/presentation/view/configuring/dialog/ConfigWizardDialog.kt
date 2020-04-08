@@ -1,8 +1,8 @@
-package ui.configuring.wizard
+package presentation.view.configuring.dialog
 
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardDialog
-import data.model.ProfilingConfiguration
+import domain.model.ProfilingConfiguration
 
 class ConfigWizardDialog(
         project: Project,

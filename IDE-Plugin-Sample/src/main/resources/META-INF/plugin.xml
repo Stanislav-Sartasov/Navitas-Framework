@@ -16,6 +16,6 @@
     -->
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="ui.tool_window.ToolWindowFactory"/>
+        <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="presentation.view.ToolWindowFactory"/>
     </extensions>
 </idea-plugin>

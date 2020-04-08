@@ -1,11 +1,10 @@
-package ui.configuring.wizard.steps
+package presentation.view.configuring.dialog.steps
 
 import com.intellij.ui.CheckBoxList
 import com.intellij.ui.wizard.WizardNavigationState
 import com.intellij.ui.wizard.WizardStep
-import ui.configuring.wizard.ConfigModel
-
-import javax.swing.*
+import presentation.view.configuring.dialog.ConfigModel
+import javax.swing.JComponent
 
 class InstrumentedTestChoosingStep(private val configModel: ConfigModel) : WizardStep<ConfigModel>("Choose tests for profiling") {
 

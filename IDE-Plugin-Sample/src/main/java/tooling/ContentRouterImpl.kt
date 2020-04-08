@@ -2,7 +2,6 @@ package tooling
 
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.content.Content
-import interfaces.ContentRouter
 
 class ContentRouterImpl(private val toolWindow: ToolWindow) : ContentRouter {
 
