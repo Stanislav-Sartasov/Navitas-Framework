@@ -3,7 +3,9 @@ package tooling
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.content.Content
 
-class ContentRouterImpl(private val toolWindow: ToolWindow) : ContentRouter {
+class ContentRouterImpl(
+        private val toolWindow: ToolWindow
+) : ContentRouter {
 
     private var currentContentIndex = 0
     private var currentContent: Content? = null

@@ -14,6 +14,7 @@ import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel
 
+// ATTENTION: this content view is temporarily unavailable
 class ConfiguringContentView(
         private val project: Project,
         private val router: ContentRouter

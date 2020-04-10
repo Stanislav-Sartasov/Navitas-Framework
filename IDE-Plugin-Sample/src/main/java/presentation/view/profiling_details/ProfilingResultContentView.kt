@@ -4,7 +4,10 @@ import tooling.ContentRouter
 import javax.swing.JButton
 import javax.swing.JPanel
 
-class ProfilingResultContentView(private val router: ContentRouter) {
+// ATTENTION: this content view is temporarily unavailable
+class ProfilingResultContentView(
+        private val router: ContentRouter
+) {
 
     // UI components
     lateinit var contentPanel: JPanel
