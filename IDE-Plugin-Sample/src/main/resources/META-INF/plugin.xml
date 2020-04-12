@@ -18,4 +18,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Navitas Profiler" anchor="bottom" secondary="true" factoryClass="presentation.view.ToolWindowFactory"/>
     </extensions>
+
+    <actions>
+        <action class="action.BackContentAction" id="navitas.action.Back"
+                text="Back" icon="AllIcons.Actions.Back"/>
+
+        <action class="action.ShowDetailsContentAction" id="navitas.action.ShowDetails"
+                text="Show Details" icon="AllIcons.Actions.Show"/>
+    </actions>
 </idea-plugin>
