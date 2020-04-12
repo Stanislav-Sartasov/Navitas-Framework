@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import tooling.ContentRouter
 import tooling.OnBackClickCallback
 
-class BackContentAction(
+class BackAction(
     private val router: ContentRouter? = null,
     private val callback: OnBackClickCallback? = null
 ) : AnAction() {

@@ -7,6 +7,7 @@ import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
 import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
@@ -16,19 +17,28 @@ class ProfilingViewModel(
         private val configurationRepository: ConfigurationRepository
 ) {
 
-    private val _profilingResult = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
-    val profilingResult: Observable<RequestVerdict<Unit, ProfilingError>> = _profilingResult
+    enum class ViewState {
+        INITIAL, READY_TO_PROFILING, PROFILING
+    }
+
+    private val profilingVerdictSubject = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
+    val profilingVerdict: Observable<RequestVerdict<Unit, ProfilingError>> = profilingVerdictSubject
+
+    private val viewStateSubject = BehaviorSubject.create<ViewState>()
+    val viewState: Observable<ViewState> = viewStateSubject
 
     private var currentConfiguration: ProfilingConfiguration? = null
 
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
-            _profilingResult.onNext(RequestVerdict.Success(Unit))
+            profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
+            viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
             println("ConfigAndProfilingViewModel: TaskCallback::onSuccess")
         }
 
         override fun onFailure() {
-            _profilingResult.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
+            profilingVerdictSubject.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
+            viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
             println("ConfigAndProfilingViewModel: TaskCallback::onFailure")
         }
     }
@@ -38,14 +48,18 @@ class ProfilingViewModel(
     init {
         gradleTaskExecutor.callback = onExecuteTaskCallback
 
+        viewStateSubject.onNext(ViewState.INITIAL)
+
         configurationRepository.fetch()
                 .subscribe { config ->
                     currentConfiguration = config
+                    viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
                 }
     }
 
     fun startProfiling() {
         currentConfiguration?.let { config ->
+            viewStateSubject.onNext(ViewState.PROFILING)
             GradlePluginInjector(project).verifyAndInject()
             val moduleName = config.module.name
             gradleTaskExecutor.executeTask(

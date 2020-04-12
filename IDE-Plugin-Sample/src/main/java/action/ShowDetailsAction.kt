@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import tooling.ActionState
 import tooling.OnActionClickCallback
 
-class ShowDetailsContentAction(
+class ShowDetailsAction(
         private val callback: OnActionClickCallback? = null
 ) : AnAction(), ActionState {
 

@@ -20,10 +20,19 @@
     </extensions>
 
     <actions>
-        <action class="action.BackContentAction" id="navitas.action.Back"
+        <action class="action.ConfigureAction" id="navitas.action.Configure"
+                text="Configure" icon="AllIcons.General.Settings"/>
+
+        <action class="action.StartProfilingAction" id="navitas.action.Profile"
+                text="Profile" icon="AllIcons.Actions.Profile"/>
+
+        <action class="action.StopProfilingAction" id="navitas.action.Stop"
+                text="Stop" icon="AllIcons.Actions.Cancel"/>
+
+        <action class="action.BackAction" id="navitas.action.Back"
                 text="Back" icon="AllIcons.Actions.Back"/>
 
-        <action class="action.ShowDetailsContentAction" id="navitas.action.ShowDetails"
+        <action class="action.ShowDetailsAction" id="navitas.action.ShowDetails"
                 text="Show Details" icon="AllIcons.Actions.Show"/>
     </actions>
 </idea-plugin>

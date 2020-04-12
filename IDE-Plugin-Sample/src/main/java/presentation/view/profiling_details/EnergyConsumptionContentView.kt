@@ -1,7 +1,7 @@
 package presentation.view.profiling_details
 
-import action.BackContentAction
-import action.ShowDetailsContentAction
+import action.BackAction
+import action.ShowDetailsAction
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionPlaces
 import com.intellij.openapi.actionSystem.DefaultActionGroup
@@ -11,6 +11,7 @@ import com.intellij.ui.table.JBTable
 import data.repository_impl.ProfilingResultRepositoryImpl
 import domain.model.FullEnergyConsumption
 import domain.model.TestEnergyConsumption
+import extensions.copyTemplate
 import presentation.viewmodel.ProfilingResultViewModel
 import tooling.ActionState
 import tooling.ContentRouter
@@ -90,17 +91,15 @@ class EnergyConsumptionContentView(
         val actionManager = ActionManager.getInstance()
         val actionGroup = DefaultActionGroup().apply {
             // add 'back' button
-            actionManager.getAction("navitas.action.Back").also { templateAction ->
-                val newAction = BackContentAction(router, onBackClickCallback)
-                newAction.copyFrom(templateAction)
+            BackAction(router, onBackClickCallback).also { newAction ->
+                actionManager.copyTemplate("navitas.action.Back", newAction)
                 add(newAction)
             }
             // add 'see details' button
-            actionManager.getAction("navitas.action.ShowDetails").also { templateAction ->
-                val newAction = ShowDetailsContentAction(onShowDetailsClickCallback)
-                newAction.copyFrom(templateAction)
-                add(newAction)
+            ShowDetailsAction(onShowDetailsClickCallback).also { newAction ->
                 showDetailsActionState = newAction
+                actionManager.copyTemplate("navitas.action.ShowDetails", newAction)
+                add(newAction)
             }
         }
         val actionToolbar = actionManager.createActionToolbar(ActionPlaces.UNKNOWN, actionGroup, false)
