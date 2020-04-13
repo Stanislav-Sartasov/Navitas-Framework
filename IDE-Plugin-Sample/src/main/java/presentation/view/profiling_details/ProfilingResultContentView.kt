@@ -1,5 +1,12 @@
 package presentation.view.profiling_details
 
+import action.BackAction
+import action.ShowDetailsAction
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.ActionPlaces
+import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.ui.SimpleToolWindowPanel
+import extensions.copyTemplate
 import tooling.ContentRouter
 import javax.swing.JButton
 import javax.swing.JPanel
@@ -9,35 +16,31 @@ class ProfilingResultContentView(
 ) {
 
     // UI components
-    lateinit var contentPanel: JPanel
-    private lateinit var finishButton: JButton
-    private lateinit var saveAndFinishButton: JButton
-    private lateinit var compareButton: JButton
+    val panel: JPanel
+    private lateinit var contentPanel: JPanel
     private lateinit var showEnergyConsumptionViewButton: JButton
 
     init {
+        // create action toolbar
+        val actionManager = ActionManager.getInstance()
+        val actionGroup = DefaultActionGroup().apply {
+            // add 'back' button
+            BackAction(router).also { newAction ->
+                actionManager.copyTemplate("navitas.action.Back", newAction)
+                add(newAction)
+            }
+        }
+        val actionToolbar = actionManager.createActionToolbar(ActionPlaces.UNKNOWN, actionGroup, false)
+
+        panel = SimpleToolWindowPanel(false, true).apply {
+            toolbar = actionToolbar.component
+            setContent(contentPanel)
+        }
+
         setupUI()
     }
 
     private fun setupUI() {
-        finishButton.apply {
-            text = "Finish"
-            addActionListener {
-                router.toPreviousContent()
-            }
-        }
-        saveAndFinishButton.apply {
-            text = "Save"
-            addActionListener {
-                // TODO: save measurements
-            }
-        }
-        compareButton.apply {
-            text = "Compare"
-            addActionListener {
-                // TODO: update chart and data views
-            }
-        }
         showEnergyConsumptionViewButton.apply {
             text = "Energy consumption"
             addActionListener {

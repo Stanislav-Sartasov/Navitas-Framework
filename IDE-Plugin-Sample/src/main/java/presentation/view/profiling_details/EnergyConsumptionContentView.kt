@@ -1,6 +1,7 @@
 package presentation.view.profiling_details
 
 import action.BackAction
+import action.CustomAction
 import action.ShowDetailsAction
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionPlaces
@@ -13,7 +14,6 @@ import domain.model.FullEnergyConsumption
 import domain.model.TestEnergyConsumption
 import extensions.copyTemplate
 import presentation.viewmodel.ProfilingResultViewModel
-import tooling.ActionState
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
 import tooling.OnBackClickCallback
@@ -38,9 +38,10 @@ class EnergyConsumptionContentView(
 
     private val profilingResultVM = ProfilingResultViewModel(ProfilingResultRepositoryImpl)
     private var currentViewMode = ViewMode.FULL_TEST_LIST
+    private val energyTableModel = EnergyConsumptionTableModel()
 //    private var selectedItemPosition = -1
 
-    private lateinit var showDetailsActionState: ActionState
+    private lateinit var showDetailsAction: CustomAction
 
     private val onBackClickCallback = object : OnBackClickCallback {
         override fun onBackClick(): Boolean {
@@ -49,7 +50,7 @@ class EnergyConsumptionContentView(
                 profilingResultVM.fetch()
                 scrollTableToTop()
 //                tableView.clearSelection()
-                showDetailsActionState.isVisible = true
+                showDetailsAction.isVisible = true
 //                showDetailsActionState.isEnabled = false
                 true
             } else false
@@ -62,7 +63,7 @@ class EnergyConsumptionContentView(
             if (position != -1) {
                 currentViewMode = ViewMode.SPECIFIC_TEST_DETAILS
                 profilingResultVM.fetchTestDetails(position)
-                showDetailsActionState.isVisible = false
+                showDetailsAction.isVisible = false
                 scrollTableToTop()
             }
         }
@@ -97,7 +98,7 @@ class EnergyConsumptionContentView(
             }
             // add 'see details' button
             ShowDetailsAction(onShowDetailsClickCallback).also { newAction ->
-                showDetailsActionState = newAction
+                showDetailsAction = newAction
                 actionManager.copyTemplate("navitas.action.ShowDetails", newAction)
                 add(newAction)
             }
@@ -115,6 +116,7 @@ class EnergyConsumptionContentView(
     private fun setupUI() {
 //        showDetailsActionState.isEnabled = false
         tableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
+        tableView.model = energyTableModel
 //        tableView.selectionModel.addListSelectionListener(onSelectRowListener)
 
         profilingResultVM.energyDistribution
@@ -123,11 +125,15 @@ class EnergyConsumptionContentView(
                         when (data) {
                             is FullEnergyConsumption -> {
                                 // TODO: update chart
-                                tableView.model = TestEnergyTableModel(data.testDetails)
+                                energyTableModel.consumerType = EnergyConsumptionTableModel.ConsumerType.TEST
+                                energyTableModel.items = data.testDetails
+                                tableView.invalidate()
                             }
                             is TestEnergyConsumption -> {
                                 // TODO: update chart
-                                tableView.model = MethodEnergyTableModel(data.methodDetails)
+                                energyTableModel.consumerType = EnergyConsumptionTableModel.ConsumerType.METHOD
+                                energyTableModel.items = data.methodDetails
+                                tableView.invalidate()
                             }
                         }
                     }

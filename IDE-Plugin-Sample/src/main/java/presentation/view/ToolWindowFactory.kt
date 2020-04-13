@@ -15,7 +15,7 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
         val contentFactory = ContentFactory.SERVICE.getInstance()
 
         val configuringContent = contentFactory.createContent(ConfiguringContentView(project, router).panel, "", false)
-        val profilingContent = contentFactory.createContent(ProfilingResultContentView(router).contentPanel, "", false)
+        val profilingContent = contentFactory.createContent(ProfilingResultContentView(router).panel, "", false)
         val energyConsumptionContent = contentFactory.createContent(EnergyConsumptionContentView(router).panel, "", false)
 
         router.setupContents(listOf(configuringContent, profilingContent, energyConsumptionContent))
