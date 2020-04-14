@@ -1,0 +1,143 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61'
+    }
+}
+
+plugins {
+    id 'java'
+    //id 'org.jetbrains.intellij' version '0.4.9'
+    id "org.jetbrains.kotlin.jvm" version "1.3.61"
+    id 'java-gradle-plugin'
+    //id 'maven-publish'
+    id 'com.bmuschko.nexus' version '2.3.1'
+    id 'io.codearte.nexus-staging' version '0.11.0'
+    id 'signing'
+}
+
+archivesBaseName = 'NaviProf'
+group = 'com.github.stanislav-sartasov'
+version = '1.11'
+
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation 'com.android.tools.build:gradle:3.2.1'
+    implementation 'com.android.tools.build:gradle-api:3.2.1'
+    implementation 'org.javassist:javassist:3.23.1-GA'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.61'
+}
+
+modifyPom {
+    //noinspection GroovyAssignabilityCheck
+    project {
+        name 'NaviProf'
+        description 'A profiling tool for power estimation.'
+        url 'https://github.com/Stanislav-Sartasov/Navitas-Framework'
+        inceptionYear '2020'
+
+        scm {
+            url 'https://github.com/Stanislav-Sartasov/Navitas-Framework'
+            connection 'scm:https://github.com/Stanislav-Sartasov/Navitas-Framework.git'
+            developerConnection 'scm:https://github.com/Stanislav-Sartasov/Navitas-Framework.git'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'Shaposhnikov-Alexey'
+                name 'Shaposhnikov Alexey'
+                email 'shaposhnikov.lyosha@gmail.com'
+            }
+
+            /*developer {
+                id.set("johnd")
+                name.set("John Doe")
+                email.set("john.doe@example.com")
+            } TODO: write other developers
+            */
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+}
+
+
+/*
+//This was used for publishing to github-packages with KotlinDSL
+configure<PublishingExtension> {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/stanislav-sartasov/navitas-framework")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("mavenJava") {
+            artifactId = "NaviProf"
+            from(components["java"])
+
+            pom {
+                name.set("NaviProf")
+                description.set("A profiling tool for power estimation")
+                url.set("http://www.example.com/library") //TODO
+
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Shaposhnikov-Alexey")
+                        name.set("Shaposhnikov Alexey")
+                        email.set("shaposhnikov.lyosha@gmail.com")
+                    }
+                    developer {
+                        id.set("johnd")
+                        name.set("John Doe")
+                        email.set("john.doe@example.com")
+                    } TODO: write other developers
+                }
+                scm {
+                    url.set("https://github.com/Stanislav-Sartasov/Navitas-Framework")
+                 connection.set("https://github.com/Stanislav-Sartasov/Navitas-Framework.git")
+                   developerConnection.set("https://github.com/Stanislav-Sartasov/Navitas-Framework.git")
+                }
+            }
+        }
+    }
+}*/

@@ -6,6 +6,8 @@
       <module name="com.Navitas-Framework.NaviProf.test" target="1.8" />
       <module name="com.Navitas-Framework.profilingPlugin.main" target="1.8" />
       <module name="com.Navitas-Framework.profilingPlugin.test" target="1.8" />
+      <module name="com.Navitas.NaviProf.main" target="1.8" />
+      <module name="com.Navitas.NaviProf.test" target="1.8" />
       <module name="com.Navitas.profilingPlugin.main" target="1.8" />
       <module name="com.Navitas.profilingPlugin.test" target="1.8" />
       <module name="instrumentor.main" target="1.8" />
