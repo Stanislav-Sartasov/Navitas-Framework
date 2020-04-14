@@ -92,10 +92,10 @@ private fun transformInput(
 private fun transformClass(clazz: CtClass) {
     clazz.declaredMethods.forEach { method ->
         if (!method.isEmpty) {
-            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${method.name} " +
-                    "TimeInStates ${getTimeInState()} EndOfData\");"))
-            method.insertAfter(String.format("Log.d(\"TEST\", \"Exit ${method.name} " +
-                    "TimeInStates ${getTimeInState()} EndOfData\");"))
+            method.insertBefore(String.format("Log.d(\"TEST\", \"Entry ${clazz.name}.${method.name} " +
+                    "TimeInStates ${getTimeInState()} EndOfData ${getScreenBrightness()}\");"))
+            method.insertAfter(String.format("Log.d(\"TEST\", \"Exit ${clazz.name}.${method.name} " +
+                    "TimeInStates ${getTimeInState()} EndOfData ${getScreenBrightness()}\");"))
         }
     }
 }
@@ -110,13 +110,26 @@ private fun File.isClassfile(): Boolean = isFile && path.endsWith(".class")
 private fun getTimeInState(): String {
     var timeInState = ""
     for (i in 0 until 8) {
+        timeInState += "cpu$i "
         val filePath = "/sys/devices/system/cpu/cpu$i/cpufreq/stats/time_in_state"
         val proc = Runtime.getRuntime().exec("adb shell cat \"$filePath\"")
 
         Scanner(proc.inputStream).use {
             while (it.hasNextLine())
                 timeInState += it.nextLine() + " "
+            timeInState += "; "
         }
     }
     return timeInState
+}
+
+private fun getScreenBrightness(): Int {
+    val proc = Runtime.getRuntime().exec("adb shell settings get system screen_brightness")
+
+    Scanner(proc.inputStream).use {
+        return if (it.hasNextInt())
+            it.nextInt()
+        else
+            -1
+    }
 }

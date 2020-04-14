@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.Navitas"
-version = "1.11"
+version = "1.13"
 
 repositories {
     mavenCentral()
@@ -78,9 +78,9 @@ configure<PublishingExtension> {
                         email.set("shaposhnikov.lyosha@gmail.com")
                     }
                     developer {
-                        id.set("johnd")
-                        name.set("John Doe")
-                        email.set("john.doe@example.com")
+                        id.set("GOEgor")
+                        name.set("Egor Gordienko")
+                        email.set("egor.gordienko.00@gmail.com")
                     } //TODO: write other developers
                 }
             }

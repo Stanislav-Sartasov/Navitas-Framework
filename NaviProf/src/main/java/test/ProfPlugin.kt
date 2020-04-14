@@ -4,10 +4,14 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.json.simple.JSONArray
+import org.json.simple.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.regex.Pattern
 
 open class ProfPlugin : Plugin<Project>{
@@ -24,21 +28,9 @@ open class ProfPlugin : Plugin<Project>{
             }
         }
 
-        target.tasks.register("rawProfile") { it ->
-            val profileOutput = File("${target.projectDir}/profileOutput")
-            if (!profileOutput.exists()) profileOutput.mkdirs()
-
-            val printLogs = {
-                target.exec{
-                    it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/logs.txt")
-                }
-            }
-
+        target.tasks.register("rawProfile") {
             it.doLast {
-                printLogs()
-                val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
-                parseToCsv(logsFile, target)
+                JSONGenerator().generate("${target.projectDir}/profileOutput/")
             }
         }
 
@@ -70,8 +62,6 @@ open class ProfPlugin : Plugin<Project>{
             }
 
             it.doLast {
-                clearLogs()
-
                 val testApkPath: String? =
                     if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
 
@@ -85,7 +75,20 @@ open class ProfPlugin : Plugin<Project>{
                     val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
                     for (path in testPaths) {
+                        clearLogs()
                         runTest(path, testRunnerInfo)
+
+                        val profileOutput = File("${target.projectDir}/profileOutput")
+                        if (!profileOutput.exists()) profileOutput.mkdirs()
+
+                        val printLogs = {
+                            target.exec{
+                                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
+                            }
+                        }
+
+                        printLogs()
                     }
                 }
                 else {
@@ -155,64 +158,123 @@ open class TestRunnerInfo(aaptOutput: String) {
     }
 }
 
-fun parseToCsv(input: File, target: Project) {
-    val fileWriter = FileWriter("parsedLogs.csv")
-    val header = "MethodName,StartTime,EndTime,ThreadID,Energy"
-    fileWriter.append(header)
-    fileWriter.append('\n')
+private class JSONGenerator {
+    fun generate(directory: String) {
+        val testList = JSONArray()
 
-    val data = input.readLines()
-    for (i in 0 until data.size) {
-        val line = data[i]
+        File(directory).walk().forEach {
+            if (it.isFile) {
+                val testName = it.name.substringBefore(".txt")
 
-        if (!line.startsWith('-')) {
-            val entryLineList = line.split("\\s+".toRegex())
-            var dataString = ""
+                val testLogs = JSONArray()
 
-            if (entryLineList[7] != "Entry") {
-                continue
-            } else {
-                val methodName = entryLineList[8]
-                val threadId = entryLineList[3]
+                val data = it.readLines()
+                for (i in 0 until data.size) {
+                    val line = data[i]
 
-                val exitLine = findExitLine(data, i, methodName)
-                val exitLineList = exitLine!!.split("\\s+".toRegex())
+                    if (!line.startsWith('-')) {
+                        val entryLineList = line.split("\\s+".toRegex())
 
-                val startTime = entryLineList[1]
-                val endTime = exitLineList[1]
+                        val methodName = entryLineList[8]
+                        val processId = entryLineList[2].toInt()
+                        val threadId = entryLineList[3].toInt()
 
-                var energy = 0
+                        val startDate = entryLineList[0]
+                        val startTime = entryLineList[1]
 
-                var parseIndex = 10
-                while (entryLineList[parseIndex] != "EndOfData") {
-                    val freq = entryLineList[parseIndex].toInt()
-                    val timeAtEntry = entryLineList[parseIndex + 1].toInt()
-                    val timeAtExit = exitLineList[parseIndex + 1].toInt()
+                        //timestamp from January 1, 1970, 00:00:00 GMT
+                        val timestamp = getTimestamp(startDate, startTime)
 
-                    energy += freq * (timeAtExit - timeAtEntry)
+                        val isEntry = entryLineList[7] == "Entry"
 
-                    parseIndex += 2
+                        val cpuDetails = JSONArray()
+                        var kernelDetails = JSONObject()
+                        var valuesDetails = JSONArray()
+
+                        var parseIndex = 10
+                        while (entryLineList[parseIndex] != "EndOfData") {
+                            val item = entryLineList[parseIndex]
+
+                            when {
+                                item == ";" -> {
+                                    kernelDetails["details"] = valuesDetails
+                                    cpuDetails.add(kernelDetails)
+
+                                    parseIndex += 1
+                                }
+                                item.startsWith("cpu") -> {
+                                    kernelDetails = JSONObject()
+                                    valuesDetails = JSONArray()
+
+                                    val kernelIndex = item.substringAfter("cpu").toInt()
+                                    kernelDetails["kernel"] = kernelIndex
+
+                                    parseIndex += 1
+                                }
+                                else -> {
+                                    val freq = entryLineList[parseIndex].toInt()
+                                    val timeInState = entryLineList[parseIndex + 1].toInt()
+
+                                    val valuesPair = JSONObject()
+                                    valuesPair["frequency"] = freq
+                                    valuesPair["timestamp"] = timeInState
+
+                                    valuesDetails.add(valuesPair)
+
+                                    parseIndex += 2
+                                }
+                            }
+                        }
+
+                        val brightness = entryLineList[parseIndex + 1].toInt()
+
+                        val headerDetails = JSONObject()
+                        headerDetails["timestamp"] = timestamp
+                        headerDetails["processID"] = processId
+                        headerDetails["threadID"] = threadId
+                        headerDetails["methodName"] = methodName
+                        headerDetails["isEntry"] = isEntry
+
+                        val cpuComponent = JSONObject()
+                        cpuComponent["component"] = "cpuTimeInStates"
+                        cpuComponent["details"] = cpuDetails
+
+                        val brightnessComponent = JSONObject()
+                        brightnessComponent["component"] = "brightness"
+                        brightnessComponent["details"] = brightness
+
+                        val bodyArray = JSONArray()
+                        bodyArray.add(cpuComponent)
+                        bodyArray.add(brightnessComponent)
+
+                        val logObject = JSONObject()
+                        logObject["header"] = headerDetails
+                        logObject["body"] = bodyArray
+
+                        testLogs.add(logObject)
+                    }
                 }
 
-                dataString += "$methodName,$startTime,$endTime,$threadId,$energy"
+                val testObject = JSONObject()
+                testObject["testName"] = testName
+                testObject["logs"] = testLogs
+
+                testList.add(testObject)
             }
-
-            fileWriter.append(dataString)
-            fileWriter.append('\n')
         }
-    }
-    fileWriter.close()
-}
 
-fun findExitLine(data: List<String>, startingIndex: Int, methodName: String): String? {
-    for (i in (startingIndex + 1) until data.size) {
-        val line = data[i]
+        val json = JSONObject()
+        json["tests"] = testList
 
-        if (!line.startsWith('-')) {
-            val dataList = line.split("\\s+".toRegex())
-            if (dataList[7] == "Exit" && dataList[8] == methodName)
-                return line
-        }
+        val file = FileWriter("$directory/logs.json")
+        file.write(json.toJSONString())
+        file.flush()
+        file.close()
     }
-    return null
+
+    private fun getTimestamp(date: String, time: String): Long {
+        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss.SSS")
+        val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
+        return sdf.parse(dateString).time
+    }
 }
