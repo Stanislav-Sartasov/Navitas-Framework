@@ -9,7 +9,3 @@ fun GroovyPsiElementFactory.createBreakLineElement(): PsiElement = createLineTer
 fun GroovyPsiElementFactory.createClassPathExpression(path: String): GrExpression = createExpressionFromText("classpath \"$path\"")
 
 fun GroovyPsiElementFactory.createApplyPluginExpression(pluginName: String): GrExpression = createExpressionFromText("apply plugin: \"$pluginName\"")
-
-fun GroovyPsiElementFactory.createClosableExpression(title: String, vararg children: PsiElement): GrExpression = createExpressionFromText("$title {\n${children.joinToString(separator = "\n", transform = PsiElement::getText)}\n}}")
-
-fun GroovyPsiElementFactory.createUrlPathExpression(path: String): GrExpression = createExpressionFromText("url = uri(\"$path\")")
