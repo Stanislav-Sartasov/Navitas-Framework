@@ -1,4 +1,4 @@
-package data.repository_impl
+package data.repository
 
 import data.generateTestEnergyConsumptionList
 import domain.model.TestEnergyConsumption

@@ -4,6 +4,7 @@ import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
 import data.model.ProfilingError
 import data.model.RequestVerdict
+import data.parsing.RawProfilingResultParser
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
 import io.reactivex.Observable
@@ -58,6 +59,19 @@ class ProfilingViewModel(
     }
 
     fun startProfiling() {
+
+        /*
+        val result = RawProfilingResultParser.parse(project.basePath!!, "last_logs.json")
+        for (details in result.getTestResults()) {
+            println("test: " + details.first)
+            for (methodDetails in details.second) {
+                println(methodDetails.methodInfo)
+                println(methodDetails.cpuTimeInStates)
+                println("Brightness: " + methodDetails.brightnessLevel)
+            }
+        }
+         */
+
         currentConfiguration?.let { config ->
             viewStateSubject.onNext(ViewState.PROFILING)
             GradlePluginInjector(project).verifyAndInject()

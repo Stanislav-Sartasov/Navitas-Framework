@@ -1,4 +1,4 @@
-package data.repository_impl
+package data.repository
 
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository

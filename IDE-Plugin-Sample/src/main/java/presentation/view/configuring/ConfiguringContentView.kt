@@ -13,7 +13,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.components.JBList
 import data.model.ProfilingError
 import data.model.RequestVerdict
-import data.repository_impl.ConfigurationRepositoryImpl
+import data.repository.ConfigurationRepositoryImpl
 import extensions.copyTemplate
 import presentation.view.configuring.dialog.ConfigWizardDialog
 import presentation.viewmodel.ConfiguringViewModel

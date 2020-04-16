@@ -9,7 +9,7 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.table.JBTable
-import data.repository_impl.ProfilingResultRepositoryImpl
+import data.repository.ProfilingResultRepositoryImpl
 import domain.model.FullEnergyConsumption
 import domain.model.TestEnergyConsumption
 import extensions.copyTemplate
