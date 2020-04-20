@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.71"
     implementation "io.reactivex.rxjava2:rxjava:2.2.16"
     implementation "org.json:json:20190722"
     testCompile "junit:junit:4.12"
@@ -31,6 +31,12 @@ compileTestKotlin {
 }
 
 runIde {
-    // Absolute path to installed target v3.6 Android Studio to use as IDE Development Instance
-    ideDirectory '/home/vladislav/Programs/android-studio'
+    // You need to specify absolute path to installed target Android Studio to use as IDE Development Instance
+    // To do this, set the studio.dir property inside the local.properties file
+
+    Properties properties = new Properties()
+    properties.load(project.file('local.properties').newDataInputStream())
+    def studioDir = properties.getProperty('studio.dir')
+
+    ideDirectory studioDir
 }
