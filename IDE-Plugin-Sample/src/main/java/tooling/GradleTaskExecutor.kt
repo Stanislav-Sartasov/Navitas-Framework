@@ -16,7 +16,7 @@ class GradleTaskExecutor(private val project: Project) {
 
     fun executeTask(name: String, args: Array<String>, module: Module) {
         val settings = ExternalSystemTaskExecutionSettings()
-        settings.externalProjectPath = project.basePath
+//        settings.externalProjectPath = project.basePath
         settings.taskNames = listOf(name)
         settings.scriptParameters = args.joinToString(separator = " ")
         settings.externalSystemIdString = GradleConstants.SYSTEM_ID.id
