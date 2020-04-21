@@ -28,6 +28,29 @@ open class ProfPlugin : Plugin<Project>{
             }
         }
 
+        val clearLogs = {
+            target.exec{
+                it.isIgnoreExitValue = true //needs to be fixed somehow
+                it.commandLine("$adb", "logcat", "-c")
+                it.commandLine("$adb", "logcat", "-c")
+            }
+        }
+
+        val getTestRunnerInfo = { apkPath: String ->
+            val out = ByteArrayOutputStream()
+            target.exec {
+                it.standardOutput = out
+                it.workingDir("./..")
+                it.commandLine("aapt", "dump", "xmltree", apkPath, "AndroidManifest.xml")
+            }
+            TestRunnerInfo(out.toString())
+        }
+
+        val runTest = { testPath: String, info: TestRunnerInfo ->
+            runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
+                "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+        }
+
         target.tasks.register("customProfile") {
             it.doLast {
                 JSONGenerator().generate("${target.projectDir}/profileOutput/")
@@ -38,31 +61,11 @@ open class ProfPlugin : Plugin<Project>{
         //target.tasks.named("customProfile").configure { it.finalizedBy("clean") }
 
         target.tasks.register("runCustomTests") { it ->
-            val clearLogs = {
-                target.exec{
-                    it.isIgnoreExitValue = true //needs to be fixed somehow
-                    it.commandLine("$adb", "logcat", "-c")
-                    it.commandLine("$adb", "logcat", "-c")
-                }
-            }
-
-            val getTestRunnerInfo = { apkPath: String ->
-                val out = ByteArrayOutputStream()
-                target.exec {
-                    it.standardOutput = out
-                    it.workingDir("./..")
-                    it.commandLine("aapt", "dump", "xmltree", apkPath, "AndroidManifest.xml")
-                }
-                TestRunnerInfo(out.toString())
-            }
-
-            val runTest = { testPath: String, info: TestRunnerInfo ->
-                runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
-            }
-
             it.doLast {
                 val testApkPath: String? =
-                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+                    if (it.project.hasProperty("test_apk_path"))
+                        it.project.property("test_apk_path") as String
+                    else null
 
                 val testPaths: List<String>? =
                     if (it.project.hasProperty("test_paths")) {
@@ -91,7 +94,8 @@ open class ProfPlugin : Plugin<Project>{
                     }
                 }
                 else {
-                    runCommand("echo", "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
+                    runCommand("echo",
+                        "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
                     throw GradleException("Arguments are not passed")
                 }
             }
@@ -126,28 +130,6 @@ open class ProfPlugin : Plugin<Project>{
         //target.tasks.named("customProfile").configure { it.finalizedBy("clean") }
 
         target.tasks.register("runTests") { it ->
-            val clearLogs = {
-                target.exec{
-                    it.isIgnoreExitValue = true //needs to be fixed somehow
-                    it.commandLine("$adb", "logcat", "-c")
-                    it.commandLine("$adb", "logcat", "-c")
-                }
-            }
-
-            val getTestRunnerInfo = { apkPath: String ->
-                val out = ByteArrayOutputStream()
-                target.exec {
-                    it.standardOutput = out
-                    it.workingDir("./..")
-                    it.commandLine("aapt", "dump", "xmltree", apkPath, "AndroidManifest.xml")
-                }
-                TestRunnerInfo(out.toString())
-            }
-
-            val runTest = { testPath: String, info: TestRunnerInfo ->
-                runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
-            }
-
             it.doLast {
                 val projectName = target.project.name
                 val testApkPath = "$projectName/build/outputs/apk/androidTest/debug/$projectName-debug-androidTest.apk"

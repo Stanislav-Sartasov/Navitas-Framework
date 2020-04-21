@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     `maven-publish`
-    id("NaviProf")
+    //id("NaviProf")
 }
 
 android {

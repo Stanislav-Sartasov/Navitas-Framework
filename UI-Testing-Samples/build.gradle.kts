@@ -4,7 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        mavenLocal()
+        mavenCentral()
         /*
         //It was used for downloading from Github-packages
         maven("https://maven.pkg.github.com/Stanislav-Sartasov/Navitas-Framework/") {
@@ -20,7 +20,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
-        classpath("com.github.stanislav-sartasov:NaviProf:1.14")
+        //classpath("com.github.stanislav-sartasov:NaviProf:1.14")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
