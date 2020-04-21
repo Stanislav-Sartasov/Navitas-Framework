@@ -1,18 +1,27 @@
-## Here is a simple app and several tests (Espresso only).
+## Here is an example app and several tests (Espresso only).
 
-### ! All launches are carried out from the root project directory.
+### ! All launches are carried out from the app project directory.
 
-### -- this simply assembles apks with bytecode instrumentation and installs it on the device
-`gradlew profileBuild -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk -Papk_path=app/build/outputs/apk/debug/app-debug.apk` 
+###  >profileBuild
+#### simply assembles apks with bytecode instrumentation and installs it on the device
+`gradlew profileBuild`
 
-### -- this runs selected [test_paths] in [test_apk_path]
-`gradlew runTests -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk  -Ptest_paths=NavigationTest,AnotherTest` 
+###  >runTests
+#### runs selected [test_paths] in default [test_apk_path]
+`gradlew runTests -Ptest_paths=NavigationTest,AnotherTest`
 
-### -- full-cycle task, invocating assembling, installing, running tests, loading logs and parsing it
-`gradlew rawProfile -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk -Papk_path=app/build/outputs/apk/debug/app-debug.apk -Ptest_paths=NavigationTest,AnotherTest` 
+###  >runCustomTests
+#### runs selected [test_paths] in [test_apk_path]
+`gradlew runCustomTests -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk  -Ptest_paths=NavigationTest,AnotherTest`
 
-### If any problems occure
- - `gradle wrapper --gradle-version=5.1.1` in case of unsupported gradle version
- - Linux isn't supported yet as invocated commands are designed for Windows (will be fixed soon)
+###  >defaultProfile
+####  is full-cycle task, invocating assembling, installing, running tests, loading logs and parsing it.
+####  apk and test_apk are generating from `src`. Only needs [test_paths] to be passed
+`gradlew defaultProfile -Ptest_paths=NavigationTest,AnotherTest`
 
-CPU freqs and methods trace logs can be found in app/profileOutput.
+###  >customProfile
+####  runs tests, loads logs and parses it.
+####  it needs [apk_path], [test_apk_path] and [test_path] to be passed
+`gradlew customProfile -Ptest_apk_path=app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk -Papk_path=app/build/outputs/apk/debug/app-debug.apk -Ptest_paths=NavigationTest,AnotherTest`
+
+#### Logs for each method and JSON with all profile info can be found in {app}/profileOutput
