@@ -316,6 +316,8 @@ private class JSONGenerator {
                 testObject["logs"] = testLogs
 
                 testList.add(testObject)
+
+                it.delete()
             }
         }
 
