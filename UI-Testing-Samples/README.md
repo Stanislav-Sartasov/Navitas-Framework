@@ -1,0 +1,1 @@
+### Android Studio project used in plugin development process
