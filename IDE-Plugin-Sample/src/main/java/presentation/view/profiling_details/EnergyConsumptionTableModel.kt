@@ -6,11 +6,6 @@ import javax.swing.table.TableModel
 
 class EnergyConsumptionTableModel : TableModel {
 
-    enum class ConsumerType {
-        TEST, METHOD
-    }
-
-    var consumerType = ConsumerType.METHOD
     var items = emptyList<EnergyConsumption>()
 
     override fun getRowCount() = items.size
@@ -19,10 +14,7 @@ class EnergyConsumptionTableModel : TableModel {
 
     override fun getColumnName(var1: Int): String? {
         return when (var1) {
-            0 -> when (consumerType) {
-                ConsumerType.TEST -> "Test Name"
-                ConsumerType.METHOD -> "Method Name"
-            }
+            0 -> "Name"
             1 -> "Energy (mJ)"
             else -> null
         }

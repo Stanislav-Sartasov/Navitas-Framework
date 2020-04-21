@@ -125,15 +125,15 @@ class EnergyConsumptionContentView(
                         when (data) {
                             is FullEnergyConsumption -> {
                                 // TODO: update chart
-                                energyTableModel.consumerType = EnergyConsumptionTableModel.ConsumerType.TEST
                                 energyTableModel.items = data.testDetails
-                                tableView.invalidate()
+                                tableView.tableHeader.columnModel.getColumn(0).headerValue = "Test"
+                                tableView.updateUI()
                             }
                             is TestEnergyConsumption -> {
                                 // TODO: update chart
-                                energyTableModel.consumerType = EnergyConsumptionTableModel.ConsumerType.METHOD
                                 energyTableModel.items = data.methodDetails
-                                tableView.invalidate()
+                                tableView.tableHeader.columnModel.getColumn(0).headerValue = "Method"
+                                tableView.updateUI()
                             }
                         }
                     }

@@ -57,23 +57,17 @@ class ProfilingViewModel(
                 }
     }
 
+    // TODO: ISSUE: task doesn't stop if device is unplugged
+    // TODO: how to detect when task is failed ??? (onFailure doesn't invoke)
     fun startProfiling() {
         currentConfiguration?.let { config ->
             viewStateSubject.onNext(ViewState.PROFILING)
             GradlePluginInjector(project).verifyAndInject()
-            val moduleName = config.module.name
             gradleTaskExecutor.executeTask(
-                    "rawProfile",
-                    arrayOf(
-                            "-Ptest_apk_path=$moduleName/build/outputs/apk/androidTest/debug/$moduleName-debug-androidTest.apk",
-                            "-Papk_path=$moduleName/build/outputs/apk/debug/$moduleName-debug.apk",
-                            "-Ptest_paths=${config.instrumentedTestNames.joinToString(separator = ",")}"
-                    ),
+                    "defaultProfile",
+                    arrayOf("-Ptest_paths=${config.instrumentedTestNames.joinToString(separator = ",")}"),
                     config.module
             )
-            // TODO: replace hardcoded args to selected app module
-            // TODO: ISSUE: task doesn't stop if device is unplugged
-            // TODO: how to detect when task is failed ??? (onFailure doesn't invoke)
         }
     }
 
