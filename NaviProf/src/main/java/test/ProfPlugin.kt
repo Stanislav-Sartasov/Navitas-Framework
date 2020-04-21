@@ -219,7 +219,7 @@ private class JSONGenerator {
         val testList = JSONArray()
 
         File(directory).walk().forEach {
-            if (it.isFile) {
+            if (it.isFile && it.name.endsWith(".txt")) {
                 val testName = it.name.substringBefore(".txt")
 
                 val testLogs = JSONArray()
