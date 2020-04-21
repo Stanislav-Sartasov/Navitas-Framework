@@ -125,7 +125,7 @@ open class ProfPlugin : Plugin<Project>{
         target.tasks.named("defaultProfile").configure { it.dependsOn("runTests") }
         //target.tasks.named("customProfile").configure { it.finalizedBy("clean") }
 
-        target.tasks.register("Tests") { it ->
+        target.tasks.register("runTests") { it ->
             val clearLogs = {
                 target.exec{
                     it.isIgnoreExitValue = true //needs to be fixed somehow
