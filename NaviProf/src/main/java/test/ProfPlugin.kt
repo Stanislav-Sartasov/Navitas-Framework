@@ -4,14 +4,10 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.json.simple.JSONArray
-import org.json.simple.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
-import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.regex.Pattern
 
 open class ProfPlugin : Plugin<Project>{
@@ -28,15 +24,116 @@ open class ProfPlugin : Plugin<Project>{
             }
         }
 
-        target.tasks.register("rawProfile") {
+        target.tasks.register("customProfile") { it ->
+            val profileOutput = File("${target.projectDir}/profileOutput")
+            if (!profileOutput.exists()) profileOutput.mkdirs()
+
+            val printLogs = {
+                target.exec{
+                    it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/logs.txt")
+                }
+            }
+
             it.doLast {
-                JSONGenerator().generate("${target.projectDir}/profileOutput/")
+                printLogs()
+                val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
+                parseToCsv(logsFile, target)
             }
         }
 
-        target.tasks.named("rawProfile").configure { it.dependsOn("profileBuild") }
-        target.tasks.named("rawProfile").configure { it.dependsOn("runTests") }
-        target.tasks.named("rawProfile").configure { it.finalizedBy("clean") }
+        target.tasks.named("customProfile").configure { it.dependsOn("profileBuild") }
+        target.tasks.named("customProfile").configure { it.dependsOn("runCustomTests") }
+        target.tasks.named("customProfile").configure { it.finalizedBy("clean") }
+
+        target.tasks.register("runCustomTests") { it ->
+            val clearLogs = {
+                target.exec{
+                    it.isIgnoreExitValue = true //needs to be fixed somehow
+                    it.commandLine("$adb", "logcat", "-c")
+                    it.commandLine("$adb", "logcat", "-c")
+                }
+            }
+
+            val getTestRunnerInfo = { apkPath: String ->
+                val out = ByteArrayOutputStream()
+                target.exec {
+                    it.standardOutput = out
+                    it.workingDir("./..")
+                    it.commandLine("aapt", "dump", "xmltree", apkPath, "AndroidManifest.xml")
+                }
+                TestRunnerInfo(out.toString())
+            }
+
+            val runTest = { testPath: String, info: TestRunnerInfo ->
+                runCommand("$adb", "shell", "am", "instrument", "-w", "-e", "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+            }
+
+            it.doLast {
+                clearLogs()
+
+                val testApkPath: String? =
+                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+
+                val testPaths: List<String>? =
+                    if (it.project.hasProperty("test_paths")) {
+                        val paths = it.project.property("test_paths") as String
+                        paths.split(",")
+                    } else null
+
+                if (testPaths != null && testApkPath != null) {
+                    val testRunnerInfo = getTestRunnerInfo(testApkPath)
+
+                    for (path in testPaths) {
+                        runTest(path, testRunnerInfo)
+                    }
+                }
+                else {
+                    runCommand("echo", "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
+                    throw GradleException("Arguments are not passed")
+                }
+            }
+        }
+
+        target.tasks.register("profileBuild") { it ->
+            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
+
+            val installApk = { apkPath: String ->
+                runCommand("echo", "APK Installing: ", apkPath)
+                runCommand("$adb", "install", "-r", apkPath)
+            }
+
+            it.doLast {
+                val projectName = target.project.name
+                val apkPath = "$projectName/build/outputs/apk/debug/$projectName-debug.apk"
+                val testApkPath = "$projectName/build/outputs/apk/androidTest/debug/$projectName-debug-androidTest.apk"
+
+                installApk(apkPath)
+                installApk(testApkPath)
+            }
+        }
+
+        target.tasks.register("defaultProfile") { it ->
+            val profileOutput = File("${target.projectDir}/profileOutput")
+            if (!profileOutput.exists()) profileOutput.mkdirs()
+
+            val printLogs = {
+                target.exec{
+                    it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                    it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/logs.txt")
+                }
+            }
+
+            it.doLast {
+                printLogs()
+                val logsFile = File("${target.projectDir}/profileOutput/logs.txt")
+                parseToCsv(logsFile, target)
+            }
+        }
+
+        target.tasks.named("defaultProfile").configure { it.dependsOn("profileBuild") }
+        target.tasks.named("defaultProfile").configure { it.dependsOn("runTests") }
+        target.tasks.named("defaultProfile").configure { it.finalizedBy("clean") }
 
         target.tasks.register("runTests") { it ->
             val clearLogs = {
@@ -62,67 +159,25 @@ open class ProfPlugin : Plugin<Project>{
             }
 
             it.doLast {
-                val testApkPath: String? =
-                    if (it.project.hasProperty("test_apk_path")) it.project.property("test_apk_path") as String else null
+                clearLogs()
 
+                val projectName = target.project.name
+                val testApkPath = "$projectName/build/outputs/apk/androidTest/debug/$projectName-debug-androidTest.apk"
                 val testPaths: List<String>? =
                     if (it.project.hasProperty("test_paths")) {
                         val paths = it.project.property("test_paths") as String
                         paths.split(",")
                     } else null
 
-                if (testPaths != null && testApkPath != null) {
+                if (testPaths != null) {
                     val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
                     for (path in testPaths) {
-                        clearLogs()
                         runTest(path, testRunnerInfo)
-
-                        val profileOutput = File("${target.projectDir}/profileOutput")
-                        if (!profileOutput.exists()) profileOutput.mkdirs()
-
-                        val printLogs = {
-                            target.exec{
-                                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
-                            }
-                        }
-
-                        printLogs()
                     }
                 }
                 else {
-                    runCommand("echo", "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
-                    throw GradleException("Arguments are not passed")
-                }
-            }
-        }
-
-        target.tasks.register("profileBuild") { it ->
-            it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
-
-            val installApk = { apkPath: String ->
-                runCommand("echo", "APK Installing: ", apkPath)
-                runCommand("$adb", "install", "-r", apkPath)
-            }
-
-            it.doLast {
-                val apkPath: String? =
-                    if (it.project.hasProperty("apk_path"))
-                        it.project.property("apk_path") as String
-                    else null
-
-                val testApkPath: String? =
-                    if (it.project.hasProperty("test_apk_path"))
-                        it.project.property("test_apk_path") as String
-                    else null
-
-                if (apkPath != null && testApkPath != null) {
-                    installApk(apkPath)
-                    installApk(testApkPath)
-                }
-                else {
-                    runCommand("echo", "\n!Error at task [profileBuild]: apk_path and test_apk_path should be passed\n")
+                    runCommand("echo", "\n!Error at task [runTests]: test_paths should be passed\n")
                     throw GradleException("Arguments are not passed")
                 }
             }
@@ -158,123 +213,64 @@ open class TestRunnerInfo(aaptOutput: String) {
     }
 }
 
-private class JSONGenerator {
-    fun generate(directory: String) {
-        val testList = JSONArray()
+fun parseToCsv(input: File, target: Project) {
+    val fileWriter = FileWriter("parsedLogs.csv")
+    val header = "MethodName,StartTime,EndTime,ThreadID,Energy"
+    fileWriter.append(header)
+    fileWriter.append('\n')
 
-        File(directory).walk().forEach {
-            if (it.isFile) {
-                val testName = it.name.substringBefore(".txt")
+    val data = input.readLines()
+    for (i in 0 until data.size) {
+        val line = data[i]
 
-                val testLogs = JSONArray()
+        if (!line.startsWith('-')) {
+            val entryLineList = line.split("\\s+".toRegex())
+            var dataString = ""
 
-                val data = it.readLines()
-                for (i in 0 until data.size) {
-                    val line = data[i]
+            if (entryLineList[7] != "Entry") {
+                continue
+            } else {
+                val methodName = entryLineList[8]
+                val threadId = entryLineList[3]
 
-                    if (!line.startsWith('-')) {
-                        val entryLineList = line.split("\\s+".toRegex())
+                val exitLine = findExitLine(data, i, methodName)
+                val exitLineList = exitLine!!.split("\\s+".toRegex())
 
-                        val methodName = entryLineList[8]
-                        val processId = entryLineList[2].toInt()
-                        val threadId = entryLineList[3].toInt()
+                val startTime = entryLineList[1]
+                val endTime = exitLineList[1]
 
-                        val startDate = entryLineList[0]
-                        val startTime = entryLineList[1]
+                var energy = 0
 
-                        //timestamp from January 1, 1970, 00:00:00 GMT
-                        val timestamp = getTimestamp(startDate, startTime)
+                var parseIndex = 10
+                while (entryLineList[parseIndex] != "EndOfData") {
+                    val freq = entryLineList[parseIndex].toInt()
+                    val timeAtEntry = entryLineList[parseIndex + 1].toInt()
+                    val timeAtExit = exitLineList[parseIndex + 1].toInt()
 
-                        val isEntry = entryLineList[7] == "Entry"
+                    energy += freq * (timeAtExit - timeAtEntry)
 
-                        val cpuDetails = JSONArray()
-                        var kernelDetails = JSONObject()
-                        var valuesDetails = JSONArray()
-
-                        var parseIndex = 10
-                        while (entryLineList[parseIndex] != "EndOfData") {
-                            val item = entryLineList[parseIndex]
-
-                            when {
-                                item == ";" -> {
-                                    kernelDetails["details"] = valuesDetails
-                                    cpuDetails.add(kernelDetails)
-
-                                    parseIndex += 1
-                                }
-                                item.startsWith("cpu") -> {
-                                    kernelDetails = JSONObject()
-                                    valuesDetails = JSONArray()
-
-                                    val kernelIndex = item.substringAfter("cpu").toInt()
-                                    kernelDetails["kernel"] = kernelIndex
-
-                                    parseIndex += 1
-                                }
-                                else -> {
-                                    val freq = entryLineList[parseIndex].toInt()
-                                    val timeInState = entryLineList[parseIndex + 1].toInt()
-
-                                    val valuesPair = JSONObject()
-                                    valuesPair["frequency"] = freq
-                                    valuesPair["timestamp"] = timeInState
-
-                                    valuesDetails.add(valuesPair)
-
-                                    parseIndex += 2
-                                }
-                            }
-                        }
-
-                        val brightness = entryLineList[parseIndex + 1].toInt()
-
-                        val headerDetails = JSONObject()
-                        headerDetails["timestamp"] = timestamp
-                        headerDetails["processID"] = processId
-                        headerDetails["threadID"] = threadId
-                        headerDetails["methodName"] = methodName
-                        headerDetails["isEntry"] = isEntry
-
-                        val cpuComponent = JSONObject()
-                        cpuComponent["component"] = "cpuTimeInStates"
-                        cpuComponent["details"] = cpuDetails
-
-                        val brightnessComponent = JSONObject()
-                        brightnessComponent["component"] = "brightness"
-                        brightnessComponent["details"] = brightness
-
-                        val bodyArray = JSONArray()
-                        bodyArray.add(cpuComponent)
-                        bodyArray.add(brightnessComponent)
-
-                        val logObject = JSONObject()
-                        logObject["header"] = headerDetails
-                        logObject["body"] = bodyArray
-
-                        testLogs.add(logObject)
-                    }
+                    parseIndex += 2
                 }
 
-                val testObject = JSONObject()
-                testObject["testName"] = testName
-                testObject["logs"] = testLogs
-
-                testList.add(testObject)
+                dataString += "$methodName,$startTime,$endTime,$threadId,$energy"
             }
+
+            fileWriter.append(dataString)
+            fileWriter.append('\n')
         }
-
-        val json = JSONObject()
-        json["tests"] = testList
-
-        val file = FileWriter("$directory/logs.json")
-        file.write(json.toJSONString())
-        file.flush()
-        file.close()
     }
+    fileWriter.close()
+}
 
-    private fun getTimestamp(date: String, time: String): Long {
-        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss.SSS")
-        val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
-        return sdf.parse(dateString).time
+fun findExitLine(data: List<String>, startingIndex: Int, methodName: String): String? {
+    for (i in (startingIndex + 1) until data.size) {
+        val line = data[i]
+
+        if (!line.startsWith('-')) {
+            val dataList = line.split("\\s+".toRegex())
+            if (dataList[7] == "Exit" && dataList[8] == methodName)
+                return line
+        }
     }
+    return null
 }

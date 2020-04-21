@@ -11,7 +11,7 @@ To see plugin's API check UI-Testing-Samples.
         -> `gpg --keyserver hkp://pool.sks-keyservers.net --send-keys {KeyId}` 
 	    -> `gpg --keyserver hkp://keys.openpgp.org --send-keys {KeyId}`
     3) Sign up for Jira https://issues.sonatype.org/secure/Signup!default.jspa and then ask for a permission
-    4) Place to gradle.properties  
+    4) Place to ${home}/.gradle/gradle.properties
     `nexusUsername=YOUR_SONATYPE_USER_NAME  
      nexusPassword=YOUR_SONATYPE_USER_PASSWORD  
   
@@ -20,4 +20,8 @@ To see plugin's API check UI-Testing-Samples.
      signing.secretKeyRingFile=/PATH/TO/SECRET/RING/FILE`
     5) `./gradlew uploadArchives` 
         -> `./gradlew closeAndReleaseRepository`
-    6) ???
+    6) Profit
+
+    Instruction for publishing to mavenLocal:
+    1) `./gradlew publishToMavenLocal`
+    2) in project's build.gradle replace mavenCentral repository with mavenLocal
