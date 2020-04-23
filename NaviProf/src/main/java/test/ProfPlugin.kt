@@ -313,7 +313,7 @@ private class JSONGenerator {
     }
 
     private fun getTimestamp(date: String, time: String): Long {
-        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss.SSS")
+        val sdf = SimpleDateFormat("MM-dd-yyyy hh:mm:ss.SSS")
         val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
         return sdf.parse(dateString).time
     }
