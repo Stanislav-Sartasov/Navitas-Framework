@@ -4,7 +4,7 @@ import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
 import io.reactivex.Observable
 
-class ConfiguringViewModel(
+class ConfiguringVM(
         private val configurationRepository: ConfigurationRepository
 ) {
 

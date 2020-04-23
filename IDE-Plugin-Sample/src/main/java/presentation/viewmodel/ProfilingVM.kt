@@ -6,19 +6,24 @@ import data.model.ProfilingError
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
+import domain.repository.ProfilingResultRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import org.jetbrains.kotlin.idea.configuration.externalProjectPath
 import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
+import tooling.RawProfilingResultAnalyzer
+import tooling.RawProfilingResultParser
 
-class ProfilingViewModel(
+class ProfilingVM(
         private val project: Project,
-        private val configurationRepository: ConfigurationRepository
+        private val configurationRepository: ConfigurationRepository,
+        private val profilingResultRepository: ProfilingResultRepository
 ) {
 
     enum class ViewState {
-        INITIAL, READY_TO_PROFILING, PROFILING
+        INITIAL, READY_TO_PROFILING, DURING_PROFILING
     }
 
     private val profilingVerdictSubject = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
@@ -28,22 +33,28 @@ class ProfilingViewModel(
     val viewState: Observable<ViewState> = viewStateSubject
 
     private var currentConfiguration: ProfilingConfiguration? = null
+    private val gradleTaskExecutor = GradleTaskExecutor(project)
 
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
+            // TODO: move to background thread
+            val raw = RawProfilingResultParser.parse("${currentConfiguration!!.module.externalProjectPath!!}/profileOutput", "logs.json")
+            val result = RawProfilingResultAnalyzer.analyze(raw)
+            profilingResultRepository.save(result)
+
             profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
             viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
-            println("ConfigAndProfilingViewModel: TaskCallback::onSuccess")
+
+            println("Profiling completed")
         }
 
         override fun onFailure() {
             profilingVerdictSubject.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
             viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
-            println("ConfigAndProfilingViewModel: TaskCallback::onFailure")
+
+            println("Profiling failed")
         }
     }
-
-    private val gradleTaskExecutor = GradleTaskExecutor(project)
 
     init {
         gradleTaskExecutor.callback = onExecuteTaskCallback
@@ -61,7 +72,7 @@ class ProfilingViewModel(
     // TODO: how to detect when task is failed ??? (onFailure doesn't invoke)
     fun startProfiling() {
         currentConfiguration?.let { config ->
-            viewStateSubject.onNext(ViewState.PROFILING)
+            viewStateSubject.onNext(ViewState.DURING_PROFILING)
             GradlePluginInjector(project).verifyAndInject()
             gradleTaskExecutor.executeTask(
                     "defaultProfile",

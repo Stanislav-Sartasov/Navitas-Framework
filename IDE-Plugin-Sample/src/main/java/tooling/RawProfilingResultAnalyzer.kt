@@ -14,6 +14,7 @@ object RawProfilingResultAnalyzer {
         for (testResult in raw.getTestResults()) {
             val testName = testResult.first
             val testDetails = mutableMapOf<Pair<Int, Int>, List<MethodDetails>>()
+            var testEnergy = 0F
 
             val logs = testResult.second
                     .sortedBy { log -> log.methodInfo.timestamp }
@@ -25,6 +26,7 @@ object RawProfilingResultAnalyzer {
                 val nestedMethodsDeque = ArrayDeque<MutableList<MethodDetails>>()
 
                 for (log in logGroup.value) {
+                    println(log.methodInfo)
                     if (log.methodInfo.isEntry) {
                         logDeque.addLast(log)
                         nestedMethodsDeque.addLast(mutableListOf())
@@ -32,6 +34,7 @@ object RawProfilingResultAnalyzer {
                         val methodDetails = analyzeMethodLogs(logDeque.pollLast(), log, nestedMethodsDeque.pollLast())
                         if (logDeque.isEmpty()) {
                             externalMethods.add(methodDetails)
+                            testEnergy += methodDetails.cpuEnergy
                         } else {
                             nestedMethodsDeque.peekLast().add(methodDetails)
                         }
@@ -41,7 +44,7 @@ object RawProfilingResultAnalyzer {
                 testDetails[logGroup.key] = externalMethods
             }
 
-            result.add(DetailedTestEnergyConsumption(testName, testDetails))
+            result.add(DetailedTestEnergyConsumption(testName, testEnergy, testDetails))
         }
 
         return result
@@ -85,7 +88,7 @@ fun processNode(node: MethodDetails, lvl: Int = 0) {
 
 // ATTENTION: only for debug
 fun main() {
-    val raw = RawProfilingResultParser.parse("/home/vladislav/Workspace/Navitas-Framework/IDE-Plugin-Sample/", "last_logs.json")
+    val raw = RawProfilingResultParser.parse("/home/vladislav/Workspace/Navitas-Framework/IDE-Plugin-Sample/", "logs.json")
     val result = RawProfilingResultAnalyzer.analyze(raw)
     for (test in result) {
         println(test.testName)

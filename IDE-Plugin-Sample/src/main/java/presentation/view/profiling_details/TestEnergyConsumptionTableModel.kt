@@ -4,9 +4,7 @@ import domain.model.EnergyConsumption
 import javax.swing.event.TableModelListener
 import javax.swing.table.TableModel
 
-class EnergyConsumptionTableModel : TableModel {
-
-    var items = emptyList<EnergyConsumption>()
+class TestEnergyConsumptionTableModel(private val items: List<EnergyConsumption>) : TableModel {
 
     override fun getRowCount() = items.size
 
@@ -14,7 +12,7 @@ class EnergyConsumptionTableModel : TableModel {
 
     override fun getColumnName(var1: Int): String? {
         return when (var1) {
-            0 -> "Name"
+            0 -> "Test"
             1 -> "Energy (mJ)"
             else -> null
         }

@@ -14,10 +14,12 @@ import com.intellij.ui.components.JBList
 import data.model.ProfilingError
 import data.model.RequestVerdict
 import data.repository.ConfigurationRepositoryImpl
+import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
+import presentation.view.common.ContentContainer
 import presentation.view.configuring.dialog.ConfigWizardDialog
-import presentation.viewmodel.ConfiguringViewModel
-import presentation.viewmodel.ProfilingViewModel
+import presentation.viewmodel.ConfiguringVM
+import presentation.viewmodel.ProfilingVM
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
 import javax.swing.JLabel
@@ -26,16 +28,16 @@ import javax.swing.JPanel
 class ConfiguringContentView(
         private val project: Project,
         private val router: ContentRouter
-) {
+) : ContentContainer() {
 
     // UI components
-    val panel: JPanel
+    override val panel: JPanel
     private lateinit var contentPanel: JPanel
     private lateinit var androidAppModuleField: JLabel
     private lateinit var instrumentedTestList: JBList<String>
 
-    private val profilingVM = ProfilingViewModel(project, ConfigurationRepositoryImpl)
-    private val configuringVM = ConfiguringViewModel(ConfigurationRepositoryImpl)
+    private val profilingVM = ProfilingVM(project, ConfigurationRepositoryImpl, ProfilingResultRepositoryImpl)
+    private val configuringVM = ConfiguringVM(ConfigurationRepositoryImpl)
 
     private val configureAction: CustomAction
     private val startProfilingAction: CustomAction
@@ -101,11 +103,12 @@ class ConfiguringContentView(
                         when (verdict) {
                             is RequestVerdict.Success -> router.toNextContent()
                             is ProfilingError -> {
-                                // TODO: show error dialog or notification
+                                // TODO: show error notification
                             }
                         }
                     }
                 }
+
         configuringVM.profilingConfiguration
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
@@ -113,21 +116,22 @@ class ConfiguringContentView(
                         instrumentedTestList.setListData(config.instrumentedTestNames.toTypedArray())
                     }
                 }
+
         profilingVM.viewState
                 .subscribe { state ->
                     AppUIExecutor.onUiThread().execute {
                         when (state) {
-                            ProfilingViewModel.ViewState.INITIAL -> {
+                            ProfilingVM.ViewState.INITIAL -> {
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
                             }
-                            ProfilingViewModel.ViewState.READY_TO_PROFILING -> {
+                            ProfilingVM.ViewState.READY_TO_PROFILING -> {
                                 startProfilingAction.isEnabled = true
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
                             }
-                            ProfilingViewModel.ViewState.PROFILING -> {
+                            ProfilingVM.ViewState.DURING_PROFILING -> {
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = true
                                 configureAction.isEnabled = false

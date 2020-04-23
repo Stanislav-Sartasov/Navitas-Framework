@@ -2,6 +2,6 @@ package tooling
 
 interface ContentRouter {
 
-    fun toNextContent()
+    fun toNextContent(arg: Any? = null)
     fun toPreviousContent()
 }

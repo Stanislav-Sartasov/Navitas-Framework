@@ -2,41 +2,43 @@ package tooling
 
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.content.Content
+import presentation.view.common.ContentContainer
+import javax.inject.Provider
 
 class ContentRouterImpl(
         private val toolWindow: ToolWindow
 ) : ContentRouter {
 
-    private var currentContentIndex = 0
-    private var currentContent: Content? = null
-    private lateinit var contentList: List<Content>
+    private val contentStack = mutableListOf<Content>()
+    private lateinit var providers: List<Provider<ContentContainer>>
 
-    fun setupContents(_contents: List<Content>) {
-        currentContentIndex = 0
-        currentContent = null
-        contentList = _contents
+    fun setupProviders(_providers: List<Provider<ContentContainer>>) {
+        providers = _providers
     }
 
-    override fun toNextContent() {
-        if (currentContentIndex < contentList.size - 1) {
+    override fun toNextContent(arg: Any?) {
+        if (contentStack.size < providers.size) {
             with(toolWindow.contentManager) {
-                currentContent?.apply {
-                    removeContent(this, false)
-                    currentContentIndex++
+                val container = providers[contentStack.size].get()
+                arg?.let {
+                    container.setArgument(it)
                 }
-                currentContent = contentList[currentContentIndex].also { content -> addContent(content) }
+                val newContent = factory.createContent(container.panel, "", false)
+                if (contentStack.isNotEmpty()) {
+                    removeContent(contentStack.last(), false)
+                }
+                contentStack.add(newContent)
+                addContent(newContent)
             }
         }
     }
 
     override fun toPreviousContent() {
-        if (currentContentIndex > 0) {
+        if (contentStack.size > 1) {
             with(toolWindow.contentManager) {
-                currentContent?.apply {
-                    removeContent(this, false)
-                    currentContentIndex--
-                }
-                currentContent = contentList[currentContentIndex].also { content -> addContent(content) }
+                removeContent(contentStack.last(), true)
+                contentStack.removeAt(contentStack.size - 1)
+                addContent(contentStack.last())
             }
         }
     }
