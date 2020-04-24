@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="ba9c0" class="com.intellij.ui.table.JBTable" binding="tableView">
+          <component id="84242" class="com.intellij.ui.dualView.TreeTableView" binding="treeTableView" custom-create="true">
             <constraints/>
             <properties/>
           </component>

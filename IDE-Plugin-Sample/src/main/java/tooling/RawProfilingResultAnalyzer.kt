@@ -26,7 +26,6 @@ object RawProfilingResultAnalyzer {
                 val nestedMethodsDeque = ArrayDeque<MutableList<MethodDetails>>()
 
                 for (log in logGroup.value) {
-                    println(log.methodInfo)
                     if (log.methodInfo.isEntry) {
                         logDeque.addLast(log)
                         nestedMethodsDeque.addLast(mutableListOf())

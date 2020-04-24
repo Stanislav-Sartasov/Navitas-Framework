@@ -6,14 +6,22 @@ import com.intellij.openapi.actionSystem.ActionPlaces
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.ui.SimpleToolWindowPanel
-import com.intellij.ui.table.JBTable
+import com.intellij.ui.ColoredTreeCellRenderer
+import com.intellij.ui.dualView.TreeTableView
+import com.intellij.ui.treeStructure.treetable.ListTreeTableModelOnColumns
+import com.intellij.ui.treeStructure.treetable.TreeColumnInfo
+import com.intellij.util.ui.ColumnInfo
+import data.model.MethodDetails
 import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
+import extensions.toTreeNode
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
 import tooling.ContentRouter
 import javax.swing.JPanel
+import javax.swing.JTree
 import javax.swing.ListSelectionModel
+import javax.swing.tree.DefaultMutableTreeNode
 
 class TestProfilingResultDetailsContentView(
         private val router: ContentRouter
@@ -21,9 +29,10 @@ class TestProfilingResultDetailsContentView(
 
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
-    private lateinit var tableView: JBTable
+    private lateinit var treeTableView: TreeTableView
 
     private val profilingResultVM = DetailedTestEnergyConsumptionVM(ProfilingResultRepositoryImpl)
+    private lateinit var treeTableModel: ListTreeTableModelOnColumns
 
     init {
         // create action toolbar
@@ -45,6 +54,32 @@ class TestProfilingResultDetailsContentView(
         setupUI()
     }
 
+    fun createUIComponents() {
+        val columns = arrayOf(
+                TreeColumnInfo("Method"),
+                object : ColumnInfo<DefaultMutableTreeNode, Float>("Energy (mJ)") {
+                    override fun valueOf(item: DefaultMutableTreeNode): Float {
+                        return (item.userObject as MethodDetails).cpuEnergy
+                    }
+                }
+        )
+
+        treeTableModel = ListTreeTableModelOnColumns(null, columns)
+
+        treeTableView = TreeTableView(treeTableModel).apply {
+            setTreeCellRenderer(
+                    object : ColoredTreeCellRenderer() {
+                        override fun customizeCellRenderer(tree: JTree, value: Any?, selected: Boolean, expanded: Boolean, leaf: Boolean, row: Int, hasFocus: Boolean) {
+                            val node = value as DefaultMutableTreeNode
+                            val model = node.userObject as MethodDetails
+                            append(model.methodName)
+                        }
+                    }
+            )
+        }
+
+    }
+
     override fun setArgument(arg: Any) {
         if (arg is Int) {
             profilingResultVM.fetch(arg)
@@ -52,16 +87,21 @@ class TestProfilingResultDetailsContentView(
     }
 
     private fun setupUI() {
-        tableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
+        treeTableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
 
         profilingResultVM.energyConsumption
                 .subscribe { result ->
                     AppUIExecutor.onUiThread().execute {
                         // TODO: update chart
-                        val items = result.testDetails.entries  // TODO: flatten all trees
-                                .map { it.value }
-                                .flatten()
-                        tableView.model = DetailedTestEnergyConsumptionTableModel(items)
+
+                        // create tree from received data
+                        val items = result.testDetails.entries.map { it.value }.flatten()
+                        val root = DefaultMutableTreeNode(MethodDetails("", 0, 0, 0F, emptyList()))
+                        for (item in items)
+                            root.add(item.toTreeNode())
+
+                        treeTableModel.setRoot(root)
+                        treeTableModel.reload()
                     }
                 }
     }
