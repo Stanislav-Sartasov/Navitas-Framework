@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Thread {
+            doInBackground()
+        }.start()
+
         findViewById<Button>(R.id.button_1).setOnClickListener(onButtonClickListener)
         findViewById<Button>(R.id.button_2).setOnClickListener(onButtonClickListener)
     }
