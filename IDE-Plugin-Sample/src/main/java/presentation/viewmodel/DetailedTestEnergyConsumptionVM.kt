@@ -11,6 +11,10 @@ class DetailedTestEnergyConsumptionVM(
         private val profilingResultRepository: ProfilingResultRepository
 ) {
 
+    companion object {
+        val ALL_PROCESSES_AND_THREADS = -1 to -1
+    }
+
     private val testInfoSubject = PublishSubject.create<TestInfo>()
     val testInfo: Observable<TestInfo> = testInfoSubject
 
@@ -24,7 +28,14 @@ class DetailedTestEnergyConsumptionVM(
         profilingResultRepository.fetchDetailedTestEnergyConsumption(position)
                 .subscribe( { result ->
                     cache = result
-                    testInfoSubject.onNext(TestInfo(result.testName, result.energy, result.testDetails.keys.toList()))
+
+                    val ids = result.testDetails.keys.toMutableList()
+                    ids.add(0, ALL_PROCESSES_AND_THREADS)
+
+                    currentProcessThreadIDs = ids[0]
+                    testInfoSubject.onNext(TestInfo(result.testName, result.energy, ids))
+                    energyConsumptionSubject.onNext(cache!!.testDetails.values.flatten())
+//                    energyConsumptionSubject.onNext(result.testDetails.getOrDefault(currentProcessThreadIDs!!, emptyList()))
                 }, { error ->
                     // TODO: send error
                 })
@@ -33,7 +44,11 @@ class DetailedTestEnergyConsumptionVM(
     fun fetch(processThreadIDs: Pair<Int, Int>) {
         if (processThreadIDs != currentProcessThreadIDs) {
             currentProcessThreadIDs = processThreadIDs
-            energyConsumptionSubject.onNext(cache!!.testDetails[processThreadIDs]!!)
+            if (processThreadIDs == ALL_PROCESSES_AND_THREADS) {
+                energyConsumptionSubject.onNext(cache!!.testDetails.values.flatten())
+            } else {
+                energyConsumptionSubject.onNext(cache!!.testDetails.getOrDefault(processThreadIDs, emptyList()))
+            }
         }
     }
 }

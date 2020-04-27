@@ -9,26 +9,25 @@ import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.CollectionComboBoxModel
 import com.intellij.ui.ColoredTreeCellRenderer
-import com.intellij.ui.ListCellRendererWrapper
 import com.intellij.ui.SimpleListCellRenderer
+import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dualView.TreeTableView
 import com.intellij.ui.treeStructure.treetable.ListTreeTableModelOnColumns
 import com.intellij.ui.treeStructure.treetable.TreeColumnInfo
-import com.intellij.ui.treeStructure.treetable.TreeTableCellRenderer
 import com.intellij.util.ui.ColumnInfo
 import data.model.MethodDetails
 import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
 import extensions.toTreeNode
-import org.jetbrains.kotlin.diagnostics.Errors.UNCHECKED_CAST
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
 import tooling.ContentRouter
-import java.awt.Component
 import java.awt.event.ItemEvent
-import javax.swing.*
+import javax.swing.JList
+import javax.swing.JPanel
+import javax.swing.JTree
+import javax.swing.ListSelectionModel
 import javax.swing.tree.DefaultMutableTreeNode
-import javax.swing.tree.TreeCellRenderer
 
 class TestProfilingResultDetailsContentView(
         private val router: ContentRouter
@@ -38,6 +37,7 @@ class TestProfilingResultDetailsContentView(
     private lateinit var contentPanel: JPanel
     private lateinit var treeTableView: TreeTableView
     private lateinit var processThreadChooser: ComboBox<Pair<Int, Int>>
+    private lateinit var testTitleField: JBLabel
 
     private val profilingResultVM = DetailedTestEnergyConsumptionVM(ProfilingResultRepositoryImpl)
     private lateinit var treeTableModel: ListTreeTableModelOnColumns
@@ -103,7 +103,7 @@ class TestProfilingResultDetailsContentView(
                 object : SimpleListCellRenderer<Pair<Int, Int>>() {
                     override fun customize(list: JList<out Pair<Int, Int>>?, value: Pair<Int, Int>?, index: Int, selected: Boolean, hasFocus: Boolean) {
                         if (value != null) {
-                            text = "Process: ${value.first} | Thread: ${value.second}"
+                            text = if (value == DetailedTestEnergyConsumptionVM.ALL_PROCESSES_AND_THREADS) "All" else "Process: ${value.first} | Thread: ${value.second}"
                         }
                     }
                 }
@@ -121,10 +121,10 @@ class TestProfilingResultDetailsContentView(
                     AppUIExecutor.onUiThread().execute {
                         // TODO: update chart (set test name and energy)
 
+                        testTitleField.text = "${info.testName}: ${info.energy} mJ"
+
                         processThreadChooserModel.add(info.processThreadIDs)
                         processThreadChooser.selectedIndex = 0
-
-                        profilingResultVM.fetch(info.processThreadIDs[0])
                     }
                 }
 

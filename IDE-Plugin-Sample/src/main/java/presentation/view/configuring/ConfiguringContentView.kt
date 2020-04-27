@@ -10,7 +10,7 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.SimpleToolWindowPanel
-import com.intellij.ui.components.JBList
+import com.intellij.ui.components.JBLabel
 import data.model.ProfilingError
 import data.model.RequestVerdict
 import data.repository.ConfigurationRepositoryImpl
@@ -22,7 +22,6 @@ import presentation.viewmodel.ConfiguringVM
 import presentation.viewmodel.ProfilingVM
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
-import javax.swing.JLabel
 import javax.swing.JPanel
 
 class ConfiguringContentView(
@@ -33,8 +32,8 @@ class ConfiguringContentView(
     // UI components
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
-    private lateinit var androidAppModuleField: JLabel
-    private lateinit var instrumentedTestList: JBList<String>
+    private lateinit var androidAppModuleField: JBLabel
+    private lateinit var testListField: JBLabel
 
     private val profilingVM = ProfilingVM(project, ConfigurationRepositoryImpl, ProfilingResultRepositoryImpl)
     private val configuringVM = ConfiguringVM(ConfigurationRepositoryImpl)
@@ -113,7 +112,7 @@ class ConfiguringContentView(
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
                         androidAppModuleField.text = config.module.name
-                        instrumentedTestList.setListData(config.instrumentedTestNames.toTypedArray())
+                        testListField.text = "<html><ul>${config.instrumentedTestNames.joinToString(separator = "<li>", prefix = "<li>")}</ul></html>"
                     }
                 }
 
