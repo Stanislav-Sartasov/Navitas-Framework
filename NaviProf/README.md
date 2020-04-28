@@ -1,4 +1,4 @@
-**Implementation of power-profiling Gradle plugin**;    
+**Implementation of power-profiling Gradle plugin** actual version is 1.16;    
 Can be downloaded from Github packages: deprecated;    
 MavenCentral: add `classpath("com.github.stanislav-sartasov:NaviProf:${plugin_version}")` to your build.gradle dependencies and apply "NaviProf" plugin;    
 To see plugin's API check UI-Testing-Samples.    
