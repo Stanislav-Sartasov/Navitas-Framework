@@ -22,7 +22,7 @@ plugins {
 
 archivesBaseName = 'NaviProf'
 group = 'com.github.stanislav-sartasov'
-version = '1.14'
+version = '1.16'
 
 
 repositories {
@@ -94,6 +94,8 @@ nexus {
 }
 
 
+
+
 /*
 //This was used for publishing to github-packages with KotlinDSL
 configure<PublishingExtension> {
@@ -122,18 +124,6 @@ configure<PublishingExtension> {
                         name.set("The Apache License, Version 2.0")
                         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
-                }
-                developers {
-                    developer {
-                        id.set("Shaposhnikov-Alexey")
-                        name.set("Shaposhnikov Alexey")
-                        email.set("shaposhnikov.lyosha@gmail.com")
-                    }
-                    developer {
-                        id.set("johnd")
-                        name.set("John Doe")
-                        email.set("john.doe@example.com")
-                    } TODO: write other developers
                 }
                 scm {
                     url.set("https://github.com/Stanislav-Sartasov/Navitas-Framework")

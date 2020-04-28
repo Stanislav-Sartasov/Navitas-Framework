@@ -1,10 +1,11 @@
 <idea-plugin>
     <id>"com.github.stanislav-sartasov"</id>
     <name>NaviProf</name>
-    <vendor email="support@yourcompany.com" url="https://github.com/Stanislav-Sartasov/Navitas-Framework">YourCompany</vendor>
+    <vendor  url="https://github.com/Stanislav-Sartasov/Navitas-Framework">Navitas Framework</vendor>
 
     <description><![CDATA[
-    A profiling tool for power estimation
+    A profiling tool for power estimation.
+    It provides tasks for build with instrumentation, installing apks, running tests and profiling logs
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

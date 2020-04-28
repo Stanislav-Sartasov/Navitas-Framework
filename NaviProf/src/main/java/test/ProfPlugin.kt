@@ -11,7 +11,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.util.*
 import java.util.regex.Pattern
 
 open class ProfPlugin : Plugin<Project>{
@@ -46,9 +46,80 @@ open class ProfPlugin : Plugin<Project>{
             TestRunnerInfo(out.toString())
         }
 
-        val runTest = { testPath: String, info: TestRunnerInfo ->
+        val runTestClass = { testPath: String, info: TestRunnerInfo ->
             runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
                 "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+        }
+
+        val runTestMethod = { testPath: String, info: TestRunnerInfo, methodName: String ->
+            runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
+                "class", "${info.targetPackage}.$testPath#$methodName", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+        }
+
+        val printLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
+            target.exec{
+                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName:$method.txt")
+            }
+        }
+
+        val printLogs = {  profileOutput: File, path: String ->
+            target.exec{
+                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
+            }
+        }
+
+        val execTests = {project: Project, testApkPath: String?, testPaths: List<String>? ->
+            if (testPaths != null && testApkPath != null) {
+                val testRunnerInfo = getTestRunnerInfo(testApkPath)
+
+                val profileOutput = File("${target.projectDir}/profileOutput")
+                if (!profileOutput.exists()) profileOutput.mkdirs()
+
+                if (project.hasProperty("granularity"))
+                    when (project.property("granularity")) {
+                        "class" -> {
+                            for (path in testPaths) {
+                                clearLogs()
+
+                                runTestClass(path, testRunnerInfo)
+
+                                printLogs(profileOutput, path)
+                            }
+                        }
+                        "methods" -> {
+                            for (path in testPaths) {
+                                clearLogs()
+                                val pathName = path.substringBefore('#')
+                                val methods = path.substringAfter('#').split(':')
+
+                                for (method in methods){
+                                    runTestMethod(path, testRunnerInfo, method)
+
+                                    printLogsOfMethod(profileOutput, pathName, method)
+                                }
+                            }
+                        }
+                        else -> {
+                            runCommand("echo", "\n!Error at running tests: granularity must be either \"methods\" or \"class\"\n")
+                            throw GradleException("Wrong argument")
+                        }
+                    }
+                else { // supposes that absence of parameter means 'class' granularity 
+                    for (path in testPaths) {
+                        clearLogs()
+
+                        runTestClass(path, testRunnerInfo)
+
+                        printLogs(profileOutput, path)
+                    }
+                }
+            }
+            else {
+                runCommand("echo", "\n!Error at running tests: test_paths should be passed\n")
+                throw GradleException("Arguments are not passed")
+            }
         }
 
         target.tasks.register("customProfile") {
@@ -73,35 +144,11 @@ open class ProfPlugin : Plugin<Project>{
                         paths.split(",")
                     } else null
 
-                if (testPaths != null && testApkPath != null) {
-                    val testRunnerInfo = getTestRunnerInfo(testApkPath)
-
-                    for (path in testPaths) {
-                        clearLogs()
-                        runTest(path, testRunnerInfo)
-
-                        val profileOutput = File("${target.projectDir}/profileOutput")
-                        if (!profileOutput.exists()) profileOutput.mkdirs()
-
-                        val printLogs = {
-                            target.exec{
-                                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
-                            }
-                        }
-
-                        printLogs()
-                    }
-                }
-                else {
-                    runCommand("echo",
-                        "\n!Error at task [runTests]: test_apk_path and test_paths should be passed\n")
-                    throw GradleException("Arguments are not passed")
-                }
+                execTests(it.project, testApkPath, testPaths)
             }
         }
 
-        target.tasks.register("profileBuild") { it ->
+        target.tasks.register("profileBuild") {
             it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
 
             val installApk = { apkPath: String ->
@@ -139,30 +186,7 @@ open class ProfPlugin : Plugin<Project>{
                         paths.split(",")
                     } else null
 
-                if (testPaths != null) {
-                    val testRunnerInfo = getTestRunnerInfo(testApkPath)
-
-                    for (path in testPaths) {
-                        clearLogs()
-                        runTest(path, testRunnerInfo)
-
-                        val profileOutput = File("${target.projectDir}/profileOutput")
-                        if (!profileOutput.exists()) profileOutput.mkdirs()
-
-                        val printLogs = {
-                            target.exec{
-                                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
-                            }
-                        }
-
-                        printLogs()
-                    }
-                }
-                else {
-                    runCommand("echo", "\n!Error at task [runTests]: test_paths should be passed\n")
-                    throw GradleException("Arguments are not passed")
-                }
+                execTests(it.project, testApkPath, testPaths)
             }
         }
     }
@@ -207,9 +231,7 @@ private class JSONGenerator {
                 val testLogs = JSONArray()
 
                 val data = it.readLines()
-                for (i in 0 until data.size) {
-                    val line = data[i]
-
+                for (line in data) {
                     if (!line.startsWith('-')) {
                         val entryLineList = line.split("\\s+".toRegex())
 
