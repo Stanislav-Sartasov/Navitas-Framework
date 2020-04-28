@@ -4,9 +4,7 @@ import action.ConfigureAction
 import action.CustomAction
 import action.StartProfilingAction
 import action.StopProfilingAction
-import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.actionSystem.ActionPlaces
-import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.SimpleToolWindowPanel
@@ -85,10 +83,10 @@ class ConfiguringContentView(
                 add(newAction)
             }
         }
-        val actionToolbar = actionManager.createActionToolbar(ActionPlaces.UNKNOWN, actionGroup, false)
+        val toolbar = actionManager.createActionToolbar(ActionPlaces.UNKNOWN, actionGroup, false)
 
         panel = SimpleToolWindowPanel(false, true).apply {
-            toolbar = actionToolbar.component
+            setToolbar(toolbar.component)
             setContent(contentPanel)
         }
 

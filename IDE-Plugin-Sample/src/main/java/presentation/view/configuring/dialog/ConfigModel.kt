@@ -4,16 +4,18 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardModel
 import domain.model.ProfilingConfiguration
-import tooling.AndroidModuleProvider
 import presentation.view.configuring.dialog.steps.AndroidAppModuleChoosingStep
 import presentation.view.configuring.dialog.steps.InstrumentedTestChoosingStep
+import tooling.AndroidModuleProvider
 
-class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
+class ConfigModel(
+        project: Project
+) : WizardModel("Navitas configuration") {
 
     private val provider = AndroidModuleProvider(project)
     private var selectedModule: Module? = null
     private var selectedTests: List<String> = emptyList()
-    private val instrumentedTestNames: MutableList<String> = mutableListOf()
+    private val currentTestNames: MutableList<String> = mutableListOf()
 
     private val androidAppModules: List<Module> = provider.fetchAndroidAppModuleList()
     val androidAppModuleNames: List<String> = androidAppModules.map { module -> module.name }
@@ -23,24 +25,24 @@ class ConfigModel(project: Project) : WizardModel("Navitas configuration") {
         add(InstrumentedTestChoosingStep(this))
     }
 
-    fun selectModule(index: Int) {
-        selectedModule = androidAppModules[index]
+    fun selectModule(position: Int) {
+        selectedModule = androidAppModules[position]
     }
 
-    fun selectTests(indices: List<Int>) {
-        selectedTests = instrumentedTestNames.asSequence()
-                .withIndex()
-                .filter { (index, _) -> indices.contains(index) }
-                .map { (_, value) -> value }
-                .toList()
+    fun selectTests(selectedTestArray: BooleanArray) {
+        val result = mutableListOf<String>()
+        for ((i, isSelected) in selectedTestArray.withIndex()) {
+            if (isSelected) result.add(currentTestNames[i])
+        }
+        selectedTests = result
     }
 
     fun getTestNamesOfSelectedModule(): List<String> {
-        instrumentedTestNames.clear()
+        currentTestNames.clear()
         selectedModule?.let { module ->
-            instrumentedTestNames.addAll(provider.fetchInstrumentedTestNames(module))
+            currentTestNames.addAll(provider.fetchInstrumentedTestNames(module))
         }
-        return instrumentedTestNames
+        return currentTestNames
     }
 
     fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!, selectedTests)

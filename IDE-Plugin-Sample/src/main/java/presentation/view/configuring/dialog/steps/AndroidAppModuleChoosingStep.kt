@@ -7,26 +7,32 @@ import presentation.view.configuring.dialog.ConfigModel
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 
-class AndroidAppModuleChoosingStep(private val configModel: ConfigModel) : WizardStep<ConfigModel>("Choose module for deployment") {
+class AndroidAppModuleChoosingStep(
+        configModel: ConfigModel
+) : WizardStep<ConfigModel>("Choose module for profiling") {
 
-    private lateinit var moduleList: JBList<String>
-    private var isNextButtonFrozen = true
+    private val moduleList: JBList<String>
+    private var selectedModulePosition = -1
 
-    override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
-        moduleList = JBList(configModel.androidAppModuleNames).apply {
-            selectionMode = ListSelectionModel.SINGLE_SELECTION
-            addListSelectionListener {
-                wizardNavigationState.NEXT.isEnabled = true
-                isNextButtonFrozen = false
+    init {
+        // create UI components
+        moduleList = JBList(configModel.androidAppModuleNames)
+        moduleList.selectionMode = ListSelectionModel.SINGLE_SELECTION
+        moduleList.addListSelectionListener { event ->
+            if (!event.valueIsAdjusting) {
+                selectedModulePosition = moduleList.selectedIndex
+                configModel.currentNavigationState.NEXT.isEnabled = (selectedModulePosition != -1)
             }
         }
-        if (isNextButtonFrozen) wizardNavigationState.NEXT.isEnabled = false
+    }
+
+    override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
+        wizardNavigationState.NEXT.isEnabled = (selectedModulePosition != -1)
         return moduleList
     }
 
-    // TODO: problem with returning back from TestChooserStep: 'Next' button isn't reacted
-    override fun onNext(model: ConfigModel?): WizardStep<*> {
-        model?.selectModule(moduleList.selectedIndex)
+    override fun onNext(model: ConfigModel): WizardStep<*> {
+        model.selectModule(selectedModulePosition)
         return super.onNext(model)
     }
 }
