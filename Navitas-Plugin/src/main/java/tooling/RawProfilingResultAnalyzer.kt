@@ -87,7 +87,7 @@ fun processNode(node: MethodDetails, lvl: Int = 0) {
 
 // ATTENTION: only for debug
 fun main() {
-    val raw = RawProfilingResultParser.parse("/home/vladislav/Workspace/Navitas-Framework/IDE-Plugin-Sample/", "logs.json")
+    val raw = RawProfilingResultParser.parse("/home/vladislav/Workspace/SPBU/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
     val result = RawProfilingResultAnalyzer.analyze(raw)
     for (test in result) {
         println(test.testName)
