@@ -8,8 +8,7 @@ import java.awt.BorderLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 
-class ChartPanel : JPanel()
-{
+class ChartPanel : JPanel() {
     private enum class ChartType {
         BAR_CHART, PIE_CHART
     }
@@ -17,8 +16,7 @@ class ChartPanel : JPanel()
     private val defaultTitle = "Energy consumption"
     private val yAxisTitle   = "Energy (mJ)"
 
-    fun showChart(data : List<EnergyConsumption>, title: String = defaultTitle)
-    {
+    fun showChart(data : List<EnergyConsumption>, title: String = defaultTitle) {
         val panel = setupNewChart(
                 input = data,
                 title = title,
@@ -29,8 +27,7 @@ class ChartPanel : JPanel()
     }
 
     private fun setupNewChart(input: List<EnergyConsumption>, title: String,
-                              type: ChartType) : JPanel
-    {
+                              type: ChartType) : JPanel {
         //Chart panel can't be smaller than chartHeight*chartWidth
         val chartHeight = 0
         val chartWidth  = 0
@@ -72,8 +69,7 @@ class ChartPanel : JPanel()
         return XChartPanel(chart)
     }
 
-    private fun mergeSameNames(data: List<EnergyConsumption>) : List<EnergyConsumption>
-    {
+    private fun mergeSameNames(data: List<EnergyConsumption>) : List<EnergyConsumption> {
         val result = mutableMapOf<String, Float>()
         for (elem in data)
             if (!result.containsKey(elem.consumer))
@@ -87,8 +83,7 @@ class ChartPanel : JPanel()
         }
     }
 
-    private fun addToView(panel : JPanel)
-    {
+    private fun addToView(panel : JPanel) {
         removeAll()
         this.layout = GridBagLayout()
 
