@@ -16,6 +16,7 @@ import com.intellij.ui.treeStructure.Tree
 import data.model.MethodDetails
 import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
+import presentation.view.charts.ChartPanel
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
 import tooling.ContentRouter
@@ -33,6 +34,7 @@ class TestProfilingResultDetailsContentView(
 
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
+    private lateinit var chartView : ChartPanel
     private lateinit var processThreadChooser: ComboBox<Pair<Int, Int>>
     private lateinit var tempField: JBLabel
     private lateinit var treeView: Tree
@@ -127,7 +129,7 @@ class TestProfilingResultDetailsContentView(
         profilingResultVM.currentEnergyConsumption
                 .subscribe { data ->
                     AppUIExecutor.onUiThread().execute {
-                        // TODO: update chart (title and energy consumption list)
+                        chartView.showChart(data.second, data.first)
                         tempField.text = data.first
                     }
                 }

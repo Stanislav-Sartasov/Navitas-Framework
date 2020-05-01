@@ -10,6 +10,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.table.JBTable
 import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
+import presentation.view.charts.ChartPanel
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.TestEnergyConsumptionListVM
 import tooling.ContentRouter
@@ -24,7 +25,7 @@ class TestsProfilingResultContentView(
     // UI components
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
-    private lateinit var chartView: JPanel // TODO: add swing component to GUI form (use custom palette)
+    private lateinit var chartView: ChartPanel
     private lateinit var tableView: JBTable
 
     private val profilingResultVM = TestEnergyConsumptionListVM(ProfilingResultRepositoryImpl)
@@ -69,7 +70,7 @@ class TestsProfilingResultContentView(
         profilingResultVM.energyConsumption
                 .subscribe { result ->
                     AppUIExecutor.onUiThread().execute {
-                        // TODO: update chart
+                        chartView.showChart(result)
                         tableView.model = TestEnergyConsumptionTableModel(result)
                     }
                 }
