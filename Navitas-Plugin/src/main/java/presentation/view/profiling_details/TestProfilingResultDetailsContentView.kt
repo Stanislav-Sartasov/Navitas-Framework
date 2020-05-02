@@ -14,7 +14,6 @@ import com.intellij.ui.SimpleTextAttributes
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.treeStructure.Tree
 import data.model.MethodDetails
-import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
@@ -28,7 +27,8 @@ import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreeSelectionModel
 
 class TestProfilingResultDetailsContentView(
-        private val router: ContentRouter
+        private val router: ContentRouter,
+        private val profilingResultVM: DetailedTestEnergyConsumptionVM
 ) : ContentContainer() {
 
     override val panel: JPanel
@@ -37,7 +37,6 @@ class TestProfilingResultDetailsContentView(
     private lateinit var tempField: JBLabel
     private lateinit var treeView: Tree
 
-    private val profilingResultVM = DetailedTestEnergyConsumptionVM(ProfilingResultRepositoryImpl)
     private lateinit var treeModel: DefaultTreeModel
     private lateinit var processThreadChooserModel: CollectionComboBoxModel<Pair<Int, Int>>
 
@@ -116,10 +115,10 @@ class TestProfilingResultDetailsContentView(
             }
         }
 
-        profilingResultVM.testInfo
-                .subscribe { info ->
+        profilingResultVM.threadProcessIDs
+                .subscribe { ids ->
                     AppUIExecutor.onUiThread().execute {
-                        processThreadChooserModel.add(info.processThreadIDs)
+                        processThreadChooserModel.add(ids)
                         processThreadChooser.selectedIndex = 0
                     }
                 }

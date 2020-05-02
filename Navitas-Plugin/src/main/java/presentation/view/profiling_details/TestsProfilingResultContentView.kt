@@ -8,7 +8,6 @@ import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.table.JBTable
-import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.TestEnergyConsumptionListVM
@@ -18,7 +17,8 @@ import javax.swing.JPanel
 import javax.swing.ListSelectionModel
 
 class TestsProfilingResultContentView(
-        private val router: ContentRouter
+        private val router: ContentRouter,
+        private val profilingResultVM: TestEnergyConsumptionListVM
 ) : ContentContainer() {
 
     // UI components
@@ -26,8 +26,6 @@ class TestsProfilingResultContentView(
     private lateinit var contentPanel: JPanel
     private lateinit var chartView: JPanel // TODO: add swing component to GUI form (use custom palette)
     private lateinit var tableView: JBTable
-
-    private val profilingResultVM = TestEnergyConsumptionListVM(ProfilingResultRepositoryImpl)
 
     private val onShowDetailsClickCallback = object : OnActionClickCallback {
         override fun onActionClick() {

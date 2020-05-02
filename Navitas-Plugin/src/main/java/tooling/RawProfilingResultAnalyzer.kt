@@ -5,6 +5,7 @@ import data.model.RawMethodLog
 import data.model.RawProfilingResult
 import domain.model.DetailedTestEnergyConsumption
 import java.util.*
+import kotlin.math.round
 
 object RawProfilingResultAnalyzer {
 
@@ -65,6 +66,7 @@ object RawProfilingResultAnalyzer {
                 cpuEnergy += (time2 - time1) * 0.1F   // TODO: use EnergyProfile's constants
             }
         }
+        cpuEnergy = round(cpuEnergy * 10) / 10F
 
         return MethodDetails(
                 methodName,

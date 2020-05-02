@@ -3,7 +3,6 @@ package presentation.viewmodel
 import data.model.MethodDetails
 import domain.model.DetailedTestEnergyConsumption
 import domain.model.EnergyConsumption
-import domain.model.TestInfo
 import domain.repository.ProfilingResultRepository
 import extensions.toTreeNode
 import io.reactivex.Observable
@@ -19,8 +18,8 @@ class DetailedTestEnergyConsumptionVM(
         val ALL_PROCESSES_AND_THREADS = -1 to -1
     }
 
-    private val testInfoSubject = PublishSubject.create<TestInfo>()
-    val testInfo: Observable<TestInfo> = testInfoSubject
+    private val threadProcessIDsSubject = PublishSubject.create<List<Pair<Int, Int>>>()
+    val threadProcessIDs: Observable<List<Pair<Int, Int>>> = threadProcessIDsSubject
 
     private val currentEnergyConsumptionSubject = PublishSubject.create<Pair<String, List<EnergyConsumption>>>()
     val currentEnergyConsumption: Observable<Pair<String, List<EnergyConsumption>>> = currentEnergyConsumptionSubject
@@ -40,7 +39,7 @@ class DetailedTestEnergyConsumptionVM(
 
                     // emission of initial data
                     fetch(ids[0])
-                    testInfoSubject.onNext(TestInfo(result.testName, result.energy, ids))
+                    threadProcessIDsSubject.onNext(ids)
                 }, { error ->
                     // TODO: send error
                 })
