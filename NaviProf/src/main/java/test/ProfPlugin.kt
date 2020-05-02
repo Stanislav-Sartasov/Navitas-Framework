@@ -189,6 +189,8 @@ open class ProfPlugin : Plugin<Project>{
                 execTests(it.project, testApkPath, testPaths)
             }
         }
+
+        target.tasks.named("runTests").configure { it.mustRunAfter("profileBuild") }
     }
 }
 
