@@ -5,14 +5,15 @@ buildscript {
     }
     dependencies {
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72'
     }
 }
+
 
 plugins {
     id 'java'
     //id 'org.jetbrains.intellij' version '0.4.9'
-    id "org.jetbrains.kotlin.jvm" version "1.3.61"
+    id "org.jetbrains.kotlin.jvm" version "1.3.72"
     id 'java-gradle-plugin'
     id 'maven-publish'
     id 'com.bmuschko.nexus' version '2.3.1'
@@ -22,7 +23,7 @@ plugins {
 
 archivesBaseName = 'NaviProf'
 group = 'com.github.stanislav-sartasov'
-version = '1.17'
+version = '1.17b'
 
 
 repositories {
@@ -33,10 +34,10 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-    implementation 'com.android.tools.build:gradle:3.2.1'
-    implementation 'com.android.tools.build:gradle-api:3.2.1'
+    implementation 'com.android.tools.build:gradle:3.6.3'
+    implementation 'com.android.tools.build:gradle-api:3.6.3'
     implementation 'org.javassist:javassist:3.23.1-GA'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.61'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.72'
 }
 
 modifyPom {
