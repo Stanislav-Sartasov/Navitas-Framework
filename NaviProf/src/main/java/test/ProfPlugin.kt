@@ -59,7 +59,7 @@ open class ProfPlugin : Plugin<Project>{
         val printLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
             target.exec{
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName:$method.txt")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt")
             }
         }
 
