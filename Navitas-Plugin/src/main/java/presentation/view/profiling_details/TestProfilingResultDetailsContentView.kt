@@ -13,7 +13,7 @@ import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.SimpleTextAttributes
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.treeStructure.Tree
-import data.model.MethodDetails
+import domain.model.MethodEnergyConsumption
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
@@ -80,7 +80,7 @@ class TestProfilingResultDetailsContentView(
                 object : ColoredTreeCellRenderer() {
                     override fun customizeCellRenderer(tree: JTree, value: Any, selected: Boolean, expanded: Boolean, leaf: Boolean, row: Int, hasFocus: Boolean) {
                         val node = value as DefaultMutableTreeNode
-                        val item = node.userObject as MethodDetails
+                        val item = node.userObject as MethodEnergyConsumption
                         append(item.methodName, SimpleTextAttributes.REGULAR_ATTRIBUTES)
                         append("   ")
                         append("${item.cpuEnergy} mJ", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)
@@ -99,7 +99,7 @@ class TestProfilingResultDetailsContentView(
         treeView.selectionModel.addTreeSelectionListener { event ->
             if (event.isAddedPath) {
                 val node = event.path.lastPathComponent as DefaultMutableTreeNode
-                val item = node.userObject as MethodDetails
+                val item = node.userObject as MethodEnergyConsumption
                 profilingResultVM.selectMethod(item)
             } else {
                 profilingResultVM.selectMethod(null)

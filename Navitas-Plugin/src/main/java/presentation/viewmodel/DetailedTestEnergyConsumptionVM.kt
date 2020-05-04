@@ -1,14 +1,14 @@
 package presentation.viewmodel
 
-import data.model.MethodDetails
+import domain.model.MethodEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
 import domain.model.EnergyConsumption
 import domain.repository.ProfilingResultRepository
+import extensions.roundWithAccuracy
 import extensions.toTreeNode
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.swing.tree.DefaultMutableTreeNode
-import kotlin.math.abs
 
 class DetailedTestEnergyConsumptionVM(
         private val profilingResultRepository: ProfilingResultRepository
@@ -53,7 +53,7 @@ class DetailedTestEnergyConsumptionVM(
         }
     }
 
-    fun selectMethod(item: MethodDetails?) {
+    fun selectMethod(item: MethodEnergyConsumption?) {
         val items = mutableListOf<EnergyConsumption>()
         val title: String
         if (item == null) {
@@ -68,18 +68,19 @@ class DetailedTestEnergyConsumptionVM(
                 items.add(EnergyConsumption(child.methodName, child.cpuEnergy))
                 childrenEnergy += child.cpuEnergy
             }
-            items.add(EnergyConsumption(item.methodName, abs(item.cpuEnergy - childrenEnergy))) // TODO: ISSUE: remaining energy may be negative
+            val remainder = (item.cpuEnergy - childrenEnergy).roundWithAccuracy(1)
+            items.add(EnergyConsumption(item.methodName, remainder))
         }
         currentEnergyConsumptionSubject.onNext(title to items)
     }
 
-    private fun createRoot(children: List<MethodDetails>): DefaultMutableTreeNode {
-        val root = DefaultMutableTreeNode(MethodDetails("", 0, 0, 0F, emptyList()))
+    private fun createRoot(children: List<MethodEnergyConsumption>): DefaultMutableTreeNode {
+        val root = DefaultMutableTreeNode(MethodEnergyConsumption("", 0, 0, 0F, emptyList()))
         for (item in children) root.add(item.toTreeNode())
         return root
     }
 
-    private fun getCurrentExternalMethods(): List<MethodDetails> {
+    private fun getCurrentExternalMethods(): List<MethodEnergyConsumption> {
         return if (currentProcessThreadIDs == ALL_PROCESSES_AND_THREADS) {
             cache!!.testDetails.values.flatten()
         } else {

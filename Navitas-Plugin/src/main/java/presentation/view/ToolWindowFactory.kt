@@ -23,33 +23,34 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val router = ContentRouterImpl(toolWindow)
 
+        val configRepository = ConfigurationRepositoryImpl()
+        val profilingResultRepository = ProfilingResultRepositoryImpl()
+
         val providers = listOf<Provider<ContentContainer>>(
                 Provider {
                     ConfiguringContentView(
                             project,
                             router,
-                            ProfilingVM(project, ConfigurationRepositoryImpl, ProfilingResultRepositoryImpl),
-                            ConfiguringVM(ConfigurationRepositoryImpl)
+                            ProfilingVM(project, configRepository, profilingResultRepository),
+                            ConfiguringVM(configRepository)
                     )
                 },
                 Provider {
                     ProfilingResultContentView(router)
                 },
                 Provider {
-                    TestsProfilingResultContentView(router, TestEnergyConsumptionListVM(ProfilingResultRepositoryImpl))
+                    TestsProfilingResultContentView(router, TestEnergyConsumptionListVM(profilingResultRepository))
                 },
                 Provider {
-                    TestProfilingResultDetailsContentView(router, DetailedTestEnergyConsumptionVM(ProfilingResultRepositoryImpl))
+                    TestProfilingResultDetailsContentView(router, DetailedTestEnergyConsumptionVM(profilingResultRepository))
                 }
         )
 
 //        val raw = RawProfilingResultParser.parse("${project.basePath!!}/app/profileOutput", "logs.json")
 //        val result = RawProfilingResultAnalyzer.analyze(raw)
-//        ProfilingResultRepositoryImpl.save(result)
+//        profilingResultRepository.save(result)
 
         router.setupProviders(providers)
         router.toNextContent()
     }
 }
-
-//        Disposer.register(project, component)

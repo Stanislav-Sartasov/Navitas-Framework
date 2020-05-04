@@ -5,7 +5,7 @@ import domain.repository.ConfigurationRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-object ConfigurationRepositoryImpl : ConfigurationRepository {
+class ConfigurationRepositoryImpl : ConfigurationRepository {
 
     private val profilingConfigurationSubject = BehaviorSubject.create<ProfilingConfiguration>()
 
