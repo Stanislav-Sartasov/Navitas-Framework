@@ -14,12 +14,12 @@ Can be downloaded from
 It is recommended to apply plugin at the bottom of the file 
 
 ## API:
-####  \>profileBuild
+###  \>profileBuild
 Assembles **app-debug.apk** and **app-debug-androidTest.apk** with bytecode instrumentation and installs it on the device
  
 `./gradlew :{appModule}:profileBuild`
 
-#### \>runTests
+### \>runTests
 Runs all the methods of selected test_classes in default **test_apk_path**. 
  - **test_paths** accepts test classes names (split with ',') to be run 
  - depending on **granularity** you should either pass ClassNames or ClassNames with MethodNames
