@@ -4,15 +4,15 @@ import action.ConfigureAction
 import action.CustomAction
 import action.StartProfilingAction
 import action.StopProfilingAction
-import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.ActionPlaces
+import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.AppUIExecutor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.components.JBLabel
 import data.model.ProfilingError
 import data.model.RequestVerdict
-import data.repository.ConfigurationRepositoryImpl
-import data.repository.ProfilingResultRepositoryImpl
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.view.configuring.dialog.ConfigWizardDialog
@@ -23,8 +23,10 @@ import tooling.OnActionClickCallback
 import javax.swing.JPanel
 
 class ConfiguringContentView(
-        private val project: Project,
-        private val router: ContentRouter
+        project: Project,
+        private val router: ContentRouter,
+        private val profilingVM: ProfilingVM,
+        private val configuringVM: ConfiguringVM
 ) : ContentContainer() {
 
     // UI components
@@ -32,9 +34,6 @@ class ConfiguringContentView(
     private lateinit var contentPanel: JPanel
     private lateinit var androidAppModuleField: JBLabel
     private lateinit var testListField: JBLabel
-
-    private val profilingVM = ProfilingVM(project, ConfigurationRepositoryImpl, ProfilingResultRepositoryImpl)
-    private val configuringVM = ConfiguringVM(ConfigurationRepositoryImpl)
 
     private val configureAction: CustomAction
     private val startProfilingAction: CustomAction

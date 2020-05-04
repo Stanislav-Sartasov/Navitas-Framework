@@ -37,22 +37,19 @@ class ProfilingVM(
 
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
-            // TODO: move to background thread
-            val raw = RawProfilingResultParser.parse("${currentConfiguration!!.module.externalProjectPath!!}/profileOutput", "logs.json")
-            val result = RawProfilingResultAnalyzer.analyze(raw)
-            profilingResultRepository.save(result)
+            Thread {
+                val raw = RawProfilingResultParser.parse("${currentConfiguration!!.module.externalProjectPath!!}/profileOutput", "logs.json")
+                val result = RawProfilingResultAnalyzer.analyze(raw)
+                profilingResultRepository.save(result)
 
-            profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
-            viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
-
-            println("Profiling completed")
+                profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
+                viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
+            }.start()
         }
 
         override fun onFailure() {
             profilingVerdictSubject.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
             viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
-
-            println("Profiling failed")
         }
     }
 

@@ -10,15 +10,11 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.CollectionComboBoxModel
 import com.intellij.ui.ColoredTreeCellRenderer
 import com.intellij.ui.SimpleListCellRenderer
+import com.intellij.ui.SimpleTextAttributes
 import com.intellij.ui.components.JBLabel
-import com.intellij.ui.dualView.TreeTableView
-import com.intellij.ui.treeStructure.treetable.ListTreeTableModelOnColumns
-import com.intellij.ui.treeStructure.treetable.TreeColumnInfo
-import com.intellij.util.ui.ColumnInfo
-import data.model.MethodDetails
-import data.repository.ProfilingResultRepositoryImpl
+import com.intellij.ui.treeStructure.Tree
+import domain.model.MethodEnergyConsumption
 import extensions.copyTemplate
-import extensions.toTreeNode
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
 import tooling.ContentRouter
@@ -26,21 +22,22 @@ import java.awt.event.ItemEvent
 import javax.swing.JList
 import javax.swing.JPanel
 import javax.swing.JTree
-import javax.swing.ListSelectionModel
 import javax.swing.tree.DefaultMutableTreeNode
+import javax.swing.tree.DefaultTreeModel
+import javax.swing.tree.TreeSelectionModel
 
 class TestProfilingResultDetailsContentView(
-        private val router: ContentRouter
+        private val router: ContentRouter,
+        private val profilingResultVM: DetailedTestEnergyConsumptionVM
 ) : ContentContainer() {
 
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
-    private lateinit var treeTableView: TreeTableView
     private lateinit var processThreadChooser: ComboBox<Pair<Int, Int>>
-    private lateinit var testTitleField: JBLabel
+    private lateinit var tempField: JBLabel
+    private lateinit var treeView: Tree
 
-    private val profilingResultVM = DetailedTestEnergyConsumptionVM(ProfilingResultRepositoryImpl)
-    private lateinit var treeTableModel: ListTreeTableModelOnColumns
+    private lateinit var treeModel: DefaultTreeModel
     private lateinit var processThreadChooserModel: CollectionComboBoxModel<Pair<Int, Int>>
 
     init {
@@ -63,20 +60,6 @@ class TestProfilingResultDetailsContentView(
         setupUI()
     }
 
-    fun createUIComponents() {
-        val columns = arrayOf(
-                TreeColumnInfo("Method"),
-                object : ColumnInfo<DefaultMutableTreeNode, Float>("Energy (mJ)") {
-                    override fun valueOf(item: DefaultMutableTreeNode): Float {
-                        return (item.userObject as MethodDetails).cpuEnergy
-                    }
-                }
-        )
-
-        treeTableModel = ListTreeTableModelOnColumns(null, columns)
-        treeTableView = TreeTableView(treeTableModel)
-    }
-
     override fun setArgument(arg: Any) {
         if (arg is Int) {
             profilingResultVM.fetch(arg)
@@ -87,17 +70,22 @@ class TestProfilingResultDetailsContentView(
         processThreadChooserModel = CollectionComboBoxModel()
         processThreadChooser.model = processThreadChooserModel
 
-        treeTableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
+        tempField.text = "none"
 
-        treeTableView.setTreeCellRenderer(
+        treeModel = DefaultTreeModel(null)
+        treeView.model = treeModel
+        treeView.selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
+
+        treeView.cellRenderer =
                 object : ColoredTreeCellRenderer() {
                     override fun customizeCellRenderer(tree: JTree, value: Any, selected: Boolean, expanded: Boolean, leaf: Boolean, row: Int, hasFocus: Boolean) {
                         val node = value as DefaultMutableTreeNode
-                        val data = node.userObject as MethodDetails
-                        append(data.methodName)
+                        val item = node.userObject as MethodEnergyConsumption
+                        append(item.methodName, SimpleTextAttributes.REGULAR_ATTRIBUTES)
+                        append("   ")
+                        append("${item.cpuEnergy} mJ", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)
                     }
                 }
-        )
 
         processThreadChooser.renderer =
                 object : SimpleListCellRenderer<Pair<Int, Int>>() {
@@ -108,37 +96,46 @@ class TestProfilingResultDetailsContentView(
                     }
                 }
 
+        treeView.selectionModel.addTreeSelectionListener { event ->
+            if (event.isAddedPath) {
+                val node = event.path.lastPathComponent as DefaultMutableTreeNode
+                val item = node.userObject as MethodEnergyConsumption
+                profilingResultVM.selectMethod(item)
+            } else {
+                profilingResultVM.selectMethod(null)
+            }
+        }
+
         @Suppress("UNCHECKED_CAST")
         processThreadChooser.addItemListener { event ->
             if (event.stateChange == ItemEvent.SELECTED) {
                 val processThreadIDs = event.item as Pair<Int, Int>
                 profilingResultVM.fetch(processThreadIDs)
+                profilingResultVM.selectMethod(null)
             }
         }
 
-        profilingResultVM.testInfo
-                .subscribe { info ->
+        profilingResultVM.threadProcessIDs
+                .subscribe { ids ->
                     AppUIExecutor.onUiThread().execute {
-                        // TODO: update chart (set test name and energy)
-
-                        testTitleField.text = "${info.testName}: ${info.energy} mJ"
-
-                        processThreadChooserModel.add(info.processThreadIDs)
+                        processThreadChooserModel.add(ids)
                         processThreadChooser.selectedIndex = 0
                     }
                 }
 
-        profilingResultVM.energyConsumption
-                .subscribe { result ->
+        profilingResultVM.currentEnergyConsumption
+                .subscribe { data ->
                     AppUIExecutor.onUiThread().execute {
-                        // TODO: update chart (set methods name and energy)
+                        // TODO: update chart (title and energy consumption list)
+                        tempField.text = data.first
+                    }
+                }
 
-                        // create tree from received data
-                        val root = DefaultMutableTreeNode(MethodDetails("", 0, 0, 0F, emptyList()))
-                        for (item in result) root.add(item.toTreeNode())
-
-                        treeTableModel.setRoot(root)
-                        treeTableModel.reload()
+        profilingResultVM.energyConsumptionTree
+                .subscribe { root ->
+                    AppUIExecutor.onUiThread().execute {
+                        treeModel.setRoot(root)
+                        treeModel.reload()
                     }
                 }
     }

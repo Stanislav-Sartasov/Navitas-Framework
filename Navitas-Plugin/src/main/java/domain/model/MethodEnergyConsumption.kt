@@ -1,10 +1,10 @@
-package data.model
+package domain.model
 
-class MethodDetails(
+class MethodEnergyConsumption(
         val methodName: String,
         val startTimestamp: Long,
         val endTimestamp: Long,
         val cpuEnergy: Float,
-        val nestedMethods: List<MethodDetails>
+        val nestedMethods: List<MethodEnergyConsumption>
 )
 

@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>ide-plugin-sample</id>
-    <name>Navitas Energy Profiler</name>
+    <id>navitas-profiler</id>
+    <name>Navitas Profiler</name>
     <vendor>...</vendor>
     <version>1.0</version>
 
