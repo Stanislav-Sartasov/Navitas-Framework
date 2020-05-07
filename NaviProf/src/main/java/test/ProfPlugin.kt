@@ -53,7 +53,7 @@ open class ProfPlugin : Plugin<Project>{
 
         val runTestMethod = { testPath: String, info: TestRunnerInfo, methodName: String ->
             runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
-                "class", "${info.targetPackage}.$testPath#$methodName", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+                "class", "${info.targetPackage}.$testPath#$methodName", "${info.testPackage}/${info.runnerName}")
         }
 
         val printLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
@@ -90,12 +90,13 @@ open class ProfPlugin : Plugin<Project>{
                         }
                         "methods" -> {
                             for (path in testPaths) {
-                                clearLogs()
                                 val pathName = path.substringBefore('#')
                                 val methods = path.substringAfter('#').split(':')
 
                                 for (method in methods){
-                                    runTestMethod(path, testRunnerInfo, method)
+                                    clearLogs()
+
+                                    runTestMethod(pathName, testRunnerInfo, method)
 
                                     printLogsOfMethod(profileOutput, pathName, method)
                                 }

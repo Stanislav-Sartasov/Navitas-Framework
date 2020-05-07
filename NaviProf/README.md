@@ -4,7 +4,7 @@ NaviProf consist of a set of tasks (profileBuild, runTests, runCustomTests, defa
  1. assembling *app_apk* and *test_apk* with instrumenting bytecode that allows to generate logs of cpu cores frequencies at start and end of method's invocation;
  2. installing *app_apk* and *test_apk* on device, clearing device's logs and running selected test methods;
  3. unloading of log files and transforming it to json with information about energy consumption (CPU activity) that can be further handled or visually presented. 
-#### actual version is 1.17
+#### actual version is 1.18
 #### latest compatible version of com.android.tools.build:gradle is 3.4.2
 Can be downloaded from 
 
