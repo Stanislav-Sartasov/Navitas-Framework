@@ -15,7 +15,7 @@ class AndroidModuleProvider(private val project: Project) {
                 .filter { it.isAndroidModule() }
     }
 
-    fun fetchInstrumentedTestNames(module: Module): List<String> {
+    fun fetchInstrumentedTestNames(module: Module): Map<String, List<String>> {
         return module.findInstrumentedTestNames()
     }
 }

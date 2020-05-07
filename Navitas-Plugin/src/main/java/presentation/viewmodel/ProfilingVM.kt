@@ -23,7 +23,7 @@ class ProfilingVM(
 ) {
 
     enum class ViewState {
-        INITIAL, READY_TO_PROFILING, DURING_PROFILING
+        INITIAL, READY_FOR_PROFILING, DURING_PROFILING
     }
 
     private val profilingVerdictSubject = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
@@ -43,13 +43,13 @@ class ProfilingVM(
                 profilingResultRepository.save(result)
 
                 profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
-                viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
+                viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
             }.start()
         }
 
         override fun onFailure() {
             profilingVerdictSubject.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
-            viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
+            viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
         }
     }
 
@@ -61,7 +61,7 @@ class ProfilingVM(
         configurationRepository.fetch()
                 .subscribe { config ->
                     currentConfiguration = config
-                    viewStateSubject.onNext(ViewState.READY_TO_PROFILING)
+                    viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
                 }
     }
 
@@ -71,9 +71,15 @@ class ProfilingVM(
         currentConfiguration?.let { config ->
             viewStateSubject.onNext(ViewState.DURING_PROFILING)
             GradlePluginInjector(project).verifyAndInject()
+
+            val tests = config.instrumentedTestNames.entries.joinToString(separator = ",") { clazz -> "${clazz.key}#${clazz.value.joinToString(separator = ":")}" }
+
             gradleTaskExecutor.executeTask(
                     "defaultProfile",
-                    arrayOf("-Ptest_paths=${config.instrumentedTestNames.joinToString(separator = ",")}"),
+                    arrayOf(
+                            "-Pgranularity=methods",
+                            "-Ptest_paths=$tests"
+                    ),
                     config.module
             )
         }

@@ -25,7 +25,7 @@ class InstrumentedTestChoosingStep(
     }
 
     override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
-        val items = configModel.getTestNamesOfSelectedModule()
+        val items = configModel.getTestNamesOfSelectedModule().entries.map { testClass -> testClass.value.map { testName -> "${testClass.key}.$testName"}}.flatten()
         selectedTestArray = BooleanArray(items.size)
         testList.setItems(items, String::toString)
         selectedTestAmount = 0
