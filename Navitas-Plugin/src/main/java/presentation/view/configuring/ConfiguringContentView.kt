@@ -109,7 +109,11 @@ class ConfiguringContentView(
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
                         androidAppModuleField.text = config.module.name
-                        testListField.text = "<html><ul>${config.instrumentedTestNames.joinToString(separator = "<li>", prefix = "<li>")}</ul></html>"
+                        val tests = config.instrumentedTestNames.entries
+                                .joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") { clazz ->
+                                    "${clazz.key}:${clazz.value.joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") }"
+                                }
+                        testListField.text = "<html>$tests</html>"
                     }
                 }
 
@@ -122,7 +126,7 @@ class ConfiguringContentView(
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
                             }
-                            ProfilingVM.ViewState.READY_TO_PROFILING -> {
+                            ProfilingVM.ViewState.READY_FOR_PROFILING -> {
                                 startProfilingAction.isEnabled = true
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
