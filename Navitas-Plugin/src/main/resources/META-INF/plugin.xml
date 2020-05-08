@@ -34,5 +34,8 @@
 
         <action class="action.ShowDetailsAction" id="navitas.action.ShowDetails"
                 text="Show Details" icon="AllIcons.Actions.Show"/>
+
+        <action class="action.ChoosePowerProfileAction" id="navitas.action.ChoosePowerProfile"
+                text="Choose Power Profile" icon="AllIcons.Actions.Annotate"/>
     </actions>
 </idea-plugin>

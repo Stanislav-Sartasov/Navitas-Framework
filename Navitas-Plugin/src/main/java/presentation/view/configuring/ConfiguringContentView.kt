@@ -1,9 +1,6 @@
 package presentation.view.configuring
 
-import action.ConfigureAction
-import action.CustomAction
-import action.StartProfilingAction
-import action.StopProfilingAction
+import action.*
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionPlaces
 import com.intellij.openapi.actionSystem.DefaultActionGroup
@@ -16,7 +13,9 @@ import data.model.RequestVerdict
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.view.configuring.dialog.ConfigWizardDialog
+import presentation.view.power_profile.PowerProfileDialog
 import presentation.viewmodel.ConfiguringVM
+import presentation.viewmodel.PowerProfileVM
 import presentation.viewmodel.ProfilingVM
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
@@ -26,7 +25,8 @@ class ConfiguringContentView(
         project: Project,
         private val router: ContentRouter,
         private val profilingVM: ProfilingVM,
-        private val configuringVM: ConfiguringVM
+        private val configuringVM: ConfiguringVM,
+        private val powerProfileVM: PowerProfileVM
 ) : ContentContainer() {
 
     // UI components
@@ -34,8 +34,10 @@ class ConfiguringContentView(
     private lateinit var contentPanel: JPanel
     private lateinit var androidAppModuleField: JBLabel
     private lateinit var testListField: JBLabel
+    private lateinit var powerProfileField: JBLabel
 
     private val configureAction: CustomAction
+    private val choosePowerProfileAction: CustomAction
     private val startProfilingAction: CustomAction
     private val stopProfilingAction: CustomAction
 
@@ -44,6 +46,12 @@ class ConfiguringContentView(
             ConfigWizardDialog(project) { config ->
                 configuringVM.save(config)
             }.show()
+        }
+    }
+
+    private val onChoosePowerProfileClickCallback = object : OnActionClickCallback {
+        override fun onActionClick() {
+            PowerProfileDialog(powerProfileVM).show()
         }
     }
 
@@ -67,6 +75,12 @@ class ConfiguringContentView(
             ConfigureAction(onConfigureClickCallback).also { newAction ->
                 configureAction = newAction
                 actionManager.copyTemplate("navitas.action.Configure", newAction)
+                add(newAction)
+            }
+            // add 'choose power profile' button
+            ChoosePowerProfileAction(onChoosePowerProfileClickCallback).also { newAction ->
+                choosePowerProfileAction = newAction
+                actionManager.copyTemplate("navitas.action.ChoosePowerProfile", newAction)
                 add(newAction)
             }
             // add 'profile' button
@@ -117,6 +131,13 @@ class ConfiguringContentView(
                     }
                 }
 
+        powerProfileVM.powerProfile
+                .subscribe { profile ->
+                    AppUIExecutor.onUiThread().execute {
+                        powerProfileField.text = profile.path
+                    }
+                }
+
         profilingVM.viewState
                 .subscribe { state ->
                     AppUIExecutor.onUiThread().execute {
@@ -125,16 +146,19 @@ class ConfiguringContentView(
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
+                                choosePowerProfileAction.isEnabled = true
                             }
                             ProfilingVM.ViewState.READY_FOR_PROFILING -> {
                                 startProfilingAction.isEnabled = true
                                 stopProfilingAction.isEnabled = false
                                 configureAction.isEnabled = true
+                                choosePowerProfileAction.isEnabled = true
                             }
                             ProfilingVM.ViewState.DURING_PROFILING -> {
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = true
                                 configureAction.isEnabled = false
+                                choosePowerProfileAction.isEnabled = false
                             }
                         }
                     }

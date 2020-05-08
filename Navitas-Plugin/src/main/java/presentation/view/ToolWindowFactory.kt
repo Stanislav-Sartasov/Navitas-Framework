@@ -3,16 +3,14 @@ package presentation.view
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import data.repository.ConfigurationRepositoryImpl
+import data.repository.PowerProfileRepositoryImpl
 import data.repository.ProfilingResultRepositoryImpl
 import presentation.view.common.ContentContainer
 import presentation.view.configuring.ConfiguringContentView
 import presentation.view.profiling_details.ProfilingResultContentView
 import presentation.view.profiling_details.TestProfilingResultDetailsContentView
 import presentation.view.profiling_details.TestsProfilingResultContentView
-import presentation.viewmodel.ConfiguringVM
-import presentation.viewmodel.DetailedTestEnergyConsumptionVM
-import presentation.viewmodel.ProfilingVM
-import presentation.viewmodel.TestEnergyConsumptionListVM
+import presentation.viewmodel.*
 import tooling.ContentRouterImpl
 import tooling.RawProfilingResultAnalyzer
 import tooling.RawProfilingResultParser
@@ -24,6 +22,7 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
         val router = ContentRouterImpl(toolWindow)
 
         val configRepository = ConfigurationRepositoryImpl()
+        val powerProfileRepository = PowerProfileRepositoryImpl()
         val profilingResultRepository = ProfilingResultRepositoryImpl()
 
         val providers = listOf<Provider<ContentContainer>>(
@@ -31,8 +30,9 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
                     ConfiguringContentView(
                             project,
                             router,
-                            ProfilingVM(project, configRepository, profilingResultRepository),
-                            ConfiguringVM(configRepository)
+                            ProfilingVM(project, configRepository, profilingResultRepository, powerProfileRepository),
+                            ConfiguringVM(configRepository),
+                            PowerProfileVM(powerProfileRepository)
                     )
                 },
                 Provider {
