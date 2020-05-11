@@ -23,10 +23,10 @@
         </constraints>
         <properties>
           <font size="14" style="1"/>
-          <text value="Android app module:"/>
+          <text value="Android module:"/>
         </properties>
       </component>
-      <component id="d7292" class="com.intellij.ui.components.JBLabel" binding="androidAppModuleField">
+      <component id="d7292" class="com.intellij.ui.components.JBLabel" binding="androidModuleField">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

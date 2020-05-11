@@ -13,27 +13,23 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
 import java.util.regex.Pattern
 
-const val BUILD_GRADLE_FILE_NAME = "build.gradle"
-const val PLUGIN_ANDROID_LIBRARY_NAME = "com.android.library"
-const val PLUGIN_ANDROID_APPLICATION_NAME = "com.android.application"
 const val INSTRUMENTED_TEST_FOLDER_NAME = "androidTest"
 const val ANDROID_MANIFEST_FILE_NAME = "AndroidManifest.xml"
 const val TEST_ANNOTATION_TEXT = "@Test"
 
-// TODO: checking for the presence of AndroidManifest file because module may not have build.gradle file
-private fun Module.isAndroidModule(type: String): Boolean {
-    return FilenameIndex.getFilesByName(
+private fun Module.isAndroidModule(type: String?): Boolean {
+    val manifest = FilenameIndex.getFilesByName(
             project,
-            BUILD_GRADLE_FILE_NAME,
+            ANDROID_MANIFEST_FILE_NAME,
             moduleContentScope
-    ).firstOrNull()?.hasChildWithText(type) ?: false
+    ).firstOrNull() ?: return false
+
+    return type?.let {
+        manifest.hasChildWithText(type)
+    } ?: true
 }
 
-fun Module.isAndroidLibraryModule(): Boolean = isAndroidModule(PLUGIN_ANDROID_LIBRARY_NAME)
-
-fun Module.isAndroidApplicationModule(): Boolean = isAndroidModule(PLUGIN_ANDROID_APPLICATION_NAME)
-
-fun Module.isAndroidModule(): Boolean = isAndroidLibraryModule() || isAndroidApplicationModule()
+fun Module.isAndroidModule(): Boolean = isAndroidModule(null)
 
 fun Module.findInstrumentedTestNames(): Map<String, List<String>> {
     val result = mutableMapOf<String, List<String>>()
