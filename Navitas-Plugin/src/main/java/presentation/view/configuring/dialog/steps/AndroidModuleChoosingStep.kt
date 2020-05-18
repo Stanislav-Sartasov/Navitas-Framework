@@ -7,7 +7,7 @@ import presentation.view.configuring.dialog.ConfigModel
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 
-class AndroidAppModuleChoosingStep(
+class AndroidModuleChoosingStep(
         configModel: ConfigModel
 ) : WizardStep<ConfigModel>("Choose module for profiling") {
 
@@ -16,7 +16,7 @@ class AndroidAppModuleChoosingStep(
 
     init {
         // create UI components
-        moduleList = JBList(configModel.androidAppModuleNames)
+        moduleList = JBList(configModel.androidModuleNames)
         moduleList.selectionMode = ListSelectionModel.SINGLE_SELECTION
         moduleList.addListSelectionListener { event ->
             if (!event.valueIsAdjusting) {

@@ -8,11 +8,10 @@ import extensions.isAndroidModule
 
 class AndroidModuleProvider(private val project: Project) {
 
-    fun fetchAndroidAppModuleList(): List<Module> {
+    fun fetchAndroidModuleList(): List<Module> {
         return ModuleManager.getInstance(project)
                 .modules
-                .toList()
-                .filter { it.isAndroidModule() }
+                .filter { module -> module.isAndroidModule() }
     }
 
     fun fetchInstrumentedTestNames(module: Module): Map<String, List<String>> {

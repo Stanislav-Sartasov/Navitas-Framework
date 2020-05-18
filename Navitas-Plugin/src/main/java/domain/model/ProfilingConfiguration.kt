@@ -1,8 +1,7 @@
 package domain.model
 
-import com.intellij.openapi.module.Module
-
 class ProfilingConfiguration(
-        val module: Module,
+        val moduleName: String,
+        val modulePath: String,
         val instrumentedTestNames: Map<String, List<String>>
 )

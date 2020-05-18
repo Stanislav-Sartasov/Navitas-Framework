@@ -32,7 +32,7 @@ class ConfiguringContentView(
     // UI components
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
-    private lateinit var androidAppModuleField: JBLabel
+    private lateinit var androidModuleField: JBLabel
     private lateinit var testListField: JBLabel
     private lateinit var powerProfileField: JBLabel
 
@@ -122,7 +122,7 @@ class ConfiguringContentView(
         configuringVM.profilingConfiguration
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
-                        androidAppModuleField.text = config.module.name
+                        androidModuleField.text = config.moduleName
                         val tests = config.instrumentedTestNames.entries
                                 .joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") { clazz ->
                                     "${clazz.key}:${clazz.value.joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") }"

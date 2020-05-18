@@ -4,7 +4,8 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardModel
 import domain.model.ProfilingConfiguration
-import presentation.view.configuring.dialog.steps.AndroidAppModuleChoosingStep
+import org.jetbrains.kotlin.idea.configuration.externalProjectPath
+import presentation.view.configuring.dialog.steps.AndroidModuleChoosingStep
 import presentation.view.configuring.dialog.steps.InstrumentedTestChoosingStep
 import tooling.AndroidModuleProvider
 
@@ -17,16 +18,16 @@ class ConfigModel(
     private var selectedTests: Map<String, List<String>>? = null
     private var currentTestNames: Map<String, List<String>>? = null
 
-    private val androidAppModules: List<Module> = provider.fetchAndroidAppModuleList()
-    val androidAppModuleNames: List<String> = androidAppModules.map { module -> module.name }
+    private val androidModules: List<Module> = provider.fetchAndroidModuleList()
+    val androidModuleNames: List<String> = androidModules.map { module -> module.name }
 
     init {
-        add(AndroidAppModuleChoosingStep(this))
+        add(AndroidModuleChoosingStep(this))
         add(InstrumentedTestChoosingStep(this))
     }
 
     fun selectModule(position: Int) {
-        selectedModule = androidAppModules[position]
+        selectedModule = androidModules[position]
     }
 
     fun selectTests(selectedTestArray: BooleanArray) {
@@ -53,5 +54,5 @@ class ConfigModel(
 
     fun getTestNamesOfSelectedModule(): Map<String, List<String>> = provider.fetchInstrumentedTestNames(selectedModule!!).also { currentTestNames = it }
 
-    fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!, selectedTests!!)
+    fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!.name, selectedModule!!.externalProjectPath!!, selectedTests!!)
 }
