@@ -4,6 +4,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardModel
 import domain.model.ProfilingConfiguration
+import org.jetbrains.kotlin.idea.configuration.externalProjectPath
 import presentation.view.configuring.dialog.steps.AndroidModuleChoosingStep
 import presentation.view.configuring.dialog.steps.InstrumentedTestChoosingStep
 import tooling.AndroidModuleProvider
@@ -53,5 +54,5 @@ class ConfigModel(
 
     fun getTestNamesOfSelectedModule(): Map<String, List<String>> = provider.fetchInstrumentedTestNames(selectedModule!!).also { currentTestNames = it }
 
-    fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!, selectedTests!!)
+    fun getProfilingConfiguration() = ProfilingConfiguration(selectedModule!!.name, selectedModule!!.externalProjectPath!!, selectedTests!!)
 }

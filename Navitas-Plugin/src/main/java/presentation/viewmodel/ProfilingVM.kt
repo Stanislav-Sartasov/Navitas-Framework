@@ -10,7 +10,6 @@ import domain.repository.ProfilingResultRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import org.jetbrains.kotlin.idea.configuration.externalProjectPath
 import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
 import tooling.RawProfilingResultAnalyzer
@@ -38,7 +37,7 @@ class ProfilingVM(
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
             Thread {
-                val raw = RawProfilingResultParser.parse("${currentConfiguration!!.module.externalProjectPath!!}/profileOutput", "logs.json")
+                val raw = RawProfilingResultParser.parse("${currentConfiguration!!.modulePath}/profileOutput", "logs.json")
                 val result = RawProfilingResultAnalyzer.analyze(raw)
                 profilingResultRepository.save(result)
 
@@ -80,7 +79,7 @@ class ProfilingVM(
                             "-Pgranularity=methods",
                             "-Ptest_paths=$tests"
                     ),
-                    config.module
+                    config.modulePath
             )
         }
     }

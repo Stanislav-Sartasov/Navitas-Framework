@@ -1,2 +1,3 @@
 rootProject.name = 'navitas-plugin'
+include 'test'
 

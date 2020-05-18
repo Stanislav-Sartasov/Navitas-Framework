@@ -108,7 +108,7 @@ class ConfiguringContentView(
         configuringVM.profilingConfiguration
                 .subscribe { config ->
                     AppUIExecutor.onUiThread().execute {
-                        androidModuleField.text = config.module.name
+                        androidModuleField.text = config.moduleName
                         val tests = config.instrumentedTestNames.entries
                                 .joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") { clazz ->
                                     "${clazz.key}:${clazz.value.joinToString(separator="</li><li>", prefix = "<ul><li>", postfix = "</li></ul>") }"
