@@ -2,10 +2,12 @@ package presentation.viewmodel
 
 import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
+import data.model.PowerProfile
 import data.model.ProfilingError
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
+import domain.repository.PowerProfileRepository
 import domain.repository.ProfilingResultRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -19,7 +21,8 @@ import tooling.RawProfilingResultParser
 class ProfilingVM(
         private val project: Project,
         private val configurationRepository: ConfigurationRepository,
-        private val profilingResultRepository: ProfilingResultRepository
+        private val profilingResultRepository: ProfilingResultRepository,
+        private val powerProfileRepository: PowerProfileRepository
 ) {
 
     enum class ViewState {
@@ -35,11 +38,13 @@ class ProfilingVM(
     private var currentConfiguration: ProfilingConfiguration? = null
     private val gradleTaskExecutor = GradleTaskExecutor(project)
 
+    private var powerProfile: PowerProfile? = null
+
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
             Thread {
                 val raw = RawProfilingResultParser.parse("${currentConfiguration!!.module.externalProjectPath!!}/profileOutput", "logs.json")
-                val result = RawProfilingResultAnalyzer.analyze(raw)
+                val result = RawProfilingResultAnalyzer.analyze(raw, powerProfile!!)
                 profilingResultRepository.save(result)
 
                 profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
@@ -61,7 +66,17 @@ class ProfilingVM(
         configurationRepository.fetch()
                 .subscribe { config ->
                     currentConfiguration = config
-                    viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+                    if (powerProfile != null) {
+                        viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+                    }
+                }
+
+        powerProfileRepository.fetch()
+                .subscribe { profile ->
+                    powerProfile = profile
+                    if (currentConfiguration != null) {
+                        viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+                    }
                 }
     }
 
