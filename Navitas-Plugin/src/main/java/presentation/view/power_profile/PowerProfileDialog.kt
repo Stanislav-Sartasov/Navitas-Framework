@@ -10,10 +10,10 @@ import javax.swing.filechooser.FileSystemView
 
 class PowerProfileDialog(private val powerProfileVM: PowerProfileVM) : DialogWrapper(true) {
 
-    private var contentPane: JPanel? = null
-    private var chooseButton: JButton? = null
-    private var defaultButton: JButton? = null
-    private var chosenProfileLabel: JLabel? = null
+    private lateinit var contentPane: JPanel
+    private lateinit var chooseButton: JButton
+    private lateinit var defaultButton: JButton
+    private lateinit var chosenProfileLabel: JLabel
 
     private var profileFile: File? = null
     private var isChosen: Boolean = false
@@ -21,8 +21,8 @@ class PowerProfileDialog(private val powerProfileVM: PowerProfileVM) : DialogWra
     init {
         init()
         title = "Power Profile configuration"
-        chooseButton!!.addActionListener { onChoose() }
-        defaultButton!!.addActionListener { onUseDefault() }
+        chooseButton.addActionListener { onChoose() }
+        defaultButton.addActionListener { onUseDefault() }
     }
 
     private fun onChoose() {
@@ -34,14 +34,14 @@ class PowerProfileDialog(private val powerProfileVM: PowerProfileVM) : DialogWra
         if (dialog == JFileChooser.APPROVE_OPTION) {
             profileFile = fileChooser.selectedFile
             isChosen = true
-            chosenProfileLabel!!.text = profileFile!!.absolutePath
+            chosenProfileLabel.text = profileFile!!.absolutePath
         }
     }
 
     private fun onUseDefault() {
         profileFile = null
         isChosen = true
-        chosenProfileLabel!!.text = "Default profile"
+        chosenProfileLabel.text = "Default profile"
     }
 
     override fun createCenterPanel(): JComponent? {
