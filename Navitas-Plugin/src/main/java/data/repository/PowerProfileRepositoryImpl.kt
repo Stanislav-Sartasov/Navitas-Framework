@@ -1,6 +1,6 @@
 package data.repository
 
-import data.model.PowerProfile
+import domain.model.PowerProfile
 import domain.repository.PowerProfileRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject

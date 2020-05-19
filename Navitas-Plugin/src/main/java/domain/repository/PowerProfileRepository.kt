@@ -1,6 +1,6 @@
 package domain.repository
 
-import data.model.PowerProfile
+import domain.model.PowerProfile
 import io.reactivex.Observable
 
 interface PowerProfileRepository {

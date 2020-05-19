@@ -1,13 +1,13 @@
 package tooling
 
-import data.model.Cluster
-import data.model.PowerProfile
+import domain.model.CpuCoreCluster
+import domain.model.PowerProfile
 
 class PowerProfileManager {
     // default profile initialization
     companion object {
-        private val defaultClusterFirst = Cluster(4)
-        private val defaultClusterSecond = Cluster(4)
+        private val defaultClusterFirst = CpuCoreCluster(4)
+        private val defaultClusterSecond = CpuCoreCluster(4)
 
         init {
             defaultClusterFirst.speeds.add(400000)

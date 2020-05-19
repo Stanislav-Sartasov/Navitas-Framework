@@ -1,8 +1,8 @@
-package data.model
+package domain.model
 
 class PowerProfile(
         val path: String,
-        private val clusters: List<Cluster>
+        private val cpuCoreClusters: List<CpuCoreCluster>
 ) {
 
     fun getPowerAtSpeed(coreIndex: Int, speed: Long): Float {
@@ -36,9 +36,9 @@ class PowerProfile(
         }
     }
 
-    private fun getClusterWithCore(coreIndex: Int): Cluster? {
+    private fun getClusterWithCore(coreIndex: Int): CpuCoreCluster? {
         var index = coreIndex
-        for (cluster in clusters) {
+        for (cluster in cpuCoreClusters) {
             if (cluster.numCores - 1 >= index) {
                 return cluster
             } else {

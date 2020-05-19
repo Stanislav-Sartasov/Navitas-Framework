@@ -2,7 +2,7 @@ package presentation.viewmodel
 
 import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
-import data.model.PowerProfile
+import domain.model.PowerProfile
 import data.model.ProfilingError
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration

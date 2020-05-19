@@ -1,7 +1,7 @@
 package tooling
 
-import data.model.Cluster
-import data.model.PowerProfile
+import domain.model.CpuCoreCluster
+import domain.model.PowerProfile
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
 import java.io.File
@@ -17,7 +17,7 @@ class PowerProfileParser(private val file: File) {
 
     fun parseXML(): PowerProfile {
         val path = file.canonicalPath
-        val clusters = ArrayList<Cluster>()
+        val clusters = ArrayList<CpuCoreCluster>()
 
         val doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file)
         val xPath = XPathFactory.newInstance().newXPath()
@@ -27,7 +27,7 @@ class PowerProfileParser(private val file: File) {
         val clusterNodeList = xPath.evaluate("value", clusterNode, XPathConstants.NODESET) as NodeList
 
         for (i in 0 until clusterNodeList.length) {
-            val cluster = Cluster(clusterNodeList.item(i).textContent.toInt())
+            val cluster = CpuCoreCluster(clusterNodeList.item(i).textContent.toInt())
             clusters.add(cluster)
         }
 

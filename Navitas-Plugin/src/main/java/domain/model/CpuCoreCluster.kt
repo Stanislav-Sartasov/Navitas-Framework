@@ -1,6 +1,6 @@
-package data.model
+package domain.model
 
-class Cluster(val numCores: Int) {
+class CpuCoreCluster(val numCores: Int) {
     val speeds = ArrayList<Long>()
     val powers = ArrayList<Float>()
 }

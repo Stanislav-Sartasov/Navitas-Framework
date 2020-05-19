@@ -1,12 +1,11 @@
 package tooling
 
-import data.model.PowerProfile
+import domain.model.PowerProfile
 import domain.model.MethodEnergyConsumption
 import data.model.RawMethodLog
 import data.model.RawProfilingResult
 import domain.model.DetailedTestEnergyConsumption
 import extensions.roundWithAccuracy
-import java.io.File
 import java.util.*
 
 object RawProfilingResultAnalyzer {
