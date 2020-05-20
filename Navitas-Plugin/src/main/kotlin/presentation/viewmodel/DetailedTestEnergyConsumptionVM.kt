@@ -41,7 +41,7 @@ class DetailedTestEnergyConsumptionVM(
                     fetch(ids[0])
                     threadProcessIDsSubject.onNext(ids)
                 }, { error ->
-                    // TODO: send error
+                    error.printStackTrace()
                 })
     }
 

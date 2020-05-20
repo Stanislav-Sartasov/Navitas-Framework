@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 
-class ConfigurationRepositoryTests {
+class ConfigurationRepositoryTest {
 
     private val repository: ConfigurationRepository = ConfigurationRepositoryImpl()
 

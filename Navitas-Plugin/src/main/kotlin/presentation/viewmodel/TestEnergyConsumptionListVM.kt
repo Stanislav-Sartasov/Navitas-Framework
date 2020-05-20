@@ -17,7 +17,7 @@ class TestEnergyConsumptionListVM(
                 .subscribe( { result ->
                     energyConsumptionSubject.onNext(result)
                 }, { error ->
-                    // TODO: send error
+                    error.printStackTrace()
                 })
     }
 }

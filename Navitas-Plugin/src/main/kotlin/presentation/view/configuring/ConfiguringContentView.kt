@@ -113,7 +113,7 @@ class ConfiguringContentView(
                         when (verdict) {
                             is RequestVerdict.Success -> router.toNextContent()
                             is ProfilingError -> {
-                                // TODO: show error notification
+                                // TODO: show error notification (currently it's not reachable)
                             }
                         }
                     }

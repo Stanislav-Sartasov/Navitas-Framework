@@ -7,6 +7,6 @@ import io.reactivex.Single
 interface ProfilingResultRepository {
 
     fun fetchTestsEnergyConsumption(): Single<List<EnergyConsumption>>
-    fun fetchDetailedTestEnergyConsumption(position: Int): Single<DetailedTestEnergyConsumption> // TODO: replace position with id
+    fun fetchDetailedTestEnergyConsumption(position: Int): Single<DetailedTestEnergyConsumption>
     fun save(result: List<DetailedTestEnergyConsumption>)
 }

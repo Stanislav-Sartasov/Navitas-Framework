@@ -80,7 +80,7 @@ class ProfilingVM(
     }
 
     // TODO: ISSUE: task doesn't stop if device is unplugged
-    // TODO: how to detect when task is failed ??? (onFailure doesn't invoke)
+    // TODO: how to detect when task is failed ??? (onFailure doesn't invoke --- Android Studio bug)
     fun startProfiling() {
         currentConfiguration?.let { config ->
             viewStateSubject.onNext(ViewState.DURING_PROFILING)

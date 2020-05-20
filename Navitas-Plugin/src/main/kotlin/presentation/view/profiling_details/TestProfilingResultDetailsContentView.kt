@@ -34,7 +34,6 @@ class TestProfilingResultDetailsContentView(
     override val panel: JPanel
     private lateinit var contentPanel: JPanel
     private lateinit var processThreadChooser: ComboBox<Pair<Int, Int>>
-    private lateinit var tempField: JBLabel
     private lateinit var treeView: Tree
 
     private lateinit var treeModel: DefaultTreeModel
@@ -69,8 +68,6 @@ class TestProfilingResultDetailsContentView(
     private fun setupUI() {
         processThreadChooserModel = CollectionComboBoxModel()
         processThreadChooser.model = processThreadChooserModel
-
-        tempField.text = "none"
 
         treeModel = DefaultTreeModel(null)
         treeView.model = treeModel
@@ -127,7 +124,6 @@ class TestProfilingResultDetailsContentView(
                 .subscribe { data ->
                     AppUIExecutor.onUiThread().execute {
                         // TODO: update chart (title and energy consumption list)
-                        tempField.text = data.first
                     }
                 }
 
