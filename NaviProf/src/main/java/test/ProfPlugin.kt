@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
+import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -67,6 +68,26 @@ open class ProfPlugin : Plugin<Project>{
             target.exec{
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
+            }
+        }
+
+        val resetBatteryStats = { profileOutput: File ->
+            target.exec {
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
+            }
+        }
+
+        val printBatteryStats = { profileOutput: File ->
+            target.exec {
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--history")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/stats.txt")
+            }
+        }
+
+        val printResetTime = { profileOutput: File ->
+            target.exec {
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "-c", "|", "grep", "RESET")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/resetTime.txt")
             }
         }
 
@@ -341,5 +362,64 @@ private class JSONGenerator {
         val sdf = SimpleDateFormat("MM-dd-yyyy hh:mm:ss.SSS")
         val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
         return sdf.parse(dateString).time
+    }
+}
+
+private class BatterystatsParser {
+    fun parseStats(directoryToWrite: String, statsFile: String, resetTimeFile: String) {
+        if (File(statsFile).exists() && File(resetTimeFile).exists()) {
+            val output = PrintWriter("$directoryToWrite/brightness.txt")
+            val resetMillis = File(resetTimeFile).readLines()[0].drop(17).toLong()
+            val stats = File(statsFile).readLines()
+            var isScreenOn = false
+
+            for (line in stats) {
+                if (line.contains("-screen")) {
+                    isScreenOn = false
+                } else if (line.contains("+screen")) {
+                    isScreenOn = true
+                }
+
+                if (line.contains("brightness=")) {
+                    val difTime = line.dropLast(line.length - line.indexOf(" (")).drop(line.indexOf("+") + 1)
+                    val time = Regex("""\d+""").findAll(difTime).toList().reversed()
+
+                    var difMillis = 0L
+                    if (!time.isEmpty() && !line.contains("RESET")) {
+                        difMillis = time[0].value.toLong()
+                        if (time.size > 1) difMillis += time[1].value.toLong() * 1000
+                        if (time.size > 2) difMillis += time[2].value.toLong() * 60000
+                        if (time.size > 3) difMillis += time[3].value.toLong() * 3600000
+                        if (time.size == 5) difMillis += time[4].value.toLong() * 86400000
+                    }
+
+                    var brightness =
+                        if (line.contains("dark"))
+                            if (!isScreenOn)
+                                "0"
+                            else
+                                "1"
+                        else if (line.contains("dim"))
+                            "2"
+                        else if (line.contains("medium"))
+                            "3"
+                        else if (line.contains("light"))
+                            "4"
+                        else
+                            "5"
+
+                    output.println(getTimestamp(resetMillis, difMillis) + " " + brightness)
+                }
+            }
+            output.flush()
+            output.close()
+        }
+    }
+
+    private fun getTimestamp(resetMillis: Long, difMillis: Long): String {
+        val sdf = SimpleDateFormat("MM-dd HH:mm:ss.SSS")
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = resetMillis + difMillis
+        return sdf.format(cal.time).toString()
     }
 }
