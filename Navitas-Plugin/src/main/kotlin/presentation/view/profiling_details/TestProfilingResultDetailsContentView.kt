@@ -86,7 +86,7 @@ class TestProfilingResultDetailsContentView(
 
         processThreadChooser.renderer =
                 object : SimpleListCellRenderer<Pair<Int, Int>>() {
-                    override fun customize(list: JList<out Pair<Int, Int>>?, value: Pair<Int, Int>?, index: Int, selected: Boolean, hasFocus: Boolean) {
+                    override fun customize(list: JList<out Pair<Int, Int>>, value: Pair<Int, Int>, index: Int, selected: Boolean, hasFocus: Boolean) {
                         if (value != null) {
                             text = if (value == DetailedTestEnergyConsumptionVM.ALL_PROCESSES_AND_THREADS) "All" else "Process: ${value.first} | Thread: ${value.second}"
                         }

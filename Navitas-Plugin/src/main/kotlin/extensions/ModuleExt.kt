@@ -7,7 +7,7 @@ import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.FilenameIndex
 import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.idea.refactoring.fqName.getKotlinFqName
-import org.jetbrains.kotlin.idea.refactoring.toPsiFile
+import org.jetbrains.kotlin.idea.core.util.toPsiFile
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
