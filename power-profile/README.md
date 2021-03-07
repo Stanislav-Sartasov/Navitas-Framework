@@ -14,4 +14,3 @@
 
 ---
 
-As an example, the power_profile.xml data of the Sony Xperia ZL (2013, Android 5.1.1) smartphone is provided.
