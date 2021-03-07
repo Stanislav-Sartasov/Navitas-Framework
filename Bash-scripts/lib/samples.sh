@@ -4,14 +4,15 @@
 
 #It is necessary to turn off all the sparing functions of the phone,
 #except for the tested one, turn on the airplane mode and send the
-#ntire application to sleep mode
+#entire application to sleep mode
 
 #This command may not work on some devices. You should check it in advance
 adb shell dumpsys battery unplug
 
-#adb shell dumpsys battery set ac 0
-#adb shell dumpsys battery set usb 0
-#adb shell dumpsys battery set wireless 0
+adb shell dumpsys battery set ac 0
+adb shell dumpsys battery set usb 0
+adb shell dumpsys battery set wireless 0
+adb shell dumpsys battery set status 0
 
 #adb shell svc wifi enable
 #adb shell svc bluetooth enable
@@ -28,7 +29,7 @@ do
 	for ((m = 1; m <= 5; m++))
 	do
 		
-		wifi 30 $(echo "scale=1; 0.1 * $n" | bc)
+		wifi_sony 30 $(echo "scale=1; 0.1 * $n" | bc)
 		
 	done
 	
@@ -42,6 +43,7 @@ adb shell input keyevent 26
 #adb shell svc wifi disable
 #adb shell svc bluetooth disable
 
-#adb shell dumpsys battery set ac 1
-#adb shell dumpsys battery set usb 1
-#adb shell dumpsys battery set wireless 1
+adb shell dumpsys battery set ac 1
+adb shell dumpsys battery set usb 1
+adb shell dumpsys battery set wireless 1
+adb shell dumpsys battery set status 1
