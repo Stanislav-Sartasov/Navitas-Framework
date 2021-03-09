@@ -19,21 +19,12 @@ adb shell dumpsys battery set status 0
 
 adb shell input keyevent 26
 
-echo "Wait 30 seconds to avoid Wi-Fi or Bluetooth scans or other negative impacts on testing,\
+echo "Wait 30 seconds to avoid Wi-Fi or Bluetooth scans or other negative impacts on testing, \
 it's also time to make some final changes before the test"
 sleep 30
 
-for ((n = 1; n <= 20; n++))
-do
-
-	for ((m = 1; m <= 5; m++))
-	do
-		
-		wifi_sony 30 $(echo "scale=1; 0.1 * $n" | bc)
-		
-	done
-	
-done
+bluetooth_common 30 0.2 -s
+bluetooth_common 30 1 -s
 
 echo "Testing completed"
 
