@@ -30,8 +30,9 @@ private fun executeCMDWrite(cmd: String) {
 
 @RunWith(AndroidJUnit4::class)
 class InliningSeparateClassTest {
+
     @Test
-    fun inlineActivity_start() {
+    fun start() {
         ActivityScenario.launch(MainActivity::class.java)
 
         executeCMDWrite("echo " + MAX_FREQ + " > /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
@@ -75,8 +76,9 @@ private class CalcTask() : Runnable {
 
 @RunWith(AndroidJUnit4::class)
 class InliningAnonymousClassTest {
+
     @Test
-    fun inlineActivity_start() {
+    fun start() {
         val calcTask : Runnable = object: Runnable
         {
             var cycles: Int = 1000000;

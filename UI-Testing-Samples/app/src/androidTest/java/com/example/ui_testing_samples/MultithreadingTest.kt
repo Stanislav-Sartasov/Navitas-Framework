@@ -11,56 +11,65 @@ import kotlin.random.Random
 class MultithreadingTest {
 
     @Test
-    fun testWithoutSort() {
+    fun startWithoutSort() {
         ActivityScenario.launch(MainActivity::class.java)
+
         val testClass = ThreadCreator()
+
+        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithoutSort().join()
         testClass.initiateCalcFuncWithoutSort().join()
         testClass.initiateCalcFuncWithoutSort().join()
         testClass.initiateCalcFuncWithoutSort().join()
     }
 
     @Test
-    fun testWithSort() {
+    fun startWithSort() {
         ActivityScenario.launch(MainActivity::class.java)
-        val testClass = ThreadCreator()
-        testClass.initiateCalcFuncWithSort().join()
-        testClass.initiateCalcFuncWithSort().join()
-        testClass.initiateCalcFuncWithSort().join()
-    }
 
+        val testClass = ThreadCreator()
+
+        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithoutSort().join()
+    }
 }
 
 private class ThreadCreator {
     fun initiateCalcFuncWithoutSort(): Thread {
         val thread = Thread(Runnable{calcTaskWithoutSort()})
+
         thread.start()
         Thread.sleep(5)
-        return thread
 
+        return thread
     }
 
     fun initiateCalcFuncWithSort(): Thread {
         val thread = Thread(Runnable{calcTaskWithSort()})
+
         thread.start()
         Thread.sleep(5)
-        return thread
 
+        return thread
     }
 }
 
 private fun calcTaskWithoutSort() {
-    val array = IntArray(1000000) { Random(0).nextInt()}
+    val array = IntArray(1000000) { Random(0).nextInt() }
     val path = System.getProperty("user.dir")
-    val file = File("$path/sample.txt")
-    file.printWriter().use{ out -> out.println(array)}
+    val file = File("$path/tmp.txt")
+    file.printWriter().use{ out -> out.println(array) }
     file.delete()
 }
 
 private fun calcTaskWithSort() {
-    val array = IntArray(1000000) { Random(0).nextInt()}
+    val array = IntArray(1000000) { Random(0).nextInt() }
     val path = System.getProperty("user.dir")
     array.sort()
-    val file = File("$path/sample.txt")
-    file.printWriter().use{ out -> out.println(array)}
+    val file = File("$path/tmp.txt")
+    file.printWriter().use{ out -> out.println(array) }
     file.delete()
 }
