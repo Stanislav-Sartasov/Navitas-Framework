@@ -308,57 +308,98 @@ open class ProfPlugin : Plugin<Project> {
                                 entryLineList[0] == "Wifi:" -> {
                                     var wifiComponent = JSONObject()
 
-                                    wifiComponent["common"] = entryLineList[1].toDouble()
+                                    wifiComponent["common"] = entryLineList[1].replace(",",".").toDouble()
 
-                                    if(entryLineList[2] == "(") {
-                                        var i = 3
-                                        while(entryLineList[i] != ")") {
-                                            val componentDetails = entryLineList[i].split('=')
+                                    if(entryLineList.size >= 3) {
+                                        if(entryLineList[2] == "(") {
+                                            var i = 3
+                                            while(entryLineList[i] != ")") {
+                                                val componentDetails = entryLineList[i].split('=')
 
-                                            wifiComponent[componentDetails[0]] = componentDetails[1].toDouble()
+                                                wifiComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toDouble()
 
-                                            i++
+                                                i++
+                                            }
                                         }
                                     }
-
                                     testLogs["wifi"] = wifiComponent
                                 }
                                 entryLineList[0] == "Bluetooth:" -> {
                                     var bluetoothComponent = JSONObject()
 
-                                    bluetoothComponent["common"] = entryLineList[1].toDouble()
+                                    bluetoothComponent["common"] = entryLineList[1].replace(",",".").toDouble()
 
-                                    if(entryLineList[2] == "(") {
-                                        var i = 3
-                                        while (entryLineList[i] != ")") {
-                                            val componentDetails = entryLineList[i].split('=')
+                                    if(entryLineList.size >= 3) {
+                                        if(entryLineList[2] == "(") {
+                                            var i = 3
+                                            while (entryLineList[i] != ")") {
+                                                val componentDetails = entryLineList[i].split('=')
 
-                                            bluetoothComponent[componentDetails[0]] = componentDetails[1].toDouble()
+                                                bluetoothComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toDouble()
 
-                                            i++
+                                                i++
+                                            }
                                         }
                                     }
 
                                     testLogs["bluetooth"] = bluetoothComponent
                                 }
                                 else -> {
-                                    val methodName = entryLineList[8]
-                                    val processId = entryLineList[2].toInt()
-                                    val threadId = entryLineList[3].toInt()
+                                    var methodName: String = ""
+                                    var processId: Int = 0
+                                    var threadId: Int = 0
 
-                                    val startDate = entryLineList[0]
-                                    val startTime = entryLineList[1]
+                                    var startDate: String = ""
+                                    var startTime: String = ""
 
                                     //timestamp from January 1, 1970, 00:00:00 GMT
-                                    val timestamp = getTimestamp(startDate, startTime)
+                                    var timestamp: Long = 0
 
-                                    val isEntry = entryLineList[7] == "Entry"
+                                    var isEntry: Boolean = false
+
+                                    var parseIndex: Int = 0
+
+                                    if(entryLineList[4] == "D" && entryLineList[5] == "TEST") {
+                                        methodName = entryLineList[8]
+                                        processId = entryLineList[2].toInt()
+                                        threadId = entryLineList[3].toInt()
+
+                                        startDate = entryLineList[0]
+                                        startTime = entryLineList[1]
+
+                                        //timestamp from January 1, 1970, 00:00:00 GMT
+                                        timestamp = getTimestamp(startDate, startTime)
+
+                                        isEntry = entryLineList[7] == "Entry"
+                                        parseIndex = 10
+                                    }
+                                    else if (entryLineList[1] == "(")
+                                    {
+                                        methodName = entryLineList[4]
+                                        startDate = SimpleDateFormat("MM-dd").format(Date())
+                                        startTime = SimpleDateFormat("hh:mm:ss.SSS").format(Date())
+
+                                        timestamp = getTimestamp(startDate, startTime)
+
+                                        isEntry = entryLineList[3] == "Entry"
+                                        parseIndex = 6
+                                    }
+                                    else
+                                    {
+                                        methodName = entryLineList[3]
+                                        startDate = SimpleDateFormat("MM-dd").format(Date())
+                                        startTime = SimpleDateFormat("hh:mm:ss.SSS").format(Date())
+
+                                        timestamp = getTimestamp(startDate, startTime)
+
+                                        isEntry = entryLineList[2] == "Entry"
+                                        parseIndex = 5
+                                    }
 
                                     val cpuDetails = JSONArray()
                                     var kernelDetails = JSONObject()
                                     var valuesDetails = JSONArray()
 
-                                    var parseIndex = 10
                                     while (entryLineList[parseIndex] != "EndOfData") {
                                         val item = entryLineList[parseIndex]
 
