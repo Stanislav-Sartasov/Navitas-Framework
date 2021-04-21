@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/Navitas-Framework.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -499,6 +484,7 @@
       <workItem from="1619003023285" duration="787000" />
       <workItem from="1619004015054" duration="59000" />
       <workItem from="1619004337254" duration="1713000" />
+      <workItem from="1619007714580" duration="8000" />
     </task>
     <servers />
   </component>
