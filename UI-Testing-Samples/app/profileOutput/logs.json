@@ -1,1 +1,2820 @@
-{"tests":[{"logs":[{"header":{"threadID":19142,"isEntry":true,"processID":19142,"methodName":"com.example.ui_testing_samples.MainActivity.onCreate","timestamp":1618672370511},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27623},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27623},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27624},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27624},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19241,"isEntry":true,"processID":19142,"methodName":"com.example.ui_testing_samples.MainActivity$onCreate$1.run","timestamp":1618672370678},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27640},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27640},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27641},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27641},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19142,"isEntry":false,"processID":19142,"methodName":"com.example.ui_testing_samples.MainActivity.onCreate","timestamp":1618672370681},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27640},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27640},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27641},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27641},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19241,"isEntry":true,"processID":19142,"methodName":"com.example.ui_testing_samples.BackgroundKt.doInBackground","timestamp":1618672370691},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27641},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27642},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27642},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27642},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19241,"isEntry":false,"processID":19142,"methodName":"com.example.ui_testing_samples.BackgroundKt.doInBackground","timestamp":1618672370748},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27647},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27647},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27648},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27648},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19241,"isEntry":false,"processID":19142,"methodName":"com.example.ui_testing_samples.MainActivity$onCreate$1.run","timestamp":1618672370772},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":27648},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":27649},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":27649},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":27650},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]}],"testName":"MultithreadingTest.startWithoutSort"},{"logs":[{"header":{"threadID":19539,"isEntry":true,"processID":19539,"methodName":"com.example.ui_testing_samples.MainActivity.onCreate","timestamp":1618672374792},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28051},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28051},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28052},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28052},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19539,"isEntry":false,"processID":19539,"methodName":"com.example.ui_testing_samples.MainActivity.onCreate","timestamp":1618672374980},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28070},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19609,"isEntry":true,"processID":19539,"methodName":"com.example.ui_testing_samples.MainActivity$onCreate$1.run","timestamp":1618672374982},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28070},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28071},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19609,"isEntry":true,"processID":19539,"methodName":"com.example.ui_testing_samples.BackgroundKt.doInBackground","timestamp":1618672374997},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28072},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28072},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28072},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28073},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19609,"isEntry":false,"processID":19539,"methodName":"com.example.ui_testing_samples.BackgroundKt.doInBackground","timestamp":1618672375068},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28079},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28079},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28080},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28080},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]},{"header":{"threadID":19609,"isEntry":false,"processID":19539,"methodName":"com.example.ui_testing_samples.MainActivity$onCreate$1.run","timestamp":1618672375086},"body":[{"component":"cpuTimeInStates","details":[{"kernel":0,"details":[{"frequency":1500000,"timestamp":28081},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":1,"details":[{"frequency":1500000,"timestamp":28081},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":2,"details":[{"frequency":1500000,"timestamp":28081},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]},{"kernel":3,"details":[{"frequency":1500000,"timestamp":28082},{"frequency":1400000,"timestamp":1695},{"frequency":1300000,"timestamp":1278},{"frequency":1200000,"timestamp":8715},{"frequency":1100000,"timestamp":533},{"frequency":1000000,"timestamp":8330},{"frequency":900000,"timestamp":8462},{"frequency":800000,"timestamp":422},{"frequency":700000,"timestamp":257},{"frequency":600000,"timestamp":91019},{"frequency":500000,"timestamp":522},{"frequency":400000,"timestamp":51052}]}]},{"component":"brightness","details":0}]}],"testName":"MultithreadingTest.startWithSort"}]}
+{
+  "tests": [
+    {
+      "logs": {
+        "wifi": {
+          "wifi": 0.0811,
+          "common": 0.0982,
+          "cpu": 0.0171
+        },
+        "bluetooth": {
+          "common": 0.0171,
+          "cpu": 0.0171
+        },
+        "cpu": [
+          {
+            "header": {
+              "threadID": 11113,
+              "isEntry": true,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.MainActivity.onCreate",
+              "timestamp": 1619004240244
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126147
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126147
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126148
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126148
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11113,
+              "isEntry": false,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.MainActivity.onCreate",
+              "timestamp": 1619004240455
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126168
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126168
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126169
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126169
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11223,
+              "isEntry": true,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.MainActivity$onCreate$1.run",
+              "timestamp": 1619004240455
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126168
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126168
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126169
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126169
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11223,
+              "isEntry": true,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.BackgroundKt.doInBackground",
+              "timestamp": 1619004240466
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126169
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126170
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126170
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126170
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11223,
+              "isEntry": false,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.BackgroundKt.doInBackground",
+              "timestamp": 1619004240547
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126177
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126178
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126178
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126178
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11223,
+              "isEntry": false,
+              "processID": 11113,
+              "methodName": "com.example.ui_testing_samples.MainActivity$onCreate$1.run",
+              "timestamp": 1619004240564
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126178
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126179
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126180
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126180
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          }
+        ]
+      },
+      "testName": "MultithreadingTest.startWithoutSort"
+    },
+    {
+      "logs": {
+        "wifi": {
+          "wifi": 0.0811,
+          "common": 0.0982,
+          "cpu": 0.0171
+        },
+        "bluetooth": {
+          "common": 0.0171,
+          "cpu": 0.0171
+        },
+        "cpu": [
+          {
+            "header": {
+              "threadID": 11736,
+              "isEntry": true,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.MainActivity.onCreate",
+              "timestamp": 1619004245280
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126650
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126651
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126651
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126651
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11736,
+              "isEntry": false,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.MainActivity.onCreate",
+              "timestamp": 1619004245452
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126669
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11817,
+              "isEntry": true,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.MainActivity$onCreate$1.run",
+              "timestamp": 1619004245452
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126668
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126669
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11817,
+              "isEntry": true,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.BackgroundKt.doInBackground",
+              "timestamp": 1619004245468
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126669
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126670
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126670
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126670
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11817,
+              "isEntry": false,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.BackgroundKt.doInBackground",
+              "timestamp": 1619004245511
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126674
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126674
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126674
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126675
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          },
+          {
+            "header": {
+              "threadID": 11817,
+              "isEntry": false,
+              "processID": 11736,
+              "methodName": "com.example.ui_testing_samples.MainActivity$onCreate$1.run",
+              "timestamp": 1619004245535
+            },
+            "body": [
+              {
+                "component": "cpuTimeInStates",
+                "details": [
+                  {
+                    "kernel": 0,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126675
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 1,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126676
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 2,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126676
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  },
+                  {
+                    "kernel": 3,
+                    "details": [
+                      {
+                        "frequency": 1500000,
+                        "timestamp": 126677
+                      },
+                      {
+                        "frequency": 1400000,
+                        "timestamp": 60757
+                      },
+                      {
+                        "frequency": 1300000,
+                        "timestamp": 5317
+                      },
+                      {
+                        "frequency": 1200000,
+                        "timestamp": 14628
+                      },
+                      {
+                        "frequency": 1100000,
+                        "timestamp": 1920
+                      },
+                      {
+                        "frequency": 1000000,
+                        "timestamp": 5218
+                      },
+                      {
+                        "frequency": 900000,
+                        "timestamp": 22041
+                      },
+                      {
+                        "frequency": 800000,
+                        "timestamp": 392
+                      },
+                      {
+                        "frequency": 700000,
+                        "timestamp": 678
+                      },
+                      {
+                        "frequency": 600000,
+                        "timestamp": 45615
+                      },
+                      {
+                        "frequency": 500000,
+                        "timestamp": 5287
+                      },
+                      {
+                        "frequency": 400000,
+                        "timestamp": 312223
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "brightness",
+                "details": 0
+              }
+            ]
+          }
+        ]
+      },
+      "testName": "MultithreadingTest.startWithSort"
+    }
+  ]
+}

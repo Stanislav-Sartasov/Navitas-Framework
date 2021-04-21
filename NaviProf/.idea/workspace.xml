@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/Navitas-Framework.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/Navitas-Framework.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +92,16 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <branch-grouping />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -275,14 +291,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587480664051" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Navitas-Plugin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.proportion" value="0.19418387" />
+    <property name="project.structure.side.proportion" value="0.2607987" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
@@ -290,7 +307,7 @@
       <recent name="D:\instrumentor\src\main\java\Test" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.NaviProf [clean]">
+  <component name="RunManager" selected="Gradle.NaviProf [publishToMavenLocal]">
     <configuration name="NaviProf [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -354,7 +371,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="NaviProf [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="NaviProf [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -365,7 +382,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="publish" />
+            <option value="publishToMavenLocal" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -419,11 +436,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.NaviProf [publishToMavenLocal]" />
         <item itemvalue="Gradle.NaviProf [clean]" />
         <item itemvalue="Gradle.NaviProf [uploadArchives]" />
         <item itemvalue="Gradle.NaviProf [build]" />
         <item itemvalue="Gradle.NaviProf [closeAndReleaseRepository]" />
-        <item itemvalue="Gradle.NaviProf [publish]" />
       </list>
     </recent_temporary>
   </component>
@@ -441,6 +458,47 @@
       <workItem from="1618330659865" duration="509000" />
       <workItem from="1618333520397" duration="2147000" />
       <workItem from="1618584534726" duration="86000" />
+      <workItem from="1618735158801" duration="4094000" />
+      <workItem from="1618742415980" duration="5179000" />
+      <workItem from="1618747704515" duration="133000" />
+      <workItem from="1618748153619" duration="5367000" />
+      <workItem from="1618753603406" duration="288000" />
+      <workItem from="1618754228328" duration="1798000" />
+      <workItem from="1618756605081" duration="276000" />
+      <workItem from="1618846801248" duration="2557000" />
+      <workItem from="1618849380457" duration="972000" />
+      <workItem from="1618850450242" duration="137000" />
+      <workItem from="1618850678865" duration="18000" />
+      <workItem from="1618937669436" duration="63000" />
+      <workItem from="1618938389045" duration="61000" />
+      <workItem from="1618938588896" duration="107000" />
+      <workItem from="1618938728074" duration="20000" />
+      <workItem from="1618938831599" duration="65000" />
+      <workItem from="1618938932382" duration="74000" />
+      <workItem from="1618939025209" duration="621000" />
+      <workItem from="1618940028122" duration="88000" />
+      <workItem from="1618940165078" duration="83000" />
+      <workItem from="1618940266132" duration="179000" />
+      <workItem from="1618940626681" duration="1566000" />
+      <workItem from="1618942252497" duration="64000" />
+      <workItem from="1618942637788" duration="125000" />
+      <workItem from="1618992592229" duration="456000" />
+      <workItem from="1618993269684" duration="13000" />
+      <workItem from="1618993882136" duration="39000" />
+      <workItem from="1618993934924" duration="13000" />
+      <workItem from="1618994066759" duration="43000" />
+      <workItem from="1618994237274" duration="327000" />
+      <workItem from="1618994739527" duration="2033000" />
+      <workItem from="1618997326835" duration="558000" />
+      <workItem from="1618998561680" duration="493000" />
+      <workItem from="1618999496735" duration="581000" />
+      <workItem from="1619000284071" duration="371000" />
+      <workItem from="1619000766285" duration="407000" />
+      <workItem from="1619001194446" duration="12000" />
+      <workItem from="1619001406752" duration="1484000" />
+      <workItem from="1619003023285" duration="787000" />
+      <workItem from="1619004015054" duration="59000" />
+      <workItem from="1619004337254" duration="1713000" />
     </task>
     <servers />
   </component>
@@ -493,6 +551,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gradlew">

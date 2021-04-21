@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
-open class ProfPlugin : Plugin<Project>{
-    override fun apply(target: Project){
+open class ProfPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
         val extension = target.extensions.create("profilingPlugin", InstrExtension::class.java)
         val android = target.extensions.findByName("android") as BaseExtension
         android.registerTransform(Transformer(android, extension))
@@ -28,7 +28,22 @@ open class ProfPlugin : Plugin<Project>{
             }
         }
 
-        val clearLogs = {
+        val testConfiguration = {
+            target.exec {
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "unplug")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "ac", "0")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "0")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "0")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "0")
+
+                //it.commandLine("$adb", "shell", "svc", "wifi", "enable")
+                //it.commandLine("$adb", "shell", "svc", "bluetooth", "enable")
+
+                //it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
+            }
+        }
+
+        val prepareLogs = {
             target.exec{
                 it.isIgnoreExitValue = true //needs to be fixed somehow
                 it.commandLine("$adb", "logcat", "-c")
@@ -56,36 +71,91 @@ open class ProfPlugin : Plugin<Project>{
                 "class", "${info.targetPackage}.$testPath#$methodName", "${info.testPackage}/${info.runnerName}")
         }
 
-        val printLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
+        val cpuLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
             target.exec{
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt")
             }
         }
 
-        val printLogs = {  profileOutput: File, path: String ->
+        val wifiLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
             target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi:\"")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
+        val bluetoothLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
+            target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth:\"")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
+        val cpuLogs = { profileOutput: File, path: String ->
+            target.exec {
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
             }
         }
 
-        val execTests = {project: Project, testApkPath: String?, testPaths: List<String>? ->
+        val wifiLogs = { profileOutput: File, path: String ->
+            target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi:\"")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
+            }
+        }
+
+        val bluetoothLogs = { profileOutput: File, path: String ->
+            target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth:\"")
+                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
+            }
+        }
+
+        val defaultConfiguration = {
+            target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "ac", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "1")
+            }
+        }
+
+        val execTests = { project: Project, testApkPath: String?, testPaths: List<String>? ->
             if (testPaths != null && testApkPath != null) {
                 val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
                 val profileOutput = File("${target.projectDir}/profileOutput")
                 if (!profileOutput.exists()) profileOutput.mkdirs()
 
+                val profileClass = {path : String ->
+                    testConfiguration()
+                    prepareLogs()
+
+                    runTestClass(path, testRunnerInfo)
+
+                    cpuLogs(profileOutput, path)
+                    wifiLogs(profileOutput, path)
+                    bluetoothLogs(profileOutput, path)
+                }
+
+                val profileMethod = {pathName : String, method : String ->
+                    testConfiguration()
+                    prepareLogs()
+
+                    runTestMethod(pathName, testRunnerInfo, method)
+
+                    cpuLogsOfMethod(profileOutput, pathName, method)
+                    wifiLogsOfMethod(profileOutput, pathName, method)
+                    bluetoothLogsOfMethod(profileOutput, pathName, method)
+                }
+
                 if (project.hasProperty("granularity"))
                     when (project.property("granularity")) {
                         "class" -> {
                             for (path in testPaths) {
-                                clearLogs()
-
-                                runTestClass(path, testRunnerInfo)
-
-                                printLogs(profileOutput, path)
+                                profileClass(path)
                             }
                         }
                         "methods" -> {
@@ -93,12 +163,8 @@ open class ProfPlugin : Plugin<Project>{
                                 val pathName = path.substringBefore('#')
                                 val methods = path.substringAfter('#').split(':')
 
-                                for (method in methods){
-                                    clearLogs()
-
-                                    runTestMethod(pathName, testRunnerInfo, method)
-
-                                    printLogsOfMethod(profileOutput, pathName, method)
+                                for (method in methods) {
+                                    profileMethod(pathName, method)
                                 }
                             }
                         }
@@ -107,15 +173,13 @@ open class ProfPlugin : Plugin<Project>{
                             throw GradleException("Wrong argument")
                         }
                     }
-                else { // supposes that absence of parameter means 'class' granularity 
+                else { // supposes that absence of parameter means 'class' granularity
                     for (path in testPaths) {
-                        clearLogs()
-
-                        runTestClass(path, testRunnerInfo)
-
-                        printLogs(profileOutput, path)
+                        profileClass(path)
                     }
                 }
+
+                defaultConfiguration()
             }
             else {
                 runCommand("echo", "\n!Error at running tests: test_paths should be passed\n")
@@ -195,151 +259,194 @@ open class ProfPlugin : Plugin<Project>{
     }
 }
 
-open class InstrExtension {
-    var applyFor: Array<String>? = null
-}
-
-const val nameRegex = "([a-zA-Z0-9_\\.]+)"
-val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
-val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
-val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
-
-open class TestRunnerInfo(aaptOutput: String) {
-    val targetPackage: String
-    val testPackage: String
-    val runnerName: String
-
-    init {
-        var matcher = testPackagePattern.matcher(aaptOutput).apply { find() }
-        testPackage = matcher.group(1)
-
-        val tail = aaptOutput.substringAfter("instrumentation")
-
-        matcher = targetPackagePattern.matcher(tail).apply { find() }
-        targetPackage = matcher.group(1)
-
-        matcher = runnerNamePattern.matcher(tail).apply { find() }
-        runnerName = matcher.group(1)
+    open class InstrExtension {
+        var applyFor: Array<String>? = null
     }
-}
 
-private class JSONGenerator {
-    fun generate(directory: String) {
-        val testList = JSONArray()
+    const val nameRegex = "([a-zA-Z0-9_\\.]+)"
+    val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
+    val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
+    val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
 
-        File(directory).walk().forEach {
-            if (it.isFile && it.name.endsWith(".txt")) {
-                val testName = it.name.substringBefore(".txt")
+    open class TestRunnerInfo(aaptOutput: String) {
+        val targetPackage: String
+        val testPackage: String
+        val runnerName: String
 
-                val testLogs = JSONArray()
+        init {
+            var matcher = testPackagePattern.matcher(aaptOutput).apply { find() }
+            testPackage = matcher.group(1)
 
-                val data = it.readLines()
-                for (line in data) {
-                    if (!line.startsWith('-')) {
-                        val entryLineList = line.split("\\s+".toRegex())
+            val tail = aaptOutput.substringAfter("instrumentation")
 
-                        val methodName = entryLineList[8]
-                        val processId = entryLineList[2].toInt()
-                        val threadId = entryLineList[3].toInt()
+            matcher = targetPackagePattern.matcher(tail).apply { find() }
+            targetPackage = matcher.group(1)
 
-                        val startDate = entryLineList[0]
-                        val startTime = entryLineList[1]
+            matcher = runnerNamePattern.matcher(tail).apply { find() }
+            runnerName = matcher.group(1)
+        }
+    }
 
-                        //timestamp from January 1, 1970, 00:00:00 GMT
-                        val timestamp = getTimestamp(startDate, startTime)
+    private class JSONGenerator {
+        fun generate(directory: String) {
+            val testList = JSONArray()
 
-                        val isEntry = entryLineList[7] == "Entry"
+            File(directory).walk().forEach {
+                if (it.isFile && it.name.endsWith(".txt")) {
+                    val testName = it.name.substringBefore(".txt")
 
-                        val cpuDetails = JSONArray()
-                        var kernelDetails = JSONObject()
-                        var valuesDetails = JSONArray()
+                    val testLogs = JSONObject()
 
-                        var parseIndex = 10
-                        while (entryLineList[parseIndex] != "EndOfData") {
-                            val item = entryLineList[parseIndex]
+                    val cpuComponent = JSONArray()
+
+                    val data = it.readLines()
+                    for (line in data) {
+                        if (!line.startsWith('-')) {
+                            val entryLineList = line.trim().split("\\s+".toRegex())
 
                             when {
-                                item == ";" -> {
-                                    kernelDetails["details"] = valuesDetails
-                                    cpuDetails.add(kernelDetails)
+                                entryLineList[0] == "Wifi:" -> {
+                                    var wifiComponent = JSONObject()
 
-                                    parseIndex += 1
+                                    wifiComponent["common"] = entryLineList[1].toDouble()
+
+                                    if(entryLineList[2] == "(") {
+                                        var i = 3
+                                        while(entryLineList[i] != ")") {
+                                            val componentDetails = entryLineList[i].split('=')
+
+                                            wifiComponent[componentDetails[0]] = componentDetails[1].toDouble()
+
+                                            i++
+                                        }
+                                    }
+
+                                    testLogs["wifi"] = wifiComponent
                                 }
-                                item.startsWith("cpu") -> {
-                                    kernelDetails = JSONObject()
-                                    valuesDetails = JSONArray()
+                                entryLineList[0] == "Bluetooth:" -> {
+                                    var bluetoothComponent = JSONObject()
 
-                                    val kernelIndex = item.substringAfter("cpu").toInt()
-                                    kernelDetails["kernel"] = kernelIndex
+                                    bluetoothComponent["common"] = entryLineList[1].toDouble()
 
-                                    parseIndex += 1
+                                    if(entryLineList[2] == "(") {
+                                        var i = 3
+                                        while (entryLineList[i] != ")") {
+                                            val componentDetails = entryLineList[i].split('=')
+
+                                            bluetoothComponent[componentDetails[0]] = componentDetails[1].toDouble()
+
+                                            i++
+                                        }
+                                    }
+
+                                    testLogs["bluetooth"] = bluetoothComponent
                                 }
                                 else -> {
-                                    val freq = entryLineList[parseIndex].toInt()
-                                    val timeInState = entryLineList[parseIndex + 1].toInt()
+                                    val methodName = entryLineList[8]
+                                    val processId = entryLineList[2].toInt()
+                                    val threadId = entryLineList[3].toInt()
 
-                                    val valuesPair = JSONObject()
-                                    valuesPair["frequency"] = freq
-                                    valuesPair["timestamp"] = timeInState
+                                    val startDate = entryLineList[0]
+                                    val startTime = entryLineList[1]
 
-                                    valuesDetails.add(valuesPair)
+                                    //timestamp from January 1, 1970, 00:00:00 GMT
+                                    val timestamp = getTimestamp(startDate, startTime)
 
-                                    parseIndex += 2
+                                    val isEntry = entryLineList[7] == "Entry"
+
+                                    val cpuDetails = JSONArray()
+                                    var kernelDetails = JSONObject()
+                                    var valuesDetails = JSONArray()
+
+                                    var parseIndex = 10
+                                    while (entryLineList[parseIndex] != "EndOfData") {
+                                        val item = entryLineList[parseIndex]
+
+                                        when {
+                                            item == ";" -> {
+                                                kernelDetails["details"] = valuesDetails
+                                                cpuDetails.add(kernelDetails)
+
+                                                parseIndex += 1
+                                            }
+                                            item.startsWith("cpu") -> {
+                                                kernelDetails = JSONObject()
+                                                valuesDetails = JSONArray()
+
+                                                val kernelIndex = item.substringAfter("cpu").toInt()
+                                                kernelDetails["kernel"] = kernelIndex
+
+                                                parseIndex += 1
+                                            }
+                                            else -> {
+                                                val freq = entryLineList[parseIndex].toInt()
+                                                val timeInState = entryLineList[parseIndex + 1].toInt()
+
+                                                val valuesPair = JSONObject()
+                                                valuesPair["frequency"] = freq
+                                                valuesPair["timestamp"] = timeInState
+
+                                                valuesDetails.add(valuesPair)
+
+                                                parseIndex += 2
+                                            }
+                                        }
+                                    }
+
+                                    val brightness = entryLineList[parseIndex + 1].toInt()
+
+                                    val headerDetails = JSONObject()
+                                    headerDetails["timestamp"] = timestamp
+                                    headerDetails["processID"] = processId
+                                    headerDetails["threadID"] = threadId
+                                    headerDetails["methodName"] = methodName
+                                    headerDetails["isEntry"] = isEntry
+
+                                    val cpuTimeInStates = JSONObject()
+                                    cpuTimeInStates["component"] = "cpuTimeInStates"
+                                    cpuTimeInStates["details"] = cpuDetails
+
+                                    val brightnessComponent = JSONObject()
+                                    brightnessComponent["component"] = "brightness"
+                                    brightnessComponent["details"] = brightness
+
+                                    val bodyArray = JSONArray()
+                                    bodyArray.add(cpuTimeInStates)
+                                    bodyArray.add(brightnessComponent)
+
+                                    val logObject = JSONObject()
+                                    logObject["header"] = headerDetails
+                                    logObject["body"] = bodyArray
+
+                                    cpuComponent.add(logObject)
                                 }
                             }
                         }
-
-                        val brightness = entryLineList[parseIndex + 1].toInt()
-
-                        val headerDetails = JSONObject()
-                        headerDetails["timestamp"] = timestamp
-                        headerDetails["processID"] = processId
-                        headerDetails["threadID"] = threadId
-                        headerDetails["methodName"] = methodName
-                        headerDetails["isEntry"] = isEntry
-
-                        val cpuComponent = JSONObject()
-                        cpuComponent["component"] = "cpuTimeInStates"
-                        cpuComponent["details"] = cpuDetails
-
-                        val brightnessComponent = JSONObject()
-                        brightnessComponent["component"] = "brightness"
-                        brightnessComponent["details"] = brightness
-
-                        val bodyArray = JSONArray()
-                        bodyArray.add(cpuComponent)
-                        bodyArray.add(brightnessComponent)
-
-                        val logObject = JSONObject()
-                        logObject["header"] = headerDetails
-                        logObject["body"] = bodyArray
-
-                        testLogs.add(logObject)
                     }
+                    testLogs["cpu"] = cpuComponent
+
+                    val testObject = JSONObject()
+                    testObject["testName"] = testName
+                    testObject["logs"] = testLogs
+
+                    testList.add(testObject)
+
+                    //it.delete()
                 }
-
-                val testObject = JSONObject()
-                testObject["testName"] = testName
-                testObject["logs"] = testLogs
-
-                testList.add(testObject)
-
-                it.delete()
             }
+
+            val json = JSONObject()
+            json["tests"] = testList
+
+            val file = FileWriter("$directory/logs.json")
+            file.write(json.toJSONString())
+            file.flush()
+            file.close()
         }
 
-        val json = JSONObject()
-        json["tests"] = testList
-
-        val file = FileWriter("$directory/logs.json")
-        file.write(json.toJSONString())
-        file.flush()
-        file.close()
+        private fun getTimestamp(date: String, time: String): Long {
+            val sdf = SimpleDateFormat("MM-dd-yyyy hh:mm:ss.SSS")
+            val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
+            return sdf.parse(dateString).time
+        }
     }
-
-    private fun getTimestamp(date: String, time: String): Long {
-        val sdf = SimpleDateFormat("MM-dd-yyyy hh:mm:ss.SSS")
-        val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
-        return sdf.parse(dateString).time
-    }
-}

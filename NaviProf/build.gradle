@@ -23,7 +23,7 @@ plugins {
 
 archivesBaseName = 'NaviProf'
 group = 'com.github.stanislav-sartasov'
-version = '1.19'
+version = '1.29'
 
 
 repositories {
@@ -39,6 +39,7 @@ dependencies {
     implementation 'org.javassist:javassist:3.23.1-GA'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.61'
 }
+
 
 modifyPom {
     //noinspection GroovyAssignabilityCheck
@@ -78,6 +79,18 @@ modifyPom {
                 name 'Afonina Olga'
                 email 'https://github.com/AfoninaOlga'
             }
+
+            developer {
+                id 'kznts9v-1lya'
+                name 'Kuznetsov Ilya'
+                email 'https://github.com/kznts9v-1lya'
+            }
+
+            developer {
+                id 'vladislav-miroshnikov'
+                name 'Miroshnikov Vladislav'
+                email 'https://github.com/vladislav-miroshnikov'
+            }
         }
     }
 }
@@ -93,9 +106,6 @@ nexus {
     repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
     snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
 }
-
-
-
 
 /*
 //This was used for publishing to github-packages with KotlinDSL
