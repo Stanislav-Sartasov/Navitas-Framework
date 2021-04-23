@@ -1,6 +1,6 @@
 package data.model
 
-data class MethodInfo(
+data class MethodInfo (
         val methodName: String,
         val timestamp: Long,
         val processID: Int,

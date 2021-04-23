@@ -4,6 +4,7 @@ import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
 import domain.model.PowerProfile
 import data.model.ProfilingError
+import data.model.ProfilingResult
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
@@ -14,8 +15,9 @@ import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
-import tooling.RawProfilingResultAnalyzer
-import tooling.RawProfilingResultParser
+import tooling.ProfilingResultAnalyzer
+import tooling.ProfilingResultParser
+import java.io.File
 
 class ProfilingVM(
         private val project: Project,
@@ -42,9 +44,10 @@ class ProfilingVM(
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
             Thread {
-                val raw = RawProfilingResultParser.parse("${currentConfiguration!!.modulePath}/profileOutput", "logs.json")
-                val result = RawProfilingResultAnalyzer.analyze(raw, powerProfile!!)
-                profilingResultRepository.save(result)
+                val profilingResult = ProfilingResultParser.parse("${currentConfiguration!!.modulePath}/profileOutput", "logs.json")
+                printJSONParseResult(currentConfiguration!!, profilingResult)
+                val analysisResult = ProfilingResultAnalyzer.analyze(profilingResult, powerProfile!!)
+                profilingResultRepository.save(analysisResult)
 
                 profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
                 viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
@@ -92,14 +95,75 @@ class ProfilingVM(
                     "defaultProfile",
                     arrayOf(
                             "-Pgranularity=methods",
-                            "-Ptest_paths=$tests"
+                            "-Ptest_paths=$tests",
+                            "--full-stacktrace"
                     ),
                     config.modulePath
             )
         }
     }
 
+    // TODO: how to stop executing gradle task ???
     fun stopProfiling() {
-        // TODO: how to stop executing gradle task ???
+
+    }
+
+    // Only for debug JSON parsing
+    private fun printJSONParseResult(config : ProfilingConfiguration, parseResult : ProfilingResult) {
+        var writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
+        val parsingResult = parseResult.getTestResults()
+
+        for(i in parsingResult)
+        {
+            writer.write(i.first)
+            writer.newLine()
+
+            val j = i.second
+            writer.write("Wifi component:")
+            writer.newLine()
+            writer.write("common: " + j.wifiEnergyConsumption?.common.toString())
+            writer.newLine()
+            writer.write("wifi: " + j.wifiEnergyConsumption?.wifi.toString())
+            writer.newLine()
+            j.wifiEnergyConsumption?.external?.forEach {
+                    x -> writer.write(x.component + ": ")
+                    writer.write(x.energy.toString())
+                    writer.newLine()
+            }
+
+            writer.write("Bluetooth component:")
+            writer.newLine()
+            writer.write("common: " + j.bluetoothEnergyConsumption?.common.toString())
+            writer.newLine()
+            writer.write("bluetooth: " + j.bluetoothEnergyConsumption?.bluetooth.toString())
+            writer.newLine()
+            j.bluetoothEnergyConsumption?.external?.forEach {
+                    x -> writer.write(x.component + ": ")
+                    writer.write(x.energy.toString())
+                    writer.newLine()
+            }
+
+            writer.write("Cpu component:")
+            writer.newLine()
+            for(k in j.cpuInfo)
+            {
+                writer.write("isEntry: " + k.methodInfo.isEntry.toString())
+                writer.newLine()
+                writer.write("methodName: " + k.methodInfo.methodName)
+                writer.newLine()
+                writer.write("processID: " + k.methodInfo.processID)
+                writer.newLine()
+                writer.write("threadID: " + k.methodInfo.threadID)
+                writer.newLine()
+                writer.write("timestamp: " + k.methodInfo.timestamp)
+                writer.newLine()
+                writer.write("brightnessLevel: " + k.brightnessLevel)
+                writer.newLine()
+            }
+
+            writer.newLine()
+        }
+
+        writer.close()
     }
 }

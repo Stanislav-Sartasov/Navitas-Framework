@@ -21,7 +21,7 @@ class WifiTest {
         ActivityScenario.launch(MainActivity::class.java)
 
         for (i in 1..10) {
-            pingAndLoad(URL("ya.ru"))
+            pingAndLoad(URL("https://yandex.ru/"))
         }
     }
 

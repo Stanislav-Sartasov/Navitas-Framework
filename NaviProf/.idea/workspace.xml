@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="" />
+    <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuTimeInStates.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/CpuTimeInStates.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/MethodInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/MethodInfo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawMethodLog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawMethodLog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawProfilingResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawProfilingResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/RawProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/RawProfilingResultParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithSort.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithoutSort.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/WifiTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/WifiTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -276,7 +295,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587480664051" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Navitas-Plugin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -293,6 +312,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.NaviProf [publishToMavenLocal]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NaviProf [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -485,6 +515,11 @@
       <workItem from="1619004015054" duration="59000" />
       <workItem from="1619004337254" duration="1713000" />
       <workItem from="1619007714580" duration="8000" />
+      <workItem from="1619020298015" duration="912000" />
+      <workItem from="1619122266896" duration="15000" />
+      <workItem from="1619122673563" duration="17000" />
+      <workItem from="1619169217427" duration="84000" />
+      <workItem from="1619182699509" duration="555000" />
     </task>
     <servers />
   </component>

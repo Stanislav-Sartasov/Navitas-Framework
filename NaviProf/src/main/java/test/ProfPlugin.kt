@@ -38,8 +38,6 @@ open class ProfPlugin : Plugin<Project> {
 
                 //it.commandLine("$adb", "shell", "svc", "wifi", "enable")
                 //it.commandLine("$adb", "shell", "svc", "bluetooth", "enable")
-
-                //it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
             }
         }
 
@@ -48,6 +46,8 @@ open class ProfPlugin : Plugin<Project> {
                 it.isIgnoreExitValue = true //needs to be fixed somehow
                 it.commandLine("$adb", "logcat", "-c")
                 it.commandLine("$adb", "logcat", "-c")
+
+                //it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
             }
         }
 
@@ -308,7 +308,7 @@ open class ProfPlugin : Plugin<Project> {
                                 entryLineList[0] == "Wifi:" -> {
                                     var wifiComponent = JSONObject()
 
-                                    wifiComponent["common"] = entryLineList[1].replace(",",".").toDouble()
+                                    wifiComponent["common"] = entryLineList[1].replace(",",".").toFloat()
 
                                     if(entryLineList.size >= 3) {
                                         if(entryLineList[2] == "(") {
@@ -316,7 +316,7 @@ open class ProfPlugin : Plugin<Project> {
                                             while(entryLineList[i] != ")") {
                                                 val componentDetails = entryLineList[i].split('=')
 
-                                                wifiComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toDouble()
+                                                wifiComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toFloat()
 
                                                 i++
                                             }
@@ -327,7 +327,7 @@ open class ProfPlugin : Plugin<Project> {
                                 entryLineList[0] == "Bluetooth:" -> {
                                     var bluetoothComponent = JSONObject()
 
-                                    bluetoothComponent["common"] = entryLineList[1].replace(",",".").toDouble()
+                                    bluetoothComponent["common"] = entryLineList[1].replace(",",".").toFloat()
 
                                     if(entryLineList.size >= 3) {
                                         if(entryLineList[2] == "(") {
@@ -335,7 +335,7 @@ open class ProfPlugin : Plugin<Project> {
                                             while (entryLineList[i] != ")") {
                                                 val componentDetails = entryLineList[i].split('=')
 
-                                                bluetoothComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toDouble()
+                                                bluetoothComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toFloat()
 
                                                 i++
                                             }
@@ -356,7 +356,6 @@ open class ProfPlugin : Plugin<Project> {
                                     var timestamp: Long = 0
 
                                     var isEntry: Boolean = false
-
                                     var parseIndex: Int = 0
 
                                     if(entryLineList[4] == "D" && entryLineList[5] == "TEST") {

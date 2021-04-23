@@ -1,16 +1,16 @@
 package tooling
 
+import data.model.CpuInfo
 import domain.model.PowerProfile
 import domain.model.MethodEnergyConsumption
-import data.model.RawMethodLog
-import data.model.RawProfilingResult
+import data.model.ProfilingResult
 import domain.model.DetailedTestEnergyConsumption
 import extensions.roundWithAccuracy
 import java.util.*
 
-object RawProfilingResultAnalyzer {
+object ProfilingResultAnalyzer {
 
-    fun analyze(raw: RawProfilingResult, profile: PowerProfile): List<DetailedTestEnergyConsumption> {
+    fun analyze(raw: ProfilingResult, profile: PowerProfile): List<DetailedTestEnergyConsumption> {
         val result = mutableListOf<DetailedTestEnergyConsumption>()
 
         for (testResult in raw.getTestResults()) {
@@ -18,13 +18,13 @@ object RawProfilingResultAnalyzer {
             val testDetails = mutableMapOf<Pair<Int, Int>, List<MethodEnergyConsumption>>()
             var testEnergy = 0F
 
-            val logs = testResult.second
+            val logs = testResult.second.cpuInfo
                     .sortedBy { log -> log.methodInfo.timestamp }
                     .groupBy { log -> log.methodInfo.processID to log.methodInfo.threadID }
 
             for (logGroup in logs) {
                 val externalMethods = mutableListOf<MethodEnergyConsumption>()
-                val logDeque = ArrayDeque<RawMethodLog>()
+                val logDeque = ArrayDeque<CpuInfo>()
                 val nestedMethodsDeque = ArrayDeque<MutableList<MethodEnergyConsumption>>()
 
                 for (log in logGroup.value) {
@@ -57,10 +57,10 @@ object RawProfilingResultAnalyzer {
     }
 
     private fun analyzeMethodLogs(
-            entryLog: RawMethodLog,
-            exitLog: RawMethodLog,
-            nestedMethods: List<MethodEnergyConsumption>,
-            profile: PowerProfile
+        entryLog: CpuInfo,
+        exitLog: CpuInfo,
+        nestedMethods: List<MethodEnergyConsumption>,
+        profile: PowerProfile
     ): MethodEnergyConsumption {
         val methodName = entryLog.methodInfo.methodName
         val startTimestamp = entryLog.methodInfo.timestamp
@@ -102,8 +102,8 @@ fun processNode(node: MethodEnergyConsumption, lvl: Int = 0) {
 // ATTENTION: only for debug
 fun main() {
     val profile = PowerProfileManager.getDefaultProfile()
-    val raw = RawProfilingResultParser.parse("C:/Users/EG/Documents/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
-    val result = RawProfilingResultAnalyzer.analyze(raw, profile)
+    val raw = ProfilingResultParser.parse("C:/Users/EG/Documents/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
+    val result = ProfilingResultAnalyzer.analyze(raw, profile)
     for (test in result) {
         println(test.testName)
         for (info in test.testDetails) {
