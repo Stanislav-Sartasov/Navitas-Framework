@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuTimeInStates.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/CpuTimeInStates.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/MethodInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/MethodInfo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawMethodLog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawMethodLog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawProfilingResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/RawProfilingResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/domain/model/PowerProfile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/domain/model/PowerProfile.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/RawProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/RawProfilingResultParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/PowerProfileParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/PowerProfileParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/BluetoothTest.startBluetoothActivity.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/InliningAnonymousClassTest.start.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/InliningSeparateClassTest.start.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithSort.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithoutSort.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/WifiTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/WifiTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/parseResult.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,17 +307,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.NaviProf [publishToMavenLocal]">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="NaviProf [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -520,6 +504,8 @@
       <workItem from="1619122673563" duration="17000" />
       <workItem from="1619169217427" duration="84000" />
       <workItem from="1619182699509" duration="555000" />
+      <workItem from="1619272877030" duration="52000" />
+      <workItem from="1619865966255" duration="161000" />
     </task>
     <servers />
   </component>

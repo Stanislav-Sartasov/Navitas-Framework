@@ -45,7 +45,6 @@ class ProfilingVM(
         override fun onSuccess() {
             Thread {
                 val profilingResult = ProfilingResultParser.parse("${currentConfiguration!!.modulePath}/profileOutput", "logs.json")
-                printJSONParseResult(currentConfiguration!!, profilingResult)
                 val analysisResult = ProfilingResultAnalyzer.analyze(profilingResult, powerProfile!!)
                 profilingResultRepository.save(analysisResult)
 
@@ -163,6 +162,31 @@ class ProfilingVM(
 
             writer.newLine()
         }
+
+        writer.close()
+    }
+
+    // Only for debug power_profile.xml parsing
+    private fun printPowerProfileParseResult(config : ProfilingConfiguration, powerProfile : PowerProfile) {
+        var writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
+
+        writer.write("wifi.on: " + powerProfile.wifiOn.toString())
+        writer.newLine()
+
+        writer.write("wifi.scan: " + powerProfile.wifiScan.toString())
+        writer.newLine()
+
+        writer.write("wifi.active: " + powerProfile.wifiActive.toString())
+        writer.newLine()
+
+        writer.write("bluetooth.on: " + powerProfile.bluetoothOn.toString())
+        writer.newLine()
+
+        writer.write("bluetooth.active: " + powerProfile.bluetoothActive.toString())
+        writer.newLine()
+
+        writer.write("cpu.active: " + powerProfile.getPowerAtSpeed(0, 400000).toString())
+        writer.newLine()
 
         writer.close()
     }

@@ -114,7 +114,7 @@ object ProfilingResultParser {
                     "common" -> {
                         common = obj.getFloat(component)
                     }
-                    "bluetooth" -> {
+                    "bluetooth", "bt", "usage" -> {
                         bluetooth = obj.getFloat(component)
                     }
                     else -> {

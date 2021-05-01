@@ -6,9 +6,17 @@ import domain.model.PowerProfile
 class PowerProfileManager {
     // default profile initialization
     companion object {
+        private const val defaultWifiOn = 0.1f
+        private const val defaultWifiScan = 0.1f
+        private const val defaultWifiActive = 0.1f
+        private const val defaultBluetoothOn = 0.1f
+        private const val defaultBluetoothActive = 0.1f
+
         private val defaultClusterFirst = CpuCoreCluster(4)
         private val defaultClusterSecond = CpuCoreCluster(4)
 
+        // These values are taken from some device, so they are not default.
+        // This is justified by the fact that this is the only way to calculate approximate values.
         init {
             defaultClusterFirst.speeds.add(400000)
             defaultClusterFirst.speeds.add(691200)
@@ -57,9 +65,14 @@ class PowerProfileManager {
             defaultClusterSecond.powers.add(275.35F)
         }
 
-        private val defaultProfile = PowerProfile(
-                "Default Profile",
-                arrayListOf(defaultClusterFirst, defaultClusterSecond)
+        private val defaultProfile = PowerProfile (
+            "Default Profile",
+            arrayListOf(defaultClusterFirst, defaultClusterSecond),
+            defaultWifiOn,
+            defaultWifiScan,
+            defaultWifiActive,
+            defaultBluetoothOn,
+            defaultBluetoothActive
         )
 
         fun getDefaultProfile(): PowerProfile {

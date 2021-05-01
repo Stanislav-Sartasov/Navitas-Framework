@@ -1,10 +1,14 @@
 package domain.model
 
-class PowerProfile(
+class PowerProfile (
         val path: String,
-        private val cpuCoreClusters: List<CpuCoreCluster>
+        private val cpuCoreClusters: List<CpuCoreCluster>,
+        val wifiOn : Float,
+        val wifiScan : Float,
+        val wifiActive : Float,
+        val bluetoothOn : Float,
+        val bluetoothActive : Float
 ) {
-
     fun getPowerAtSpeed(coreIndex: Int, speed: Long): Float {
         val cluster = getClusterWithCore(coreIndex)
         val speeds = cluster!!.speeds
@@ -39,12 +43,13 @@ class PowerProfile(
     private fun getClusterWithCore(coreIndex: Int): CpuCoreCluster? {
         var index = coreIndex
         for (cluster in cpuCoreClusters) {
-            if (cluster.numCores - 1 >= index) {
+            if (index <= cluster.numCores - 1) {
                 return cluster
             } else {
                 index -= cluster.numCores
             }
         }
-        return null
+
+        return getClusterWithCore(index)
     }
 }
