@@ -1,9 +1,9 @@
 package domain.model
 
-class MethodEnergyConsumption (
+class CpuMethodEnergyConsumption (
         val methodName: String,
         val startTimestamp: Long,
         val endTimestamp: Long,
         val cpuEnergy: Float,
-        val nestedMethods: List<MethodEnergyConsumption>
+        val nestedMethods: List<CpuMethodEnergyConsumption>
 )

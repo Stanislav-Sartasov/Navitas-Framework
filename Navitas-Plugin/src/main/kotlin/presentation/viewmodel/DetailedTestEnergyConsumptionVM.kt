@@ -1,6 +1,6 @@
 package presentation.viewmodel
 
-import domain.model.MethodEnergyConsumption
+import domain.model.CpuMethodEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
 import domain.model.EnergyConsumption
 import domain.repository.ProfilingResultRepository
@@ -34,7 +34,7 @@ class DetailedTestEnergyConsumptionVM(
         profilingResultRepository.fetchDetailedTestEnergyConsumption(position)
                 .subscribe( { result ->
                     cache = result
-                    val ids = result.testDetails.keys.toMutableList()
+                    val ids = result.cpuEnergyConsumption.testDetails.keys.toMutableList()
                     ids.add(0, ALL_PROCESSES_AND_THREADS)
 
                     // emission of initial data
@@ -53,7 +53,7 @@ class DetailedTestEnergyConsumptionVM(
         }
     }
 
-    fun selectMethod(item: MethodEnergyConsumption?) {
+    fun selectMethod(item: CpuMethodEnergyConsumption?) {
         val items = mutableListOf<EnergyConsumption>()
         val title: String
         if (item == null) {
@@ -74,17 +74,17 @@ class DetailedTestEnergyConsumptionVM(
         currentEnergyConsumptionSubject.onNext(title to items)
     }
 
-    private fun createRoot(children: List<MethodEnergyConsumption>): DefaultMutableTreeNode {
-        val root = DefaultMutableTreeNode(MethodEnergyConsumption("", 0, 0, 0F, emptyList()))
+    private fun createRoot(children: List<CpuMethodEnergyConsumption>): DefaultMutableTreeNode {
+        val root = DefaultMutableTreeNode(CpuMethodEnergyConsumption("", 0, 0, 0F, emptyList()))
         for (item in children) root.add(item.toTreeNode())
         return root
     }
 
-    private fun getCurrentExternalMethods(): List<MethodEnergyConsumption> {
+    private fun getCurrentExternalMethods(): List<CpuMethodEnergyConsumption> {
         return if (currentProcessThreadIDs == ALL_PROCESSES_AND_THREADS) {
-            cache!!.testDetails.values.flatten()
+            cache!!.cpuEnergyConsumption.testDetails.values.flatten()
         } else {
-            cache!!.testDetails.getOrDefault(currentProcessThreadIDs, emptyList())
+            cache!!.cpuEnergyConsumption.testDetails.getOrDefault(currentProcessThreadIDs, emptyList())
         }
     }
 }

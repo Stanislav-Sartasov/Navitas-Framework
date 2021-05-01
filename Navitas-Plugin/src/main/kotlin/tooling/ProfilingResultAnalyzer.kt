@@ -2,20 +2,22 @@ package tooling
 
 import data.model.CpuInfo
 import domain.model.PowerProfile
-import domain.model.MethodEnergyConsumption
+import domain.model.CpuMethodEnergyConsumption
 import data.model.ProfilingResult
+import domain.model.CpuEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
 import extensions.roundWithAccuracy
 import java.util.*
 
 object ProfilingResultAnalyzer {
 
-    fun analyze(raw: ProfilingResult, profile: PowerProfile): List<DetailedTestEnergyConsumption> {
+    fun analyze(profilingResult: ProfilingResult, powerProfile: PowerProfile): List<DetailedTestEnergyConsumption> {
         val result = mutableListOf<DetailedTestEnergyConsumption>()
 
-        for (testResult in raw.getTestResults()) {
+        for (testResult in profilingResult.getTestResults()) {
+
             val testName = testResult.first
-            val testDetails = mutableMapOf<Pair<Int, Int>, List<MethodEnergyConsumption>>()
+            val testDetails = mutableMapOf<Pair<Int, Int>, List<CpuMethodEnergyConsumption>>()
             var testEnergy = 0F
 
             val logs = testResult.second.cpuInfo
@@ -23,9 +25,9 @@ object ProfilingResultAnalyzer {
                     .groupBy { log -> log.methodInfo.processID to log.methodInfo.threadID }
 
             for (logGroup in logs) {
-                val externalMethods = mutableListOf<MethodEnergyConsumption>()
+                val externalMethods = mutableListOf<CpuMethodEnergyConsumption>()
                 val logDeque = ArrayDeque<CpuInfo>()
-                val nestedMethodsDeque = ArrayDeque<MutableList<MethodEnergyConsumption>>()
+                val nestedMethodsDeque = ArrayDeque<MutableList<CpuMethodEnergyConsumption>>()
 
                 for (log in logGroup.value) {
                     if (log.methodInfo.isEntry) {
@@ -36,7 +38,7 @@ object ProfilingResultAnalyzer {
                                 logDeque.pollLast(),
                                 log,
                                 nestedMethodsDeque.pollLast(),
-                                profile
+                                powerProfile
                         )
                         if (logDeque.isEmpty()) {
                             externalMethods.add(methodDetails)
@@ -49,8 +51,8 @@ object ProfilingResultAnalyzer {
 
                 testDetails[logGroup.key] = externalMethods
             }
-
-            result.add(DetailedTestEnergyConsumption(testName, testEnergy, testDetails))
+            val cpu = CpuEnergyConsumption(testEnergy, testDetails)
+            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiEnergyConsumption, testResult.second.bluetoothEnergyConsumption))
         }
 
         return result
@@ -59,9 +61,9 @@ object ProfilingResultAnalyzer {
     private fun analyzeMethodLogs(
         entryLog: CpuInfo,
         exitLog: CpuInfo,
-        nestedMethods: List<MethodEnergyConsumption>,
+        nestedMethods: List<CpuMethodEnergyConsumption>,
         profile: PowerProfile
-    ): MethodEnergyConsumption {
+    ): CpuMethodEnergyConsumption {
         val methodName = entryLog.methodInfo.methodName
         val startTimestamp = entryLog.methodInfo.timestamp
         val endTimestamp = exitLog.methodInfo.timestamp
@@ -80,7 +82,7 @@ object ProfilingResultAnalyzer {
         }
         cpuEnergy = cpuEnergy.roundWithAccuracy(1)
 
-        return MethodEnergyConsumption(
+        return CpuMethodEnergyConsumption(
                 methodName,
                 startTimestamp,
                 endTimestamp,
@@ -91,7 +93,7 @@ object ProfilingResultAnalyzer {
 }
 
 // ATTENTION: only for debug
-fun processNode(node: MethodEnergyConsumption, lvl: Int = 0) {
+fun processNode(node: CpuMethodEnergyConsumption, lvl: Int = 0) {
     val offset = " ".repeat(lvl)
     println(offset + node.methodName + " " + node.cpuEnergy + " " + node.startTimestamp + ".." + node.endTimestamp)
     for (child in node.nestedMethods) {
@@ -106,7 +108,7 @@ fun main() {
     val result = ProfilingResultAnalyzer.analyze(raw, profile)
     for (test in result) {
         println(test.testName)
-        for (info in test.testDetails) {
+        for (info in test.cpuEnergyConsumption.testDetails) {
             println("Process ${info.key.first}, Thread ${info.key.second}")
             for (method in info.value) {
                 processNode(method)

@@ -80,14 +80,14 @@ open class ProfPlugin : Plugin<Project> {
 
         val wifiLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
             target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi:\"")
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi: \"")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
 
         val bluetoothLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
             target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth:\"")
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth: \"")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
