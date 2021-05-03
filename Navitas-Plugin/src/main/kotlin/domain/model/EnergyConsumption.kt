@@ -1,6 +1,8 @@
 package domain.model
 
-data class EnergyConsumption(
+data class EnergyConsumption (
         val consumer: String,
-        val energy: Float
+        val cpuEnergy: Float,
+        val wifiEnergy: Float,
+        val bluetoothEnergy: Float
 )

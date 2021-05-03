@@ -15,5 +15,5 @@ val dummyProfilingResult = listOf(
 )
 
 val dummyTestEnergyConsumptionList = listOf(
-        EnergyConsumption("test 1", 0.0F)
+        EnergyConsumption("test 1", 0.0F, 0f, 0f)
 )

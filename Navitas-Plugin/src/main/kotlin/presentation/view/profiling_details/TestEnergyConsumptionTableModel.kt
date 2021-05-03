@@ -8,12 +8,14 @@ class TestEnergyConsumptionTableModel(private val items: List<EnergyConsumption>
 
     override fun getRowCount() = items.size
 
-    override fun getColumnCount() = 2
+    override fun getColumnCount() = 4
 
     override fun getColumnName(var1: Int): String? {
         return when (var1) {
             0 -> "Test"
-            1 -> "Energy (mJ)"
+            1 -> "CPU (mJ)"
+            2 -> "Wi-Fi (mAh)"
+            3 -> "Bluetooth (mAh)"
             else -> null
         }
     }
@@ -24,7 +26,9 @@ class TestEnergyConsumptionTableModel(private val items: List<EnergyConsumption>
 
     override fun getValueAt(var1: Int, var2: Int): Any? {
         if (var2 == 0) return items[var1].consumer
-        if (var2 == 1) return items[var1].energy
+        if (var2 == 1) return items[var1].cpuEnergy
+        if (var2 == 2) return items[var1].wifiEnergy
+        if (var2 == 3) return items[var1].bluetoothEnergy
         return null
     }
 

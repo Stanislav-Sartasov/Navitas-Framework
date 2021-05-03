@@ -59,17 +59,17 @@ class DetailedTestEnergyConsumptionVM(
         if (item == null) {
             title = if (currentProcessThreadIDs == ALL_PROCESSES_AND_THREADS) cache!!.testName else "${cache!!.testName} (Process: ${currentProcessThreadIDs!!.first}, Thread: ${currentProcessThreadIDs!!.second})"
             for (child in getCurrentExternalMethods()) {
-                items.add(EnergyConsumption(child.methodName, child.cpuEnergy))
+                items.add(EnergyConsumption(child.methodName, child.cpuEnergy, Float.NaN, Float.NaN))
             }
         } else {
             title = item.methodName
             var childrenEnergy = 0F
             for (child in item.nestedMethods) {
-                items.add(EnergyConsumption(child.methodName, child.cpuEnergy))
+                items.add(EnergyConsumption(child.methodName, child.cpuEnergy, Float.NaN, Float.NaN))
                 childrenEnergy += child.cpuEnergy
             }
             val remainder = (item.cpuEnergy - childrenEnergy).roundWithAccuracy(1)
-            items.add(EnergyConsumption(item.methodName, remainder))
+            items.add(EnergyConsumption(item.methodName, remainder, Float.NaN, Float.NaN))
         }
         currentEnergyConsumptionSubject.onNext(title to items)
     }

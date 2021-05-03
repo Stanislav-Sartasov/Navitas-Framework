@@ -1,7 +1,7 @@
 package domain.model
 
 class CpuEnergyConsumption(
-    val energy: Float,
+    val cpu: Float,
     val testDetails: Map<Pair<Int, Int>, List<CpuMethodEnergyConsumption>>
 )
 
