@@ -77,10 +77,10 @@ object ProfilingResultAnalyzer {
                 val freq = entryCpuLog[i][j].frequency
                 val time1 = entryCpuLog[i][j].timestamp
                 val time2 = exitCpuLog[i][j].timestamp
-                cpuEnergy += (time2 - time1) * profile.getPowerAtSpeed(i, freq)
+                cpuEnergy += ((time2 - time1) / 3600f) * profile.getPowerAtSpeed(i, freq)
             }
         }
-        cpuEnergy = cpuEnergy.roundWithAccuracy(1)
+        cpuEnergy = cpuEnergy.roundWithAccuracy(2)
 
         return CpuMethodEnergyConsumption(
                 methodName,

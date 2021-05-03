@@ -80,7 +80,7 @@ class TestProfilingResultDetailsContentView(
                         val item = node.userObject as CpuMethodEnergyConsumption
                         append(item.methodName, SimpleTextAttributes.REGULAR_ATTRIBUTES)
                         append("   ")
-                        append("${item.cpuEnergy} mJ", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)
+                        append("${item.cpuEnergy} mAh", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)
                     }
                 }
 

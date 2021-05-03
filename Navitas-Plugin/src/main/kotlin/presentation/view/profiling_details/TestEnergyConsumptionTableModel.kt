@@ -13,7 +13,7 @@ class TestEnergyConsumptionTableModel(private val items: List<EnergyConsumption>
     override fun getColumnName(var1: Int): String? {
         return when (var1) {
             0 -> "Test"
-            1 -> "CPU (mJ)"
+            1 -> "CPU (mAh)"
             2 -> "Wi-Fi (mAh)"
             3 -> "Bluetooth (mAh)"
             else -> null

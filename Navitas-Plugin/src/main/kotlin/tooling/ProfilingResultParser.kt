@@ -72,8 +72,8 @@ object ProfilingResultParser {
     }
 
     private fun parseWifiEnergyConsumption(obj: JSONObject): WifiEnergyConsumption {
-        var common = 0f
-        var wifi = 0f
+        var common = Float.NaN
+        var wifi = Float.NaN
         val external = mutableListOf<ComponentEnergyPair>()
 
         for(component in obj.keys()) {
@@ -103,8 +103,8 @@ object ProfilingResultParser {
     }
 
     private fun parseBluetoothEnergyConsumption(obj: JSONObject): BluetoothEnergyConsumption {
-        var common = 0f
-        var bluetooth = 0f
+        var common = Float.NaN
+        var bluetooth = Float.NaN
         val external = mutableListOf<ComponentEnergyPair>()
 
         for(component in obj.keys()) {
