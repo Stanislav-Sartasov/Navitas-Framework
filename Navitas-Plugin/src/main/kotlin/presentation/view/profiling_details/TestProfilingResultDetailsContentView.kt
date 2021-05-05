@@ -14,6 +14,7 @@ import com.intellij.ui.SimpleTextAttributes
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.treeStructure.Tree
 import domain.model.CpuMethodEnergyConsumption
+import domain.model.DetailedTestEnergyConsumption
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
 import presentation.viewmodel.DetailedTestEnergyConsumptionVM
@@ -21,6 +22,7 @@ import tooling.ContentRouter
 import java.awt.event.ItemEvent
 import javax.swing.JList
 import javax.swing.JPanel
+import javax.swing.JTextArea
 import javax.swing.JTree
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
@@ -35,7 +37,7 @@ class TestProfilingResultDetailsContentView(
     private lateinit var contentPanel: JPanel
     private lateinit var processThreadChooser: ComboBox<Pair<Int, Int>>
     private lateinit var treeView: Tree
-
+    private lateinit var componentsArea: JTextArea
     private lateinit var treeModel: DefaultTreeModel
     private lateinit var processThreadChooserModel: CollectionComboBoxModel<Pair<Int, Int>>
 
@@ -55,7 +57,7 @@ class TestProfilingResultDetailsContentView(
             toolbar = actionToolbar.component
             setContent(contentPanel)
         }
-
+        componentsArea.isEditable = false
         setupUI()
     }
 
@@ -73,11 +75,34 @@ class TestProfilingResultDetailsContentView(
         treeView.model = treeModel
         treeView.selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
 
+        fun getWifiBluetoothInfo(energyConsumption: DetailedTestEnergyConsumption?) : String {
+            val info = StringBuilder()
+            if(energyConsumption?.wifiEnergyConsumption?.common != null) {
+                info.append("Wi-Fi:\n   common: ${energyConsumption?.wifiEnergyConsumption?.common} mAh")
+            }
+            if(energyConsumption?.wifiEnergyConsumption?.external != null) {
+                for (item in energyConsumption?.wifiEnergyConsumption?.external) {
+                    info.append("\n   ${item.component}: ${item.energy} mAh")
+                }
+            }
+            if(energyConsumption?.bluetoothEnergyConsumption?.common != null) {
+                info.append("\nBluetooth:\n   common: ${energyConsumption?.bluetoothEnergyConsumption?.common} mAh")
+            }
+            if(energyConsumption?.bluetoothEnergyConsumption?.external != null) {
+                for (item in energyConsumption?.bluetoothEnergyConsumption?.external) {
+                    info.append("\n   ${item.component}: ${item.energy} mAh")
+                }
+            }
+            return info.toString()
+        }
+
         treeView.cellRenderer =
                 object : ColoredTreeCellRenderer() {
                     override fun customizeCellRenderer(tree: JTree, value: Any, selected: Boolean, expanded: Boolean, leaf: Boolean, row: Int, hasFocus: Boolean) {
                         val node = value as DefaultMutableTreeNode
                         val item = node.userObject as CpuMethodEnergyConsumption
+                        val energyConsumption = profilingResultVM.cache
+                        componentsArea.text = getWifiBluetoothInfo(energyConsumption)
                         append(item.methodName, SimpleTextAttributes.REGULAR_ATTRIBUTES)
                         append("   ")
                         append("${item.cpuEnergy} mAh", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)

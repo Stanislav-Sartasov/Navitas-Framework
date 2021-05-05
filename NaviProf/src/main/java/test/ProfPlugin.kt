@@ -47,7 +47,7 @@ open class ProfPlugin : Plugin<Project> {
                 it.commandLine("$adb", "logcat", "-c")
                 it.commandLine("$adb", "logcat", "-c")
 
-                //it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
             }
         }
 
@@ -101,14 +101,14 @@ open class ProfPlugin : Plugin<Project> {
 
         val wifiLogs = { profileOutput: File, path: String ->
             target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi:\"")
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi: \"")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
             }
         }
 
         val bluetoothLogs = { profileOutput: File, path: String ->
             target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth:\"")
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth: \"")
                 it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
             }
         }
@@ -471,7 +471,7 @@ open class ProfPlugin : Plugin<Project> {
 
                     testList.add(testObject)
 
-                    //it.delete()
+                    it.delete()
                 }
             }
 

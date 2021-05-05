@@ -27,7 +27,7 @@ class DetailedTestEnergyConsumptionVM(
     private val energyConsumptionTreeSubject = PublishSubject.create<DefaultMutableTreeNode>()
     val energyConsumptionTree: Observable<DefaultMutableTreeNode> = energyConsumptionTreeSubject
 
-    private var cache: DetailedTestEnergyConsumption? = null
+    var cache: DetailedTestEnergyConsumption? = null
     private var currentProcessThreadIDs: Pair<Int, Int>? = null
 
     fun fetch(position: Int) {
