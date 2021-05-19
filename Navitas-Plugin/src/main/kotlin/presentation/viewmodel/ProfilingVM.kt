@@ -102,14 +102,19 @@ class ProfilingVM(
         }
     }
 
-    // TODO: how to stop executing gradle task ???
+    // TODO: how to stop executing gradle task?
+    // Suggested approach don't work, because tasks get in queue
+    // But it's OK, when queue is empty
     fun stopProfiling() {
-
+        currentConfiguration?.let { config ->
+            gradleTaskExecutor.executeTask(
+                "stopTests", emptyArray(), config.modulePath)
+        }
     }
 
     // Only for debug JSON parsing
     private fun printJSONParseResult(config : ProfilingConfiguration, parseResult : ProfilingResult) {
-        var writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
+        val writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
         val parsingResult = parseResult.getTestResults()
 
         for(i in parsingResult)
@@ -168,7 +173,7 @@ class ProfilingVM(
 
     // Only for debug power_profile.xml parsing
     private fun printPowerProfileParseResult(config : ProfilingConfiguration, powerProfile : PowerProfile) {
-        var writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
+        val writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
 
         writer.write("wifi.on: " + powerProfile.wifiOn.toString())
         writer.newLine()

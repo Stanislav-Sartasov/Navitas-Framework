@@ -62,6 +62,7 @@
         <properties>
           <background color="-12828863"/>
           <editable value="false"/>
+          <font swing-font="Button.font"/>
           <wrapStyleWord value="true"/>
         </properties>
       </component>

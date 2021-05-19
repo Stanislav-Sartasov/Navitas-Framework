@@ -22,9 +22,14 @@ open class ProfPlugin : Plugin<Project> {
 
         val adb: File = android.adbExecutable
         fun runCommand(vararg args: String) {
-            target.exec {
-                it.workingDir("./..")
-                it.commandLine(*args)
+            try {
+                target.exec {
+                    it.workingDir("./..")
+                    it.commandLine(*args)
+                }
+            }
+            catch (exc : Exception) {
+                throw GradleException(exc.message.toString())
             }
         }
 
@@ -63,7 +68,8 @@ open class ProfPlugin : Plugin<Project> {
 
         val runTestClass = { testPath: String, info: TestRunnerInfo ->
             runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
-                "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")//androidx.test.runner.AndroidJUnitRunner")
+                "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")
+                //androidx.test.runner.AndroidJUnitRunner")
         }
 
         val runTestMethod = { testPath: String, info: TestRunnerInfo, methodName: String ->
@@ -256,6 +262,16 @@ open class ProfPlugin : Plugin<Project> {
         }
 
         target.tasks.named("runTests").configure { it.mustRunAfter("profileBuild") }
+
+        val stopTasks = {
+            runCommand("./gradlew", "--stop")
+        }
+
+        target.tasks.register("stopTests") {
+            it.doFirst {
+                stopTasks()
+            }
+        }
     }
 }
 
@@ -306,7 +322,7 @@ open class ProfPlugin : Plugin<Project> {
 
                             when {
                                 entryLineList[0] == "Wifi:" -> {
-                                    var wifiComponent = JSONObject()
+                                    val wifiComponent = JSONObject()
 
                                     wifiComponent["common"] = entryLineList[1].replace(",",".").toFloat()
 
@@ -325,7 +341,7 @@ open class ProfPlugin : Plugin<Project> {
                                     testLogs["wifi"] = wifiComponent
                                 }
                                 entryLineList[0] == "Bluetooth:" -> {
-                                    var bluetoothComponent = JSONObject()
+                                    val bluetoothComponent = JSONObject()
 
                                     bluetoothComponent["common"] = entryLineList[1].replace(",",".").toFloat()
 
@@ -345,18 +361,18 @@ open class ProfPlugin : Plugin<Project> {
                                     testLogs["bluetooth"] = bluetoothComponent
                                 }
                                 else -> {
-                                    var methodName: String = ""
-                                    var processId: Int = 0
-                                    var threadId: Int = 0
+                                    var methodName: String
+                                    var processId = 0
+                                    var threadId = 0
 
-                                    var startDate: String = ""
-                                    var startTime: String = ""
+                                    var startDate: String
+                                    var startTime: String
 
                                     //timestamp from January 1, 1970, 00:00:00 GMT
-                                    var timestamp: Long = 0
+                                    var timestamp: Long
 
-                                    var isEntry: Boolean = false
-                                    var parseIndex: Int = 0
+                                    var isEntry: Boolean
+                                    var parseIndex: Int
 
                                     if(entryLineList[4] == "D" && entryLineList[5] == "TEST") {
                                         methodName = entryLineList[8]
