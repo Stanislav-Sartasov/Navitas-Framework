@@ -29,11 +29,11 @@ class MultithreadingTest {
 
         val testClass = ThreadCreator()
 
-        testClass.initiateCalcFuncWithoutSort().join()
-        testClass.initiateCalcFuncWithoutSort().join()
-        testClass.initiateCalcFuncWithoutSort().join()
-        testClass.initiateCalcFuncWithoutSort().join()
-        testClass.initiateCalcFuncWithoutSort().join()
+        testClass.initiateCalcFuncWithSort().join()
+        testClass.initiateCalcFuncWithSort().join()
+        testClass.initiateCalcFuncWithSort().join()
+        testClass.initiateCalcFuncWithSort().join()
+        testClass.initiateCalcFuncWithSort().join()
     }
 }
 

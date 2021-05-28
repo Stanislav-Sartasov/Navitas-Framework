@@ -93,6 +93,7 @@ class ProfilingVM(
             gradleTaskExecutor.executeTask(
                     "defaultProfile",
                     arrayOf(
+                            "-Pmode=constants",
                             "-Pgranularity=methods",
                             "-Ptest_paths=$tests",
                             "--full-stacktrace"

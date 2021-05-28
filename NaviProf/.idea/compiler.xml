@@ -12,6 +12,8 @@
       <module name="com.Navitas.profilingPlugin.test" target="1.8" />
       <module name="instrumentor.main" target="1.8" />
       <module name="instrumentor.test" target="1.8" />
+      <module name="NaviProf.main" target="11" />
+      <module name="NaviProf.test" target="11" />
       <module name="profilingPlugin.com.lanit.profilingPlugin.main" target="1.8" />
       <module name="profilingPlugin.com.lanit.profilingPlugin.test" target="1.8" />
     </bytecodeTargetLevel>

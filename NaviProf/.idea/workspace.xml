@@ -7,25 +7,14 @@
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/profiling_details/TestProfilingResultDetailsContentView.form" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/profiling_details/TestProfilingResultDetailsContentView.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/profiling_details/TestsProfilingResultContentView.form" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/profiling_details/TestsProfilingResultContentView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithSort.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/MultithreadingTest.startWithoutSort.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/profileOutput/logs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/AnotherTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/BluetoothTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/InliningClassTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/MultithreadingTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/NavigationTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/WifiTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/additional/SomeJavaTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/MultithreadingTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/app/src/androidTest/java/com/example/ui_testing_samples/MultithreadingTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +113,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587480664051" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../UI-Testing-Samples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -348,6 +337,24 @@
       <workItem from="1621103331123" duration="146000" />
       <workItem from="1621103508394" duration="6000" />
       <workItem from="1621445883492" duration="475000" />
+      <workItem from="1621447352135" duration="1949000" />
+      <workItem from="1621450259743" duration="1311000" />
+      <workItem from="1621494540073" duration="616000" />
+      <workItem from="1621497385896" duration="603000" />
+      <workItem from="1621509411972" duration="430000" />
+      <workItem from="1621510238883" duration="5207000" />
+      <workItem from="1621528207134" duration="37000" />
+      <workItem from="1621528510752" duration="31000" />
+      <workItem from="1621529213954" duration="442000" />
+      <workItem from="1621529888133" duration="419000" />
+      <workItem from="1621530974169" duration="190000" />
+      <workItem from="1621531543627" duration="992000" />
+      <workItem from="1621532917267" duration="913000" />
+      <workItem from="1621534210723" duration="7153000" />
+      <workItem from="1621585862205" duration="5195000" />
+      <workItem from="1621681627359" duration="25272000" />
+      <workItem from="1622012497709" duration="1783000" />
+      <workItem from="1622029829959" duration="39106000" />
     </task>
     <servers />
   </component>
@@ -375,12 +382,6 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="726" y="258" width="530" height="605" key="FileChooserDialogImpl" timestamp="1621447293162">
-      <screen x="72" y="34" width="1848" height="1046" />
-    </state>
-    <state x="726" y="258" width="530" height="605" key="FileChooserDialogImpl/72.34.1848.1046@72.34.1848.1046" timestamp="1621447293162" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
