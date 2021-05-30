@@ -8,12 +8,10 @@ import java.nio.file.Files.readAllBytes
 import java.nio.file.Paths
 
 object ProfilingResultParser {
-
     fun parse(directory: String, fileName: String): ProfilingResult {
         val result = ProfilingResult()
         val json = String(readAllBytes(Paths.get(directory, fileName)))
         val obj = JSONObject(json)
-        JSONObject()
         val tests = obj.getJSONArray("tests")
 
         for (i in 0 until tests.length()) {
@@ -22,21 +20,29 @@ object ProfilingResultParser {
             val testLogs = test.getJSONObject("logs")
 
             val cpuInfo = mutableListOf<CpuInfo>()
-            var wifiEnergyConsumption : WifiEnergyConsumption? = null
-            var bluetoothEnergyConsumption : BluetoothEnergyConsumption? = null
-            for(component in testLogs.keys())
-            {
-                if(component != null)
-                {
-                    when(component)
-                    {
+            val wifiInfo = mutableListOf<WifiInfo>()
+            val bluetoothInfo = mutableListOf<BluetoothInfo>()
+
+            for(component in testLogs.keys()) {
+                if(component != null) {
+                    when(component) {
                         "wifi" -> {
-                            val wifiLogs = testLogs.getJSONObject("wifi")
-                            wifiEnergyConsumption = parseWifiEnergyConsumption(wifiLogs)
+                            val wifiArray = testLogs.getJSONArray("wifi")
+
+                            for(j in 0 until wifiArray.length()) {
+                                val wifiLog = wifiArray.getJSONObject(j)
+
+                                wifiInfo.add(parseWifiInfo(wifiLog))
+                            }
                         }
                         "bluetooth" -> {
-                            val bluetoothLogs = testLogs.getJSONObject("bluetooth")
-                            bluetoothEnergyConsumption = parseBluetoothEnergyConsumption(bluetoothLogs)
+                            val bluetoothArray = testLogs.getJSONArray("bluetooth")
+
+                            for(j in 0 until bluetoothArray.length()) {
+                                val bluetoothLog = bluetoothArray.getJSONObject(j)
+
+                                bluetoothInfo.add(parseBluetoothInfo(bluetoothLog))
+                            }
                         }
                         "cpu" -> {
                             val cpuLogs = testLogs.getJSONArray("cpu")
@@ -63,7 +69,10 @@ object ProfilingResultParser {
                 }
             }
 
-            val testLog = ProfilingTestLog(cpuInfo, wifiEnergyConsumption, bluetoothEnergyConsumption)
+            val testLog = ProfilingTestLog(cpuInfo,
+                if(wifiInfo.size != 0) wifiInfo else null,
+                if(bluetoothInfo.size != 0) bluetoothInfo else null
+            )
 
             result.addTestResults(testName, testLog)
         }
@@ -71,23 +80,33 @@ object ProfilingResultParser {
         return result
     }
 
-    private fun parseWifiEnergyConsumption(obj: JSONObject): WifiEnergyConsumption {
+    private fun parseTestInfo(obj: JSONObject): TestInfo {
+        val frequency = obj.getFloat("frequency")
+        val timestamp = obj.getLong("timestamp")
+
+        return TestInfo(frequency, timestamp)
+    }
+
+    private fun parseWifiInfo(obj: JSONObject): WifiInfo {
+        val testInfo = parseTestInfo(obj.getJSONObject("header"))
+
         var common = Float.NaN
         var wifi = Float.NaN
         val external = mutableListOf<ComponentEnergyPair>()
 
-        for(component in obj.keys()) {
+        val testDetails = obj.getJSONObject("body")
+        for(component in testDetails.keys()) {
             if(component != null)
             {
                 when (component) {
                     "common" -> {
-                        common = obj.getFloat(component)
+                        common = testDetails.getFloat(component)
                     }
                     "wifi" -> {
-                        wifi = obj.getFloat(component)
+                        wifi = testDetails.getFloat(component)
                     }
                     else -> {
-                        val energy = obj.getFloat(component)
+                        val energy = testDetails.getFloat(component)
                         external.add(ComponentEnergyPair(component, energy))
                     }
                 }
@@ -96,29 +115,32 @@ object ProfilingResultParser {
 
         if(external.isEmpty())
         {
-            return WifiEnergyConsumption(common, wifi, null)
+            return WifiInfo(testInfo, WifiEnergyConsumption(common, wifi, null))
         }
 
-        return WifiEnergyConsumption(common, wifi, external)
+        return WifiInfo(testInfo, WifiEnergyConsumption(common, wifi, external))
     }
 
-    private fun parseBluetoothEnergyConsumption(obj: JSONObject): BluetoothEnergyConsumption {
+    private fun parseBluetoothInfo(obj: JSONObject): BluetoothInfo {
+        val testInfo = parseTestInfo(obj.getJSONObject("header"))
+
         var common = Float.NaN
         var bluetooth = Float.NaN
         val external = mutableListOf<ComponentEnergyPair>()
 
-        for(component in obj.keys()) {
+        val testDetails = obj.getJSONObject("body")
+        for(component in testDetails.keys()) {
             if(component != null)
             {
                 when (component) {
                     "common" -> {
-                        common = obj.getFloat(component)
+                        common = testDetails.getFloat(component)
                     }
                     "bluetooth", "bt", "usage" -> {
-                        bluetooth = obj.getFloat(component)
+                        bluetooth = testDetails.getFloat(component)
                     }
                     else -> {
-                        val energy = obj.getFloat(component)
+                        val energy = testDetails.getFloat(component)
                         external.add(ComponentEnergyPair(component, energy))
                     }
                 }
@@ -127,10 +149,10 @@ object ProfilingResultParser {
 
         if(external.isEmpty())
         {
-            return BluetoothEnergyConsumption(common, bluetooth, null)
+            return BluetoothInfo(testInfo, BluetoothEnergyConsumption(common, bluetooth, null))
         }
 
-        return BluetoothEnergyConsumption(common, bluetooth, external)
+        return BluetoothInfo(testInfo, BluetoothEnergyConsumption(common, bluetooth, external))
     }
 
     private fun parseMethodInfo(obj: JSONObject): MethodInfo {
@@ -139,6 +161,7 @@ object ProfilingResultParser {
         val methodName = obj.getString("methodName")
         val timestamp = obj.getLong("timestamp")
         val isEntry = obj.getBoolean("isEntry")
+
         return MethodInfo(methodName, timestamp, processID, threadID, isEntry)
     }
 

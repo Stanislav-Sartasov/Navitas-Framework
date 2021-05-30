@@ -1,7 +1,6 @@
 package data.model
 
 class ProfilingResult {
-
     private val map = mutableMapOf<String, ProfilingTestLog>()
 
     fun addTestResults(testName: String, results: ProfilingTestLog) {

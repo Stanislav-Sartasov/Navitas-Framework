@@ -616,7 +616,6 @@ private class JSONGenerator {
                                             val body = JSONObject()
                                             body["common"] = entryLineList[componentWithIndex.second + 1].replace(",",".").toFloat()
 
-
                                             if(entryLineList.elementAt(componentWithIndex.second + 2) == "(") {
                                                 var i = componentWithIndex.second + 3
                                                 while(entryLineList[i] != ")") {
@@ -760,9 +759,18 @@ private class JSONGenerator {
                         }
                     }
                 }
-                testLogs["cpu"] = cpuComponent
-                testLogs["wifi"] = wifiComponent
-                testLogs["bluetooth"] = bluetoothComponent
+                if(cpuComponent.size != 0)
+                {
+                    testLogs["cpu"] = cpuComponent
+                }
+                if(wifiComponent.size != 0)
+                {
+                    testLogs["wifi"] = wifiComponent
+                }
+                if(bluetoothComponent.size != 0)
+                {
+                    testLogs["bluetooth"] = bluetoothComponent
+                }
 
                 val testObject = JSONObject()
                 testObject["testName"] = testName

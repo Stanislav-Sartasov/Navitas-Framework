@@ -7,6 +7,7 @@ import data.model.ProfilingResult
 import domain.model.CpuEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
 import extensions.roundWithAccuracy
+import org.jetbrains.kotlin.idea.internal.makeBackup.random
 import java.util.*
 
 object ProfilingResultAnalyzer {
@@ -52,7 +53,9 @@ object ProfilingResultAnalyzer {
                 testDetails[logGroup.key] = externalMethods
             }
             val cpu = CpuEnergyConsumption(testEnergy, testDetails)
-            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiEnergyConsumption, testResult.second.bluetoothEnergyConsumption))
+
+            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiInfo?.last()!!.wifiEnergyConsumption,
+                testResult.second.bluetoothInfo!!.last().bluetoothEnergyConsumption))
         }
 
         return result

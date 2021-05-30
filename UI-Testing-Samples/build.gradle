@@ -73,6 +73,8 @@ buildscript {
         classpath "com.github.stanislav-sartasov:NaviProf:1.81"
         classpath "com.github.stanislav-sartasov:NaviProf:1.82"
         classpath "com.github.stanislav-sartasov:NaviProf:1.83"
+        classpath "com.github.stanislav-sartasov:NaviProf:1.84"
+        classpath "com.github.stanislav-sartasov:NaviProf:1.85"
     }
 }
 

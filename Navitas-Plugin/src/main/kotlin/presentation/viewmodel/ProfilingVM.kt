@@ -114,86 +114,96 @@ class ProfilingVM(
     }
 
     // Only for debug JSON parsing
-    private fun printJSONParseResult(config : ProfilingConfiguration, parseResult : ProfilingResult) {
-        val writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
-        val parsingResult = parseResult.getTestResults()
-
-        for(i in parsingResult)
-        {
-            writer.write(i.first)
-            writer.newLine()
-
-            val j = i.second
-            writer.write("Wifi component:")
-            writer.newLine()
-            writer.write("common: " + j.wifiEnergyConsumption?.common.toString())
-            writer.newLine()
-            writer.write("wifi: " + j.wifiEnergyConsumption?.wifi.toString())
-            writer.newLine()
-            j.wifiEnergyConsumption?.external?.forEach {
-                    x -> writer.write(x.component + ": ")
-                    writer.write(x.energy.toString())
-                    writer.newLine()
-            }
-
-            writer.write("Bluetooth component:")
-            writer.newLine()
-            writer.write("common: " + j.bluetoothEnergyConsumption?.common.toString())
-            writer.newLine()
-            writer.write("bluetooth: " + j.bluetoothEnergyConsumption?.bluetooth.toString())
-            writer.newLine()
-            j.bluetoothEnergyConsumption?.external?.forEach {
-                    x -> writer.write(x.component + ": ")
-                    writer.write(x.energy.toString())
-                    writer.newLine()
-            }
-
-            writer.write("Cpu component:")
-            writer.newLine()
-            for(k in j.cpuInfo)
-            {
-                writer.write("isEntry: " + k.methodInfo.isEntry.toString())
-                writer.newLine()
-                writer.write("methodName: " + k.methodInfo.methodName)
-                writer.newLine()
-                writer.write("processID: " + k.methodInfo.processID)
-                writer.newLine()
-                writer.write("threadID: " + k.methodInfo.threadID)
-                writer.newLine()
-                writer.write("timestamp: " + k.methodInfo.timestamp)
-                writer.newLine()
-                writer.write("brightnessLevel: " + k.brightnessLevel)
-                writer.newLine()
-            }
-
-            writer.newLine()
-        }
-
-        writer.close()
-    }
+//    private fun printJSONParseResult(config : ProfilingConfiguration, parseResult : ProfilingResult) {
+//        val writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
+//        val parsingResult = parseResult.getTestResults()
+//
+//        for(i in parsingResult)
+//        {
+//            writer.write(i.first)
+//            writer.newLine()
+//
+//            val wifi = i.second.wifiInfo?.random()!!
+//            writer.write("Wifi component:")
+//            writer.newLine()
+//            writer.write("frequency: " + wifi.testInfo.frequency)
+//            writer.newLine()
+//            writer.write("timestamp: " + wifi.testInfo.timestamp)
+//            writer.newLine()
+//            writer.write("common: " + wifi.wifiEnergyConsumption.common.toString())
+//            writer.newLine()
+//            writer.write("wifi: " + wifi.wifiEnergyConsumption.wifi.toString())
+//            writer.newLine()
+//            wifi.wifiEnergyConsumption.external?.forEach {
+//                    x -> writer.write(x.component + ": ")
+//                    writer.write(x.energy.toString())
+//                    writer.newLine()
+//            }
+//
+//            val bluetooth = i.second.bluetoothInfo?.random()!!
+//            writer.write("Bluetooth component:")
+//            writer.newLine()
+//            writer.write("frequency: " + bluetooth.testInfo.frequency)
+//            writer.newLine()
+//            writer.write("timestamp: " + bluetooth.testInfo.timestamp)
+//            writer.newLine()
+//            writer.write("common: " + bluetooth.bluetoothEnergyConsumption.common.toString())
+//            writer.newLine()
+//            writer.write("bluetooth: " + bluetooth.bluetoothEnergyConsumption.bluetooth.toString())
+//            writer.newLine()
+//            bluetooth.bluetoothEnergyConsumption?.external?.forEach {
+//                    x -> writer.write(x.component + ": ")
+//                    writer.write(x.energy.toString())
+//                    writer.newLine()
+//            }
+//
+//            val cpu = i.second.cpuInfo
+//            writer.write("Cpu component:")
+//            writer.newLine()
+//            for(k in cpu)
+//            {
+//                writer.write("isEntry: " + k.methodInfo.isEntry.toString())
+//                writer.newLine()
+//                writer.write("methodName: " + k.methodInfo.methodName)
+//                writer.newLine()
+//                writer.write("processID: " + k.methodInfo.processID)
+//                writer.newLine()
+//                writer.write("threadID: " + k.methodInfo.threadID)
+//                writer.newLine()
+//                writer.write("timestamp: " + k.methodInfo.timestamp)
+//                writer.newLine()
+//                writer.write("brightnessLevel: " + k.brightnessLevel)
+//                writer.newLine()
+//            }
+//
+//            writer.newLine()
+//        }
+//
+//        writer.close()
+//    }
 
     // Only for debug power_profile.xml parsing
-    private fun printPowerProfileParseResult(config : ProfilingConfiguration, powerProfile : PowerProfile) {
-        val writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
-
-        writer.write("wifi.on: " + powerProfile.wifiOn.toString())
-        writer.newLine()
-
-        writer.write("wifi.scan: " + powerProfile.wifiScan.toString())
-        writer.newLine()
-
-        writer.write("wifi.active: " + powerProfile.wifiActive.toString())
-        writer.newLine()
-
-        writer.write("bluetooth.on: " + powerProfile.bluetoothOn.toString())
-        writer.newLine()
-
-        writer.write("bluetooth.active: " + powerProfile.bluetoothActive.toString())
-        writer.newLine()
-
-        writer.write("cpu.active: " + powerProfile.getPowerAtSpeed(0, 400000).toString())
-        writer.newLine()
-
-        writer.close()
-    }
+//    private fun printPowerProfileParseResult(config : ProfilingConfiguration, powerProfile : PowerProfile) {
+//        val writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
+//
+//        writer.write("wifi.on: " + powerProfile.wifiOn.toString())
+//        writer.newLine()
+//
+//        writer.write("wifi.scan: " + powerProfile.wifiScan.toString())
+//        writer.newLine()
+//
+//        writer.write("wifi.active: " + powerProfile.wifiActive.toString())
+//        writer.newLine()
+//
+//        writer.write("bluetooth.on: " + powerProfile.bluetoothOn.toString())
+//        writer.newLine()
+//
+//        writer.write("bluetooth.active: " + powerProfile.bluetoothActive.toString())
+//        writer.newLine()
+//
+//        writer.write("cpu.active: " + powerProfile.getPowerAtSpeed(0, 400000).toString())
+//        writer.newLine()
+//
+//        writer.close()
+//    }
 }
