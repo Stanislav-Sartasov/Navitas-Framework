@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/BluetoothInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/TestInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/WifiInfo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -13,7 +16,7 @@
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuInfo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingResult.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingTestLog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingTestLog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/ComponentEnergyPair.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/ComponentEnergyPair.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/ComponentEnergyPair.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" afterDir="false" />
@@ -371,6 +374,7 @@
       <workItem from="1622029829959" duration="39106000" />
       <workItem from="1622371821481" duration="5673000" />
       <workItem from="1622389532327" duration="594000" />
+      <workItem from="1622390212388" duration="4000" />
     </task>
     <servers />
   </component>

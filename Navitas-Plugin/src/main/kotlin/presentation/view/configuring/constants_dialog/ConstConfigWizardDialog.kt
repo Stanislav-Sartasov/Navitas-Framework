@@ -1,13 +1,13 @@
-package presentation.view.configuring.dialog
+package presentation.view.configuring.constants_dialog
 
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardDialog
 import domain.model.ProfilingConfiguration
 
-class ConfigWizardDialog(
+class ConstConfigWizardDialog(
         project: Project,
         private val callback: (ProfilingConfiguration) -> Unit
-) : WizardDialog<ConfigModel>(true, true, ConfigModel(project)) {
+) : WizardDialog<ConstConfigModel>(true, true, ConstConfigModel(project)) {
 
     override fun onWizardGoalAchieved() {
         super.onWizardGoalAchieved()

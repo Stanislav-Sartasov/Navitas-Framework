@@ -12,21 +12,22 @@ import data.model.ProfilingError
 import data.model.RequestVerdict
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
-import presentation.view.configuring.dialog.ConfigWizardDialog
+import presentation.view.configuring.profiling_dialog.ProfConfigWizardDialog
+import presentation.view.configuring.constants_dialog.ConstConfigWizardDialog
 import presentation.view.power_profile.PowerProfileDialog
 import presentation.viewmodel.ConfiguringVM
 import presentation.viewmodel.PowerProfileVM
-import presentation.viewmodel.ProfilingVM
+import presentation.viewmodel.ProfilingAndConstantsVM
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
 import javax.swing.JPanel
 
 class ConfiguringContentView(
-        project: Project,
-        private val router: ContentRouter,
-        private val profilingVM: ProfilingVM,
-        private val configuringVM: ConfiguringVM,
-        private val powerProfileVM: PowerProfileVM
+    project: Project,
+    private val router: ContentRouter,
+    private val profilingAndConstantsVM: ProfilingAndConstantsVM,
+    private val configuringVM: ConfiguringVM,
+    private val powerProfileVM: PowerProfileVM
 ) : ContentContainer() {
 
     // UI components
@@ -36,14 +37,23 @@ class ConfiguringContentView(
     private lateinit var testListField: JBLabel
     private lateinit var powerProfileField: JBLabel
 
-    private val configureAction: CustomAction
+    private val configureProfilingAction: CustomAction
+    private val configureConstantsAction: CustomAction
     private val choosePowerProfileAction: CustomAction
     private val startProfilingAction: CustomAction
     private val stopProfilingAction: CustomAction
 
-    private val onConfigureClickCallback = object : OnActionClickCallback {
+    private val onConfigureProfilingClickCallback = object : OnActionClickCallback {
         override fun onActionClick() {
-            ConfigWizardDialog(project) { config ->
+            ProfConfigWizardDialog(project) { config ->
+                configuringVM.save(config)
+            }.show()
+        }
+    }
+
+    private val onConfigureConstantsClickCallback = object : OnActionClickCallback {
+        override fun onActionClick() {
+            ConstConfigWizardDialog(project) { config ->
                 configuringVM.save(config)
             }.show()
         }
@@ -57,13 +67,13 @@ class ConfiguringContentView(
 
     private val onStartProfilingClickCallback = object : OnActionClickCallback {
         override fun onActionClick() {
-            profilingVM.startProfiling()
+            profilingAndConstantsVM.start()
         }
     }
 
     private val onStopProfilingClickCallback = object : OnActionClickCallback {
         override fun onActionClick() {
-            profilingVM.stopProfiling()
+            profilingAndConstantsVM.stop()
         }
     }
 
@@ -71,10 +81,16 @@ class ConfiguringContentView(
         // create action toolbar
         val actionManager = ActionManager.getInstance()
         val actionGroup = DefaultActionGroup().apply {
-            // add 'configure' button
-            ConfigureAction(onConfigureClickCallback).also { newAction ->
-                configureAction = newAction
-                actionManager.copyTemplate("navitas.action.Configure", newAction)
+            // add 'configure profiling' button
+            ConfigureProfilingAction(onConfigureProfilingClickCallback).also { newAction ->
+                configureProfilingAction = newAction
+                actionManager.copyTemplate("navitas.action.ProfilingConfigure", newAction)
+                add(newAction)
+            }
+            // add 'configure constants' button
+            ConfigureConstantsAction(onConfigureConstantsClickCallback).also { newAction ->
+                configureConstantsAction = newAction
+                actionManager.copyTemplate("navitas.action.ConstantsConfigure", newAction)
                 add(newAction)
             }
             // add 'choose power profile' button
@@ -107,7 +123,7 @@ class ConfiguringContentView(
     }
 
     private fun setupUI() {
-        profilingVM.profilingVerdict
+        profilingAndConstantsVM.profilingVerdict
                 .subscribe { verdict ->
                     AppUIExecutor.onUiThread().execute {
                         when (verdict) {
@@ -138,26 +154,36 @@ class ConfiguringContentView(
                     }
                 }
 
-        profilingVM.viewState
+        profilingAndConstantsVM.viewState
                 .subscribe { state ->
                     AppUIExecutor.onUiThread().execute {
                         when (state) {
-                            ProfilingVM.ViewState.INITIAL -> {
+                            ProfilingAndConstantsVM.ViewState.INITIAL -> {
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = false
-                                configureAction.isEnabled = true
+                                configureProfilingAction.isEnabled = true
+                                configureConstantsAction.isEnabled = true
                                 choosePowerProfileAction.isEnabled = true
                             }
-                            ProfilingVM.ViewState.READY_FOR_PROFILING -> {
+                            ProfilingAndConstantsVM.ViewState.READY_FOR_PROFILING -> {
                                 startProfilingAction.isEnabled = true
                                 stopProfilingAction.isEnabled = false
-                                configureAction.isEnabled = true
+                                configureProfilingAction.isEnabled = true
+                                configureConstantsAction.isEnabled = true
                                 choosePowerProfileAction.isEnabled = true
                             }
-                            ProfilingVM.ViewState.DURING_PROFILING -> {
+                            ProfilingAndConstantsVM.ViewState.READY_FOR_CONSTANTS -> {
+                                startProfilingAction.isEnabled = true
+                                stopProfilingAction.isEnabled = false
+                                configureProfilingAction.isEnabled = true
+                                configureConstantsAction.isEnabled = true
+                                choosePowerProfileAction.isEnabled = false
+                            }
+                            ProfilingAndConstantsVM.ViewState.DURING -> {
                                 startProfilingAction.isEnabled = false
                                 stopProfilingAction.isEnabled = true
-                                configureAction.isEnabled = false
+                                configureProfilingAction.isEnabled = false
+                                configureConstantsAction.isEnabled = false
                                 choosePowerProfileAction.isEnabled = false
                             }
                         }

@@ -1,33 +1,26 @@
-package presentation.view.configuring.dialog
+package presentation.view.configuring.constants_dialog
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.ui.wizard.WizardModel
 import domain.model.ProfilingConfiguration
 import org.jetbrains.kotlin.idea.configuration.externalProjectPath
-import presentation.view.configuring.dialog.steps.AndroidModuleChoosingStep
-import presentation.view.configuring.dialog.steps.InstrumentedTestChoosingStep
+import presentation.view.configuring.constants_dialog.steps.InstrumentedTestChoosingStep
 import tooling.AndroidModuleProvider
 
-class ConfigModel(
+class ConstConfigModel(
         project: Project
-) : WizardModel("Navitas configuration") {
+) : WizardModel("Constants configuration") {
 
     private val provider = AndroidModuleProvider(project)
-    private var selectedModule: Module? = null
     private var selectedTests: Map<String, List<String>>? = null
     private var currentTestNames: Map<String, List<String>>? = null
 
-    private val androidModules: List<Module> = provider.fetchAndroidModuleList()
-    val androidModuleNames: List<String> = androidModules.map { module -> module.name }
+    private var selectedModule: Module? = provider.fetchAndroidModuleList().
+    find{ module -> module.name.split('.').contains("navi_constants")}
 
     init {
-        add(AndroidModuleChoosingStep(this))
         add(InstrumentedTestChoosingStep(this))
-    }
-
-    fun selectModule(position: Int) {
-        selectedModule = androidModules[position]
     }
 
     fun selectTests(selectedTestArray: BooleanArray) {

@@ -20,14 +20,17 @@
     </extensions>
 
     <actions>
-        <action class="action.ConfigureAction" id="navitas.action.Configure"
-                text="Configure" icon="AllIcons.General.Settings"/>
+        <action class="action.ConfigureProfilingAction" id="navitas.action.ProfilingConfigure"
+                text="Configure Profiling" icon="AllIcons.Nodes.Property"/>
+
+        <action class="action.ConfigureConstantsAction" id="navitas.action.ConstantsConfigure"
+                text="Configure Constants" icon="AllIcons.Nodes.Constant"/>
 
         <action class="action.StartProfilingAction" id="navitas.action.Profile"
-                text="Profile" icon="AllIcons.Actions.Profile"/>
+                text="Profile" icon="AllIcons.Actions.Execute"/>
 
         <action class="action.StopProfilingAction" id="navitas.action.Stop"
-                text="Stop" icon="AllIcons.Actions.Cancel"/>
+                text="Stop" icon="AllIcons.Actions.Suspend"/>
 
         <action class="action.BackAction" id="navitas.action.Back"
                 text="Back" icon="AllIcons.Actions.Back"/>
@@ -36,6 +39,6 @@
                 text="Show Details" icon="AllIcons.Actions.Show"/>
 
         <action class="action.ChoosePowerProfileAction" id="navitas.action.ChoosePowerProfile"
-                text="Choose Power Profile" icon="AllIcons.Actions.Annotate"/>
+                text="Choose Power Profile" icon="AllIcons.FileTypes.Xml"/>
     </actions>
 </idea-plugin>

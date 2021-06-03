@@ -10,20 +10,20 @@
     <children>
       <component id="d51b7" class="com.intellij.ui.components.JBLabel">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="14" style="1"/>
-          <text value="Instrumented tests:"/>
+          <font size="16" style="1"/>
+          <text value="Instrumented tests"/>
         </properties>
       </component>
       <component id="78430" class="com.intellij.ui.components.JBLabel">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="14" style="1"/>
-          <text value="Android module:"/>
+          <font size="16" style="1"/>
+          <text value="Android module"/>
         </properties>
       </component>
       <component id="d7292" class="com.intellij.ui.components.JBLabel" binding="androidModuleField">
@@ -68,11 +68,12 @@
       </scrollpane>
       <component id="60364" class="com.intellij.ui.components.JBLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="14" style="1"/>
-          <text value="Power profile:"/>
+          <focusable value="false"/>
+          <font size="16" style="1"/>
+          <text value="Power profile"/>
         </properties>
       </component>
       <component id="d98" class="com.intellij.ui.components.JBLabel" binding="powerProfileField">

@@ -1,14 +1,14 @@
-package presentation.view.configuring.dialog.steps
+package presentation.view.configuring.constants_dialog.steps
 
 import com.intellij.ui.CheckBoxList
 import com.intellij.ui.wizard.WizardNavigationState
 import com.intellij.ui.wizard.WizardStep
-import presentation.view.configuring.dialog.ConfigModel
+import presentation.view.configuring.constants_dialog.ConstConfigModel
 import javax.swing.JComponent
 
 class InstrumentedTestChoosingStep(
-        private val configModel: ConfigModel
-) : WizardStep<ConfigModel>("Choose tests for profiling") {
+        private val constConfigModel: ConstConfigModel
+) : WizardStep<ConstConfigModel>("Choose tests for constants deriving") {
 
     private val testList: CheckBoxList<String>
     private lateinit var selectedTestArray: BooleanArray
@@ -20,12 +20,12 @@ class InstrumentedTestChoosingStep(
         testList.setCheckBoxListListener { position: Int, isChecked: Boolean ->
             selectedTestArray[position] = isChecked
             selectedTestAmount += if (isChecked) 1 else -1
-            configModel.currentNavigationState.FINISH.isEnabled = (selectedTestAmount != 0)
+            constConfigModel.currentNavigationState.FINISH.isEnabled = (selectedTestAmount != 0)
         }
     }
 
     override fun prepare(wizardNavigationState: WizardNavigationState): JComponent? {
-        val items = configModel.getTestNamesOfSelectedModule().entries.map { testClass -> testClass.value.map { testName -> "${testClass.key}.$testName"}}.flatten()
+        val items = constConfigModel.getTestNamesOfSelectedModule().entries.map { testClass -> testClass.value.map { testName -> "${testClass.key}.$testName"}}.flatten()
         selectedTestArray = BooleanArray(items.size)
         testList.setItems(items, String::toString)
         selectedTestAmount = 0
@@ -35,7 +35,7 @@ class InstrumentedTestChoosingStep(
     }
 
     override fun onFinish(): Boolean {
-        configModel.selectTests(selectedTestArray)
+        constConfigModel.selectTests(selectedTestArray)
         return super.onFinish()
     }
 }

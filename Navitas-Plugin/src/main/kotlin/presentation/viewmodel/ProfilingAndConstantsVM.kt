@@ -4,7 +4,6 @@ import com.intellij.openapi.externalSystem.task.TaskCallback
 import com.intellij.openapi.project.Project
 import domain.model.PowerProfile
 import data.model.ProfilingError
-import data.model.ProfilingResult
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
@@ -17,9 +16,8 @@ import tooling.GradlePluginInjector
 import tooling.GradleTaskExecutor
 import tooling.ProfilingResultAnalyzer
 import tooling.ProfilingResultParser
-import java.io.File
 
-class ProfilingVM(
+class ProfilingAndConstantsVM(
         private val project: Project,
         private val configurationRepository: ConfigurationRepository,
         private val profilingResultRepository: ProfilingResultRepository,
@@ -27,7 +25,7 @@ class ProfilingVM(
 ) {
 
     enum class ViewState {
-        INITIAL, READY_FOR_PROFILING, DURING_PROFILING
+        INITIAL, READY_FOR_PROFILING, READY_FOR_CONSTANTS, DURING
     }
 
     private val profilingVerdictSubject = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
@@ -37,9 +35,10 @@ class ProfilingVM(
     val viewState: Observable<ViewState> = viewStateSubject
 
     private var currentConfiguration: ProfilingConfiguration? = null
-    private val gradleTaskExecutor = GradleTaskExecutor(project)
-
     private var powerProfile: PowerProfile? = null
+    private var mode: String? = null
+
+    private val gradleTaskExecutor = GradleTaskExecutor(project)
 
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
@@ -67,7 +66,21 @@ class ProfilingVM(
         configurationRepository.fetch()
                 .subscribe { config ->
                     currentConfiguration = config
-                    if (powerProfile != null) {
+
+                    mode = if (currentConfiguration!!.moduleName.split('.').contains("navi_constants"))
+                        "constants" else "profiling"
+
+                    if (powerProfile == null && mode == "constants") {
+                        viewStateSubject.onNext(ViewState.READY_FOR_CONSTANTS)
+                    }
+                    if (powerProfile == null && mode != "constants") {
+                        viewStateSubject.onNext(ViewState.INITIAL)
+                    }
+                    else if (powerProfile != null && mode == "constants") {
+                        powerProfile = null
+                        viewStateSubject.onNext(ViewState.READY_FOR_CONSTANTS)
+                    }
+                    else if (powerProfile != null && mode != "constants") {
                         viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
                     }
                 }
@@ -75,7 +88,7 @@ class ProfilingVM(
         powerProfileRepository.fetch()
                 .subscribe { profile ->
                     powerProfile = profile
-                    if (currentConfiguration != null) {
+                    if (mode != "constants") {
                         viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
                     }
                 }
@@ -83,9 +96,9 @@ class ProfilingVM(
 
     // TODO: ISSUE: task doesn't stop if device is unplugged
     // TODO: how to detect when task is failed ??? (onFailure doesn't invoke --- Android Studio bug)
-    fun startProfiling() {
+    fun start() {
         currentConfiguration?.let { config ->
-            viewStateSubject.onNext(ViewState.DURING_PROFILING)
+            viewStateSubject.onNext(ViewState.DURING)
             GradlePluginInjector(project).verifyAndInject()
 
             val tests = config.instrumentedTestNames.entries.joinToString(separator = ",") { clazz -> "${clazz.key}#${clazz.value.joinToString(separator = ":")}" }
@@ -93,7 +106,7 @@ class ProfilingVM(
             gradleTaskExecutor.executeTask(
                     "defaultProfile",
                     arrayOf(
-                            "-Pmode=constants",
+                            "-Pmode=$mode",
                             "-Pgranularity=methods",
                             "-Ptest_paths=$tests",
                             "--full-stacktrace"
@@ -106,7 +119,7 @@ class ProfilingVM(
     // TODO: how to stop executing gradle task?
     // Suggested approach don't work, because tasks get in queue
     // But it's OK, when queue is empty
-    fun stopProfiling() {
+    fun stop() {
         currentConfiguration?.let { config ->
             gradleTaskExecutor.executeTask(
                 "stopTests", emptyArray(), config.modulePath)

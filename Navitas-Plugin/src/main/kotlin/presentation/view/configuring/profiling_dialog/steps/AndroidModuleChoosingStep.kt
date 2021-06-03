@@ -1,27 +1,27 @@
-package presentation.view.configuring.dialog.steps
+package presentation.view.configuring.profiling_dialog.steps
 
 import com.intellij.ui.components.JBList
 import com.intellij.ui.wizard.WizardNavigationState
 import com.intellij.ui.wizard.WizardStep
-import presentation.view.configuring.dialog.ConfigModel
+import presentation.view.configuring.profiling_dialog.ProfConfigModel
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 
 class AndroidModuleChoosingStep(
-        configModel: ConfigModel
-) : WizardStep<ConfigModel>("Choose module for profiling") {
+    profConfigModel: ProfConfigModel
+) : WizardStep<ProfConfigModel>("Choose Android module for profiling") {
 
     private val moduleList: JBList<String>
     private var selectedModulePosition = -1
 
     init {
         // create UI components
-        moduleList = JBList(configModel.androidModuleNames)
+        moduleList = JBList(profConfigModel.androidModuleNames)
         moduleList.selectionMode = ListSelectionModel.SINGLE_SELECTION
         moduleList.addListSelectionListener { event ->
             if (!event.valueIsAdjusting) {
                 selectedModulePosition = moduleList.selectedIndex
-                configModel.currentNavigationState.NEXT.isEnabled = (selectedModulePosition != -1)
+                profConfigModel.currentNavigationState.NEXT.isEnabled = (selectedModulePosition != -1)
             }
         }
     }
@@ -31,8 +31,8 @@ class AndroidModuleChoosingStep(
         return moduleList
     }
 
-    override fun onNext(model: ConfigModel): WizardStep<*> {
-        model.selectModule(selectedModulePosition)
-        return super.onNext(model)
+    override fun onNext(modelProf: ProfConfigModel): WizardStep<*> {
+        modelProf.selectModule(selectedModulePosition)
+        return super.onNext(modelProf)
     }
 }

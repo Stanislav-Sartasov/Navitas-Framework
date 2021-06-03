@@ -25,11 +25,11 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
         val providers = listOf<Provider<ContentContainer>>(
                 Provider {
                     ConfiguringContentView(
-                            project,
-                            router,
-                            ProfilingVM(project, configRepository, profilingResultRepository, powerProfileRepository),
-                            ConfiguringVM(configRepository),
-                            PowerProfileVM(powerProfileRepository)
+                        project,
+                        router,
+                        ProfilingAndConstantsVM(project, configRepository, profilingResultRepository, powerProfileRepository),
+                        ConfiguringVM(configRepository),
+                        PowerProfileVM(powerProfileRepository)
                     )
                 },
                 Provider {
