@@ -7,7 +7,7 @@ import org.json.JSONObject
 import java.nio.file.Files.readAllBytes
 import java.nio.file.Paths
 
-object ProfilingResultParser {
+object ProfilerResultParser {
     fun parse(directory: String, fileName: String): ProfilingResult {
         val result = ProfilingResult()
         val json = String(readAllBytes(Paths.get(directory, fileName)))

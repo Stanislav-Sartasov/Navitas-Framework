@@ -8,7 +8,7 @@ import javax.swing.JComponent
 
 class InstrumentedTestChoosingStep(
         private val constConfigModel: ConstConfigModel
-) : WizardStep<ConstConfigModel>("Choose tests for constants deriving") {
+) : WizardStep<ConstConfigModel>("Choose tests for energy constants deriving") {
 
     private val testList: CheckBoxList<String>
     private lateinit var selectedTestArray: BooleanArray

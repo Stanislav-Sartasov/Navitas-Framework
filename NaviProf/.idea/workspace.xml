@@ -5,34 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/BluetoothInfo.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/TestInfo.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/WifiInfo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/CpuInfo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingResult.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingTestLog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/ProfilingTestLog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/ComponentEnergyPair.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/data/model/components/ComponentEnergyPair.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/ToolWindowFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/ToolWindowFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/constants_dialog/steps/InstrumentedTestChoosingStep.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/profiling_dialog/ProfConfigModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/profiling_dialog/ProfConfigModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingAndConstantsVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingAndConstantsVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ConstantsResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ConstantsResultAnalyzer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilerResultParser.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/AnotherTest.mainActivity_start.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/BluetoothTest.startBluetoothActivity.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/InliningAnonymousClassTest.start.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/InliningSeparateClassTest.start.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/MultithreadingTest.startWithSort.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/MultithreadingTest.startWithoutSort.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/NavigationTest.mainActivity_to_childActivity_andBack_navigation.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/NavigationTest.mainActivity_to_childActivity_navigation.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/WifiTest.startWifiActivity.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/additional.SomeJavaTest.mainActivity_start.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/profileOutput/logs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/BluetoothConstant.bluetoothActiveTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/BluetoothConstant.bluetoothOnTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/WifiConstant.startWifiActiveTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/WifiConstant.startWifiOnTest.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,6 +366,8 @@
       <workItem from="1622371821481" duration="5673000" />
       <workItem from="1622389532327" duration="594000" />
       <workItem from="1622390212388" duration="4000" />
+      <workItem from="1622820390911" duration="1975000" />
+      <workItem from="1622823046905" duration="628000" />
     </task>
     <servers />
   </component>

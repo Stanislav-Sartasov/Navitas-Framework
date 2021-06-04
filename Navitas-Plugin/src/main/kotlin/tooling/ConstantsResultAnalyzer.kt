@@ -3,16 +3,19 @@ package tooling
 import data.model.BluetoothInfo
 import data.model.ProfilingResult
 import data.model.WifiInfo
+import domain.model.EnergyConstant
+import org.jetbrains.kotlin.idea.kdoc.Placeholder
+import org.jetbrains.kotlin.idea.kdoc.insert
 
 object ConstantsResultAnalyzer {
 
-    fun analyze(profilingResult: ProfilingResult): MutableMap<String, Float> {
-        val constantsMap = mutableMapOf<String, Float>()
+    fun analyze(profilingResult: ProfilingResult): List<EnergyConstant> {
+        val constantsList = mutableListOf<EnergyConstant>()
         for (testResult in profilingResult.getTestResults()) {
-            val testName = testResult.first
+            val testNameParts = testResult.first.split('.')
             val freqAndConstantMap = mutableMapOf<Double, Double>()
-            when (testName.substringBefore(".")) {
-                "WifiConstant" -> {
+            when (testNameParts[0]) {
+                "WifiConstants" -> {
                     val wifiMap = testResult.second.wifiInfo?.let { wifiTestLogConverter(it) }
                     wifiMap?.forEach { it ->
                         freqAndConstantMap[it.key.toDouble()] = it.value.average()
@@ -20,10 +23,10 @@ object ConstantsResultAnalyzer {
                     if (freqAndConstantMap.isNotEmpty()) {
                         val wifiRegressionModel = LinearRegression(freqAndConstantMap.keys.toList(), freqAndConstantMap.values.toList())
                         val wifiConstant = wifiRegressionModel.predict(0.0).toFloat()
-                        constantsMap[testName.substringAfter("WifiConstant.")] = wifiConstant
+                        constantsList.add(EnergyConstant(normalizeComponent(testNameParts[1]), wifiConstant))
                     }
                 }
-                "BluetoothConstant" -> {
+                "BluetoothConstants" -> {
                     val bluetoothMap = testResult.second.bluetoothInfo?.let { bluetoothTestLogConverter(it) }
                     bluetoothMap?.forEach { it ->
                         freqAndConstantMap[it.key.toDouble()] = it.value.average()
@@ -31,12 +34,12 @@ object ConstantsResultAnalyzer {
                     if (freqAndConstantMap.isNotEmpty()) {
                         val bluetoothRegressionModel = LinearRegression(freqAndConstantMap.keys.toList(), freqAndConstantMap.values.toList())
                         val bluetoothConstant = bluetoothRegressionModel.predict(0.0).toFloat()
-                        constantsMap[testName.substringAfter("BluetoothConstant.")] = bluetoothConstant
+                        constantsList.add(EnergyConstant(normalizeComponent(testNameParts[1]), bluetoothConstant))
                     }
                 }
             }
         }
-        return constantsMap
+        return constantsList
     }
 
     private fun wifiTestLogConverter(wifiInfoList: List<WifiInfo>): MutableMap<Float, List<Float>> {
@@ -69,5 +72,12 @@ object ConstantsResultAnalyzer {
             bluetoothFrequenciesMap[it.key] = bluetoothList
         }
         return bluetoothFrequenciesMap
+    }
+
+    private fun normalizeComponent(name : String) : String {
+        val upper = name.find { char -> char.toUpperCase() == char }!!
+        name.replaceFirst(upper.toString(), ".$upper", false)
+
+        return name.toLowerCase()
     }
 }

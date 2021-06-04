@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.idea.internal.makeBackup.random
 import java.util.*
 
 object ProfilingResultAnalyzer {
-
     fun analyze(profilingResult: ProfilingResult, powerProfile: PowerProfile): List<DetailedTestEnergyConsumption> {
         val result = mutableListOf<DetailedTestEnergyConsumption>()
 
@@ -96,27 +95,27 @@ object ProfilingResultAnalyzer {
 }
 
 // ATTENTION: only for debug
-fun processNode(node: CpuMethodEnergyConsumption, lvl: Int = 0) {
-    val offset = " ".repeat(lvl)
-    println(offset + node.methodName + " " + node.cpuEnergy + " " + node.startTimestamp + ".." + node.endTimestamp)
-    for (child in node.nestedMethods) {
-        processNode(child, lvl + 4)
-    }
-}
-
-// ATTENTION: only for debug
-fun main() {
-    val profile = PowerProfileManager.getDefaultProfile()
-    val raw = ProfilingResultParser.parse("C:/Users/EG/Documents/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
-    val result = ProfilingResultAnalyzer.analyze(raw, profile)
-    for (test in result) {
-        println(test.testName)
-        for (info in test.cpuEnergyConsumption.testDetails) {
-            println("Process ${info.key.first}, Thread ${info.key.second}")
-            for (method in info.value) {
-                processNode(method)
-            }
-            println("----------------------------------------------------")
-        }
-    }
-}
+//fun processNode(node: CpuMethodEnergyConsumption, lvl: Int = 0) {
+//    val offset = " ".repeat(lvl)
+//    println(offset + node.methodName + " " + node.cpuEnergy + " " + node.startTimestamp + ".." + node.endTimestamp)
+//    for (child in node.nestedMethods) {
+//        processNode(child, lvl + 4)
+//    }
+//}
+//
+//// ATTENTION: only for debug
+//fun main() {
+//    val profile = PowerProfileManager.getDefaultProfile()
+//    val raw = ProfilerResultParser.parse("C:/Users/EG/Documents/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
+//    val result = ProfilingResultAnalyzer.analyze(raw, profile)
+//    for (test in result) {
+//        println(test.testName)
+//        for (info in test.cpuEnergyConsumption.testDetails) {
+//            println("Process ${info.key.first}, Thread ${info.key.second}")
+//            for (method in info.value) {
+//                processNode(method)
+//            }
+//            println("----------------------------------------------------")
+//        }
+//    }
+//}

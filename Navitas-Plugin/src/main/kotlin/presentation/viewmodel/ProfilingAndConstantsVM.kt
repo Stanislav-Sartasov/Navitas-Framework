@@ -7,20 +7,19 @@ import data.model.ProfilingError
 import data.model.RequestVerdict
 import domain.model.ProfilingConfiguration
 import domain.repository.ConfigurationRepository
+import domain.repository.ConstantsResultRepository
 import domain.repository.PowerProfileRepository
 import domain.repository.ProfilingResultRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import tooling.GradlePluginInjector
-import tooling.GradleTaskExecutor
-import tooling.ProfilingResultAnalyzer
-import tooling.ProfilingResultParser
+import tooling.*
 
 class ProfilingAndConstantsVM(
         private val project: Project,
         private val configurationRepository: ConfigurationRepository,
         private val profilingResultRepository: ProfilingResultRepository,
+        private val constantsResultRepository: ConstantsResultRepository,
         private val powerProfileRepository: PowerProfileRepository
 ) {
 
@@ -43,18 +42,29 @@ class ProfilingAndConstantsVM(
     private val onExecuteTaskCallback = object : TaskCallback {
         override fun onSuccess() {
             Thread {
-                val profilingResult = ProfilingResultParser.parse("${currentConfiguration!!.modulePath}/profileOutput", "logs.json")
-                val analysisResult = ProfilingResultAnalyzer.analyze(profilingResult, powerProfile!!)
-                profilingResultRepository.save(analysisResult)
+                val profilerResult = ProfilerResultParser.parse("${currentConfiguration!!.modulePath}/profilingOutput", "logs.json")
+
+                when(mode)
+                {
+                    "profiling" -> {
+                        val profilingAnalysisResult = ProfilingResultAnalyzer.analyze(profilerResult, powerProfile!!)
+                        profilingResultRepository.save(profilingAnalysisResult)
+                    }
+                    "constants" -> {
+                        val constantsAnalysisResult = ConstantsResultAnalyzer.analyze(profilerResult)
+                        constantsResultRepository.save(constantsAnalysisResult)
+                        XMLGenerator.powerProfile(constantsAnalysisResult, "${currentConfiguration!!.modulePath}/constantsOutput")
+                    }
+                }
 
                 profilingVerdictSubject.onNext(RequestVerdict.Success(Unit))
-                viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+                viewStateSubject.onNext(ViewState.INITIAL)
             }.start()
         }
 
         override fun onFailure() {
             profilingVerdictSubject.onNext(RequestVerdict.Failure(ProfilingError.FailedTaskExecutionError()))
-            viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+            viewStateSubject.onNext(ViewState.INITIAL)
         }
     }
 
@@ -128,7 +138,7 @@ class ProfilingAndConstantsVM(
 
     // Only for debug JSON parsing
 //    private fun printJSONParseResult(config : ProfilingConfiguration, parseResult : ProfilingResult) {
-//        val writer = File("${config.modulePath}/profileOutput/parseResult.txt").bufferedWriter()
+//        val writer = File("${config.modulePath}/profilingOutput/parseResult.txt").bufferedWriter()
 //        val parsingResult = parseResult.getTestResults()
 //
 //        for(i in parsingResult)
@@ -197,7 +207,7 @@ class ProfilingAndConstantsVM(
 
     // Only for debug power_profile.xml parsing
 //    private fun printPowerProfileParseResult(config : ProfilingConfiguration, powerProfile : PowerProfile) {
-//        val writer = File("${config.modulePath}/profileOutput/powerProfile.txt").bufferedWriter()
+//        val writer = File("${config.modulePath}/profilingOutput/powerProfile.txt").bufferedWriter()
 //
 //        writer.write("wifi.on: " + powerProfile.wifiOn.toString())
 //        writer.newLine()

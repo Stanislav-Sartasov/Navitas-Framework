@@ -36,57 +36,57 @@ open class ProfPlugin : Plugin<Project> {
 
         val testFinished = AtomicBoolean(false)
 
-        fun cpuLogsOfClass(profileOutput: File, path: String) {
+        fun cpuLogsOfClass(profilingOutput: File, path: String) {
             target.exec {
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST", "-v", "threadtime")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$path.txt", true)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
             }
         }
 
-        fun cpuLogsOfMethod(profileOutput: File, pathName: String, method: String) {
+        fun cpuLogsOfMethod(profilingOutput: File, pathName: String, method: String) {
             target.exec {
                 it.commandLine("$adb", "logcat", "-d", "-s", "TEST", "-v", "threadtime")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
 
-        fun componentsLogsOfClass(profileOutput: File, path: String, frequencyInSec: Float) {
+        fun componentsLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
             target.exec {
                 val date = SimpleDateFormat("MM-dd").format(Date())
                 val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
                     "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$path.txt", true)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
             }
         }
 
-        fun componentsLoggingOfClassWithFrequency(milliseconds : Long, profileOutput: File, path: String) {
+        fun componentsLoggingOfClassWithFrequency(milliseconds : Long, profilingOutput: File, path: String) {
             val frequencyInSec = milliseconds / 1000f
 
             while(!testFinished.get()) {
-                componentsLogsOfClass(profileOutput, path, frequencyInSec)
+                componentsLogsOfClass(profilingOutput, path, frequencyInSec)
 
                 Thread.sleep(milliseconds)
             }
         }
 
-        fun componentsLogsOfMethod(profileOutput: File, pathName: String, method: String, frequencyInSec: Float) {
+        fun componentsLogsOfMethod(profilingOutput: File, pathName: String, method: String, frequencyInSec: Float) {
             target.exec {
                 val date = SimpleDateFormat("MM-dd").format(Date())
                 val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
                     "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
 
-        fun componentsLoggingOfMethodWithFrequency(milliseconds : Long, profileOutput: File, pathName: String, method: String) {
+        fun componentsLoggingOfMethodWithFrequency(milliseconds : Long, profilingOutput: File, pathName: String, method: String) {
             val frequencyInSec = milliseconds / 1000f
 
             while(!testFinished.get()) {
-                componentsLogsOfMethod(profileOutput, pathName, method, frequencyInSec)
+                componentsLogsOfMethod(profilingOutput, pathName, method, frequencyInSec)
 
                 Thread.sleep(milliseconds)
             }
@@ -149,8 +149,8 @@ open class ProfPlugin : Plugin<Project> {
             if (testPaths != null && testApkPath != null) {
                 val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
-                val profileOutput = File("${target.projectDir}/profileOutput")
-                if (!profileOutput.exists()) profileOutput.mkdirs()
+                val profilingOutput = File("${target.projectDir}/profilingOutput")
+                if (!profilingOutput.exists()) profilingOutput.mkdirs()
 
                 fun profileClass(path : String, loggers : List<Thread>) {
                     testConfiguration()
@@ -158,7 +158,7 @@ open class ProfPlugin : Plugin<Project> {
 
                     loggers.forEach { logger -> logger.start() }
 
-                    val testOutput = File("${profileOutput.absolutePath}/$path.txt")
+                    val testOutput = File("${profilingOutput.absolutePath}/$path.txt")
                     while(!testOutput.exists())
                     {
                         Thread.sleep(0)
@@ -170,7 +170,7 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    cpuLogsOfClass(profileOutput, path)
+                    cpuLogsOfClass(profilingOutput, path)
                 }
 
                 fun profileMethod(pathName : String, method : String, loggers : List<Thread>) {
@@ -179,7 +179,7 @@ open class ProfPlugin : Plugin<Project> {
 
                     loggers.forEach { logger -> logger.start() }
 
-                    val testOutput = File("${profileOutput.absolutePath}/$pathName.$method.txt")
+                    val testOutput = File("${profilingOutput.absolutePath}/$pathName.$method.txt")
                     while(!testOutput.exists())
                     {
                         Thread.sleep(0)
@@ -191,7 +191,7 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    cpuLogsOfMethod(profileOutput, pathName, method)
+                    cpuLogsOfMethod(profilingOutput, pathName, method)
                 }
 
                 if (project.hasProperty("granularity"))
@@ -204,7 +204,7 @@ open class ProfPlugin : Plugin<Project> {
                                             val componentsLogger = Thread {
                                                 componentsLoggingOfClassWithFrequency(
                                                     0L,
-                                                    profileOutput,
+                                                    profilingOutput,
                                                     path
                                                 )
                                             }
@@ -218,35 +218,35 @@ open class ProfPlugin : Plugin<Project> {
                                                 Thread {
                                                     componentsLoggingOfClassWithFrequency(
                                                         100L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         path
                                                     )
                                                 },
                                                 Thread {
                                                     componentsLoggingOfClassWithFrequency(
                                                         200L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         path
                                                     )
                                                 },
                                                 Thread {
                                                     componentsLoggingOfClassWithFrequency(
                                                         500L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         path
                                                     )
                                                 },
                                                 Thread {
                                                     componentsLoggingOfClassWithFrequency(
                                                         1000L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         path
                                                     )
                                                 },
                                                 Thread {
                                                     componentsLoggingOfClassWithFrequency(
                                                         2000L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         path
                                                     )
                                                 }
@@ -266,7 +266,7 @@ open class ProfPlugin : Plugin<Project> {
                                     val componentsLogger = Thread {
                                         componentsLoggingOfClassWithFrequency(
                                             0L,
-                                            profileOutput,
+                                            profilingOutput,
                                             path
                                         )
                                     }
@@ -287,7 +287,7 @@ open class ProfPlugin : Plugin<Project> {
                                                 val componentsLogger = Thread {
                                                     componentsLoggingOfMethodWithFrequency(
                                                         0L,
-                                                        profileOutput,
+                                                        profilingOutput,
                                                         pathName,
                                                         method
                                                     )
@@ -307,7 +307,7 @@ open class ProfPlugin : Plugin<Project> {
                                                     Thread {
                                                         componentsLoggingOfMethodWithFrequency(
                                                             100L,
-                                                            profileOutput,
+                                                            profilingOutput,
                                                             pathName,
                                                             method
                                                         )
@@ -315,7 +315,7 @@ open class ProfPlugin : Plugin<Project> {
                                                     Thread {
                                                         componentsLoggingOfMethodWithFrequency(
                                                             200L,
-                                                            profileOutput,
+                                                            profilingOutput,
                                                             pathName,
                                                             method
                                                         )
@@ -323,7 +323,7 @@ open class ProfPlugin : Plugin<Project> {
                                                     Thread {
                                                         componentsLoggingOfMethodWithFrequency(
                                                             500L,
-                                                            profileOutput,
+                                                            profilingOutput,
                                                             pathName,
                                                             method
                                                         )
@@ -331,7 +331,7 @@ open class ProfPlugin : Plugin<Project> {
                                                     Thread {
                                                         componentsLoggingOfMethodWithFrequency(
                                                             1000L,
-                                                            profileOutput,
+                                                            profilingOutput,
                                                             pathName,
                                                             method
                                                         )
@@ -339,7 +339,7 @@ open class ProfPlugin : Plugin<Project> {
                                                     Thread {
                                                         componentsLoggingOfMethodWithFrequency(
                                                             2000L,
-                                                            profileOutput,
+                                                            profilingOutput,
                                                             pathName,
                                                             method
                                                         )
@@ -365,7 +365,7 @@ open class ProfPlugin : Plugin<Project> {
                                         val componentsLogger = Thread {
                                             componentsLoggingOfMethodWithFrequency(
                                                 0L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 pathName,
                                                 method
                                             )
@@ -390,7 +390,7 @@ open class ProfPlugin : Plugin<Project> {
                                     val componentsLogger = Thread {
                                         componentsLoggingOfClassWithFrequency(
                                             0L,
-                                            profileOutput,
+                                            profilingOutput,
                                             path
                                         )
                                     }
@@ -404,35 +404,35 @@ open class ProfPlugin : Plugin<Project> {
                                         Thread {
                                             componentsLoggingOfClassWithFrequency(
                                                 100L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 path
                                             )
                                         },
                                         Thread {
                                             componentsLoggingOfClassWithFrequency(
                                                 200L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 path
                                             )
                                         },
                                         Thread {
                                             componentsLoggingOfClassWithFrequency(
                                                 500L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 path
                                             )
                                         },
                                         Thread {
                                             componentsLoggingOfClassWithFrequency(
                                                 1000L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 path
                                             )
                                         },
                                         Thread {
                                             componentsLoggingOfClassWithFrequency(
                                                 2000L,
-                                                profileOutput,
+                                                profilingOutput,
                                                 path
                                             )
                                         }
@@ -452,7 +452,7 @@ open class ProfPlugin : Plugin<Project> {
                             val componentsLogger = Thread {
                                 componentsLoggingOfClassWithFrequency(
                                     0L,
-                                    profileOutput,
+                                    profilingOutput,
                                     path
                                 )
                             }
@@ -472,7 +472,7 @@ open class ProfPlugin : Plugin<Project> {
 
         target.tasks.register("customProfile") {
             it.doLast {
-                JSONGenerator().generate("${target.projectDir}/profileOutput/")
+                JSONGenerator().generate("${target.projectDir}/profilingOutput/")
             }
         }
 
@@ -516,7 +516,7 @@ open class ProfPlugin : Plugin<Project> {
 
         target.tasks.register("defaultProfile") {
             it.doLast {
-                JSONGenerator().generate("${target.projectDir}/profileOutput/")
+                JSONGenerator().generate("${target.projectDir}/profilingOutput/")
             }
         }
 

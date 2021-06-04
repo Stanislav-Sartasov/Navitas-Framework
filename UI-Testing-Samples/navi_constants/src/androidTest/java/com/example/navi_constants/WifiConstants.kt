@@ -6,16 +6,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class WifiConstant {
+class WifiConstants {
 
     @Test
-    fun startWifiOnTest() {
+    fun wifiOn() {
         ActivityScenario.launch(MainActivity::class.java)
         Thread.sleep(120000)
     }
 
     @Test
-    fun startWifiActiveTest() {
+    fun wifiActive() {
         ActivityScenario.launch(YoutubeActivity::class.java)
         Thread.sleep(120000)
     }

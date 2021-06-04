@@ -3,6 +3,7 @@ package presentation.view
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import data.repository.ConfigurationRepositoryImpl
+import data.repository.ConstantsResultRepositoryImpl
 import data.repository.PowerProfileRepositoryImpl
 import data.repository.ProfilingResultRepositoryImpl
 import presentation.view.common.ContentContainer
@@ -21,13 +22,14 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
         val configRepository = ConfigurationRepositoryImpl()
         val powerProfileRepository = PowerProfileRepositoryImpl()
         val profilingResultRepository = ProfilingResultRepositoryImpl()
+        val constantsResultRepository = ConstantsResultRepositoryImpl()
 
         val providers = listOf<Provider<ContentContainer>>(
                 Provider {
                     ConfiguringContentView(
                         project,
                         router,
-                        ProfilingAndConstantsVM(project, configRepository, profilingResultRepository, powerProfileRepository),
+                        ProfilingAndConstantsVM(project, configRepository, profilingResultRepository, constantsResultRepository, powerProfileRepository),
                         ConfiguringVM(configRepository),
                         PowerProfileVM(powerProfileRepository)
                     )

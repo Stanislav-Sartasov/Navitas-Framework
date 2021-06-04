@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="This is the main screen of the Navi Constant app. This application runs tests that determine the power consumption constants of your mobile device."
+            android:text="This is the main screen of the Navi Constants app. This application runs tests that determine the energy consumption constants of your mobile device."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

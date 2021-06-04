@@ -12,10 +12,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BluetoothConstant {
+class BluetoothConstants {
 
     @Test
-    fun bluetoothOnTest() {
+    fun bluetoothOn() {
         ActivityScenario.launch(MainActivity::class.java)
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (!mBluetoothAdapter.isEnabled) {
@@ -25,7 +25,7 @@ class BluetoothConstant {
     }
 
     @Test
-    fun bluetoothScanTest() {
+    fun bluetoothScan() {
         ActivityScenario.launch(MainActivity::class.java)
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (!mBluetoothAdapter.isEnabled) {
@@ -39,7 +39,7 @@ class BluetoothConstant {
     }
 
     @Test
-    fun bluetoothActiveTest() {
+    fun bluetoothActive() {
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (!mBluetoothAdapter.isEnabled) {
             mBluetoothAdapter.enable()
@@ -79,7 +79,6 @@ class BluetoothConstant {
             // Ignore for now
         }
     }
-
 
     //TODO: find a way to connect to bluetooth device via test
 //    private val scanCallbackWithConnect: ScanCallback = object : ScanCallback() {
