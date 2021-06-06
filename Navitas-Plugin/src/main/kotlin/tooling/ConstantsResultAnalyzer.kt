@@ -76,8 +76,7 @@ object ConstantsResultAnalyzer {
 
     private fun normalizeComponent(name : String) : String {
         val upper = name.find { char -> char.toUpperCase() == char }!!
-        name.replaceFirst(upper.toString(), ".$upper", false)
 
-        return name.toLowerCase()
+        return name.replace(upper.toString(), ".${upper.toLowerCase()}", false)
     }
 }

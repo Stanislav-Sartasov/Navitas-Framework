@@ -5,25 +5,169 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059e5573-54ec-47b1-9cfc-dbf8567a8f2c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../NaviTests/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/androidTest/java/com/example/navi_constants/BluetoothConstants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/androidTest/java/com/example/navi_constants/WifiConstants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/java/com/example/navi_constants/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/java/com/example/navi_constants/MusicActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/java/com/example/navi_constants/YoutubeActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/layout/activity_music.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/layout/activity_youtube.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/raw/test_song.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_constants/src/test/java/com/example/navi_constants/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/AnotherTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/BluetoothTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/InliningClassTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/MultithreadingTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/NavigationTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/WifiTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/additional/SomeJavaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/androidTest/java/com/example/navi_test/tools/Commander.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/java/com/example/navi_test/Background.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/java/com/example/navi_test/ChildActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/java/com/example/navi_test/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/java/com/example/navi_test/YoutubeActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/layout/activity_child.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/layout/activity_youtube.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/navi_test/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NaviTests/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ProfPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/ToolWindowFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/ToolWindowFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/constants_dialog/steps/InstrumentedTestChoosingStep.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/profiling_dialog/ProfConfigModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/view/configuring/profiling_dialog/ProfConfigModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingAndConstantsVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/presentation/viewmodel/ProfilingAndConstantsVM.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ConstantsResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ConstantsResultAnalyzer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/GradlePluginInjector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultAnalyzer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilingResultParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/ProfilerResultParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/BluetoothConstant.bluetoothActiveTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/BluetoothConstant.bluetoothOnTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/WifiConstant.startWifiActiveTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profileOutput/WifiConstant.startWifiOnTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/XMLGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Navitas-Plugin/src/main/kotlin/tooling/XMLGenerator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/constantsOutput/power_profile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/libs/YouTubeAndroidPlayerApi.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profilingOutput/WifiConstants.wifiOn.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/profilingOutput/logs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/androidTest/java/com/example/navi_constants/BluetoothConstants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/androidTest/java/com/example/navi_constants/WifiConstants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/java/com/example/navi_constants/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/java/com/example/navi_constants/MusicActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/java/com/example/navi_constants/YoutubeActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/layout/activity_music.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/layout/activity_youtube.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/raw/test_song.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_constants/src/test/java/com/example/navi_constants/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/libs/YouTubeAndroidPlayerApi.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/AnotherTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/BluetoothTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/InliningClassTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/MultithreadingTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/NavigationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/WifiTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/additional/SomeJavaTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/androidTest/java/com/example/navi_test/tools/Commander.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/java/com/example/navi_test/Background.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/java/com/example/navi_test/ChildActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/java/com/example/navi_test/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/java/com/example/navi_test/YoutubeActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/layout/activity_child.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/layout/activity_youtube.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/navi_test/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI-Testing-Samples/settings.gradle" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +265,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587480664051" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Navitas-Plugin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NaviTests" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -138,6 +282,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.NaviProf [publishToMavenLocal]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NaviProf [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -368,6 +523,7 @@
       <workItem from="1622390212388" duration="4000" />
       <workItem from="1622820390911" duration="1975000" />
       <workItem from="1622823046905" duration="628000" />
+      <workItem from="1622978261386" duration="5171000" />
     </task>
     <servers />
   </component>

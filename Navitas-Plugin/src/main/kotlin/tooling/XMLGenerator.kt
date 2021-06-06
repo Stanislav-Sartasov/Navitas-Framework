@@ -6,7 +6,14 @@ import java.io.File
 
 object XMLGenerator {
     fun powerProfile(constantsList : List<EnergyConstant>, directory : String) {
-        val constantsOutput = File("$directory/power_profile.xml")
+        val constantsOutput = File(directory)
+        if(!constantsOutput.exists()) constantsOutput.mkdirs()
+
+        val powerProfileFile = File("$directory/power_profile.xml")
+        if (!powerProfileFile.exists()) powerProfileFile.createNewFile() else {
+            powerProfileFile.delete()
+            powerProfileFile.createNewFile()
+        }
 
         val powerProfile = xml("device", "utf-8", XmlVersion.V10) {
             attribute("name", "Android")
@@ -26,6 +33,6 @@ object XMLGenerator {
             indent = "\t"
         ))
 
-        constantsOutput.writeText(powerProfile)
+        powerProfileFile.writeText(powerProfile)
     }
 }

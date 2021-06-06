@@ -112,6 +112,9 @@ open class ProfPlugin : Plugin<Project> {
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "1")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "1")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "1")
+
+                //it.commandLine("$adb", "shell", "svc", "wifi", "disable")
+                //it.commandLine("$adb", "shell", "svc", "bluetooth", "disable")
             }
         }
 
@@ -150,7 +153,9 @@ open class ProfPlugin : Plugin<Project> {
                 val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
                 val profilingOutput = File("${target.projectDir}/profilingOutput")
-                if (!profilingOutput.exists()) profilingOutput.mkdirs()
+                if (!profilingOutput.exists()) profilingOutput.mkdirs() else profilingOutput.walk().forEach { it.delete() }
+                val constantsOutput = File("${target.projectDir}/constantsOutput")
+                if (!constantsOutput.exists()) profilingOutput.mkdirs() else constantsOutput.walk().forEach { it.delete() }
 
                 fun profileClass(path : String, loggers : List<Thread>) {
                     testConfiguration()
@@ -777,15 +782,18 @@ private class JSONGenerator {
                 testObject["logs"] = testLogs
 
                 testList.add(testObject)
-
-                //it.delete()
             }
         }
 
         val json = JSONObject()
         json["tests"] = testList
 
-        val file = FileWriter("$directory/logs.json")
+        val jsonFile = File("$directory/logs.json")
+        if (!jsonFile.exists()) jsonFile.createNewFile() else {
+            jsonFile.delete()
+            jsonFile.createNewFile()
+        }
+        val file = FileWriter(jsonFile)
         file.write(json.toJSONString())
         file.flush()
         file.close()

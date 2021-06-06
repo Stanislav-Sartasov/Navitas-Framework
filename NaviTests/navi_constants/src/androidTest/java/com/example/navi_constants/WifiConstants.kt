@@ -11,13 +11,13 @@ class WifiConstants {
     @Test
     fun wifiOn() {
         ActivityScenario.launch(MainActivity::class.java)
-        Thread.sleep(120000)
+        Thread.sleep(30000)
     }
 
     @Test
     fun wifiActive() {
         ActivityScenario.launch(YoutubeActivity::class.java)
-        Thread.sleep(120000)
+        Thread.sleep(30000)
     }
 
 }
