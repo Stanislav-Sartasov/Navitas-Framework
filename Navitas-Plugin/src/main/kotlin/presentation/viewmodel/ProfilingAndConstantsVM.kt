@@ -24,7 +24,7 @@ class ProfilingAndConstantsVM(
 ) {
 
     enum class ViewState {
-        INITIAL, READY_FOR_PROFILING, READY_FOR_CONSTANTS, DURING
+        INITIAL, POWER_PROFILE_REQUIRED, READY_FOR_PROFILING, READY_FOR_CONSTANTS, DURING
     }
 
     private val profilingVerdictSubject = PublishSubject.create<RequestVerdict<Unit, ProfilingError>>()
@@ -47,12 +47,10 @@ class ProfilingAndConstantsVM(
                 when(mode)
                 {
                     "profiling" -> {
-                        configurationRepository.switchMode("profiling")
                         val profilingAnalysisResult = ProfilingResultAnalyzer.analyze(profilerResult, powerProfile!!)
                         profilingResultRepository.save(profilingAnalysisResult)
                     }
                     "constants" -> {
-                        configurationRepository.switchMode("constants")
                         val constantsAnalysisResult = ConstantsResultAnalyzer.analyze(profilerResult)
                         constantsResultRepository.save(constantsAnalysisResult)
                         XMLGenerator.powerProfile(constantsAnalysisResult, "${currentConfiguration!!.modulePath}/constantsOutput")
@@ -81,29 +79,28 @@ class ProfilingAndConstantsVM(
 
                     mode = if (currentConfiguration!!.moduleName.split('.').contains("navi_constants"))
                         "constants" else "profiling"
+                    configurationRepository.switchMode(mode!!)
 
+                    if (powerProfile == null && mode == "profiling") {
+                        viewStateSubject.onNext(ViewState.POWER_PROFILE_REQUIRED)
+                    }
+                    if (powerProfile != null && mode == "profiling") {
+                        viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+                    }
                     if (powerProfile == null && mode == "constants") {
                         viewStateSubject.onNext(ViewState.READY_FOR_CONSTANTS)
                     }
-                    if (powerProfile == null && mode != "constants") {
-                        viewStateSubject.onNext(ViewState.INITIAL)
-                    }
-                    else if (powerProfile != null && mode == "constants") {
+                    if (powerProfile != null && mode == "constants") {
                         powerProfile = null
                         viewStateSubject.onNext(ViewState.READY_FOR_CONSTANTS)
-                    }
-                    else if (powerProfile != null && mode != "constants") {
-                        viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
                     }
                 }
 
         powerProfileRepository.fetch()
-                .subscribe { profile ->
-                    powerProfile = profile
-                    if (mode != "constants") {
-                        viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
-                    }
-                }
+            .subscribe { profile ->
+                powerProfile = profile
+                viewStateSubject.onNext(ViewState.READY_FOR_PROFILING)
+            }
     }
 
     // TODO: ISSUE: task doesn't stop if device is unplugged

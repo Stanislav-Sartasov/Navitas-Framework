@@ -155,39 +155,46 @@ class ConfiguringContentView(
                 }
 
         profilingAndConstantsVM.viewState
-                .subscribe { state ->
-                    AppUIExecutor.onUiThread().execute {
-                        when (state) {
-                            ProfilingAndConstantsVM.ViewState.INITIAL -> {
-                                startProfilingAction.isEnabled = false
-                                stopProfilingAction.isEnabled = false
-                                configureProfilingAction.isEnabled = true
-                                configureConstantsAction.isEnabled = true
-                                choosePowerProfileAction.isEnabled = true
-                            }
-                            ProfilingAndConstantsVM.ViewState.READY_FOR_PROFILING -> {
-                                startProfilingAction.isEnabled = true
-                                stopProfilingAction.isEnabled = false
-                                configureProfilingAction.isEnabled = true
-                                configureConstantsAction.isEnabled = true
-                                choosePowerProfileAction.isEnabled = true
-                            }
-                            ProfilingAndConstantsVM.ViewState.READY_FOR_CONSTANTS -> {
-                                startProfilingAction.isEnabled = true
-                                stopProfilingAction.isEnabled = false
-                                configureProfilingAction.isEnabled = true
-                                configureConstantsAction.isEnabled = true
-                                choosePowerProfileAction.isEnabled = false
-                            }
-                            ProfilingAndConstantsVM.ViewState.DURING -> {
-                                startProfilingAction.isEnabled = false
-                                stopProfilingAction.isEnabled = true
-                                configureProfilingAction.isEnabled = false
-                                configureConstantsAction.isEnabled = false
-                                choosePowerProfileAction.isEnabled = false
-                            }
+            .subscribe { state ->
+                AppUIExecutor.onUiThread().execute {
+                    when (state) {
+                        ProfilingAndConstantsVM.ViewState.INITIAL -> {
+                            configureProfilingAction.isEnabled = true
+                            configureConstantsAction.isEnabled = true
+                            choosePowerProfileAction.isEnabled = false
+                            startProfilingAction.isEnabled = false
+                            stopProfilingAction.isEnabled = false
+                        }
+                        ProfilingAndConstantsVM.ViewState.POWER_PROFILE_REQUIRED -> {
+                            configureProfilingAction.isEnabled = true
+                            configureConstantsAction.isEnabled = true
+                            choosePowerProfileAction.isEnabled = true
+                            startProfilingAction.isEnabled = false
+                            stopProfilingAction.isEnabled = false
+                        }
+                        ProfilingAndConstantsVM.ViewState.READY_FOR_PROFILING -> {
+                            configureProfilingAction.isEnabled = true
+                            configureConstantsAction.isEnabled = true
+                            choosePowerProfileAction.isEnabled = true
+                            startProfilingAction.isEnabled = true
+                            stopProfilingAction.isEnabled = false
+                        }
+                        ProfilingAndConstantsVM.ViewState.READY_FOR_CONSTANTS -> {
+                            configureProfilingAction.isEnabled = true
+                            configureConstantsAction.isEnabled = true
+                            choosePowerProfileAction.isEnabled = false
+                            startProfilingAction.isEnabled = true
+                            stopProfilingAction.isEnabled = false
+                        }
+                        ProfilingAndConstantsVM.ViewState.DURING -> {
+                            configureProfilingAction.isEnabled = false
+                            configureConstantsAction.isEnabled = false
+                            choosePowerProfileAction.isEnabled = false
+                            startProfilingAction.isEnabled = false
+                            stopProfilingAction.isEnabled = true
                         }
                     }
                 }
+            }
     }
 }

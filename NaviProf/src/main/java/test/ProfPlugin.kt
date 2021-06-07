@@ -126,6 +126,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
 
+                // Waiting for successful log cleanup
                 Thread.sleep(2000)
             }
         }
