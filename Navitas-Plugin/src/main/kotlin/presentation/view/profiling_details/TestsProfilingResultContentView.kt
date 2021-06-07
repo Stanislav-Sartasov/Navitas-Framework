@@ -19,7 +19,7 @@ import javax.swing.ListSelectionModel
 
 class TestsProfilingResultContentView(
         private val router: ContentRouter,
-        private val isConstantMode: Boolean,
+        private val mode: String,
         private val profilingResultVM: TestEnergyConsumptionListVM,
         private val constantsResultVM: ConstantsEnergyListVM
 ) : ContentContainer() {
@@ -48,7 +48,7 @@ class TestsProfilingResultContentView(
                 actionManager.copyTemplate("navitas.action.Back", newAction)
                 add(newAction)
             }
-            if (!isConstantMode) {
+            if (mode == "profiling") {
                 // add 'see details' button
                 ShowDetailsAction(onShowDetailsClickCallback).also { newAction ->
                     actionManager.copyTemplate("navitas.action.ShowDetails", newAction)
@@ -69,25 +69,27 @@ class TestsProfilingResultContentView(
     private fun setupUI() {
         tableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
 
-        if (!isConstantMode) {
-            profilingResultVM.energyConsumption
-                .subscribe { result ->
-                    AppUIExecutor.onUiThread().execute {
-                        // TODO: update chart
-                        tableView.model = TestEnergyConsumptionTableModel(result)
+        when (mode) {
+            "profiling" -> {
+                profilingResultVM.energyConsumption
+                    .subscribe { result ->
+                        AppUIExecutor.onUiThread().execute {
+                            // TODO: update chart
+                            tableView.model = TestEnergyConsumptionTableModel(result)
+                        }
                     }
-                }
 
-            profilingResultVM.fetch()
-        }
-        else {
-            constantsResultVM.energyConstant
-                .subscribe { result ->
-                    AppUIExecutor.onUiThread().execute {
-                        tableView.model = ConstantsEnergyTableModel(result)
+                profilingResultVM.fetch()
+            }
+            "constants" -> {
+                constantsResultVM.energyConstant
+                    .subscribe { result ->
+                        AppUIExecutor.onUiThread().execute {
+                            tableView.model = ConstantsEnergyTableModel(result)
+                        }
                     }
-                }
-            constantsResultVM.fetch()
+                constantsResultVM.fetch()
+            }
         }
     }
 }

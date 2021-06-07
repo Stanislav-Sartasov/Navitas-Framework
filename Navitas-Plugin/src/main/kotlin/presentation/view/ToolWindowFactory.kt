@@ -35,7 +35,7 @@ class ToolWindowFactory : com.intellij.openapi.wm.ToolWindowFactory {
                     )
                 },
                 Provider {
-                    TestsProfilingResultContentView(router, configRepository.isConstantMode, TestEnergyConsumptionListVM(profilingResultRepository), ConstantsEnergyListVM(constantsResultRepository))
+                    TestsProfilingResultContentView(router, configRepository.mode, TestEnergyConsumptionListVM(profilingResultRepository), ConstantsEnergyListVM(constantsResultRepository))
                 },
                 Provider {
                     TestProfilingResultDetailsContentView(router, DetailedTestEnergyConsumptionVM(profilingResultRepository))

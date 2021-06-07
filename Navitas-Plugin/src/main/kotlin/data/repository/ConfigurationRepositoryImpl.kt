@@ -19,9 +19,9 @@ class ConfigurationRepositoryImpl : ConfigurationRepository {
         profilingConfigurationSubject.onNext(config)
     }
 
-    override fun switchMode() {
-        isConstantMode = true
+    override fun switchMode(mode: String) {
+        this.mode = mode
     }
 
-    var isConstantMode = false
+    lateinit var mode: String
 }

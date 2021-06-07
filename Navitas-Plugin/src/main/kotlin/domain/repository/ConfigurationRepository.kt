@@ -7,5 +7,5 @@ interface ConfigurationRepository {
 
     fun fetch(): Observable<ProfilingConfiguration>
     fun save(config: ProfilingConfiguration)
-    fun switchMode()
+    fun switchMode(mode: String)
 }
