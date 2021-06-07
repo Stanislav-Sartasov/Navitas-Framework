@@ -23,7 +23,7 @@ plugins {
 
 archivesBaseName = 'NaviProf'
 group = 'com.github.stanislav-sartasov'
-version = '1.32'
+version = '1.90'
 
 
 repositories {

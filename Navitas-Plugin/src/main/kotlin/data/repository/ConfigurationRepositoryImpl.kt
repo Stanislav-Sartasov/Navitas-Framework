@@ -18,4 +18,10 @@ class ConfigurationRepositoryImpl : ConfigurationRepository {
         isEmpty = false
         profilingConfigurationSubject.onNext(config)
     }
+
+    override fun switchMode(mode: String) {
+        this.mode = mode
+    }
+
+    lateinit var mode: String
 }

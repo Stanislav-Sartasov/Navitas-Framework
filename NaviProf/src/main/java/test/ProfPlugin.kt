@@ -12,6 +12,7 @@ import java.io.FileOutputStream
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.regex.Pattern
 
 open class ProfPlugin : Plugin<Project> {
@@ -33,16 +34,87 @@ open class ProfPlugin : Plugin<Project> {
             }
         }
 
+        val testFinished = AtomicBoolean(false)
+
+        fun cpuLogsOfClass(profilingOutput: File, path: String) {
+            target.exec {
+                it.commandLine("$adb", "logcat", "-d", "-s", "TEST", "-v", "threadtime")
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
+            }
+        }
+
+        fun cpuLogsOfMethod(profilingOutput: File, pathName: String, method: String) {
+            target.exec {
+                it.commandLine("$adb", "logcat", "-d", "-s", "TEST", "-v", "threadtime")
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
+        fun componentsLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
+            target.exec {
+                val date = SimpleDateFormat("MM-dd").format(Date())
+                val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
+                    "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
+            }
+        }
+
+        fun componentsLoggingOfClassWithFrequency(milliseconds : Long, profilingOutput: File, path: String) {
+            val frequencyInSec = milliseconds / 1000f
+
+            while(!testFinished.get()) {
+                componentsLogsOfClass(profilingOutput, path, frequencyInSec)
+
+                Thread.sleep(milliseconds)
+            }
+        }
+
+        fun componentsLogsOfMethod(profilingOutput: File, pathName: String, method: String, frequencyInSec: Float) {
+            target.exec {
+                val date = SimpleDateFormat("MM-dd").format(Date())
+                val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
+                    "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
+        fun componentsLoggingOfMethodWithFrequency(milliseconds : Long, profilingOutput: File, pathName: String, method: String) {
+            val frequencyInSec = milliseconds / 1000f
+
+            while(!testFinished.get()) {
+                componentsLogsOfMethod(profilingOutput, pathName, method, frequencyInSec)
+
+                Thread.sleep(milliseconds)
+            }
+        }
+
         val testConfiguration = {
             target.exec {
-                it.commandLine("$adb", "shell", "dumpsys", "battery", "unplug")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "ac", "0")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "0")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "0")
                 it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "0")
 
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "unplug")
+
                 //it.commandLine("$adb", "shell", "svc", "wifi", "enable")
                 //it.commandLine("$adb", "shell", "svc", "bluetooth", "enable")
+            }
+        }
+
+        val defaultConfiguration = {
+            target.exec{
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "ac", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "1")
+                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "1")
+
+                //it.commandLine("$adb", "shell", "svc", "wifi", "disable")
+                //it.commandLine("$adb", "shell", "svc", "bluetooth", "disable")
             }
         }
 
@@ -53,6 +125,8 @@ open class ProfPlugin : Plugin<Project> {
                 it.commandLine("$adb", "logcat", "-c")
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
+
+                Thread.sleep(2000)
             }
         }
 
@@ -69,7 +143,6 @@ open class ProfPlugin : Plugin<Project> {
         val runTestClass = { testPath: String, info: TestRunnerInfo ->
             runCommand("$adb", "shell", "am", "instrument", "-w", "-e",
                 "class", "${info.targetPackage}.$testPath", "${info.testPackage}/${info.runnerName}")
-                //androidx.test.runner.AndroidJUnitRunner")
         }
 
         val runTestMethod = { testPath: String, info: TestRunnerInfo, methodName: String ->
@@ -77,115 +150,326 @@ open class ProfPlugin : Plugin<Project> {
                 "class", "${info.targetPackage}.$testPath#$methodName", "${info.testPackage}/${info.runnerName}")
         }
 
-        val cpuLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
-            target.exec{
-                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt")
-            }
-        }
-
-        val wifiLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
-            target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi: \"")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
-            }
-        }
-
-        val bluetoothLogsOfMethod = { profileOutput: File, pathName: String, method: String ->
-            target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth: \"")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/$pathName.$method.txt", true)
-            }
-        }
-
-        val cpuLogs = { profileOutput: File, path: String ->
-            target.exec {
-                it.commandLine("$adb", "logcat", "-d", "-s", "TEST")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt")
-            }
-        }
-
-        val wifiLogs = { profileOutput: File, path: String ->
-            target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Wifi: \"")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
-            }
-        }
-
-        val bluetoothLogs = { profileOutput: File, path: String ->
-            target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-m", "1", "\"Bluetooth: \"")
-                it.standardOutput = FileOutputStream("${profileOutput.absolutePath}/${path}.txt", true)
-            }
-        }
-
-        val defaultConfiguration = {
-            target.exec{
-                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "ac", "1")
-                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "usb", "1")
-                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "wireless", "1")
-                it.commandLine("$adb", "shell", "dumpsys", "battery", "set", "status", "1")
-            }
-        }
-
-        val execTests = { project: Project, testApkPath: String?, testPaths: List<String>? ->
+        fun executeTests(project: Project, testApkPath: String?, testPaths: List<String>?) {
             if (testPaths != null && testApkPath != null) {
                 val testRunnerInfo = getTestRunnerInfo(testApkPath)
 
-                val profileOutput = File("${target.projectDir}/profileOutput")
-                if (!profileOutput.exists()) profileOutput.mkdirs()
+                val profilingOutput = File("${target.projectDir}/profilingOutput")
+                if (!profilingOutput.exists()) profilingOutput.mkdirs() else profilingOutput.walk().forEach { it.delete() }
+                val constantsOutput = File("${target.projectDir}/constantsOutput")
+                if (!constantsOutput.exists()) profilingOutput.mkdirs() else constantsOutput.walk().forEach { it.delete() }
 
-                val profileClass = {path : String ->
+                fun profileClass(path : String, loggers : List<Thread>) {
                     testConfiguration()
                     prepareLogs()
+
+                    loggers.forEach { logger -> logger.start() }
+
+                    val testOutput = File("${profilingOutput.absolutePath}/$path.txt")
+                    while(!testOutput.exists())
+                    {
+                        Thread.sleep(0)
+                    }
 
                     runTestClass(path, testRunnerInfo)
 
-                    cpuLogs(profileOutput, path)
-                    wifiLogs(profileOutput, path)
-                    bluetoothLogs(profileOutput, path)
+                    testFinished.set(true)
+                    loggers.forEach { logger -> logger.join() }
+                    testFinished.set(false)
+
+                    cpuLogsOfClass(profilingOutput, path)
                 }
 
-                val profileMethod = {pathName : String, method : String ->
+                fun profileMethod(pathName : String, method : String, loggers : List<Thread>) {
                     testConfiguration()
                     prepareLogs()
 
+                    loggers.forEach { logger -> logger.start() }
+
+                    val testOutput = File("${profilingOutput.absolutePath}/$pathName.$method.txt")
+                    while(!testOutput.exists())
+                    {
+                        Thread.sleep(0)
+                    }
+
                     runTestMethod(pathName, testRunnerInfo, method)
 
-                    cpuLogsOfMethod(profileOutput, pathName, method)
-                    wifiLogsOfMethod(profileOutput, pathName, method)
-                    bluetoothLogsOfMethod(profileOutput, pathName, method)
+                    testFinished.set(true)
+                    loggers.forEach { logger -> logger.join() }
+                    testFinished.set(false)
+
+                    cpuLogsOfMethod(profilingOutput, pathName, method)
                 }
 
                 if (project.hasProperty("granularity"))
                     when (project.property("granularity")) {
                         "class" -> {
-                            for (path in testPaths) {
-                                profileClass(path)
+                            if (project.hasProperty("mode"))
+                                when (project.property("mode")) {
+                                    "profiling" -> {
+                                        for (path in testPaths) {
+                                            val componentsLogger = Thread {
+                                                componentsLoggingOfClassWithFrequency(
+                                                    0L,
+                                                    profilingOutput,
+                                                    path
+                                                )
+                                            }
+
+                                            profileClass(path, listOf(componentsLogger))
+                                        }
+                                    }
+                                    "constants" -> {
+                                        for (path in testPaths) {
+                                            val componentsLoggers = listOf(
+                                                Thread {
+                                                    componentsLoggingOfClassWithFrequency(
+                                                        100L,
+                                                        profilingOutput,
+                                                        path
+                                                    )
+                                                },
+                                                Thread {
+                                                    componentsLoggingOfClassWithFrequency(
+                                                        200L,
+                                                        profilingOutput,
+                                                        path
+                                                    )
+                                                },
+                                                Thread {
+                                                    componentsLoggingOfClassWithFrequency(
+                                                        500L,
+                                                        profilingOutput,
+                                                        path
+                                                    )
+                                                },
+                                                Thread {
+                                                    componentsLoggingOfClassWithFrequency(
+                                                        1000L,
+                                                        profilingOutput,
+                                                        path
+                                                    )
+                                                },
+                                                Thread {
+                                                    componentsLoggingOfClassWithFrequency(
+                                                        2000L,
+                                                        profilingOutput,
+                                                        path
+                                                    )
+                                                }
+                                            )
+
+                                            profileClass(path, componentsLoggers)
+                                        }
+                                    }
+                                    else -> {
+                                        runCommand("echo", "\n!Error at running tests: mode must be either \"profiling\" or \"constants\"\n")
+                                        throw GradleException("Wrong mode")
+                                    }
+                                }
+                            // supposes that absence of parameter means 'profiling' mode
+                            else {
+                                for (path in testPaths) {
+                                    val componentsLogger = Thread {
+                                        componentsLoggingOfClassWithFrequency(
+                                            0L,
+                                            profilingOutput,
+                                            path
+                                        )
+                                    }
+
+                                    profileClass(path, listOf(componentsLogger))
+                                }
                             }
                         }
                         "methods" -> {
-                            for (path in testPaths) {
-                                val pathName = path.substringBefore('#')
-                                val methods = path.substringAfter('#').split(':')
+                            if (project.hasProperty("mode"))
+                                when (project.property("mode")) {
+                                    "profiling" -> {
+                                        for (path in testPaths) {
+                                            val pathName = path.substringBefore('#')
+                                            val methods = path.substringAfter('#').split(':')
 
-                                for (method in methods) {
-                                    profileMethod(pathName, method)
+                                            for (method in methods) {
+                                                val componentsLogger = Thread {
+                                                    componentsLoggingOfMethodWithFrequency(
+                                                        0L,
+                                                        profilingOutput,
+                                                        pathName,
+                                                        method
+                                                    )
+                                                }
+
+                                                profileMethod(pathName, method, listOf(componentsLogger))
+                                            }
+                                        }
+                                    }
+                                    "constants" -> {
+                                        for (path in testPaths) {
+                                            val pathName = path.substringBefore('#')
+                                            val methods = path.substringAfter('#').split(':')
+
+                                            for (method in methods) {
+                                                val componentsLoggers = listOf(
+                                                    Thread {
+                                                        componentsLoggingOfMethodWithFrequency(
+                                                            100L,
+                                                            profilingOutput,
+                                                            pathName,
+                                                            method
+                                                        )
+                                                    },
+                                                    Thread {
+                                                        componentsLoggingOfMethodWithFrequency(
+                                                            200L,
+                                                            profilingOutput,
+                                                            pathName,
+                                                            method
+                                                        )
+                                                    },
+                                                    Thread {
+                                                        componentsLoggingOfMethodWithFrequency(
+                                                            500L,
+                                                            profilingOutput,
+                                                            pathName,
+                                                            method
+                                                        )
+                                                    },
+                                                    Thread {
+                                                        componentsLoggingOfMethodWithFrequency(
+                                                            1000L,
+                                                            profilingOutput,
+                                                            pathName,
+                                                            method
+                                                        )
+                                                    },
+                                                    Thread {
+                                                        componentsLoggingOfMethodWithFrequency(
+                                                            2000L,
+                                                            profilingOutput,
+                                                            pathName,
+                                                            method
+                                                        )
+                                                    }
+                                                )
+
+                                                profileMethod(pathName, method, componentsLoggers)
+                                            }
+                                        }
+                                    }
+                                    else -> {
+                                        runCommand("echo", "\n!Error at running tests: mode must be either \"profiling\" or \"constants\"\n")
+                                        throw GradleException("Wrong mode")
+                                    }
+                                }
+                            // supposes that absence of parameter means 'profiling' mode
+                            else {
+                                for (path in testPaths) {
+                                    val pathName = path.substringBefore('#')
+                                    val methods = path.substringAfter('#').split(':')
+
+                                    for (method in methods) {
+                                        val componentsLogger = Thread {
+                                            componentsLoggingOfMethodWithFrequency(
+                                                0L,
+                                                profilingOutput,
+                                                pathName,
+                                                method
+                                            )
+                                        }
+
+                                        profileMethod(pathName, method, listOf(componentsLogger))
+                                    }
                                 }
                             }
                         }
                         else -> {
                             runCommand("echo", "\n!Error at running tests: granularity must be either \"methods\" or \"class\"\n")
-                            throw GradleException("Wrong argument")
+                            throw GradleException("Wrong granularity")
                         }
                     }
-                else { // supposes that absence of parameter means 'class' granularity
-                    for (path in testPaths) {
-                        profileClass(path)
+                // supposes that absence of parameter means 'class' granularity
+                else {
+                    if (project.hasProperty("mode"))
+                        when (project.property("mode")) {
+                            "profiling" -> {
+                                for (path in testPaths) {
+                                    val componentsLogger = Thread {
+                                        componentsLoggingOfClassWithFrequency(
+                                            0L,
+                                            profilingOutput,
+                                            path
+                                        )
+                                    }
+
+                                    profileClass(path, listOf(componentsLogger))
+                                }
+                            }
+                            "constants" -> {
+                                for (path in testPaths) {
+                                    val componentsLoggers = listOf(
+                                        Thread {
+                                            componentsLoggingOfClassWithFrequency(
+                                                100L,
+                                                profilingOutput,
+                                                path
+                                            )
+                                        },
+                                        Thread {
+                                            componentsLoggingOfClassWithFrequency(
+                                                200L,
+                                                profilingOutput,
+                                                path
+                                            )
+                                        },
+                                        Thread {
+                                            componentsLoggingOfClassWithFrequency(
+                                                500L,
+                                                profilingOutput,
+                                                path
+                                            )
+                                        },
+                                        Thread {
+                                            componentsLoggingOfClassWithFrequency(
+                                                1000L,
+                                                profilingOutput,
+                                                path
+                                            )
+                                        },
+                                        Thread {
+                                            componentsLoggingOfClassWithFrequency(
+                                                2000L,
+                                                profilingOutput,
+                                                path
+                                            )
+                                        }
+                                    )
+
+                                    profileClass(path, componentsLoggers)
+                                }
+                            }
+                            else -> {
+                                runCommand("echo", "\n!Error at running tests: mode must be either \"profiling\" or \"constants\"\n")
+                                throw GradleException("Wrong mode")
+                            }
+                        }
+                    // supposes that absence of parameter means 'profiling' mode
+                    else {
+                        for (path in testPaths) {
+                            val componentsLogger = Thread {
+                                componentsLoggingOfClassWithFrequency(
+                                    0L,
+                                    profilingOutput,
+                                    path
+                                )
+                            }
+
+                            profileClass(path, listOf(componentsLogger))
+                        }
                     }
                 }
 
-                defaultConfiguration()
+                //defaultConfiguration()
             }
             else {
                 runCommand("echo", "\n!Error at running tests: test_paths should be passed\n")
@@ -195,7 +479,7 @@ open class ProfPlugin : Plugin<Project> {
 
         target.tasks.register("customProfile") {
             it.doLast {
-                JSONGenerator().generate("${target.projectDir}/profileOutput/")
+                JSONGenerator().generate("${target.projectDir}/profilingOutput/")
             }
         }
 
@@ -215,7 +499,7 @@ open class ProfPlugin : Plugin<Project> {
                         paths.split(",")
                     } else null
 
-                execTests(it.project, testApkPath, testPaths)
+                executeTests(it.project, testApkPath, testPaths)
             }
         }
 
@@ -239,7 +523,7 @@ open class ProfPlugin : Plugin<Project> {
 
         target.tasks.register("defaultProfile") {
             it.doLast {
-                JSONGenerator().generate("${target.projectDir}/profileOutput/")
+                JSONGenerator().generate("${target.projectDir}/profilingOutput/")
             }
         }
 
@@ -257,7 +541,7 @@ open class ProfPlugin : Plugin<Project> {
                         paths.split(",")
                     } else null
 
-                execTests(it.project, testApkPath, testPaths)
+                executeTests(it.project, testApkPath, testPaths)
             }
         }
 
@@ -275,90 +559,89 @@ open class ProfPlugin : Plugin<Project> {
     }
 }
 
-    open class InstrExtension {
-        var applyFor: Array<String>? = null
+open class InstrExtension {
+    var applyFor: Array<String>? = null
+}
+
+const val nameRegex = "([a-zA-Z0-9_\\.]+)"
+val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
+val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
+val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
+
+open class TestRunnerInfo(aaptOutput: String) {
+    val targetPackage: String
+    val testPackage: String
+    val runnerName: String
+
+    init {
+        var matcher = testPackagePattern.matcher(aaptOutput).apply { find() }
+        testPackage = matcher.group(1)
+
+        val tail = aaptOutput.substringAfter("instrumentation")
+
+        matcher = targetPackagePattern.matcher(tail).apply { find() }
+        targetPackage = matcher.group(1)
+
+        matcher = runnerNamePattern.matcher(tail).apply { find() }
+        runnerName = matcher.group(1)
     }
+}
 
-    const val nameRegex = "([a-zA-Z0-9_\\.]+)"
-    val targetPackagePattern: Pattern = Pattern.compile("android:targetPackage.*=\"$nameRegex\"")
-    val testPackagePattern: Pattern = Pattern.compile("package=\"$nameRegex\"")
-    val runnerNamePattern: Pattern = Pattern.compile("android:name.*=\"$nameRegex\"")
+private class JSONGenerator {
+    fun generate(directory: String) {
+        val testList = JSONArray()
 
-    open class TestRunnerInfo(aaptOutput: String) {
-        val targetPackage: String
-        val testPackage: String
-        val runnerName: String
+        File(directory).walk().forEach {
+            if (it.isFile && it.name.endsWith(".txt")) {
+                val testName = it.name.substringBefore(".txt")
 
-        init {
-            var matcher = testPackagePattern.matcher(aaptOutput).apply { find() }
-            testPackage = matcher.group(1)
+                val testLogs = JSONObject()
 
-            val tail = aaptOutput.substringAfter("instrumentation")
+                val cpuComponent = JSONArray()
+                val wifiComponent = JSONArray()
+                val bluetoothComponent = JSONArray()
 
-            matcher = targetPackagePattern.matcher(tail).apply { find() }
-            targetPackage = matcher.group(1)
+                val data = it.readLines()
+                for (line in data) {
+                    if (!line.startsWith('-')) {
+                        val entryLineList = line.trim().split("\\s+".toRegex())
+                        try {
+                            when(entryLineList[0]) {
+                                "Wifi:", "Bluetooth:" -> {
+                                    val header = JSONObject()
+                                    val freqInSec = entryLineList[entryLineList.lastIndex - 2].toFloat()
+                                    header["frequency"] = if (freqInSec != 0.0f) 1f / freqInSec else -1f
+                                    header["timestamp"] = getTimestamp(entryLineList[entryLineList.lastIndex - 1],
+                                        entryLineList.last())
 
-            matcher = runnerNamePattern.matcher(tail).apply { find() }
-            runnerName = matcher.group(1)
-        }
-    }
+                                    val componentsWithIndexes = listOf(
+                                        Pair(wifiComponent, entryLineList.indexOf("Wifi:")),
+                                        Pair(bluetoothComponent, entryLineList.indexOf("Bluetooth:")))
 
-    private class JSONGenerator {
-        fun generate(directory: String) {
-            val testList = JSONArray()
+                                    for(componentWithIndex in componentsWithIndexes) {
+                                        if(componentWithIndex.second != -1)
+                                        {
+                                            val body = JSONObject()
+                                            body["common"] = entryLineList[componentWithIndex.second + 1].replace(",",".").toFloat()
 
-            File(directory).walk().forEach {
-                if (it.isFile && it.name.endsWith(".txt")) {
-                    val testName = it.name.substringBefore(".txt")
+                                            if(entryLineList.elementAt(componentWithIndex.second + 2) == "(") {
+                                                var i = componentWithIndex.second + 3
+                                                while(entryLineList[i] != ")") {
+                                                    val details = entryLineList[i].split('=')
 
-                    val testLogs = JSONObject()
+                                                    body[details[0]] = details[1].replace(",",".").toFloat()
 
-                    val cpuComponent = JSONArray()
-
-                    val data = it.readLines()
-                    for (line in data) {
-                        if (!line.startsWith('-')) {
-                            val entryLineList = line.trim().split("\\s+".toRegex())
-
-                            when {
-                                entryLineList[0] == "Wifi:" -> {
-                                    val wifiComponent = JSONObject()
-
-                                    wifiComponent["common"] = entryLineList[1].replace(",",".").toFloat()
-
-                                    if(entryLineList.size >= 3) {
-                                        if(entryLineList[2] == "(") {
-                                            var i = 3
-                                            while(entryLineList[i] != ")") {
-                                                val componentDetails = entryLineList[i].split('=')
-
-                                                wifiComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toFloat()
-
-                                                i++
+                                                    i++
+                                                }
                                             }
+
+                                            val log = JSONObject()
+                                            log["header"] = header
+                                            log["body"] = body
+
+                                            componentWithIndex.first.add(log)
                                         }
                                     }
-                                    testLogs["wifi"] = wifiComponent
-                                }
-                                entryLineList[0] == "Bluetooth:" -> {
-                                    val bluetoothComponent = JSONObject()
-
-                                    bluetoothComponent["common"] = entryLineList[1].replace(",",".").toFloat()
-
-                                    if(entryLineList.size >= 3) {
-                                        if(entryLineList[2] == "(") {
-                                            var i = 3
-                                            while (entryLineList[i] != ")") {
-                                                val componentDetails = entryLineList[i].split('=')
-
-                                                bluetoothComponent[componentDetails[0]] = componentDetails[1].replace(",",".").toFloat()
-
-                                                i++
-                                            }
-                                        }
-                                    }
-
-                                    testLogs["bluetooth"] = bluetoothComponent
                                 }
                                 else -> {
                                     var methodName: String
@@ -392,7 +675,7 @@ open class ProfPlugin : Plugin<Project> {
                                     {
                                         methodName = entryLineList[4]
                                         startDate = SimpleDateFormat("MM-dd").format(Date())
-                                        startTime = SimpleDateFormat("hh:mm:ss.SSS").format(Date())
+                                        startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                                         timestamp = getTimestamp(startDate, startTime)
 
@@ -403,7 +686,7 @@ open class ProfPlugin : Plugin<Project> {
                                     {
                                         methodName = entryLineList[3]
                                         startDate = SimpleDateFormat("MM-dd").format(Date())
-                                        startTime = SimpleDateFormat("hh:mm:ss.SSS").format(Date())
+                                        startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                                         timestamp = getTimestamp(startDate, startTime)
 
@@ -478,31 +761,51 @@ open class ProfPlugin : Plugin<Project> {
                                 }
                             }
                         }
+                        catch (exc : Exception) {
+                            //Just skip this line
+                            print("JSON Generator:\n $line: was skipped due to a format mismatch\n")
+                        }
                     }
-                    testLogs["cpu"] = cpuComponent
-
-                    val testObject = JSONObject()
-                    testObject["testName"] = testName
-                    testObject["logs"] = testLogs
-
-                    testList.add(testObject)
-
-                    it.delete()
                 }
+                if(cpuComponent.size != 0)
+                {
+                    testLogs["cpu"] = cpuComponent
+                }
+                if(wifiComponent.size != 0)
+                {
+                    testLogs["wifi"] = wifiComponent
+                }
+                if(bluetoothComponent.size != 0)
+                {
+                    testLogs["bluetooth"] = bluetoothComponent
+                }
+
+                val testObject = JSONObject()
+                testObject["testName"] = testName
+                testObject["logs"] = testLogs
+
+                testList.add(testObject)
             }
-
-            val json = JSONObject()
-            json["tests"] = testList
-
-            val file = FileWriter("$directory/logs.json")
-            file.write(json.toJSONString())
-            file.flush()
-            file.close()
         }
 
-        private fun getTimestamp(date: String, time: String): Long {
-            val sdf = SimpleDateFormat("MM-dd-yyyy hh:mm:ss.SSS")
-            val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
-            return sdf.parse(dateString).time
+        val json = JSONObject()
+        json["tests"] = testList
+
+        val jsonFile = File("$directory/logs.json")
+        if (!jsonFile.exists()) jsonFile.createNewFile() else {
+            jsonFile.delete()
+            jsonFile.createNewFile()
         }
+        val file = FileWriter(jsonFile)
+        file.write(json.toJSONString())
+        file.flush()
+        file.close()
     }
+
+    private fun getTimestamp(date: String, time: String): Long {
+        val sdf = SimpleDateFormat("MM-dd-yyyy HH:mm:ss.SSS")
+        val dateString = date + "-" + Calendar.getInstance().get(Calendar.YEAR) + " " + time
+
+        return sdf.parse(dateString).time
+    }
+}
