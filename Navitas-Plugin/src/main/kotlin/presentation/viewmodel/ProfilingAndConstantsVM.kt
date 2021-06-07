@@ -51,6 +51,7 @@ class ProfilingAndConstantsVM(
                         profilingResultRepository.save(profilingAnalysisResult)
                     }
                     "constants" -> {
+                        configurationRepository.switchMode()
                         val constantsAnalysisResult = ConstantsResultAnalyzer.analyze(profilerResult)
                         constantsResultRepository.save(constantsAnalysisResult)
                         XMLGenerator.powerProfile(constantsAnalysisResult, "${currentConfiguration!!.modulePath}/constantsOutput")

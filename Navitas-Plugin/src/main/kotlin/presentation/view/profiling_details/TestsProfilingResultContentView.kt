@@ -10,6 +10,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.table.JBTable
 import extensions.copyTemplate
 import presentation.view.common.ContentContainer
+import presentation.viewmodel.ConstantsEnergyListVM
 import presentation.viewmodel.TestEnergyConsumptionListVM
 import tooling.ContentRouter
 import tooling.OnActionClickCallback
@@ -18,7 +19,9 @@ import javax.swing.ListSelectionModel
 
 class TestsProfilingResultContentView(
         private val router: ContentRouter,
-        private val profilingResultVM: TestEnergyConsumptionListVM
+        private val isConstantMode: Boolean,
+        private val profilingResultVM: TestEnergyConsumptionListVM,
+        private val constantsResultVM: ConstantsEnergyListVM
 ) : ContentContainer() {
 
     // UI components
@@ -45,10 +48,12 @@ class TestsProfilingResultContentView(
                 actionManager.copyTemplate("navitas.action.Back", newAction)
                 add(newAction)
             }
-            // add 'see details' button
-            ShowDetailsAction(onShowDetailsClickCallback).also { newAction ->
-                actionManager.copyTemplate("navitas.action.ShowDetails", newAction)
-                add(newAction)
+            if (!isConstantMode) {
+                // add 'see details' button
+                ShowDetailsAction(onShowDetailsClickCallback).also { newAction ->
+                    actionManager.copyTemplate("navitas.action.ShowDetails", newAction)
+                    add(newAction)
+                }
             }
         }
         val actionToolbar = actionManager.createActionToolbar(ActionPlaces.UNKNOWN, actionGroup, false)
@@ -64,7 +69,8 @@ class TestsProfilingResultContentView(
     private fun setupUI() {
         tableView.selectionModel.selectionMode = ListSelectionModel.SINGLE_SELECTION
 
-        profilingResultVM.energyConsumption
+        if (!isConstantMode) {
+            profilingResultVM.energyConsumption
                 .subscribe { result ->
                     AppUIExecutor.onUiThread().execute {
                         // TODO: update chart
@@ -72,6 +78,16 @@ class TestsProfilingResultContentView(
                     }
                 }
 
-        profilingResultVM.fetch()
+            profilingResultVM.fetch()
+        }
+        else {
+            constantsResultVM.energyConstant
+                .subscribe { result ->
+                    AppUIExecutor.onUiThread().execute {
+                        tableView.model = ConstantsEnergyTableModel(result)
+                    }
+                }
+            constantsResultVM.fetch()
+        }
     }
 }

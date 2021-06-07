@@ -21,7 +21,7 @@ class BluetoothConstants {
         if (!mBluetoothAdapter.isEnabled) {
             mBluetoothAdapter.enable()
         }
-        Thread.sleep(30000)
+        Thread.sleep(120000)
     }
 
     @Test
@@ -32,7 +32,7 @@ class BluetoothConstants {
             mBluetoothAdapter.enable()
         }
         val startTime = System.currentTimeMillis()
-        while (System.currentTimeMillis() - startTime < 30000)
+        while (System.currentTimeMillis() - startTime < 120000)
         {
             startScan(scanCallbackWithoutConnect)
         }
@@ -49,7 +49,7 @@ class BluetoothConstants {
             Log.d("Bluetooth active warning", "Bluetooth device not connected")
         }
         ActivityScenario.launch(MusicActivity::class.java)
-        Thread.sleep(30000)
+        Thread.sleep(120000)
     }
 
     private fun startScan(scanCallback: ScanCallback) {

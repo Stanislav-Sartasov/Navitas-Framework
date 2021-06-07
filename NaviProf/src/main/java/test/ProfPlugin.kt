@@ -125,6 +125,8 @@ open class ProfPlugin : Plugin<Project> {
                 it.commandLine("$adb", "logcat", "-c")
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "--reset")
+
+                Thread.sleep(2000)
             }
         }
 
@@ -607,7 +609,8 @@ private class JSONGenerator {
                             when(entryLineList[0]) {
                                 "Wifi:", "Bluetooth:" -> {
                                     val header = JSONObject()
-                                    header["frequency"] = 1f / entryLineList[entryLineList.lastIndex - 2].toFloat()
+                                    val freqInSec = entryLineList[entryLineList.lastIndex - 2].toFloat()
+                                    header["frequency"] = if (freqInSec != 0.0f) 1f / freqInSec else -1f
                                     header["timestamp"] = getTimestamp(entryLineList[entryLineList.lastIndex - 1],
                                         entryLineList.last())
 

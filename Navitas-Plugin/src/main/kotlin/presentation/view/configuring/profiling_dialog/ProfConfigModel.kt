@@ -18,10 +18,9 @@ class ProfConfigModel(
     private var selectedTests: Map<String, List<String>>? = null
     private var currentTestNames: Map<String, List<String>>? = null
 
-    private val androidModules: List<Module> = provider.fetchAndroidModuleList()
-    val androidModuleNames: List<String> = (androidModules.filter { module ->
-        !module.name.split('.').contains("navi_constants") })
-        .map { module -> module.name }
+    private val androidModules: List<Module> = provider.fetchAndroidModuleList().filter { module ->
+        !module.name.split('.').contains("navi_constants") }
+    val androidModuleNames: List<String> = androidModules.map { module -> module.name }
 
     init {
         add(AndroidModuleChoosingStep(this))
