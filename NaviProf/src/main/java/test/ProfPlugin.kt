@@ -178,7 +178,7 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    cpuLogsOfClass(profilingOutput, path)
+                    if (project.property("mode") == "profiling") cpuLogsOfClass(profilingOutput, path)
                 }
 
                 fun profileMethod(pathName : String, method : String, loggers : List<Thread>) {
@@ -199,7 +199,7 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    cpuLogsOfMethod(profilingOutput, pathName, method)
+                    if (project.property("mode") == "profiling") cpuLogsOfMethod(profilingOutput, pathName, method)
                 }
 
                 if (project.hasProperty("granularity"))

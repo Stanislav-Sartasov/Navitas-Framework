@@ -50,7 +50,7 @@ object ConstantsResultAnalyzer {
             val startTime = it.value.first().testInfo.timestamp
             it.value.forEach { it ->
                 wifiList.add(if (!it.wifiEnergyConsumption.wifi.isNaN()) it.wifiEnergyConsumption.wifi / ((it.testInfo.timestamp - startTime).toFloat() / (1000f * 3600f))
-                else it.wifiEnergyConsumption.common / (it.testInfo.timestamp - startTime))
+                else it.wifiEnergyConsumption.common / ((it.testInfo.timestamp - startTime).toFloat() / (1000f * 3600f))
             }
             wifiList.removeAt(0)
             wifiFrequenciesMap[it.key] = wifiList
@@ -66,7 +66,7 @@ object ConstantsResultAnalyzer {
             val startTime = it.value.first().testInfo.timestamp
             it.value.forEach { it ->
                 bluetoothList.add(if (!it.bluetoothEnergyConsumption.bluetooth.isNaN()) it.bluetoothEnergyConsumption.bluetooth / ((it.testInfo.timestamp - startTime).toFloat() / (1000f * 3600f))
-                else it.bluetoothEnergyConsumption.common / (it.testInfo.timestamp - startTime))
+                else it.bluetoothEnergyConsumption.common / ((it.testInfo.timestamp - startTime).toFloat() / (1000f * 3600f))
             }
             bluetoothList.removeAt(0)
             bluetoothFrequenciesMap[it.key] = bluetoothList
