@@ -17,9 +17,9 @@ class GradlePluginInjector(private val project: Project) {
         private const val BUILD_SCRIPT_BLOCK_NAME = "buildscript"
         private const val DEPENDENCIES_BLOCK_NAME = "dependencies"
         private const val REPOSITORIES_BLOCK_NAME = "repositories"
-        private const val MAVEN_CENTRAL_REPOSITORY = "mavenLocal()" // or mavenLocal() for developing
+        private const val MAVEN_CENTRAL_REPOSITORY = "mavenLocal()" // Replace by mavenCentral() - mavenLocal() for developing
 
-        private const val GRADLE_PROFILING_PLUGIN_FULL_NAME = "com.github.stanislav-sartasov:NaviProf:1.92"
+        private const val GRADLE_PROFILING_PLUGIN_FULL_NAME = "com.github.stanislav-sartasov:NaviProf:1.20"
         private const val GRADLE_PROFILING_PLUGIN_SHORT_NAME = "NaviProf"
     }
 
