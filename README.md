@@ -14,5 +14,14 @@ The Navitas Framework is architecturally composed of 3 parts:
  ## Installation and start-up instructions
  * Clone the repo
  * In the Navitas Plugin project, you need to add a local.properties file containing the path to the Android SDK, as well as to the Android Studio.
- * When starting the NaviTests project, change the JDK in Android Studio to the one that corresponds to the JDK of the NaviProf project and Navitas Plugin.
- 
+ * When starting the [NaviTests](https://github.com/Stanislav-Sartasov/Navitas-Framework/blob/4dbb013f183bf99a4bd4b04ffc2ce96ab20b6311/NaviTests/README.md) project, change the JDK in Android Studio to the one that corresponds to the JDK of the NaviProf project and Navitas Plugin.
+ * Apply NaviProf plugin from MavenLocal/MavenCentral, see [how to download](https://github.com/Stanislav-Sartasov/Navitas-Framework/blob/316a79fe6de4d3cc82783fd75d543b10128331ca/NaviProf/README.md#latest-compatible-version-of-comandroidtoolsbuildgradle-is-342) [how to publish](https://github.com/Stanislav-Sartasov/Navitas-Framework/tree/master/NaviProf#instruction-for-publishing-plugin-to-mavencentral)
+ * In Navitas-Plugin run ```bash $ ./gradlew runIde ```
+ * In opened Android Studio you can work with [Navitas-Plugin](https://github.com/Stanislav-Sartasov/Navitas-Framework/blob/e3ae75fa277780ba9f00b3e73f01daa441b803a8/Navitas-Plugin/README.md)
+         
+
+ ## Troubleshooting
+ * If you`re using 64-bit version of Linux you need to install required [libraries](https://developer.android.com/studio/install.html#64bit-libs) ```bash $ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 ```    
+ * If you have error 'A problem occurred starting process 'command 'aapt'', change access permission in '/build-tools'
+ * To power-profile android device you need configure developer options, [see how](https://developer.android.com/studio/debug/dev-options)
+ * If you want to update version of JDK or Gradle, please see compatibility matrix for [gradle](https://docs.gradle.org/current/userguide/compatibility.html) and [android](https://developer.android.com/studio/releases/gradle-plugin)
