@@ -1,0 +1,1216 @@
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.381
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.455
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.508
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.557
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.607
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.668
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.718
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.772
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.830
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.890
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:50.942
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.001
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.062
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.123
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.192
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.251
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.310
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.379
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.448
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.505
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.562
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.628
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.687
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.755
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.825
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.883
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:51.947
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.003
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.053
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.113
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.176
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.235
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.295
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.363
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.426
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.487
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.544
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.611
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.671
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.735
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.796
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.854
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:52.923
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.002
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.079
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.143
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.203
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.278
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.346
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.419
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.501
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.592
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.655
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.722
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.788
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.850
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.914
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:53.977
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.042
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.103
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.171
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.237
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.304
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.372
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.436
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.499
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.554
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.609
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.663
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.734
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.814
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.864
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.914
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:54.964
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.019
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.082
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.135
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.180
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.229
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.278
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.331
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.381
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.432
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.493
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.542
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.591
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.640
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.690
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.766
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.825
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.886
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:55.939
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.162
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.234
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.287
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.337
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.654
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.713
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.776
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.825
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.871
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:56.946
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.003
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.054
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.105
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.154
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.201
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.261
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.314
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.363
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.422
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.473
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.534
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.594
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.665
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.728
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.782
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.859
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:57.961
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.010
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.056
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.103
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.164
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.224
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.288
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.353
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.414
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.470
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.533
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.610
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.705
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.792
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.862
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.917
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:58.977
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.263
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.347
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.431
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.529
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.601
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.668
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.741
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.820
+/system/bin/sh: tr: not found
+    0.0 11-17 00:12:59.899
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.004
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.094
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.185
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.261
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.340
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.434
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.508
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.582
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.655
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.740
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.813
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.901
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:00.979
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.065
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.145
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.221
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.293
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.373
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.444
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.516
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.599
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.677
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.741
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.807
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.862
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:01.932
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.012
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.078
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.155
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.231
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.312
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.385
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.455
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.530
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.609
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.681
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.756
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.829
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.898
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:02.971
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.049
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.116
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.192
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.266
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.336
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.398
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.453
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.520
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.573
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.624
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.674
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.730
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.784
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.836
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.893
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:03.950
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.020
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.071
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.122
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.175
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.241
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.303
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.359
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.416
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.481
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.537
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.606
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.666
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.717
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.769
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.823
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.878
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.927
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:04.978
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.048
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.111
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.178
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.248
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.307
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.373
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.433
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.527
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.585
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.643
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.712
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.770
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.829
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.878
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.929
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:05.976
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.025
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.079
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.130
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.187
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.238
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.293
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.348
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.400
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.462
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.515
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.566
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.619
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.671
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.724
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.779
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.832
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.885
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.937
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:06.990
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.041
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.087
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.135
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.181
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.234
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.286
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.337
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.392
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.456
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.508
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.559
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.610
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.665
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.711
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.762
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.815
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.867
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.929
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:07.977
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.028
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.078
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.130
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.184
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.236
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.288
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.338
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.388
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.443
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.494
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.545
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.596
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.647
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.697
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.752
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.816
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.869
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.923
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:08.975
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.026
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.090
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.141
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.187
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.240
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.295
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.347
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.398
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.450
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.502
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.554
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.607
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.667
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.724
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.779
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.831
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.895
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.946
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:09.998
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.049
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.101
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.155
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.205
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.256
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.307
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.357
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.409
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.473
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.525
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.578
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.633
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.682
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.735
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.790
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.845
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.899
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:10.953
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.005
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.059
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.108
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.157
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.213
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.267
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.320
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.380
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.433
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.478
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.528
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.581
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.634
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.691
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.744
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.796
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.848
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.903
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:11.956
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.007
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.058
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.107
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.158
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.210
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.261
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.311
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.362
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.412
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.464
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.517
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.598
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.650
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.701
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.753
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.810
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.862
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.914
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:12.970
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.026
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.082
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.145
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.199
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.250
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.299
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.351
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.417
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.468
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.517
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.583
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.648
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.700
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.752
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.805
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.857
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.909
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:13.960
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.007
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.062
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.130
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.181
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.233
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.293
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.343
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.395
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.453
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.514
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.567
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.620
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.676
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.727
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.777
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.828
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.878
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.927
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:14.976
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.025
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.071
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.125
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.178
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.231
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.285
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.331
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.380
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.426
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.471
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.518
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.571
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.623
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.680
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.731
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.777
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.831
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.887
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.939
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:15.993
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.047
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.098
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.150
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.206
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.266
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.319
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.373
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.428
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.484
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.532
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.578
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.627
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.672
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.717
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.767
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.811
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.857
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.903
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:16.947
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.004
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.059
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.111
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.173
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.239
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.289
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.344
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.413
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.464
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.513
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.566
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.615
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.664
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.713
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.781
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.840
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.901
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:17.951
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.001
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.050
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.097
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.154
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.199
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.248
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.294
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.338
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.383
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.433
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.493
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.538
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.586
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.636
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.680
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.726
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.776
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.823
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.869
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.919
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:18.965
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.009
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.058
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.107
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.154
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.212
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.260
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.306
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.353
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.403
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.454
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.508
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.556
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.600
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.644
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.691
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.737
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.792
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.844
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.895
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.945
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:19.997
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.051
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.109
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.156
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.202
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.246
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.290
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.334
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.378
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.424
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.469
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.514
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.562
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.610
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.658
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.705
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.756
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.818
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.869
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.919
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:20.971
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.025
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.078
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.133
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.181
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.226
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.270
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.315
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.379
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.449
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.511
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.573
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.626
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.683
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.732
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.779
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.844
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.913
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:21.978
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:22.042
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:22.095
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:22.145
+/system/bin/sh: tr: not found
+    0.0 11-17 00:13:22.188
+--------- beginning of system
+--------- beginning of main
+D/TEST    ( 5365): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4702761 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702761 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512796 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512796 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5365): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4702792 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702792 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512826 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512826 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5365): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4702792 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702792 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512826 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512826 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5365): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4702792 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702793 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512827 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512827 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5365): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4702793 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702794 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512828 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512828 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5365): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4702794 1333000 1409000 933000 385016 800000 21620318 ; cpu1 1600000 4702794 1333000 1409000 933000 385016 800000 21620318 ; cpu2 1600000 4512828 1333000 1345599 933000 344936 800000 21913765 ; cpu3 1600000 4512829 1333000 1345599 933000 344936 800000 21913765 ;  EndOfData 0
+D/TEST    ( 5625): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4702991 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4702991 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4512997 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4512997 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 5625): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4703018 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4703018 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4513024 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4513024 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 5625): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4703018 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4703018 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4513024 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4513025 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 5625): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4703019 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4703019 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4513025 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4513025 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 5625): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4703020 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4703020 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4513026 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4513026 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 5625): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4703021 1333000 1409004 933000 385016 800000 21620526 ; cpu1 1600000 4703021 1333000 1409004 933000 385016 800000 21620526 ; cpu2 1600000 4513027 1333000 1345635 933000 344946 800000 21913959 ; cpu3 1600000 4513027 1333000 1345635 933000 344946 800000 21913959 ;  EndOfData 0
+D/TEST    ( 6170): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4703546 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703546 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513522 1333000 1345663 933000 344958 800000 21914142 ; cpu3 1600000 4513522 1333000 1345663 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6170): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4703574 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703574 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513548 1333000 1345665 933000 344958 800000 21914142 ; cpu3 1600000 4513548 1333000 1345665 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6170): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4703574 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703574 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513548 1333000 1345665 933000 344958 800000 21914142 ; cpu3 1600000 4513548 1333000 1345665 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6170): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4703575 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703575 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513550 1333000 1345665 933000 344958 800000 21914142 ; cpu3 1600000 4513550 1333000 1345665 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6170): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4703577 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703577 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513551 1333000 1345665 933000 344958 800000 21914142 ; cpu3 1600000 4513552 1333000 1345665 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6170): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4703578 1333000 1409014 933000 385016 800000 21620709 ; cpu1 1600000 4703578 1333000 1409014 933000 385016 800000 21620709 ; cpu2 1600000 4513552 1333000 1345665 933000 344958 800000 21914142 ; cpu3 1600000 4513554 1333000 1345665 933000 344958 800000 21914142 ;  EndOfData 0
+D/TEST    ( 6708): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704091 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704091 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514058 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514058 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 6708): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704120 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704120 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514086 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514086 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 6708): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704120 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704120 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514086 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514087 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 6708): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704121 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704121 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514087 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514088 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 6708): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704122 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704122 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514088 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514089 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 6708): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704123 1333000 1409037 933000 385026 800000 21620897 ; cpu1 1600000 4704123 1333000 1409037 933000 385026 800000 21620897 ; cpu2 1600000 4514089 1333000 1345686 933000 344958 800000 21914350 ; cpu3 1600000 4514090 1333000 1345686 933000 344958 800000 21914350 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704437 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704437 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514344 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514344 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704468 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704468 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514375 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514375 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704468 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704469 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514376 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514376 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704469 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704470 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514377 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514377 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704471 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704471 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514379 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514379 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704472 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704473 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514381 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514381 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.MainActivity$onButtonClickListener$1.onClick TimeInStates cpu0 1600000 4704517 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704518 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514425 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514426 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.MainActivity$onButtonClickListener$1.onClick TimeInStates cpu0 1600000 4704520 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704520 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514427 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514427 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.onCreate TimeInStates cpu0 1600000 4704524 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704524 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514431 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514431 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.onCreate TimeInStates cpu0 1600000 4704529 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704529 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514437 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514437 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.onStart TimeInStates cpu0 1600000 4704530 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704530 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514437 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514437 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704531 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704531 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514439 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514439 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704534 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704534 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514441 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514441 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704534 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704534 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514441 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514442 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704536 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704537 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514444 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514444 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.onStart TimeInStates cpu0 1600000 4704538 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704538 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514445 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514445 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.onStop TimeInStates cpu0 1600000 4704590 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704590 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514497 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514497 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704591 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704591 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514498 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514498 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704592 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704592 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514499 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514499 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704592 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704592 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514500 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514500 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704593 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704593 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514501 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514501 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704594 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704595 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514502 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514502 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704595 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704596 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514503 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514503 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704596 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704596 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514503 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514504 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704597 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704597 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514504 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514504 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704598 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704598 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514505 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514505 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704598 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704599 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514506 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514506 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704599 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704599 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514507 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514507 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704600 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704600 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514507 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514507 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704600 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704601 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514508 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514508 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704601 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704601 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514508 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514508 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704602 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704602 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514509 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514509 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704603 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704603 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514510 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514510 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704603 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704603 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514511 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514511 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704604 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704604 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514511 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514512 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704605 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704605 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514512 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514513 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704606 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704606 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514513 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514513 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704607 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704607 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514514 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514514 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704607 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704607 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514514 1333000 1345697 933000 344969 800000 21914507 ; cpu3 1600000 4514514 1333000 1345697 933000 344969 800000 21914507 ;  EndOfData 0
+D/TEST    ( 7027): Exit com.example.navi_test.ChildActivity.onStop TimeInStates cpu0 1600000 4704608 1333000 1409040 933000 385030 800000 21621010 ; cpu1 1600000 4704608 1333000 1409040 933000 385030 800000 21621010 ; cpu2 1600000 4514514 1333000 1345697 933000 344969 800000 21914508 ; cpu3 1600000 4514514 1333000 1345697 933000 344969 800000 21914508 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704772 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704772 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514659 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514660 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4704799 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704799 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514687 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514687 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704799 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704800 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514687 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514687 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704800 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704801 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514689 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514690 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4704803 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704803 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514691 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514691 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4704804 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704804 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514692 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514692 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.MainActivity$onButtonClickListener$1.onClick TimeInStates cpu0 1600000 4704847 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704847 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514734 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514735 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.MainActivity$onButtonClickListener$1.onClick TimeInStates cpu0 1600000 4704850 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704850 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514737 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514737 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.onCreate TimeInStates cpu0 1600000 4704853 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704853 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514740 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514740 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.onCreate TimeInStates cpu0 1600000 4704856 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704857 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514744 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514744 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.onStart TimeInStates cpu0 1600000 4704857 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704857 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514745 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514745 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704858 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704859 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514746 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514746 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704861 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704862 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514749 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514749 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704862 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704862 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514749 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514749 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.executeSomething TimeInStates cpu0 1600000 4704864 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704864 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514752 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514752 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.onStart TimeInStates cpu0 1600000 4704866 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704866 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514753 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514754 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity$onCreate$1.onClick TimeInStates cpu0 1600000 4704909 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704909 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514796 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514797 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity$onCreate$1.onClick TimeInStates cpu0 1600000 4704910 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704910 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514798 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514798 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.onStop TimeInStates cpu0 1600000 4704924 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704925 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514812 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514812 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704925 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704926 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514813 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514813 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704926 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704926 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514813 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514813 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704927 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704927 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514814 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514814 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704927 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704928 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514815 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514815 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704928 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704928 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514815 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514815 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704928 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704929 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514816 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514816 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704930 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704930 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514817 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514817 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704931 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704931 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514818 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514818 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704931 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704931 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514819 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514819 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704932 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704932 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514819 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514820 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Entry com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704934 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704934 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514821 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514821 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704934 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704934 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514821 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514822 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704935 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704935 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514823 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514823 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704936 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704936 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514823 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514824 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704937 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704937 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514825 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514825 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704938 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704938 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514825 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514826 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704939 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704939 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514826 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514826 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704940 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704940 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514827 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514827 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704940 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704941 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514828 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514828 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704941 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704941 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514829 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514829 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704942 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704943 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514830 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514830 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.rec TimeInStates cpu0 1600000 4704943 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704943 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514830 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514830 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 7340): Exit com.example.navi_test.ChildActivity.onStop TimeInStates cpu0 1600000 4704944 1333000 1409050 933000 385036 800000 21621202 ; cpu1 1600000 4704944 1333000 1409050 933000 385036 800000 21621202 ; cpu2 1600000 4514831 1333000 1345700 933000 344974 800000 21914727 ; cpu3 1600000 4514831 1333000 1345700 933000 344974 800000 21914727 ;  EndOfData 0
+D/TEST    ( 8119): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4705392 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705393 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515404 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515404 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 8119): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4705422 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705423 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515434 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515434 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 8119): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4705423 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705423 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515434 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515434 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 8119): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4705423 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705424 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515436 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515436 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 8119): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4705426 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705426 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515438 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515438 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 8119): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4705428 1333000 1409135 933000 385069 800000 21621414 ; cpu1 1600000 4705428 1333000 1409135 933000 385069 800000 21621414 ; cpu2 1600000 4515439 1333000 1345707 933000 344980 800000 21914920 ; cpu3 1600000 4515439 1333000 1345707 933000 344980 800000 21914920 ;  EndOfData 0
+D/TEST    ( 9418): Entry com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4706648 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706649 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516661 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516661 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    ( 9418): Exit com.example.navi_test.MainActivity.onCreate TimeInStates cpu0 1600000 4706675 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706675 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516688 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516688 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    ( 9418): Entry com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4706675 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706676 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516688 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516688 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    ( 9418): Entry com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4706676 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706678 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516690 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516690 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    ( 9418): Exit com.example.navi_test.BackgroundKt.doInBackground TimeInStates cpu0 1600000 4706679 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706679 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516691 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516691 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    ( 9418): Exit com.example.navi_test.MainActivity$onCreate$1.run TimeInStates cpu0 1600000 4706679 1333000 1409150 933000 385069 800000 21621626 ; cpu1 1600000 4706680 1333000 1409150 933000 385069 800000 21621626 ; cpu2 1600000 4516692 1333000 1345715 933000 344982 800000 21915136 ; cpu3 1600000 4516692 1333000 1345715 933000 344982 800000 21915136 ;  EndOfData 0
+D/TEST    (10652): Entry com.example.navi_test.YoutubeActivity.onCreate TimeInStates cpu0 1600000 4707873 1333000 1409164 933000 385077 800000 21621819 ; cpu1 1600000 4707873 1333000 1409164 933000 385077 800000 21621819 ; cpu2 1600000 4517815 1333000 1345773 933000 344982 800000 21915363 ; cpu3 1600000 4517815 1333000 1345773 933000 344982 800000 21915363 ;  EndOfData 0
+D/TEST    (10652): Exit com.example.navi_test.YoutubeActivity.onCreate TimeInStates cpu0 1600000 4707890 1333000 1409164 933000 385077 800000 21621819 ; cpu1 1600000 4707890 1333000 1409164 933000 385077 800000 21621819 ; cpu2 1600000 4517833 1333000 1345773 933000 344982 800000 21915363 ; cpu3 1600000 4517833 1333000 1345773 933000 344982 800000 21915363 ;  EndOfData 0
+D/TEST    (10652): Entry com.example.navi_test.YoutubeActivity.onInitializationSuccess TimeInStates cpu0 1600000 4708592 1333000 1409172 933000 385077 800000 21621829 ; cpu1 1600000 4708592 1333000 1409172 933000 385077 800000 21621829 ; cpu2 1600000 4518453 1333000 1345824 933000 344996 800000 21915397 ; cpu3 1600000 4518453 1333000 1345824 933000 344996 800000 21915397 ;  EndOfData 0
+D/TEST    (10652): Exit com.example.navi_test.YoutubeActivity.onInitializationSuccess TimeInStates cpu0 1600000 4708599 1333000 1409172 933000 385077 800000 21621829 ; cpu1 1600000 4708599 1333000 1409172 933000 385077 800000 21621829 ; cpu2 1600000 4518460 1333000 1345824 933000 344996 800000 21915397 ; cpu3 1600000 4518461 1333000 1345824 933000 344996 800000 21915397 ;  EndOfData 0
+D/TEST    (10652): Entry com.example.navi_test.YoutubeActivity$playbackEventListener$1.onStopped TimeInStates cpu0 1600000 4708683 1333000 1409172 933000 385089 800000 21621833 ; cpu1 1600000 4708683 1333000 1409172 933000 385089 800000 21621833 ; cpu2 1600000 4518552 1333000 1345830 933000 344996 800000 21915399 ; cpu3 1600000 4518552 1333000 1345830 933000 344996 800000 21915399 ;  EndOfData 0
+D/TEST    (10652): Exit com.example.navi_test.YoutubeActivity$playbackEventListener$1.onStopped TimeInStates cpu0 1600000 4708685 1333000 1409172 933000 385089 800000 21621833 ; cpu1 1600000 4708685 1333000 1409172 933000 385089 800000 21621833 ; cpu2 1600000 4518555 1333000 1345830 933000 344996 800000 21915399 ; cpu3 1600000 4518555 1333000 1345830 933000 344996 800000 21915399 ;  EndOfData 0
+D/TEST    (10652): Entry com.example.navi_test.YoutubeActivity$playbackEventListener$1.onPaused TimeInStates cpu0 1600000 4710804 1333000 1409209 933000 385094 800000 21621847 ; cpu1 1600000 4710804 1333000 1409209 933000 385094 800000 21621847 ; cpu2 1600000 4520057 1333000 1346230 933000 345110 800000 21915558 ; cpu3 1600000 4520057 1333000 1346230 933000 345110 800000 21915558 ;  EndOfData 0
+D/TEST    (10652): Exit com.example.navi_test.YoutubeActivity$playbackEventListener$1.onPaused TimeInStates cpu0 1600000 4710808 1333000 1409209 933000 385094 800000 21621847 ; cpu1 1600000 4710808 1333000 1409209 933000 385094 800000 21621847 ; cpu2 1600000 4520060 1333000 1346230 933000 345110 800000 21915558 ; cpu3 1600000 4520061 1333000 1346230 933000 345110 800000 21915558 ;  EndOfData 0
