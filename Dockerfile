@@ -33,10 +33,6 @@ WORKDIR /root
 #   Required package for chrome and chromedriver to run on Linux
 # xvfb
 #   X virtual framebuffer
-# gnupg
-#   Encryption software. It is needed for nodejs
-# salt-minion
-#   Infrastructure management (client-side)
 #==================
 RUN apt-get -qqy update && \
     apt-get -qqy --no-install-recommends install \
@@ -50,8 +46,6 @@ RUN apt-get -qqy update && \
     libqt5webkit5 \
     libgconf-2-4 \
     xvfb \
-    gnupg \
-    salt-minion \
   && rm -rf /var/lib/apt/lists/*
 
 #===============
@@ -91,10 +85,13 @@ RUN echo "${TZ}" > /etc/timezone
 
 
 COPY . /root/Navitas-Framework
-RUN ls -la /
+RUN ls ./Navitas-Framework
 
 RUN cd / && \
-     cd ./root/Navitas-Framework/NaviProf && \
-     ./gradlew publishToMavenLocal && \
-     cd ../NaviTests && \
-     ./gradlew :navi_constants:profileBuild
+    cd ./root/Navitas-Framework && \
+    chmod +x ./get_devices.sh && \
+    adb connect 192.168.0.103 && \
+    cd ./NaviProf && ./gradlew publishToMavenLocal && \
+    cd ../NaviTests && \
+    ./gradlew navi_test:profileBuild
+
