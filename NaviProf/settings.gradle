@@ -1,3 +1,2 @@
-//rootProject.name = 'NaviProf'
-//include 'navi_constants'
-//project(':navi_constants').projectDir = file('../NaviTests/navi_constants')
+rootProject.name = 'NaviProf'
+
