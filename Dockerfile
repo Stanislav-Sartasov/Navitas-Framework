@@ -91,6 +91,7 @@ RUN cd / && \
     cd ./root/Navitas-Framework && \
     chmod +x ./get_devices.sh && \
     adb connect 192.168.0.103 && \
+    adb tcpip 5555 && \
     cd ./NaviProf && ./gradlew publishToMavenLocal && \
     cd ../NaviTests && \
     ./gradlew navi_test:profileBuild
