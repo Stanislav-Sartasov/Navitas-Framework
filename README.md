@@ -21,4 +21,4 @@ The Navitas Framework is architecturally composed of 3 parts:
  * In terminal run ``` $ adb usb ``` and enable usb debugging on phone
  * Run ``` $ adb tcpip 5555 ```
  * After run ``` $ adb connect {device IP-address}:5555 ``` and check connection ``` $ adb devices ```
- * Run dockerfile  ``` $ docker run --privileged  -v /home/rinatisk/.android:/root/.android -v /dev/bus/usb:/dev/bus/usb -t -i --device=/dev/ttyUSB0 ```
+ * Run dockerfile  ``` $ docker run --privileged  -v {appModule}/profileOutput -i ```

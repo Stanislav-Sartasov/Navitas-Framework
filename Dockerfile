@@ -3,7 +3,7 @@ FROM ubuntu:bionic-20200311
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV SDK_VERSION=sdk-tools-linux-3859397 \
-    ANDROID_BUILD_TOOLS_VERSION=30.0.0
+    ANDROID_BUILD_TOOLS_VERSION=30.0.3
 
 #=============
 # Set WORKDIR
@@ -27,12 +27,6 @@ WORKDIR /root
 #   Transfer data from or to a server
 # wget
 #   Network downloader
-# libqt5webkit5
-#   Web content engine (Fix issue in Android)
-# libgconf-2-4
-#   Required package for chrome and chromedriver to run on Linux
-# xvfb
-#   X virtual framebuffer
 #==================
 RUN apt-get -qqy update && \
     apt-get -qqy --no-install-recommends install \
@@ -42,9 +36,8 @@ RUN apt-get -qqy update && \
     zip \
     unzip \
     curl \
+    aapt \
     wget \
-    libqt5webkit5 \
-    libgconf-2-4 \
     xvfb \
   && rm -rf /var/lib/apt/lists/*
 
@@ -89,10 +82,21 @@ RUN ls ./Navitas-Framework
 
 RUN cd / && \
     cd ./root/Navitas-Framework && \
-    chmod +x ./get_devices.sh && \
-    adb connect 192.168.0.103 && \
-    adb tcpip 5555 && \
+    chmod +x ./connect.sh && \
+    chmod +x ./entry_point.sh && \
+    chmod +x ./app.sh && \
     cd ./NaviProf && ./gradlew publishToMavenLocal && \
-    cd ../NaviTests && \
-    ./gradlew navi_test:profileBuild
+    cd ../NaviTests
+
+CMD connect.sh && entry_point.sh
+
+# If you want configure instructions manually:
+# RUN cd / && \
+  #    cd ./root/Navitas-Framework && \
+  #    chmod +x ./get_devices.sh && \
+  #    adb connect 192.168.0.103 && \
+  #    adb tcpip 5555 && \
+  #    cd ./NaviProf && ./gradlew publishToMavenLocal && \
+  #    cd ../NaviTests && \
+  #    ./gradlew navi_test:profileBuild
 
