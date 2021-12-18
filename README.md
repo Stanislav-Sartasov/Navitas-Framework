@@ -18,10 +18,19 @@ The Navitas Framework is architecturally composed of 3 parts:
  * Apply NaviProf plugin from MavenLocal/MavenCentral, see [how to download](https://github.com/Stanislav-Sartasov/Navitas-Framework/blob/316a79fe6de4d3cc82783fd75d543b10128331ca/NaviProf/README.md#latest-compatible-version-of-comandroidtoolsbuildgradle-is-342) [how to publish](https://github.com/Stanislav-Sartasov/Navitas-Framework/tree/master/NaviProf#instruction-for-publishing-plugin-to-mavencentral)
  * In Navitas-Plugin run ```bash $ ./gradlew runIde ```
  * In opened Android Studio you can work with [Navitas-Plugin](https://github.com/Stanislav-Sartasov/Navitas-Framework/blob/e3ae75fa277780ba9f00b3e73f01daa441b803a8/Navitas-Plugin/README.md)
-         
+
+
+ ## Work with Docker
+ * Connect mobile device to computer
+ * In terminal run ``` $ adb usb ``` and enable usb debugging on phone
+ * Run ``` $ adb tcpip 5555 ```
+ * After run ``` $ adb connect {device IP-address}:5555 ``` and check connection ``` $ adb devices ```
+ * Run dockerfile  ``` $ docker run --privileged  -v {appModule}/profileOutput -i ```
+
 
  ## Troubleshooting
  * If you`re using 64-bit version of Linux you need to install required [libraries](https://developer.android.com/studio/install.html#64bit-libs) ```bash $ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 ```    
  * If you have error 'A problem occurred starting process 'command 'aapt'', change access permission in '/build-tools'
  * To power-profile android device you need configure developer options, [see how](https://developer.android.com/studio/debug/dev-options)
  * If you want to update version of JDK or Gradle, please see compatibility matrix for [gradle](https://docs.gradle.org/current/userguide/compatibility.html) and [android](https://developer.android.com/studio/releases/gradle-plugin)
+
