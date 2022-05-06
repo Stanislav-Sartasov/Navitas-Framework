@@ -12,7 +12,13 @@ class ProfilingResultRepositoryImpl : ProfilingResultRepository {
     override fun fetchTestsEnergyConsumption(): Single<List<EnergyConsumption>> {
         return Single.fromCallable {
             currentProfilingResult?.map { details ->
-                EnergyConsumption(details.testName, details.cpuEnergyConsumption.cpu, details.wifiEnergyConsumption?.wifi ?: Float.NaN, details.bluetoothEnergyConsumption?.bluetooth ?: Float.NaN)
+                EnergyConsumption(
+                    details.testName,
+                    details.cpuEnergyConsumption.cpu,
+                    details.wifiEnergyConsumption?.wifi ?: Float.NaN,
+                    details.bluetoothEnergyConsumption?.bluetooth ?: Float.NaN,
+                    details.gpuEnergyConsumption?.gpu ?: Float.NaN
+                )
             }
         }
     }

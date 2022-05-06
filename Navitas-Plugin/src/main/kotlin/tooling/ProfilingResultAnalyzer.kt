@@ -1,9 +1,12 @@
 package tooling
 
 import data.model.CpuInfo
+import data.model.GpuInfo
+import data.model.MaliGPU
 import domain.model.PowerProfile
 import domain.model.CpuMethodEnergyConsumption
 import data.model.ProfilingResult
+import data.model.components.GpuEnergyConsumption
 import domain.model.CpuEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
 import extensions.roundWithAccuracy
@@ -52,9 +55,9 @@ object ProfilingResultAnalyzer {
                 testDetails[logGroup.key] = externalMethods
             }
             val cpu = CpuEnergyConsumption(testEnergy, testDetails)
-
-            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiInfo?.last()!!.wifiEnergyConsumption,
-                testResult.second.bluetoothInfo!!.last().bluetoothEnergyConsumption))
+            val gpu = analyzeGpuEC(testResult.second.gpuInfo)
+            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiInfo?.last()?.wifiEnergyConsumption,
+                testResult.second.bluetoothInfo?.last()?.bluetoothEnergyConsumption, gpu))
         }
 
         return result
@@ -91,6 +94,25 @@ object ProfilingResultAnalyzer {
                 cpuEnergy,
                 nestedMethods
         )
+    }
+
+    private fun analyzeGpuEC(gpuInfoList: List<GpuInfo>?): GpuEnergyConsumption? {
+        if (gpuInfoList == null) return null
+
+        var result = 0F
+        for (element in gpuInfoList) {
+            val util = element.gpuEnergyConsumption.gpu.toInt()
+            val coef = when(util) {
+                in 0..158 -> MaliGPU().coef[0]
+                in 159..217 -> MaliGPU().coef[1]
+                in 218 .. 230 -> MaliGPU().coef[2]
+                else -> MaliGPU().coef[3]
+            }
+
+            result += (coef.first * util + coef.second) / MaliGPU().volt
+        }
+
+        return GpuEnergyConsumption(0F, result, null)
     }
 }
 

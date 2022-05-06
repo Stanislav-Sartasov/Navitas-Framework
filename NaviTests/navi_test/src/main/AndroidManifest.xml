@@ -21,7 +21,8 @@
         <activity android:name=".YoutubeActivity"/>
         <activity android:name="com.example.navi_test.ChildActivity">
         </activity>
-        <activity android:name="com.example.navi_test.MainActivity">
+        <activity android:name="com.example.navi_test.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
