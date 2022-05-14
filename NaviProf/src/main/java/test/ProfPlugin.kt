@@ -50,6 +50,31 @@ open class ProfPlugin : Plugin<Project> {
             }
         }
 
+        fun gpuLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
+            target.exec {
+                val date = SimpleDateFormat("MM-dd").format(Date())
+                val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+
+                // Keep in mind that the path to the GPU utilization is device-dependent!
+                val cmd = "$adb shell cat ./sys/kernel/debug/mali/utilization_gp_pp | tr -d '\\r\\n' ; echo '   '".plus("gpu $frequencyInSec $date $time").split(' ')
+                it.commandLine(cmd)
+
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
+            }
+        }
+
+        fun gpuLogsOfMethod(profilingOutput: File, pathName: String, method: String, frequencyInSec: Float) {
+            target.exec {
+                val date = SimpleDateFormat("MM-dd").format(Date())
+                val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+
+                val cmd = "$adb shell cat ./sys/kernel/debug/mali/utilization_gp_pp | tr -d '\\r\\n' ; echo '   '".plus("gpu $frequencyInSec $date $time").split(' ')
+                it.commandLine(cmd)
+
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
         fun componentsLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
             target.exec {
                 val date = SimpleDateFormat("MM-dd").format(Date())
@@ -57,6 +82,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
                     "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
+
                 it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
             }
         }
@@ -66,6 +92,7 @@ open class ProfPlugin : Plugin<Project> {
 
             while(!testFinished.get()) {
                 componentsLogsOfClass(profilingOutput, path, frequencyInSec)
+                gpuLogsOfClass(profilingOutput, path, frequencyInSec)
 
                 Thread.sleep(milliseconds)
             }
@@ -78,6 +105,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
                     "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
+
                 it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
@@ -87,6 +115,7 @@ open class ProfPlugin : Plugin<Project> {
 
             while(!testFinished.get()) {
                 componentsLogsOfMethod(profilingOutput, pathName, method, frequencyInSec)
+                gpuLogsOfMethod(profilingOutput, pathName, method, frequencyInSec)
 
                 Thread.sleep(milliseconds)
             }
@@ -601,6 +630,7 @@ private class JSONGenerator {
                 val cpuComponent = JSONArray()
                 val wifiComponent = JSONArray()
                 val bluetoothComponent = JSONArray()
+                val gpuComponent = JSONArray()
 
                 val data = it.readLines()
                 for (line in data) {
@@ -617,7 +647,8 @@ private class JSONGenerator {
 
                                     val componentsWithIndexes = listOf(
                                         Pair(wifiComponent, entryLineList.indexOf("Wifi:")),
-                                        Pair(bluetoothComponent, entryLineList.indexOf("Bluetooth:")))
+                                        Pair(bluetoothComponent, entryLineList.indexOf("Bluetooth:"))
+                                    )
 
                                     for(componentWithIndex in componentsWithIndexes) {
                                         if(componentWithIndex.second != -1)
@@ -645,120 +676,139 @@ private class JSONGenerator {
                                     }
                                 }
                                 else -> {
-                                    var methodName: String
-                                    var processId = 0
-                                    var threadId = 0
+                                    if (entryLineList[1] == "gpu") {
+                                        val header = JSONObject()
+                                        val freqInSec = entryLineList[entryLineList.lastIndex - 2].toFloat()
+                                        header["frequency"] = if (freqInSec != 0.0f) 1f / freqInSec else -1f
+                                        header["timestamp"] = getTimestamp(entryLineList[entryLineList.lastIndex - 1], entryLineList.last())
 
-                                    var startDate: String
-                                    var startTime: String
+                                        val body = JSONObject()
+                                        body["common"] = entryLineList.first().toInt()
+                                        body[entryLineList[1]] = entryLineList.first().toInt()
 
-                                    //timestamp from January 1, 1970, 00:00:00 GMT
-                                    var timestamp: Long
+                                        val log = JSONObject()
+                                        log["header"] = header
+                                        log["body"] = body
 
-                                    var isEntry: Boolean
-                                    var parseIndex: Int
+                                        gpuComponent.add(log)
+                                    }
 
-                                    if(entryLineList[4] == "D" && entryLineList[5] == "TEST") {
-                                        methodName = entryLineList[8]
-                                        processId = entryLineList[2].toInt()
-                                        threadId = entryLineList[3].toInt()
+                                    else {
+                                        var methodName: String
+                                        var processId = 0
+                                        var threadId = 0
 
-                                        startDate = entryLineList[0]
-                                        startTime = entryLineList[1]
+                                        var startDate: String
+                                        var startTime: String
 
                                         //timestamp from January 1, 1970, 00:00:00 GMT
-                                        timestamp = getTimestamp(startDate, startTime)
+                                        var timestamp: Long
 
-                                        isEntry = entryLineList[7] == "Entry"
-                                        parseIndex = 10
-                                    }
-                                    else if (entryLineList[1] == "(")
-                                    {
-                                        methodName = entryLineList[4]
-                                        startDate = SimpleDateFormat("MM-dd").format(Date())
-                                        startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+                                        var isEntry: Boolean
+                                        var parseIndex: Int
 
-                                        timestamp = getTimestamp(startDate, startTime)
+                                        if(entryLineList[4] == "D" && entryLineList[5] == "TEST") {
+                                            methodName = entryLineList[8]
+                                            processId = entryLineList[2].toInt()
+                                            threadId = entryLineList[3].toInt()
 
-                                        isEntry = entryLineList[3] == "Entry"
-                                        parseIndex = 6
-                                    }
-                                    else
-                                    {
-                                        methodName = entryLineList[3]
-                                        startDate = SimpleDateFormat("MM-dd").format(Date())
-                                        startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
+                                            startDate = entryLineList[0]
+                                            startTime = entryLineList[1]
 
-                                        timestamp = getTimestamp(startDate, startTime)
+                                            //timestamp from January 1, 1970, 00:00:00 GMT
+                                            timestamp = getTimestamp(startDate, startTime)
 
-                                        isEntry = entryLineList[2] == "Entry"
-                                        parseIndex = 5
-                                    }
+                                            isEntry = entryLineList[7] == "Entry"
+                                            parseIndex = 10
+                                        }
+                                        else if (entryLineList[1] == "(")
+                                        {
+                                            methodName = entryLineList[4]
+                                            startDate = SimpleDateFormat("MM-dd").format(Date())
+                                            startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
-                                    val cpuDetails = JSONArray()
-                                    var kernelDetails = JSONObject()
-                                    var valuesDetails = JSONArray()
+                                            timestamp = getTimestamp(startDate, startTime)
 
-                                    while (entryLineList[parseIndex] != "EndOfData") {
-                                        val item = entryLineList[parseIndex]
+                                            isEntry = entryLineList[3] == "Entry"
+                                            parseIndex = 6
+                                        }
+                                        else
+                                        {
+                                            methodName = entryLineList[3]
+                                            startDate = SimpleDateFormat("MM-dd").format(Date())
+                                            startTime = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
-                                        when {
-                                            item == ";" -> {
-                                                kernelDetails["details"] = valuesDetails
-                                                cpuDetails.add(kernelDetails)
+                                            timestamp = getTimestamp(startDate, startTime)
 
-                                                parseIndex += 1
-                                            }
-                                            item.startsWith("cpu") -> {
-                                                kernelDetails = JSONObject()
-                                                valuesDetails = JSONArray()
+                                            isEntry = entryLineList[2] == "Entry"
+                                            parseIndex = 5
+                                        }
 
-                                                val kernelIndex = item.substringAfter("cpu").toInt()
-                                                kernelDetails["kernel"] = kernelIndex
+                                        val cpuDetails = JSONArray()
+                                        var kernelDetails = JSONObject()
+                                        var valuesDetails = JSONArray()
 
-                                                parseIndex += 1
-                                            }
-                                            else -> {
-                                                val freq = entryLineList[parseIndex].toInt()
-                                                val timeInState = entryLineList[parseIndex + 1].toInt()
+                                        while (entryLineList[parseIndex] != "EndOfData") {
+                                            val item = entryLineList[parseIndex]
 
-                                                val valuesPair = JSONObject()
-                                                valuesPair["frequency"] = freq
-                                                valuesPair["timestamp"] = timeInState
+                                            when {
+                                                item == ";" -> {
+                                                    kernelDetails["details"] = valuesDetails
+                                                    cpuDetails.add(kernelDetails)
 
-                                                valuesDetails.add(valuesPair)
+                                                    parseIndex += 1
+                                                }
+                                                item.startsWith("cpu") -> {
+                                                    kernelDetails = JSONObject()
+                                                    valuesDetails = JSONArray()
 
-                                                parseIndex += 2
+                                                    val kernelIndex = item.substringAfter("cpu").toInt()
+                                                    kernelDetails["kernel"] = kernelIndex
+
+                                                    parseIndex += 1
+                                                }
+                                                else -> {
+                                                    val freq = entryLineList[parseIndex].toInt()
+                                                    val timeInState = entryLineList[parseIndex + 1].toInt()
+
+                                                    val valuesPair = JSONObject()
+                                                    valuesPair["frequency"] = freq
+                                                    valuesPair["timestamp"] = timeInState
+
+                                                    valuesDetails.add(valuesPair)
+
+                                                    parseIndex += 2
+                                                }
                                             }
                                         }
+
+                                        val brightness = entryLineList[parseIndex + 1].toInt()
+
+                                        val headerDetails = JSONObject()
+                                        headerDetails["timestamp"] = timestamp
+                                        headerDetails["processID"] = processId
+                                        headerDetails["threadID"] = threadId
+                                        headerDetails["methodName"] = methodName
+                                        headerDetails["isEntry"] = isEntry
+
+                                        val cpuTimeInStates = JSONObject()
+                                        cpuTimeInStates["component"] = "cpuTimeInStates"
+                                        cpuTimeInStates["details"] = cpuDetails
+
+                                        val brightnessComponent = JSONObject()
+                                        brightnessComponent["component"] = "brightness"
+                                        brightnessComponent["details"] = brightness
+
+                                        val bodyArray = JSONArray()
+                                        bodyArray.add(cpuTimeInStates)
+                                        bodyArray.add(brightnessComponent)
+
+                                        val logObject = JSONObject()
+                                        logObject["header"] = headerDetails
+                                        logObject["body"] = bodyArray
+
+                                        cpuComponent.add(logObject)
                                     }
-
-                                    val brightness = entryLineList[parseIndex + 1].toInt()
-
-                                    val headerDetails = JSONObject()
-                                    headerDetails["timestamp"] = timestamp
-                                    headerDetails["processID"] = processId
-                                    headerDetails["threadID"] = threadId
-                                    headerDetails["methodName"] = methodName
-                                    headerDetails["isEntry"] = isEntry
-
-                                    val cpuTimeInStates = JSONObject()
-                                    cpuTimeInStates["component"] = "cpuTimeInStates"
-                                    cpuTimeInStates["details"] = cpuDetails
-
-                                    val brightnessComponent = JSONObject()
-                                    brightnessComponent["component"] = "brightness"
-                                    brightnessComponent["details"] = brightness
-
-                                    val bodyArray = JSONArray()
-                                    bodyArray.add(cpuTimeInStates)
-                                    bodyArray.add(brightnessComponent)
-
-                                    val logObject = JSONObject()
-                                    logObject["header"] = headerDetails
-                                    logObject["body"] = bodyArray
-
-                                    cpuComponent.add(logObject)
                                 }
                             }
                         }
@@ -779,6 +829,10 @@ private class JSONGenerator {
                 if(bluetoothComponent.size != 0)
                 {
                     testLogs["bluetooth"] = bluetoothComponent
+                }
+                if(gpuComponent.size != 0)
+                {
+                    testLogs["gpu"] = gpuComponent
                 }
 
                 val testObject = JSONObject()

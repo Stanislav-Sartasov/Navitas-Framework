@@ -4,5 +4,6 @@ data class EnergyConsumption (
         val consumer: String,
         val cpuEnergy: Float,
         val wifiEnergy: Float,
-        val bluetoothEnergy: Float
+        val bluetoothEnergy: Float,
+        val gpuEnergy: Float
 )

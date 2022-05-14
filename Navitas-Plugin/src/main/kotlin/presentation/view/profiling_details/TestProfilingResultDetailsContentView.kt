@@ -11,7 +11,6 @@ import com.intellij.ui.CollectionComboBoxModel
 import com.intellij.ui.ColoredTreeCellRenderer
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.SimpleTextAttributes
-import com.intellij.ui.components.JBLabel
 import com.intellij.ui.treeStructure.Tree
 import domain.model.CpuMethodEnergyConsumption
 import domain.model.DetailedTestEnergyConsumption
@@ -75,7 +74,7 @@ class TestProfilingResultDetailsContentView(
         treeView.model = treeModel
         treeView.selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
 
-        fun getWifiBluetoothInfo(energyConsumption: DetailedTestEnergyConsumption?) : String {
+        fun getComponentsInfo(energyConsumption: DetailedTestEnergyConsumption?) : String {
             val info = StringBuilder()
             if(energyConsumption?.wifiEnergyConsumption?.common != null) {
                 info.append("Wi-Fi:\n   common: ${energyConsumption?.wifiEnergyConsumption?.common} mAh")
@@ -93,6 +92,14 @@ class TestProfilingResultDetailsContentView(
                     info.append("\n   ${item.component}: ${item.energy} mAh")
                 }
             }
+            if(energyConsumption?.gpuEnergyConsumption?.common != null) {
+                info.append("GPU:\n   common: ${energyConsumption?.gpuEnergyConsumption?.common} mAh")
+            }
+            if(energyConsumption?.gpuEnergyConsumption?.external != null) {
+                for (item in energyConsumption?.gpuEnergyConsumption?.external) {
+                    info.append("\n   ${item.component}: ${item.energy} mAh")
+                }
+            }
             return info.toString()
         }
 
@@ -102,7 +109,7 @@ class TestProfilingResultDetailsContentView(
                         val node = value as DefaultMutableTreeNode
                         val item = node.userObject as CpuMethodEnergyConsumption
                         val energyConsumption = profilingResultVM.cache
-                        componentsArea.text = getWifiBluetoothInfo(energyConsumption)
+                        componentsArea.text = getComponentsInfo(energyConsumption)
                         append(item.methodName, SimpleTextAttributes.REGULAR_ATTRIBUTES)
                         append("   ")
                         append("${item.cpuEnergy} mAh", SimpleTextAttributes.REGULAR_BOLD_ATTRIBUTES)

@@ -22,10 +22,20 @@ object ProfilerResultParser {
             val cpuInfo = mutableListOf<CpuInfo>()
             val wifiInfo = mutableListOf<WifiInfo>()
             val bluetoothInfo = mutableListOf<BluetoothInfo>()
+            val gpuInfo = mutableListOf<GpuInfo>()
 
             for(component in testLogs.keys()) {
                 if(component != null) {
                     when(component) {
+                        "gpu" -> {
+                            val gpuArray = testLogs.getJSONArray("gpu")
+
+                            for(j in 0 until gpuArray.length()) {
+                                val gpuLog = gpuArray.getJSONObject(j)
+
+                                gpuInfo.add(parseGPUInfo(gpuLog))
+                            }
+                        }
                         "wifi" -> {
                             val wifiArray = testLogs.getJSONArray("wifi")
 
@@ -71,7 +81,8 @@ object ProfilerResultParser {
 
             val testLog = ProfilingTestLog(cpuInfo,
                 if(wifiInfo.size != 0) wifiInfo else null,
-                if(bluetoothInfo.size != 0) bluetoothInfo else null
+                if(bluetoothInfo.size != 0) bluetoothInfo else null,
+                if(gpuInfo.size != 0) gpuInfo else null
             )
 
             result.addTestResults(testName, testLog)
@@ -153,6 +164,40 @@ object ProfilerResultParser {
         }
 
         return BluetoothInfo(testInfo, BluetoothEnergyConsumption(common, bluetooth, external))
+    }
+
+    private fun parseGPUInfo(obj: JSONObject): GpuInfo {
+        val testInfo = parseTestInfo(obj.getJSONObject("header"))
+
+        var common = Float.NaN
+        var gpu = Float.NaN
+        val external = mutableListOf<ComponentEnergyPair>()
+
+        val testDetails = obj.getJSONObject("body")
+        for(component in testDetails.keys()) {
+            if(component != null)
+            {
+                when (component) {
+                    "common" -> {
+                         common = testDetails.getFloat(component)
+                    }
+                    "gpu" -> {
+                         gpu = testDetails.getFloat(component)
+                    }
+                    else -> {
+                        val energy = testDetails.getFloat(component)
+                        external.add(ComponentEnergyPair(component, energy))
+                    }
+                }
+            }
+        }
+
+        if(external.isEmpty())
+        {
+            return GpuInfo(testInfo, GpuEnergyConsumption(common, gpu, null))
+        }
+
+        return GpuInfo(testInfo, GpuEnergyConsumption(common, gpu, external))
     }
 
     private fun parseMethodInfo(obj: JSONObject): MethodInfo {
