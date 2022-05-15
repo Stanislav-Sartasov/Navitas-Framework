@@ -10,7 +10,9 @@ import java.nio.file.Paths
 
 fun main() {
 
-  //  val sum = File("/home/rinatisk/jsons/usb/sum.txt")
+    //!!This is cli api for analyzer to force check without plugin!!
+
+    //  val sum = File("/home/rinatisk/jsons/usb/sum.txt")
         // val fileWriter = FileWriter("/home/rinatisk/jsons/usb/sum.txt", true)
     for (i in 1..1) {
         val result = ProfilerResultParser.parse("/home/rinatisk/StudioProjects/Navitas-Framework/NaviTests/navi_test/profilingOutput/", "logs.json")

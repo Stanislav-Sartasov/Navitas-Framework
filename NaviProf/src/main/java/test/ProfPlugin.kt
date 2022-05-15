@@ -74,15 +74,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
                     "-m", "2", ";", "echo", "'   '", "$frequencyInSec", date, time)
-             //   val kostyl = String((it.standardOutput as ByteArrayOutputStream).toByteArray())
-              //  File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl.replace("\n", "") + "\n")
                 it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/${path}.txt", true)
-              //  val kostyl = File("${profilingOutput.absolutePath}/${path}.txt").readText().replace("\n", " ")
-              //  File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl)
-
-             //   println("$$$$$" + kostyl + "$$$$$$")
-           //     File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl.replace("\n", " ") + "\n")
-          //      File("${profilingOutput.absolutePath}/$path.txc").delete()
             }
         }
 
@@ -665,7 +657,6 @@ private class JSONGenerator {
                         testLogs["Uid"] = log
                     }
                     if (line.trimStart().startsWith("Wi-Fi")) {
-                        println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
                         val entryList = line.trimStart().split(" ")
                         val memorySize = entryList[2].dropLast(2).replace(",", ".").toFloat() + entryList[4].dropLast(2).replace(",", ".").toFloat()
                         val packets = entryList[7].toInt() + entryList[9].toInt()
