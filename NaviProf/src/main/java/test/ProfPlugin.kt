@@ -1,17 +1,16 @@
 package test
 
 import com.android.build.gradle.BaseExtension
+import org.codehaus.groovy.tools.shell.Shell
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.FileWriter
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Collections.min
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.regex.Pattern
 
@@ -22,6 +21,8 @@ open class ProfPlugin : Plugin<Project> {
         android.registerTransform(Transformer(android, extension))
 
         val adb: File = android.adbExecutable
+
+
         fun runCommand(vararg args: String) {
             try {
                 target.exec {
@@ -50,14 +51,38 @@ open class ProfPlugin : Plugin<Project> {
             }
         }
 
+        fun wifiLogsOfMethod(profilingOutput: File, pathName: String, method: String) {
+            target.exec {
+                //adb shell dumpsys batterystats | grep "  2000\|Uid 2000:" -A 1 -m2
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", " 2000:")
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
+            }
+        }
+
+        fun wifiLogsOfClass(profilingOutput: File, path: String) {
+            target.exec {
+                //adb shell dumpsys batterystats | grep "  2000\|Uid 2000:" -A 1 -m2
+                it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", " 2000:", "-m2", "-A", "1")
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
+            }
+        }
+
         fun componentsLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
             target.exec {
                 val date = SimpleDateFormat("MM-dd").format(Date())
                 val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
-                    "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
-                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$path.txt", true)
+                    "-m", "2", ";", "echo", "'   '", "$frequencyInSec", date, time)
+             //   val kostyl = String((it.standardOutput as ByteArrayOutputStream).toByteArray())
+              //  File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl.replace("\n", "") + "\n")
+                it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/${path}.txt", true)
+              //  val kostyl = File("${profilingOutput.absolutePath}/${path}.txt").readText().replace("\n", " ")
+              //  File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl)
+
+             //   println("$$$$$" + kostyl + "$$$$$$")
+           //     File("${profilingOutput.absolutePath}/$path.txt").appendText(kostyl.replace("\n", " ") + "\n")
+          //      File("${profilingOutput.absolutePath}/$path.txc").delete()
             }
         }
 
@@ -77,7 +102,7 @@ open class ProfPlugin : Plugin<Project> {
                 val time = SimpleDateFormat("HH:mm:ss.SSS").format(Date())
 
                 it.commandLine("$adb", "shell", "dumpsys", "batterystats", "|", "grep", "-E", "\"Wifi: |Bluetooth: \"",
-                    "-m", "2", "|", "tr", "-d", "'\\r\\n'", ";", "echo", "'   '", "$frequencyInSec", date, time)
+                    "-m", "2", ";", "echo", "'   '", "$frequencyInSec", date, time)
                 it.standardOutput = FileOutputStream("${profilingOutput.absolutePath}/$pathName.$method.txt", true)
             }
         }
@@ -169,7 +194,7 @@ open class ProfPlugin : Plugin<Project> {
                     val testOutput = File("${profilingOutput.absolutePath}/$path.txt")
                     while(!testOutput.exists())
                     {
-                        Thread.sleep(0)
+                        Thread.sleep(3)
                     }
 
                     runTestClass(path, testRunnerInfo)
@@ -178,7 +203,11 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    if (project.property("mode") == "profiling") cpuLogsOfClass(profilingOutput, path)
+                    if (project.property("mode") == "profiling") {
+                        cpuLogsOfClass(profilingOutput, path)
+                      //  wifiLogsOfClass(profilingOutput, path)
+                    }
+                    wifiLogsOfClass(profilingOutput, path)
                 }
 
                 fun profileMethod(pathName : String, method : String, loggers : List<Thread>) {
@@ -199,7 +228,11 @@ open class ProfPlugin : Plugin<Project> {
                     loggers.forEach { logger -> logger.join() }
                     testFinished.set(false)
 
-                    if (project.property("mode") == "profiling") cpuLogsOfMethod(profilingOutput, pathName, method)
+                    if (project.property("mode") == "profiling") {
+                        cpuLogsOfMethod(profilingOutput, pathName, method)
+                   //     wifiLogsOfMethod(profilingOutput, pathName, method)
+                    }
+                    wifiLogsOfMethod(profilingOutput, pathName, method)
                 }
 
                 if (project.hasProperty("granularity"))
@@ -504,6 +537,17 @@ open class ProfPlugin : Plugin<Project> {
             }
         }
 
+        target.tasks.register("generateLogs") {
+            it.doLast {
+                JSONGenerator().generate("${target.projectDir}/profilingOutput/")
+            }
+        }
+
+        target.tasks.register("generateTxt") {
+                it.dependsOn("profileBuild")
+                it.dependsOn("runTests")
+        }
+
         target.tasks.register("profileBuild") {
             it.dependsOn("assembleDebug", "assembleDebugAndroidTest")
 
@@ -588,6 +632,10 @@ open class TestRunnerInfo(aaptOutput: String) {
     }
 }
 
+fun main() {
+    JSONGenerator().generate("/NaviTests/navi_test/profilingOutput/")
+}
+
 private class JSONGenerator {
     fun generate(directory: String) {
         val testList = JSONArray()
@@ -601,14 +649,49 @@ private class JSONGenerator {
                 val cpuComponent = JSONArray()
                 val wifiComponent = JSONArray()
                 val bluetoothComponent = JSONArray()
+                val wifiConnection = JSONArray()
+                val wifiMemory = JSONArray()
 
+                val lines = it.readLines()
                 val data = it.readLines()
                 for (line in data) {
+                    if (line.trimStart().startsWith("Uid")) {
+                        val energyNumber = line.trimStart().split(":")[1].replace(",", ".").toFloat()
+                        println(energyNumber)
+                        val log = JSONObject()
+                        log["header"] = "Uid"
+                        log["body"] = energyNumber
+
+                        testLogs["Uid"] = log
+                    }
+                    if (line.trimStart().startsWith("Wi-Fi")) {
+                        println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+                        val entryList = line.trimStart().split(" ")
+                        val memorySize = entryList[2].dropLast(2).replace(",", ".").toFloat() + entryList[4].dropLast(2).replace(",", ".").toFloat()
+                        val packets = entryList[7].toInt() + entryList[9].toInt()
+                        println("$memorySize $packets")
+                        val log = JSONObject()
+                        log["header"] = "Wi-Fi"
+                        val body = JSONObject()
+                        body["memory"] = memorySize
+                        body["packets"] = packets
+                        log["body"] = body
+
+                        testLogs["Wi-Fi"] = log
+                    }
                     if (!line.startsWith('-')) {
-                        val entryLineList = line.trim().split("\\s+".toRegex())
+                        val entryLineList = if ((line.trimStart().startsWith("Bluetooth") || line.trimStart().startsWith("Wifi") && (!data[kotlin.math.min(data.indexOf(line) + 1, data.lastIndex)].trimStart().startsWith("0"))) ) {
+                            data.subList(kotlin.math.min(data.indexOf(line), data.lastIndex - 1), kotlin.math.min(data.indexOf(line) + 3, data.lastIndex - 1)).joinToString(separator = " ").trimStart().split(" ")
+                            //println("1234566ooppqe")
+                        } else {
+                            line.trim().split("\\s+".toRegex())
+                        }
+                     //   println("^^^^^" + data.subList(data.indexOf(line), data.indexOf(line) + 3).joinToString(separator = " ").trimStart())
+                     //   println("%%%$entryLineList and ###$line")
                         try {
                             when(entryLineList[0]) {
-                                "Wifi:", "Bluetooth:" -> {
+                                "Wifi:",
+                                "Bluetooth:" -> {
                                     val header = JSONObject()
                                     val freqInSec = entryLineList[entryLineList.lastIndex - 2].toFloat()
                                     header["frequency"] = if (freqInSec != 0.0f) 1f / freqInSec else -1f

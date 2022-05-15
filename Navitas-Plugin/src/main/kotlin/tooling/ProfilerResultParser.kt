@@ -4,8 +4,57 @@ import data.model.*
 import data.model.components.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 import java.nio.file.Files.readAllBytes
 import java.nio.file.Paths
+
+fun main() {
+
+  //  val sum = File("/home/rinatisk/jsons/usb/sum.txt")
+        // val fileWriter = FileWriter("/home/rinatisk/jsons/usb/sum.txt", true)
+    for (i in 1..1) {
+        val result = ProfilerResultParser.parse("/home/rinatisk/StudioProjects/Navitas-Framework/NaviTests/navi_test/profilingOutput/", "logs.json")
+        val defaultProfile = PowerProfileManager.getDefaultProfile()
+      //  println(result.getTestResults())
+        val analyzeResult = ProfilingResultAnalyzer.analyze(result, defaultProfile)
+    //    println(i)
+        var resultList = mutableListOf<Float>()
+        analyzeResult.forEach { if (it.testName.startsWith("Another") && it.bluetoothEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/usb/another_usb_b.txt").appendText(
+            it.bluetoothEnergyConsumption.common.toString() + " "
+        ) } }
+               analyzeResult.forEach { if (it.testName.startsWith("Another") && it.wifiEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/usb/another_usb_w.txt").appendText(
+            it.wifiEnergyConsumption.common.toString() + " "
+        ) } }
+
+        analyzeResult.forEach { if (it.testName.startsWith("Navi") && it.bluetoothEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/usb/navigation_usb_b.txt").appendText(
+            it.bluetoothEnergyConsumption.common.toString() + " "
+        ) } }
+        analyzeResult.forEach { if (it.testName.startsWith("Navi") && it.wifiEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/usb/navigation_usb_w.txt").appendText(
+            it.wifiEnergyConsumption.common.toString() + " "
+        ) } }
+
+        analyzeResult.forEach { if (it.testName.startsWith("Blu") && it.bluetoothEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/wifi/bluetooth_wifi_b.txt").appendText(
+            it.bluetoothEnergyConsumption.common.toString() + " "
+        ) } }
+        analyzeResult.forEach { if (it.testName.startsWith("Blu") && it.wifiEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/wifi/bluetooth_wifi_w.txt").appendText(
+            it.wifiEnergyConsumption.common.toString() + " "
+        ) } }
+
+        analyzeResult.forEach { if (it.testName.startsWith("Wi") && it.bluetoothEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/wifi/wifi_wifi_b.txt").appendText(
+            it.bluetoothEnergyConsumption.common.toString() + " "
+        ) } }
+        analyzeResult.forEach { if (it.testName.startsWith("Wi") && it.wifiEnergyConsumption?.common != null) { File("/home/rinatisk/jsons/wifi/wifi_wifi_w.txt").appendText(
+            it.wifiEnergyConsumption.common.toString() + " "
+        ) } }
+
+
+        //  File("/home/rinatisk/jsons/sum.txt").writeText()
+
+        println(analyzeResult.map { "${it.testName} ${it.wifiEnergyConsumption?.common} ${it.bluetoothEnergyConsumption?.common} ${it.cpuEnergyConsumption.cpu}\n ${it.energy} ${it.memory} ${it.packets}"}.toString())
+     //   sum.appendText(analyzeResult.map { ("${it.testName} ${it.cpuEnergyConsumption.cpu} ${it.wifiEnergyConsumption?.wifi ?: 0} ${it.bluetoothEnergyConsumption?.bluetooth ?: 0} " )}.toString() + "\n")
+    }
+}
+
 
 object ProfilerResultParser {
     fun parse(directory: String, fileName: String): ProfilingResult {
@@ -22,10 +71,20 @@ object ProfilerResultParser {
             val cpuInfo = mutableListOf<CpuInfo>()
             val wifiInfo = mutableListOf<WifiInfo>()
             val bluetoothInfo = mutableListOf<BluetoothInfo>()
+            val connectionInfo = mutableListOf<ConnectionInfo>()
+            val uidInfo = mutableListOf<UidInfo>()
 
             for(component in testLogs.keys()) {
                 if(component != null) {
                     when(component) {
+                        "Wi-Fi" -> {
+                            val array = testLogs.getJSONObject("Wi-Fi")
+                                connectionInfo.add(parseConnectionInfo(array))
+                        }
+                        "Uid" -> {
+                            val array = testLogs.getJSONObject("Uid")
+                            uidInfo.add(parseUidInfo(array))
+                        }
                         "wifi" -> {
                             val wifiArray = testLogs.getJSONArray("wifi")
 
@@ -71,7 +130,9 @@ object ProfilerResultParser {
 
             val testLog = ProfilingTestLog(cpuInfo,
                 if(wifiInfo.size != 0) wifiInfo else null,
-                if(bluetoothInfo.size != 0) bluetoothInfo else null
+                if(bluetoothInfo.size != 0) bluetoothInfo else null,
+                uidInfo,
+                connectionInfo
             )
 
             result.addTestResults(testName, testLog)
@@ -119,6 +180,41 @@ object ProfilerResultParser {
         }
 
         return WifiInfo(testInfo, WifiEnergyConsumption(common, wifi, external))
+    }
+
+    private fun parseConnectionInfo(obj: JSONObject): ConnectionInfo {
+
+        var memory = Float.NaN
+        var packets = 0
+
+        val testDetails = obj.getJSONObject("body")
+        for(component in testDetails.keys()) {
+            if(component != null)
+            {
+                when (component) {
+                    "packets" -> {
+                        packets = testDetails.getInt(component)
+                    }
+                    "memory" -> {
+                        memory = testDetails.getFloat(component)
+                    }
+                    else -> {
+                        throw NullPointerException("Invalid json log")
+                    }
+                }
+            }
+        }
+
+        return ConnectionInfo(memory, packets)
+    }
+
+    private fun parseUidInfo(obj: JSONObject): UidInfo {
+
+        var energy = Float.NaN
+
+        energy = obj.getFloat("body")
+
+        return UidInfo(energy)
     }
 
     private fun parseBluetoothInfo(obj: JSONObject): BluetoothInfo {

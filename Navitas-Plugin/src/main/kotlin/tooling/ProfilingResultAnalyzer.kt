@@ -18,6 +18,9 @@ object ProfilingResultAnalyzer {
 
             val testName = testResult.first
             val testDetails = mutableMapOf<Pair<Int, Int>, List<CpuMethodEnergyConsumption>>()
+            val energy = testResult.second.uidInfo.first().energy
+            val memory = testResult.second.info.first().memory
+            val packets = testResult.second.info.first().packets
             var testEnergy = 0F
 
             val logs = testResult.second.cpuInfo
@@ -35,10 +38,10 @@ object ProfilingResultAnalyzer {
                         nestedMethodsDeque.addLast(mutableListOf())
                     } else {
                         val methodDetails = analyzeMethodLogs(
-                                logDeque.pollLast(),
-                                log,
-                                nestedMethodsDeque.pollLast(),
-                                powerProfile
+                                entryLog = if (logDeque.isNotEmpty()) { logDeque.pollLast() } else log,
+                                exitLog = log,
+                            nestedMethods = if (nestedMethodsDeque.isNotEmpty()) { nestedMethodsDeque.pollLast() } else mutableListOf(),
+                            profile = powerProfile
                         )
                         if (logDeque.isEmpty()) {
                             externalMethods.add(methodDetails)
@@ -53,8 +56,8 @@ object ProfilingResultAnalyzer {
             }
             val cpu = CpuEnergyConsumption(testEnergy, testDetails)
 
-            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiInfo?.last()!!.wifiEnergyConsumption,
-                testResult.second.bluetoothInfo!!.last().bluetoothEnergyConsumption))
+            result.add(DetailedTestEnergyConsumption(testName, cpu, testResult.second.wifiInfo?.last()?.wifiEnergyConsumption,
+                testResult.second.bluetoothInfo?.last()?.bluetoothEnergyConsumption, memory, packets, energy))
         }
 
         return result
@@ -94,28 +97,28 @@ object ProfilingResultAnalyzer {
     }
 }
 
-// ATTENTION: only for debug
-//fun processNode(node: CpuMethodEnergyConsumption, lvl: Int = 0) {
-//    val offset = " ".repeat(lvl)
-//    println(offset + node.methodName + " " + node.cpuEnergy + " " + node.startTimestamp + ".." + node.endTimestamp)
-//    for (child in node.nestedMethods) {
-//        processNode(child, lvl + 4)
-//    }
-//}
-//
-//// ATTENTION: only for debug
-//fun main() {
-//    val profile = PowerProfileManager.getDefaultProfile()
-//    val raw = ProfilerResultParser.parse("C:/Users/EG/Documents/Navitas-Framework/UI-Testing-Samples/app/profileOutput/", "logs.json")
-//    val result = ProfilingResultAnalyzer.analyze(raw, profile)
-//    for (test in result) {
-//        println(test.testName)
-//        for (info in test.cpuEnergyConsumption.testDetails) {
-//            println("Process ${info.key.first}, Thread ${info.key.second}")
-//            for (method in info.value) {
-//                processNode(method)
-//            }
-//            println("----------------------------------------------------")
-//        }
-//    }
-//}
+fun processNode(node: CpuMethodEnergyConsumption, lvl: Int = 0) {
+    val offset = " ".repeat(lvl)
+    println(offset + node.methodName + " " + node.cpuEnergy + " " + node.startTimestamp + ".." + node.endTimestamp)
+    for (child in node.nestedMethods) {
+        processNode(child, lvl + 4)
+    }
+}
+
+fun main() {
+    val profile = PowerProfileManager.getDefaultProfile()
+    val raw = ProfilerResultParser.parse("/home/rinatisk/jsons/wifi/", "logs6.json")
+    val result = ProfilingResultAnalyzer.analyze(raw, profile)
+    for (test in result) {
+        println(test.testName)
+        println(test.wifiEnergyConsumption?.wifi)
+        println(test.wifiEnergyConsumption?.common)
+        for (info in test.cpuEnergyConsumption.testDetails) {
+            println("Process ${info.key.first}, Thread ${info.key.second}")
+            for (method in info.value) {
+                processNode(method)
+            }
+            println("----------------------------------------------------")
+        }
+    }
+}
