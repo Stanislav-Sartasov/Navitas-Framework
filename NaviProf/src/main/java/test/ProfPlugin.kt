@@ -75,6 +75,25 @@ open class ProfPlugin : Plugin<Project> {
             }
         }
 
+        fun displayMakeScreenShot(frequencyInSec: Float) {
+            target.exec {
+                val cmd = "$adb shell screencap /sdcard/screenshot.png".split(' ')
+                it.commandLine(cmd)
+            }
+        }
+
+        fun displayPullScreenShot(frequencyInSec: Float) {
+            target.exec {
+                val cmd = "$adb pull /sdcard/screenshot.png /home/debian/".split(' ')
+                it.commandLine(cmd)
+            }
+        }
+
+        fun displayScreenShot(frequencyInSec: Float) {
+            displayMakeScreenShot(frequencyInSec)
+            displayPullScreenShot(frequencyInSec)
+        }
+
         fun componentsLogsOfClass(profilingOutput: File, path: String, frequencyInSec: Float) {
             target.exec {
                 val date = SimpleDateFormat("MM-dd").format(Date())
@@ -96,6 +115,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 Thread.sleep(milliseconds)
             }
+            displayScreenShot(frequencyInSec)
         }
 
         fun componentsLogsOfMethod(profilingOutput: File, pathName: String, method: String, frequencyInSec: Float) {
@@ -119,6 +139,7 @@ open class ProfPlugin : Plugin<Project> {
 
                 Thread.sleep(milliseconds)
             }
+            displayScreenShot(frequencyInSec)
         }
 
         val testConfiguration = {
