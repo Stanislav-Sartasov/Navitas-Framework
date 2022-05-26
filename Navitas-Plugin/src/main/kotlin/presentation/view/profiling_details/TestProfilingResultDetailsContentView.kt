@@ -100,6 +100,14 @@ class TestProfilingResultDetailsContentView(
                     info.append("\n   ${item.component}: ${item.energy} mAh")
                 }
             }
+            if(energyConsumption?.displayEnergyConsumption?.common != null) {
+                info.append("DISPLAY:\n   common: ${energyConsumption?.displayEnergyConsumption?.common} mAh")
+            }
+            if(energyConsumption?.displayEnergyConsumption?.external != null) {
+                for (item in energyConsumption?.displayEnergyConsumption?.external) {
+                    info.append("\n   ${item.component}: ${item.energy} mAh")
+                }
+            }
             return info.toString()
         }
 

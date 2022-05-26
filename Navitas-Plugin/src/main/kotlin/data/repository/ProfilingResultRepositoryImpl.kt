@@ -17,7 +17,8 @@ class ProfilingResultRepositoryImpl : ProfilingResultRepository {
                     details.cpuEnergyConsumption.cpu,
                     details.wifiEnergyConsumption?.wifi ?: Float.NaN,
                     details.bluetoothEnergyConsumption?.bluetooth ?: Float.NaN,
-                    details.gpuEnergyConsumption?.gpu ?: Float.NaN
+                    details.gpuEnergyConsumption?.gpu ?: Float.NaN,
+                    details.displayEnergyConsumption?.display ?: Float.NaN
                 )
             }
         }
